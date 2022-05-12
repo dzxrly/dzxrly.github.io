@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>Shunted Self-Attention via Multi-Scale Token Aggregation 阅读笔记</title>
+    <link href="/2022/05/12/Shunted-Self-Attention-via-Multi-Scale-Token-Aggregation-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"/>
+    <url>/2022/05/12/Shunted-Self-Attention-via-Multi-Scale-Token-Aggregation-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</url>
+    
+    <content type="html"><![CDATA[<h1 id="shunted-self-attention-via-multi-scale-token-aggregation">Shunted Self-Attention via Multi-Scale Token Aggregation</h1><blockquote><ul><li>Sucheng Ren，Daquan Zhou，Shengfeng He，Jiashi Feng，Xinchao Wang</li><li>National University of Singapore</li><li>South China University of Technology</li><li>ByteDance Inc.</li><li><a href="https://arxiv.org/abs/2111.15193">CVPR2022 Oral</a></li><li><a href="https://github.com/OliverRensu/Shunted-Transformer">Code</a></li></ul></blockquote><h2 id="背景">背景</h2><p><img src="https://s2.loli.net/2022/05/12/VRCmDf5Kvs91iBI.png" /></p><p><img src="https://s2.loli.net/2022/05/12/gqi9MBAa3TVZ7zj.png" /></p><p>传统ViT通过将图片切分为Patch后产生对应的Token然后渐进式的通过全局注意力提取Token特征，这种方法虽然能处理特征的长程依赖关系但是过多的Token会导致在处理复杂的全局关系时丢失细小物体的特征，并且当Token较多时，网络的参数量与计算量会进一步上升。例如上图中天花板的灯在基于ViT的PVT中并没有得到很好的注意，而文中提出的网络结构能够更好地关注细小物体的特征。</p><hr /><h2 id="method">Method</h2><p><img src="https://s2.loli.net/2022/05/12/NW1r84lL9KZnpYo.png" /></p><p>本文总体架构与ViT类似，均采用4阶段模式，辅以Patch Embedding、Linear Embedding操作，每个阶段进行一次下采样减小特征图分辨率并将通道数翻倍。</p><h3 id="shunted-transformer-block">Shunted Transformer Block</h3><h4 id="shunted-self-attention">Shunted Self-Attention</h4><p><img src="https://s2.loli.net/2022/05/12/PetuivHEWK3YXrN.png" /></p><p>与ViT一样，先将输入序列<span class="math inline">\(F\in \mathbb{R}^{h\times w\times c}\)</span>映射为<span class="math inline">\(Q,K,V\)</span>，然后再经过MHSA。但是与其不同的是本文的结构将<span class="math inline">\(K,V\)</span>的长度通过下采样的方式进行缩减以减少计算量并且以不同的长度捕获多尺度信息。其通过MTA（Multi-scale Token Aggregation）实现，公式如下： <span class="math display">\[\begin{align}&amp; Q_i=XW_I^Q\nonumber\\&amp; K_i,V_i=MTA(X,r_i)W_i^K,MTA(X,r_i)W_i^V\nonumber\\&amp; V_i=V_i+LE(V_i)\nonumber\\\end{align}\]</span> 其中<span class="math inline">\(i\)</span>为网络的第<span class="math inline">\(i\)</span>个阶段，<span class="math inline">\(MTA(\cdot,r_i)\)</span>为第<span class="math inline">\(i\)</span>阶段的采样率为<span class="math inline">\(r_i\)</span>的下采样MTA层（MTA的具体实现为一个Stride=<span class="math inline">\(r_i\)</span>的卷积层），<span class="math inline">\(W_i^Q,W_i^K,W_i^V\)</span>为第<span class="math inline">\(i\)</span>阶段的Linear Projection参数，<span class="math inline">\(LE(\cdot)\)</span>是一个对MTA进行局部增强的深度卷积层。最终的Self-Attention公式与ViT类似，即： <span class="math display">\[\begin{align}&amp; h_i=Softmax(\frac{Q_iK_i^T}{\sqrt{d_h}})V_i\nonumber\end{align}\]</span> <strong>通过上述公式可知，当<span class="math inline">\(r\)</span>增大时，<span class="math inline">\(K,V\)</span>中更多的Token得以被融合并且<span class="math inline">\(K,V\)</span>得以缩短，因此能在降低计算量的同时增强对大目标的捕获能力。相反地，当<span class="math inline">\(r\)</span>减小时，更多的细节可以被关注但也会增加计算成本。</strong></p><h4 id="detail-specific-feedforward-layers">Detail-specific Feedforward Layers</h4><p><img src="https://s2.loli.net/2022/05/12/IiwrSWF8EYH2hbv.png" /></p><p>为了进一步补充局部信息，本文的网络在前馈层添加一个Detail Specific模块，因此该网络的前馈层的表述公式为： <span class="math display">\[\begin{align}&amp; x^\prime=FC(x;\theta_1)\nonumber\\&amp; x^{\prime\prime}=FC(\sigma(x^\prime+DS(x^\prime;\theta));\theta_2)\nonumber\\\end{align}\]</span> 其中，<span class="math inline">\(DS(\cdot;\theta)\)</span>为使用参数<span class="math inline">\(\theta\)</span>的深度卷积层，<span class="math inline">\(\theta_1,\theta_2\)</span>分别为两个FC层的参数。</p><h3 id="patch-embedding">Patch Embedding</h3><p>论文<a href="https://arxiv.org/abs/2109.03810">Scaled ReLU Matters for Training Vision Transformers</a>表明在Patch Embedding阶段使用卷积操作可以得到高质量Token，其效果要比使用单个大Stride的无重叠卷积效果更优秀。</p><p>本文中使用两个卷积层和一个Projection层作为Patch Embedding，第一个卷积层为Stride=2的7x7卷积，第二个卷积层为Stride=1的3x3卷积，最终通过一个Stride=2的无重叠Projection层来产生长度为<span class="math inline">\(\frac{H}{4}\times\frac{W}{4}\)</span>的输入序列。</p><h3 id="architecture-details-and-variants">Architecture Details and Variants</h3><p>网络的输入为<span class="math inline">\(W\times H\times 3\)</span>的原始图片，经过Patch Embedding后产生<span class="math inline">\(C\)</span>个长度为<span class="math inline">\(\frac{H}{4}\times\frac{W}{4}\)</span>的Patch序列。每个阶段的Linear Projection部分由一个Stride=2的卷积层构成。每个阶段的最后特征图分辨率减半并且通道数翻倍。网络的几种配置规格如下表：</p><p><img src="https://s2.loli.net/2022/05/12/2pSsPZGaKndiuwM.png" /></p><hr /><h2 id="实验与结果">实验与结果</h2><h3 id="imagenet-1k-图像分类">ImageNet-1K 图像分类</h3><p><img src="https://s2.loli.net/2022/05/12/LoVabzUhgEGfIws.png" /></p><h3 id="coco-2017-目标检测">COCO 2017 目标检测</h3><p><img src="https://s2.loli.net/2022/05/12/SuJlrq7OtBYvGVx.png" /></p><p>1xSchedule（12 epochs）的fine-tuning阶段将输入图的短边resize为800px，长边不大于1333px；而3xSchedule（36 epochs）的fine-tuning阶段采取多尺度训练策略，将较短的尺寸调整到480至800之间。</p><h3 id="adk20k-语义分割">ADK20K 语义分割</h3><p><img src="https://s2.loli.net/2022/05/12/i4CcmgoqJH3AsUh.png" /></p><p>下表为与使用MiT Backbone的SegFormer框架的对比：</p><p><img src="https://s2.loli.net/2022/05/12/Xj86hdbQI3GEfLF.png" /></p><h3 id="消融实验">消融实验</h3><h4 id="patch-embedding-1">Patch Embedding</h4><p><img src="https://s2.loli.net/2022/05/12/LkFm2KjZaHeMuQ4.png" /></p><p>其中Non-Overlap指ViT中使用的策略，而Overlap为Swin和PVT的Embedding策略。</p><h4 id="token-aggregation-function">Token Aggregation Function</h4><p><img src="https://s2.loli.net/2022/05/12/R5Mtv628UuVSNok.png" /></p><h4 id="detail-specific-feed-forward">Detail-specific Feed-Forward</h4><p><img src="https://s2.loli.net/2022/05/12/osnFl5bYRdqjMIk.png" /></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>论文笔记</category>
+      
+      <category>计算机视觉</category>
+      
+      <category>Transformer</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>论文笔记</tag>
+      
+      <tag>计算机视觉</tag>
+      
+      <tag>Transformer</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>MetaFormer is Actually What You Need for Vision 阅读笔记</title>
+    <link href="/2022/05/12/MetaFormer-is-Actually-What-You-Need-for-Vision-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"/>
+    <url>/2022/05/12/MetaFormer-is-Actually-What-You-Need-for-Vision-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</url>
+    
+    <content type="html"><![CDATA[<h1 id="metaformer-is-actually-what-you-need-for-vision">MetaFormer is Actually What You Need for Vision</h1><blockquote><ul><li>Weihao Yu，Mi Luo，Pan Zhou，Chenyang Si，Yichen Zhou，Xinchao Wang，Jiashi Feng，Shuicheng Yan</li><li>Sea AI Lab</li><li>National University of Singapore</li><li><a href="https://arxiv.org/abs/2111.11418#">CVPR2022 Oral</a></li></ul></blockquote><h2 id="概述">概述</h2><p>如下图所示，视觉Transformer包含两个子残差块，第一个一般为Token Mixer模块（诸如MHSA、Spatial MLP等）用于长程特征提取融合，第二个一般为两层全连接层组成的MLP（其中第二层的长度比第一层大2倍/4倍）。</p><p><img src="https://s2.loli.net/2022/05/05/Ml3k7Qw6SmPFW4g.png" /></p><p>因为通过最近的论文发现传统Transformer的Token Mixer所使用的MHSA更换为Spatial MLP或者傅里叶变换块后仍然能维持很优秀的效果，因此本文对该结构进行了抽象，并且通过实验证明了：相比Token Mixer，整体的Transformer结构（即MetaFormer）才是最重要的。除此之外，本文也就该理念提出了一个将Token Mixer更换为AvgPool的更简单的模型，即PoolFormer，其在ImageNet分类、ADE20K语义分割和COCO目标检测数据集上均能以更少的参数量和更低的MAC（Memory Access Cost）取得与其他Transformer齐平甚至更高的水平。</p><hr /><h2 id="method">Method</h2><p>首先，提出了一个针对传统视觉Transformer Block的结构抽象，其公式如下： <span class="math display">\[\begin{align}&amp; X=InputEmb(I)，X\in \mathbb{R}^{N\times C}，即对输入I进行Embedding操作\nonumber\\&amp; Y=TokenMixer(Norm(X))+X，其中Norm可替换为LN、GN、BN\nonumber\\&amp; Z=\sigma(Norm(Y)W_1)W_2+Y，W_1\in \mathbb{R}^{C\times rC}，W_2\in \mathbb{R}^{rC\times C}\nonumber\\&amp; 其中W_1，W_2为可学习的MLP参数，r为MLP扩张率，\nonumber\\&amp; \sigma(\cdot)为激活函数，如GELU、ReLU等\nonumber\\\end{align}\]</span> 本文针对该抽象提出了一个自己的实现，即Token Mixer使用简单的且无可学习参数的AvgPool，构成PoolFormer Block，PyTorch代码实现如下：</p><figure class="highlight python"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> torch.nn <span class="hljs-keyword">as</span> nn<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Pooling</span>(nn.Module):<br>  <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, pool_size=<span class="hljs-number">3</span></span>):<br>    <span class="hljs-built_in">super</span>().__init__()<br>    self.pool = nn.AvgPool2d(<br>      pool_size, stride=<span class="hljs-number">1</span>,<br>      padding=pool_size//<span class="hljs-number">2</span>,<br>      count_include_pad=<span class="hljs-literal">False</span>,<br>    )<br>    <br>  <span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params">self, x</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    [B, C, H, W] = x.shape</span><br><span class="hljs-string">    因为TokenMixer之外有一个残差连接，所以此处需要减去该连接。</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">return</span> self.pool(x) - x<br></code></pre></td></tr></table></figure><p>AvgPool的stride=1，因此其本身具有一定的特征聚合能力，并且由于自身并没有可学习参数，所以相对于Self-Attention和Spatial MLP等机制，PoolFormer占用显存更少，可以处理非常长的Token序列。完整网络结构如下图所示：</p><p><img src="https://s2.loli.net/2022/05/05/x8yAfieaTrzcVL9.png" /></p><p>对于Small网络结构，Embedding维度对应至4阶段分别为64、128、320、512；而对于Medium网络结构，Embedding维度分别为96、192、384、768。</p><p>PoolFormer网络架构的几种配置如下所示：</p><p><img src="https://s2.loli.net/2022/05/05/aAo3rJEv6YyBmfe.png" /></p><hr /><h2 id="实验">实验</h2><h3 id="图像分类任务">图像分类任务</h3><p>数据集使用ImageNet-1K，其中包含1.3M张训练图片和5K张验证图片。</p><p><img src="https://s2.loli.net/2022/05/05/2GVhxDuUdZij4TK.png" /></p><p><img src="https://s2.loli.net/2022/05/05/r7RiazD3MAUgBbc.png" /></p><p>从表中可以看出PoolFormer与使用卷积、SA或Spatial MLP的网络相比，可以在相同甚至更少的参数量的前提下达到更好的效果，并且MAC也更低。</p><h3 id="目标检测任务">目标检测任务</h3><p>数据集使用COCO，包含118K张训练图片和5K张验证图片，PoolFormer作为Backbone应用在RetinaNet或者Mask R-CNN中。</p><p><img src="https://s2.loli.net/2022/05/05/Z4SFJRMiPGuA1Bs.png" /></p><p>表中数据表明应用PoolFormer Backbone的RetinaNet可以以更少的参数量在AP上击败以ResNet为Backbone的RetinaNet。</p><p><img src="https://s2.loli.net/2022/05/05/MUfKBVL4vmw8IhS.png" /></p><p>表中数据表明应用PoolFormer Backbone的Mask R-CNN可以以更少的参数量在AP上击败以ResNet为Backbone的Mask R-CNN。</p><h3 id="语义分割任务">语义分割任务</h3><p>该任务使用ADE20K数据集，其中训练图片20K张，验证图片2K张。</p><p><img src="https://s2.loli.net/2022/05/05/dQHrnjJSxwmMgKE.png" /></p><p>实验表明以PoolFormer为Backbone的Semantic FPN网络用更少的参数量达成了比PVT、ResNeXt、ResNet更好的分割精度。</p><h3 id="消融实验">消融实验</h3><p><img src="https://s2.loli.net/2022/05/05/JQX671PIWUnj4Co.png" /></p><p>对于Hybrid Stages：由于pool操作可以处理较长的序列信息而SA/Spatial MLP能够捕获全局信息，因此使用混合架构，即先使用PoolFormer处理长序列，随着靠后的Stage的序列长度缩短，改为使用Spatial FC作为Token Mixer，从表中可以看到该方法稍微增加了参数量但也带来了一定的性能提升。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>论文笔记</category>
+      
+      <category>计算机视觉</category>
+      
+      <category>Transformer</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>论文笔记</tag>
+      
+      <tag>计算机视觉</tag>
+      
+      <tag>Transformer</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  
+</search>
