@@ -18,25 +18,25 @@
   <meta name="author" content="Egg Targaryen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Shunted Self-Attention via Multi-Scale Token Aggregation   Sucheng Ren，Daquan Zhou，Shengfeng He，Jiashi Feng，Xinchao Wang National University of Singapore South China University of Technology Byt">
+    <meta name="description" content="RepMLPNet: Hierarchical Vision MLP with Re-parameterized Locality   Xiaohan Ding，Honghao Chen，Xiangyu Zhang，Jungong Han，Guiguang Ding Beijing National Research Center for Information Science and T">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Shunted Self-Attention via Multi-Scale Token Aggregation 阅读笔记">
-<meta property="og:url" content="http://example.com/2022/05/12/Shunted-Self-Attention-via-Multi-Scale-Token-Aggregation-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:title" content="RepMLPNet: Hierarchical Vision MLP with Re-parameterized Locality 阅读笔记">
+<meta property="og:url" content="http://example.com/2022/05/28/RepMLPNet-Hierarchical-Vision-MLP-with-Re-parameterized-Locality-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="EggTargaryen的个人博客">
-<meta property="og:description" content="Shunted Self-Attention via Multi-Scale Token Aggregation   Sucheng Ren，Daquan Zhou，Shengfeng He，Jiashi Feng，Xinchao Wang National University of Singapore South China University of Technology Byt">
+<meta property="og:description" content="RepMLPNet: Hierarchical Vision MLP with Re-parameterized Locality   Xiaohan Ding，Honghao Chen，Xiangyu Zhang，Jungong Han，Guiguang Ding Beijing National Research Center for Information Science and T">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s2.loli.net/2022/05/12/PetuivHEWK3YXrN.png">
-<meta property="article:published_time" content="2022-05-12T14:02:37.000Z">
-<meta property="article:modified_time" content="2022-05-13T03:37:31.702Z">
+<meta property="og:image" content="https://s2.loli.net/2022/05/26/ar5IjCzlgV7AKoO.png">
+<meta property="article:published_time" content="2022-05-28T08:44:49.000Z">
+<meta property="article:modified_time" content="2022-05-28T08:46:02.473Z">
 <meta property="article:author" content="Egg Targaryen">
 <meta property="article:tag" content="论文笔记">
 <meta property="article:tag" content="计算机视觉">
-<meta property="article:tag" content="Transformer">
+<meta property="article:tag" content="MLP">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://s2.loli.net/2022/05/12/PetuivHEWK3YXrN.png">
+<meta name="twitter:image" content="https://s2.loli.net/2022/05/26/ar5IjCzlgV7AKoO.png">
   
   
-  <title>Shunted Self-Attention via Multi-Scale Token Aggregation 阅读笔记 - EggTargaryen的个人博客</title>
+  <title>RepMLPNet: Hierarchical Vision MLP with Re-parameterized Locality 阅读笔记 - EggTargaryen的个人博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -182,7 +182,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Shunted Self-Attention via Multi-Scale Token Aggregation 阅读笔记">
+            <span class="h2" id="subtitle" title="RepMLPNet: Hierarchical Vision MLP with Re-parameterized Locality 阅读笔记">
               
             </span>
 
@@ -192,8 +192,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-05-12 22:02" pubdate>
-        2022年5月12日 晚上
+      <time datetime="2022-05-28 16:44" pubdate>
+        2022年5月28日 下午
       </time>
     </span>
   
@@ -203,7 +203,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.4k 字
+      4.9k 字
     </span>
   
 
@@ -212,7 +212,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      20 分钟
+      42 分钟
     </span>
   
 
@@ -249,82 +249,137 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Shunted Self-Attention via Multi-Scale Token Aggregation 阅读笔记</h1>
+            <h1 style="display: none">RepMLPNet: Hierarchical Vision MLP with Re-parameterized Locality 阅读笔记</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：15 天前
+                  本文最后更新于：几秒前
                 
               </p>
             
             <div class="markdown-body">
-              <h1 id="shunted-self-attention-via-multi-scale-token-aggregation">Shunted Self-Attention via Multi-Scale Token Aggregation</h1>
+              <h1 id="repmlpnet-hierarchical-vision-mlp-with-re-parameterized-locality">RepMLPNet: Hierarchical Vision MLP with Re-parameterized Locality</h1>
 <blockquote>
 <ul>
-<li>Sucheng Ren，Daquan Zhou，Shengfeng He，Jiashi Feng，Xinchao Wang</li>
-<li>National University of Singapore</li>
-<li>South China University of Technology</li>
-<li>ByteDance Inc.</li>
-<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2111.15193">CVPR2022 Oral</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/OliverRensu/Shunted-Transformer">Code</a></li>
+<li>Xiaohan Ding，Honghao Chen，Xiangyu Zhang，Jungong Han，Guiguang Ding</li>
+<li>Beijing National Research Center for Information Science and Technology (BNRist)</li>
+<li>School of Software, Tsinghua University, Beijing, China</li>
+<li>Institute of Automation, Chinese Academy of Sciences</li>
+<li>MEGVII Technology</li>
+<li>Computer Science Department, Aberystwyth University, SY23 3FL, UK</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2112.11081">CVPR 2022</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/DingXiaoH/RepMLP">Code</a></li>
 </ul>
 </blockquote>
 <h2 id="背景">背景</h2>
-<p><img src="https://s2.loli.net/2022/05/12/VRCmDf5Kvs91iBI.png" srcset="/img/loading.gif" lazyload /></p>
-<p><img src="https://s2.loli.net/2022/05/12/gqi9MBAa3TVZ7zj.png" srcset="/img/loading.gif" lazyload /></p>
-<p>传统ViT通过将图片切分为Patch后产生对应的Token然后渐进式的通过全局注意力提取Token特征，这种方法虽然能处理特征的长程依赖关系但是过多的Token会导致在处理复杂的全局关系时丢失细小物体的特征，并且当Token较多时，网络的参数量与计算量会进一步上升。例如上图中天花板的灯在基于ViT的PVT中并没有得到很好的注意，而文中提出的网络结构能够更好地关注细小物体的特征。</p>
+<p>卷积网络的成功中局部先验发挥着重要的作用，但是传统卷积网络无法很好的处理长距离依赖关系，只能通过加深网络结构缓解问题，而过深的网络导致最终特征图分辨率过小通道数过多反而不利于特征提取。为了解决卷积网络的长距离依赖问题，一些方法采用类似MLP的机制，因为对于全连接层（FC）来说可以获得任意两点之间的关系信息，但是MLP将特征图Flatten的做法会导致位置关系的丢失。</p>
+<p>本文提出了RepMLPNet，其中通过Locality Injection的方法为FC引入位置信息，并且通过结构重参数化机制减少网络在推理时的参数量和计算量，增加推理速度。</p>
+<figure>
+<img src="https://s2.loli.net/2022/05/26/ar5IjCzlgV7AKoO.png" srcset="/img/loading.gif" lazyload alt="图1" /><figcaption aria-hidden="true">图1</figcaption>
+</figure>
 <hr />
 <h2 id="method">Method</h2>
-<p><img src="https://s2.loli.net/2022/05/12/NW1r84lL9KZnpYo.png" srcset="/img/loading.gif" lazyload /></p>
-<p>本文总体架构与ViT类似，均采用4阶段模式，辅以Patch Embedding、Linear Embedding操作，每个阶段进行一次下采样减小特征图分辨率并将通道数翻倍。</p>
-<h3 id="shunted-transformer-block">Shunted Transformer Block</h3>
-<h4 id="shunted-self-attention">Shunted Self-Attention</h4>
-<p><img src="https://s2.loli.net/2022/05/12/PetuivHEWK3YXrN.png" srcset="/img/loading.gif" lazyload /></p>
-<p>与ViT一样，先将输入序列<span class="math inline">\(F\in \mathbb{R}^{h\times w\times c}\)</span>映射为<span class="math inline">\(Q,K,V\)</span>，然后再经过MHSA。但是与其不同的是本文的结构将<span class="math inline">\(K,V\)</span>的长度通过下采样的方式进行缩减以减少计算量并且以不同的长度捕获多尺度信息。其通过MTA（Multi-scale Token Aggregation）实现，公式如下： <span class="math display">\[
+<h3 id="经过重参数化的locality-injection">经过重参数化的Locality Injection</h3>
+<h4 id="基础公式表示">基础公式表示</h4>
+<ul>
+<li><p>对于卷积操作，有张量<span class="math inline">\(M\in \mathbb{R}^{n\times c\times h\times w}\)</span>，其中<span class="math inline">\(n\)</span>表示batch size，<span class="math inline">\(c\)</span>为通道数，<span class="math inline">\(h\)</span>为高度，<span class="math inline">\(w\)</span>为宽度。使用<span class="math inline">\(F\)</span>和<span class="math inline">\(W\)</span>来表示卷积核和FC核。因此对于一个核为<span class="math inline">\(k\times k\)</span>的卷积运算来说有： <span class="math display">\[
 \begin{align}
-&amp; Q_i=XW_I^Q\nonumber\\
-&amp; K_i,V_i=MTA(X,r_i)W_i^K,MTA(X,r_i)W_i^V\nonumber\\
-&amp; V_i=V_i+LE(V_i)\nonumber\\
+&amp; M^{(out)}=CONV(M^{(in)},F,p)\nonumber\\
 \end{align}
-\]</span> 其中<span class="math inline">\(i\)</span>为网络的第<span class="math inline">\(i\)</span>个阶段，<span class="math inline">\(MTA(\cdot,r_i)\)</span>为第<span class="math inline">\(i\)</span>阶段的采样率为<span class="math inline">\(r_i\)</span>的下采样MTA层（MTA的具体实现为一个Stride=<span class="math inline">\(r_i\)</span>的卷积层），<span class="math inline">\(W_i^Q,W_i^K,W_i^V\)</span>为第<span class="math inline">\(i\)</span>阶段的Linear Projection参数，<span class="math inline">\(LE(\cdot)\)</span>是一个对MTA进行局部增强的深度卷积层。最终的Self-Attention公式与ViT类似，即： <span class="math display">\[
+\]</span> 其中<span class="math inline">\(M^{(out)}\in \mathbb{R}^{n\times o\times h^\prime\times w^\prime}\)</span>，<span class="math inline">\(o\)</span>为卷积输出通道，<span class="math inline">\(p\)</span>指Padding大小，<span class="math inline">\(F\in \mathbb{R}^{o\times c\times k\times k}\)</span>为卷积核。</p></li>
+<li><p>对于FC操作，输入维度为<span class="math inline">\(p\)</span>，输出维度为<span class="math inline">\(q\)</span>，<span class="math inline">\(V^{(in)}\in \mathbb{R}^{n\times p}\)</span>表示输入，<span class="math inline">\(V^{(out)}\in \mathbb{R}^{n\times q}\)</span>表示输出，FC核为<span class="math inline">\(W\in \mathbb{R}^{q\times p}\)</span>，则有矩阵乘法（MMUL）公式： <span class="math display">\[
 \begin{align}
-&amp; h_i=Softmax(\frac{Q_iK_i^T}{\sqrt{d_h}})V_i\nonumber
+&amp; V^{(out)}=MMUL(V^{(in)},W)=V^{(in)}\cdot W^T\nonumber\\
 \end{align}
-\]</span> <strong>通过上述公式可知，当<span class="math inline">\(r\)</span>增大时，<span class="math inline">\(K,V\)</span>中更多的Token得以被融合并且<span class="math inline">\(K,V\)</span>得以缩短，因此能在降低计算量的同时增强对大目标的捕获能力。相反地，当<span class="math inline">\(r\)</span>减小时，更多的细节可以被关注但也会增加计算成本。</strong></p>
-<h4 id="detail-specific-feedforward-layers">Detail-specific Feedforward Layers</h4>
-<p><img src="https://s2.loli.net/2022/05/12/IiwrSWF8EYH2hbv.png" srcset="/img/loading.gif" lazyload /></p>
-<p>为了进一步补充局部信息，本文的网络在前馈层添加一个Detail Specific模块，因此该网络的前馈层的表述公式为： <span class="math display">\[
+\]</span> 假设FC以<span class="math inline">\(M^{(in)}\)</span>作为输入，<span class="math inline">\(M^{(out)}\)</span>作为输出，所以需要Reshape操作（缩写为RS）转换为向量，即<span class="math inline">\(V^{(in)}=RS(M^{(in)},(n,chw))\)</span>，所以上述公式改写为： <span class="math display">\[
 \begin{align}
-&amp; x^\prime=FC(x;\theta_1)\nonumber\\
-&amp; x^{\prime\prime}=FC(\sigma(x^\prime+DS(x^\prime;\theta));\theta_2)\nonumber\\
+&amp; M^{(out)}=MMUL(M^{(in)},W)\nonumber\\
 \end{align}
-\]</span> 其中，<span class="math inline">\(DS(\cdot;\theta)\)</span>为使用参数<span class="math inline">\(\theta\)</span>的深度卷积层，<span class="math inline">\(\theta_1,\theta_2\)</span>分别为两个FC层的参数。</p>
-<h3 id="patch-embedding">Patch Embedding</h3>
-<p>论文<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2109.03810">Scaled ReLU Matters for Training Vision Transformers</a>表明在Patch Embedding阶段使用卷积操作可以得到高质量Token，其效果要比使用单个大Stride的无重叠卷积效果更优秀。</p>
-<p>本文中使用两个卷积层和一个Projection层作为Patch Embedding，第一个卷积层为Stride=2的7x7卷积，第二个卷积层为Stride=1的3x3卷积，最终通过一个Stride=2的无重叠Projection层来产生长度为<span class="math inline">\(\frac{H}{4}\times\frac{W}{4}\)</span>的输入序列。</p>
-<h3 id="architecture-details-and-variants">Architecture Details and Variants</h3>
-<p>网络的输入为<span class="math inline">\(W\times H\times 3\)</span>的原始图片，经过Patch Embedding后产生<span class="math inline">\(C\)</span>个长度为<span class="math inline">\(\frac{H}{4}\times\frac{W}{4}\)</span>的Patch序列。每个阶段的Linear Projection部分由一个Stride=2的卷积层构成。每个阶段的最后特征图分辨率减半并且通道数翻倍。网络的几种配置规格如下表：</p>
-<p><img src="https://s2.loli.net/2022/05/12/2pSsPZGaKndiuwM.png" srcset="/img/loading.gif" lazyload /></p>
+\]</span></p></li>
+</ul>
+<h4 id="locality-injection">Locality Injection</h4>
+<p>如图1所示，通道感知机和局部感知机在训练时是并行的，都使用<span class="math inline">\(M^{(in)}\)</span>作为输入，可以通过如下方法将局部感知机融合进通道感知机中。</p>
+<p>首先，假设FC核为<span class="math inline">\(W(ohw, chw)\)</span>，卷积核为<span class="math inline">\(F(o,c,k,k)\)</span>，Padding大小为<span class="math inline">\(p\)</span>，则可以构建一个同时包含局部感知机和通道感知机的FC操作（核为<span class="math inline">\(W^\prime\)</span>），即 <span class="math display">\[
+\begin{align}
+&amp; MMUL(M^{(in)},W^\prime)\nonumber\\
+&amp; = MMUL(M^{(in)},W)+CONV(M^{(in)},F,p)\\
+\end{align}
+\]</span> 又因为对于任意FC核<span class="math inline">\(W^{(1)}\)</span>和<span class="math inline">\(W^{(2)}\)</span>存在： <span class="math display">\[
+\begin{align}
+&amp; MMUL(M^{(in)},W^{(1)})+MMUL(M^{(in)},W^{(2)})\nonumber\\
+&amp; = MMUL(M^{(in)},W^{(1)}+W^{(2)})\\
+\end{align}
+\]</span> 所以可以寻找一个FC核<span class="math inline">\(W^{(F,p)}\)</span>使满足： <span class="math display">\[
+\begin{align}
+&amp; MMUL(M^{(in)},W^{(F,p)})=CONV(M^{(in)},F,p)
+\end{align}
+\]</span> 以替换公式（1）中的卷积操作。</p>
+<p>因为卷积操作可以被看作在空间位置上带有共享权重的稀疏FC，所以对于任意<span class="math inline">\(M^{(in)},F,p\)</span>都存在对应的FC核<span class="math inline">\(W^{(F,p)}\)</span>，因此<strong>问题的关键就在于寻找这个FC核的计算方法</strong>。</p>
+<p>下述方法即为寻找<span class="math inline">\(W^{(F,p)}\)</span>的过程：</p>
+<p>首先，根据“基础公式表示”的FC公式，一个核为<span class="math inline">\(W^{(F,p)}\)</span>的FC的操作即为 <span class="math display">\[
+\begin{align}
+&amp; V^{(out)}=V^{(in)}\cdot {W^{(F,p)}}^T
+\end{align}
+\]</span> 此时引入一个Identity矩阵<span class="math inline">\(I(chw,chw)\)</span>，得到 <span class="math display">\[
+\begin{align}
+&amp; V^{(out)}=V^{(in)}\cdot (I\cdot {W^{(F,p)}}^T)
+\end{align}
+\]</span> 同时为了纠正张量尺寸，添加Reshape，有 <span class="math display">\[
+\begin{align}
+&amp; V^{(out)}=V^{(in)}\cdot RS(I\cdot {W^{(F,p)}}^T,(chw, ohw))
+\end{align}
+\]</span> 可以注意到<span class="math inline">\(I\cdot {W^{(F,p)}}^T\)</span>可通过一个输入特征图从<span class="math inline">\(I\)</span> Reshape到<span class="math inline">\(M^{(I)}\)</span>，核为<span class="math inline">\(F\)</span>的卷积操作得到，即： <span class="math display">\[
+\begin{align}
+I\cdot {W^{(F,p)}}^T &amp;=CONV(RS(I,(chw,c,h,w)),F,p)\nonumber\\
+&amp;=CONV(M^{(I)},F,p)
+\end{align}
+\]</span> 因此，综合公式（4）、（6）、（7），核<span class="math inline">\(W^{(F,p)}\)</span>计算推导为 <span class="math display">\[
+\begin{align}
+&amp;{W^{(F,p)}}^T=RS(I\cdot {W^{(F,p)}}^T,(chw, ohw))\nonumber\\
+&amp;\Longrightarrow {W^{(F,p)}}^T=RS(CONV(M^{(I)},F,p),(chw, ohw))\nonumber\\
+&amp;\Longrightarrow W^{(F,p)}=RS(CONV(M^{(I)},F,p), (chw, ohw))^T\\
+\end{align}
+\]</span> 根据上述过程，总结一下就是<strong>一个卷积核等效的FC核是对Identity矩阵进行卷积和适当Reshape的结果</strong>，且该过程可微。</p>
+<h3 id="repmlpnet">RepMLPNet</h3>
+<h4 id="repmlpblock-components">RepMLPBlock Components</h4>
+<figure>
+<img src="https://s2.loli.net/2022/05/26/1oJuxaj4Ts8eRtM.png" srcset="/img/loading.gif" lazyload alt="图2" /><figcaption aria-hidden="true">图2</figcaption>
+</figure>
+<ul>
+<li><p>全局感知机：输入维度<span class="math inline">\((n,c,h,w)\)</span>经过AvgPool后变为向量<span class="math inline">\((n,c,1,1)\)</span>然后经过两个FC层。</p></li>
+<li><p>通道感知机：如果FC层的输入输出通道相等，那么常规的FC层会产生<span class="math inline">\((chw)^2\)</span>个参数，带来很大的参数量。一个比较自然的想法是参照深度卷积，对每个通道做FC操作，因此只需要计算<span class="math inline">\(c\)</span>个通道的FC，即参数量为<span class="math inline">\(c(hw)^2\)</span>。但是该参数量仍然过大，并且这样做会丢失通道之间的依赖关系，因此本文采用分组共享参数的方式构建“Set-Sharing FC”层。其中，对于输入张量，分为<span class="math inline">\(s\)</span>个Set，每组的多通道共享权重集合，因此参数量减少为<span class="math inline">\(s(hw)^2\)</span>。如图2所示，<span class="math inline">\(n=1,c=4,s=2\)</span>，相当于将输入的4通道划分为2组，每个组有自己的权重集合。</p>
+<p>其具体计算过程为：因为划分为<span class="math inline">\(s\)</span>组，所以有<span class="math inline">\(\frac{c}{s}\)</span>个通道，考虑batch size则有<span class="math inline">\(\frac{nc}{s}\)</span>个维度为<span class="math inline">\((s,h,w)\)</span>的张量，即<span class="math inline">\((n,c,h,w)\Longrightarrow (\frac{nc}{s},s,h,w)\)</span>。将<span class="math inline">\(\frac{nc}{s}\)</span>个张量分别Flatten，得到维度为<span class="math inline">\((\frac{nc}{s}, shw)\)</span>的FC输入张量，然后再对每个张量做FC操作，因此FC操作的参数量为<span class="math inline">\(s\cdot (hw)^2 = s(hw)^2\)</span>。但是该方法与参照深度卷积的FC操作相比并不能减少计算量。实际操作时，“Set-Sharing FC”将<span class="math inline">\((\frac{nc}{s}, shw)\)</span> Reshape为<span class="math inline">\((\frac{nc}{s}, shw,1,1)\)</span>然后使用1x1卷积进行计算。</p></li>
+<li><p>局部感知机：其中使用的卷积为深度卷积。</p>
+<p>通过Locality Injection将局部感知机融合进通道感知机的过程：</p>
+<p>首先明确局部感知机包含一个卷积操作和一次Batch Normalization，其中<span class="math inline">\(F\in \mathbb{R}^{s\times 1\times k\times k}\)</span>为卷积核，<span class="math inline">\(\mu,\sigma,\gamma,\beta \in \mathbb{R}^s\)</span>分别为BN操作中的均值、标准差、Scaling因子与bias。所以根据BN计算公式，有： <span class="math display">\[
+\begin{align}
+&amp;\gamma_i\cdot \frac{CONV(M,F,p)-\mu_i}{\sigma_i}+\beta_i\nonumber\\
+&amp;=CONV(M,\frac{\gamma_i\cdot F}{\sigma_i},p)-\frac{\gamma_i\cdot \mu_i}{\sigma_i}+\beta_i
+\end{align}
+\]</span> 假设存在<span class="math inline">\(F_{i,:,:,:}^\prime=\frac{\gamma_i\cdot F_{i,:,:,:}}{\sigma_i}\)</span>和<span class="math inline">\(b_{i}^\prime=-\frac{\gamma_i\cdot \mu_i}{\sigma_i}+\beta_i\)</span>，则公式（9）可简写为： <span class="math display">\[
+\begin{align}
+&amp;\gamma_i\cdot \frac{CONV(M,F,p)_{i,:,:,:}-\mu_i}{\sigma_i}+\beta_i\nonumber\\
+&amp;=CONV(M,F^\prime,p)_{i,:,:,:}+b^\prime,\forall 1\le i\le s
+\end{align}
+\]</span> 因此，通过公式（8）可以转换每个卷积操作，产生FC核并叠加到通道感知机中。</p></li>
+</ul>
+<h4 id="分层架构设计">分层架构设计</h4>
+<figure>
+<img src="https://s2.loli.net/2022/05/26/ZTG5gNX2Y3mkPfL.png" srcset="/img/loading.gif" lazyload alt="图3" /><figcaption aria-hidden="true">图3</figcaption>
+</figure>
+<p>与常规MLP模型的初始大幅降采样后使用小Size计算不同，文中的模型采用卷积网络中常见的分层设计。对于输入图片，采用一个4x4且Stride=4的卷积进行4倍下采样，对于后面的每个阶段，采用Embedding层减半尺寸并加倍通道数。网络规模如下表所示：</p>
+<p><img src="https://s2.loli.net/2022/05/26/aMtjfUQRC4nJLez.png" srcset="/img/loading.gif" lazyload /></p>
 <hr />
 <h2 id="实验与结果">实验与结果</h2>
-<h3 id="imagenet-1k-图像分类">ImageNet-1K 图像分类</h3>
-<p><img src="https://s2.loli.net/2022/05/12/LoVabzUhgEGfIws.png" srcset="/img/loading.gif" lazyload /></p>
-<h3 id="coco-2017-目标检测">COCO 2017 目标检测</h3>
-<p><img src="https://s2.loli.net/2022/05/12/SuJlrq7OtBYvGVx.png" srcset="/img/loading.gif" lazyload /></p>
-<p><img src="https://s2.loli.net/2022/05/13/WO2IbMU8wuK34ls.png" srcset="/img/loading.gif" lazyload /></p>
-<p>1xSchedule（12 epochs）的fine-tuning阶段将输入图的短边resize为800px，长边不大于1333px；而3xSchedule（36 epochs）的fine-tuning阶段采取多尺度训练策略，将较短的尺寸调整到480至800之间。</p>
-<h3 id="adk20k-语义分割">ADK20K 语义分割</h3>
-<p><img src="https://s2.loli.net/2022/05/12/i4CcmgoqJH3AsUh.png" srcset="/img/loading.gif" lazyload /></p>
-<p>下表为与使用MiT Backbone的SegFormer框架的对比：</p>
-<p><img src="https://s2.loli.net/2022/05/12/Xj86hdbQI3GEfLF.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="图像分类">图像分类</h3>
+<p><img src="https://s2.loli.net/2022/05/26/RcuUXNoFry3A9Qj.png" srcset="/img/loading.gif" lazyload /></p>
+<p>在相同的设置下，RepMLPNetT256在精度上比MLP-Mixer高出0.5%，而前者的FLOPs只有后者的1/4。在简单的训练方法下，ResMLP和MLP-Mixer明显下降，例如，在没有300个epoch DeiT式训练的情况下，ResMLP-S12的准确性下降了8.9%（76.6%→67.7%）。在FLOPs相当的情况下，MLP比CNN快，例如，RepMLPNet-D256的FLOPs比ResNeXt-101高，但运行速度是后者的1.6倍。</p>
+<p><img src="https://s2.loli.net/2022/05/26/hUtjizP3mn7pkMG.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="语义分割">语义分割</h3>
+<p><img src="https://s2.loli.net/2022/05/26/rJ4j27YwX1dUD3G.png" srcset="/img/loading.gif" lazyload /></p>
 <h3 id="消融实验">消融实验</h3>
-<h4 id="patch-embedding-1">Patch Embedding</h4>
-<p><img src="https://s2.loli.net/2022/05/12/LkFm2KjZaHeMuQ4.png" srcset="/img/loading.gif" lazyload /></p>
-<p>其中Non-Overlap指ViT中使用的策略，而Overlap为Swin和PVT的Embedding策略。</p>
-<h4 id="token-aggregation-function">Token Aggregation Function</h4>
-<p><img src="https://s2.loli.net/2022/05/12/R5Mtv628UuVSNok.png" srcset="/img/loading.gif" lazyload /></p>
-<h4 id="detail-specific-feed-forward">Detail-specific Feed-Forward</h4>
-<p><img src="https://s2.loli.net/2022/05/12/osnFl5bYRdqjMIk.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="https://s2.loli.net/2022/05/26/O1g2HJiCbnPx8IR.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="https://s2.loli.net/2022/05/26/EJmNuMchUnzjWQ5.png" srcset="/img/loading.gif" lazyload /></p>
 
             </div>
             <hr>
@@ -338,7 +393,7 @@
                     
                       <a class="hover-with-bg" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a>
                     
-                      <a class="hover-with-bg" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/Transformer/">Transformer</a>
+                      <a class="hover-with-bg" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/MLP/">MLP</a>
                     
                   </div>
                 
@@ -350,7 +405,7 @@
                     
                       <a class="hover-with-bg" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a>
                     
-                      <a class="hover-with-bg" href="/tags/Transformer/">Transformer</a>
+                      <a class="hover-with-bg" href="/tags/MLP/">MLP</a>
                     
                   </div>
                 
@@ -367,18 +422,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/05/28/RepMLPNet-Hierarchical-Vision-MLP-with-Re-parameterized-Locality-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">RepMLPNet: Hierarchical Vision MLP with Re-parameterized Locality 阅读笔记</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/05/12/MetaFormer-is-Actually-What-You-Need-for-Vision-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">
-                        <span class="hidden-mobile">MetaFormer is Actually What You Need for Vision 阅读笔记</span>
+                      <a href="/2022/05/12/Shunted-Self-Attention-via-Multi-Scale-Token-Aggregation-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">
+                        <span class="hidden-mobile">Shunted Self-Attention via Multi-Scale Token Aggregation 阅读笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
