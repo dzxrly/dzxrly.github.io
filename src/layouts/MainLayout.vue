@@ -1,43 +1,23 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
-        <q-btn
-          aria-label="Menu"
-          dense
-          flat
-          icon="menu"
-          round
-          @click="toggleLeftDrawer"
-        />
-
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
-      </q-toolbar>
+  <q-layout view="hHh lpR fFf">
+    <q-header class="bg-transparent">
+      <div class="row justify-end items-center full-width q-py-sm q-px-md">
+        <q-btn-dropdown auto-close class="rounded-borders q-py-sm" color="primary" content-class="rounded-borders"
+                        flat
+                        icon="translate">
+          <q-list class="bg-secondary-container">
+            <q-item v-for="option in languageDropdownMenuOptions" :key="option.value"
+                    v-ripple clickable
+                    @click="locale = option.value">
+              <q-item-section avatar>
+                <q-icon :name="option.value === locale ? 'check' : ''" color="on-secondary-container" />
+              </q-item-section>
+              <q-item-section class="text-on-secondary-container">{{ option.label }}</q-item-section>
+            </q-item>
+          </q-list>
+        </q-btn-dropdown>
+      </div>
     </q-header>
-
-    <q-drawer
-      v-model="leftDrawerOpen"
-      bordered
-      show-if-above
-    >
-      <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
-
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer>
 
     <q-page-container>
       <router-view />
@@ -46,57 +26,11 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-import EssentialLink, { EssentialLinkProps } from 'components/EssentialLink.vue'
+import { useI18n } from 'vue-i18n'
 
-const essentialLinks: EssentialLinkProps[] = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
+const { locale } = useI18n({ useScope: 'global' })
+const languageDropdownMenuOptions = [
+  { value: 'en-US', label: 'English' },
+  { value: 'zh-CN', label: '简体中文' }
 ]
-
-const leftDrawerOpen = ref(false)
-
-function toggleLeftDrawer() {
-  leftDrawerOpen.value = !leftDrawerOpen.value
-}
 </script>

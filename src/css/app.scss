@@ -1,1 +1,253 @@
 // app global css in SCSS form
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../fonts/JetBrainsMono-Regular.woff2") format("truetype");
+}
+
+@font-face {
+  font-family: "Noto Sans";
+  src: url("../fonts/NotoSansSC-Regular.ttf") format("truetype");
+}
+
+html, body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans", "JetBrains Mono", monospace;
+
+  --border-radius: 9px;
+
+  --primary-color: #006783;
+  --on-primary-color: #ffffff;
+  --primary-container-color: #bce9ff;
+  --on-primary-container-color: #001f29;
+
+  --secondary-color: #4d616b;
+  --on-secondary-color: #ffffff;
+  --secondary-container-color: #d0e6f2;
+  --on-secondary-container-color: #081e27;
+
+  --tertiary-color: #5c5b7d;
+  --on-tertiary-color: #ffffff;
+  --tertiary-container-color: #e2dfff;
+  --on-tertiary-container-color: #191836;
+
+  --error-color: #ba1a1a;
+  --on-error-color: #ffffff;
+  --error-container-color: #ffdad6;
+  --on-error-container-color: #410002;
+
+  --background-color: #fbfcfe;
+  --on-background-color: #191c1e;
+
+  --surface-color: #fbfcfe;
+  --on-surface-color: #191c1e;
+
+  --outline-color: #70787d;
+  --surface-variant-color: #dce4e9;
+  --on-surface-variant-color: #40484c;
+
+  --card-background-color: #eef4f8;
+}
+
+html, body {
+  background: var(--background-color);
+}
+
+// app color presets
+.text-primary {
+  color: var(--primary-color) !important;
+}
+
+.bg-primary {
+  background: var(--primary-color) !important;
+}
+
+.text-on-primary {
+  color: var(--on-primary-color) !important;
+}
+
+.bg-on-primary {
+  background: var(--on-primary-color) !important;
+}
+
+.text-primary-container {
+  color: var(--primary-container-color) !important;
+}
+
+.bg-primary-container {
+  background: var(--primary-container-color) !important;
+}
+
+.text-on-primary-container {
+  color: var(--on-primary-container-color) !important;
+}
+
+.bg-on-primary-container {
+  background: var(--on-primary-container-color) !important;
+}
+
+.text-secondary {
+  color: var(--secondary-color) !important;
+}
+
+.bg-secondary {
+  background: var(--secondary-color) !important;
+}
+
+.text-on-secondary {
+  color: var(--on-secondary-color) !important;
+}
+
+.bg-on-secondary {
+  background: var(--on-secondary-color) !important;
+}
+
+.text-secondary-container {
+  color: var(--secondary-container-color) !important;
+}
+
+.bg-secondary-container {
+  background: var(--secondary-container-color) !important;
+}
+
+.text-on-secondary-container {
+  color: var(--on-secondary-container-color) !important;
+}
+
+.bg-on-secondary-container {
+  background: var(--on-secondary-container-color) !important;
+}
+
+.text-tertiary {
+  color: var(--tertiary-color) !important;
+}
+
+.bg-tertiary {
+  background: var(--tertiary-color) !important;
+}
+
+.text-on-tertiary {
+  color: var(--on-tertiary-color) !important;
+}
+
+.bg-on-tertiary {
+  background: var(--on-tertiary-color) !important;
+}
+
+.text-tertiary-container {
+  color: var(--tertiary-container-color) !important;
+}
+
+.bg-tertiary-container {
+  background: var(--tertiary-container-color) !important;
+}
+
+.text-on-tertiary-container {
+  color: var(--on-tertiary-container-color) !important;
+}
+
+.bg-on-tertiary-container {
+  background: var(--on-tertiary-container-color) !important;
+}
+
+.text-error {
+  color: var(--error-color) !important;
+}
+
+.bg-error {
+  background: var(--error-color) !important;
+}
+
+.text-on-error {
+  color: var(--on-error-color) !important;
+}
+
+.bg-on-error {
+  background: var(--on-error-color) !important;
+}
+
+.text-error-container {
+  color: var(--error-container-color) !important;
+}
+
+.bg-error-container {
+  background: var(--error-container-color) !important;
+}
+
+.text-on-error-container {
+  color: var(--on-error-container-color) !important;
+}
+
+.bg-on-error-container {
+  background: var(--on-error-container-color) !important;
+}
+
+.text-background {
+  color: var(--background-color) !important;
+}
+
+.bg-background {
+  background: var(--background-color) !important;
+}
+
+.text-on-background {
+  color: var(--on-background-color) !important;
+}
+
+.bg-on-background {
+  background: var(--on-background-color) !important;
+}
+
+.text-surface {
+  color: var(--surface-color) !important;
+}
+
+.bg-surface {
+  background: var(--surface-color) !important;
+}
+
+.text-on-surface {
+  color: var(--on-surface-color) !important;
+}
+
+.bg-on-surface {
+  background: var(--on-surface-color) !important;
+}
+
+.text-outline {
+  color: var(--outline-color) !important;
+}
+
+.bg-outline {
+  background: var(--outline-color) !important;
+}
+
+.text-surface-variant {
+  color: var(--surface-variant-color) !important;
+}
+
+.bg-surface-variant {
+  background: var(--surface-variant-color) !important;
+}
+
+.text-on-surface-variant {
+  color: var(--on-surface-variant-color) !important;
+}
+
+.bg-on-surface-variant {
+  background: var(--on-surface-variant-color) !important;
+}
+
+.text-card-background {
+  color: var(--card-background-color) !important;
+}
+
+.bg-card-background {
+  background: var(--card-background-color) !important;
+}
+
+.rounded-borders {
+  border-radius: var(--border-radius);
+}

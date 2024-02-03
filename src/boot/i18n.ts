@@ -25,8 +25,11 @@ declare module 'vue-i18n' {
 /* eslint-enable @typescript-eslint/no-empty-interface */
 
 export default boot(({ app }) => {
+  const browserLanguage = navigator.language || 'en-US'
+  const locale = messages.hasOwnProperty(browserLanguage) ? browserLanguage : 'en-US'
+
   const i18n = createI18n({
-    locale: 'en-US',
+    locale: locale,
     legacy: false,
     messages
   })
