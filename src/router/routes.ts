@@ -10,7 +10,7 @@ const routes: RouteRecordRaw[] = [
         component: () => import('pages/IndexPage.vue'),
         children: [
           {
-            path: '/',
+            path: '',
             component: () => import('components/home-card/MainCard.vue')
           },
           {

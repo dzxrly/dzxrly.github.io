@@ -12,9 +12,10 @@
           class="home-card col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 rounded-borders bg-card-background text-on-surface q-pa-md">
           <router-view v-slot="{ Component, route }">
             <transition
-              enter-active-class="animated fadeInRight"
-              leave-active-class="animated fadeOutLeft"
               mode="out-in"
+              :duration="{ enter: 300, leave: 300 }"
+              :enter-active-class="route.path === '/' ? 'animated fadeInLeft' : 'animated fadeInRight'"
+              :leave-active-class="route.path === '/' ? 'animated fadeOutRight' : 'animated fadeOutLeft'"
             >
               <component :is="Component" :key="route.path" />
             </transition>
@@ -22,6 +23,8 @@
         </div>
       </div>
     </div>
+    <q-btn to="/mysoftwares">Software</q-btn>
+    <q-btn to="/">Main</q-btn>
   </q-page>
 </template>
 
