@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Egg Targaryen">
+  <meta name="keywords" content="">
+
+  <meta name="description" content="MetaFormer is Actually What You Need for Vision
+ 
+ 
+ Weihao Yu，Mi Luo，Pan Zhou，Chenyang Si，Yichen Zhou，Xinchao Wang，Jiashi Feng，Shuicheng Yan
+ Sea AI Lab
+ National University of Singapore
+ CVPR2022 Or">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="MetaFormer is Actually What You Need for Vision 阅读笔记">
+  <meta property="og:url"
+        content="http://example.com/2022/05/12/MetaFormer-is-Actually-What-You-Need-for-Vision-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/index.html">
+  <meta property="og:site_name" content="EggTargaryen的个人博客">
+  <meta property="og:description" content="MetaFormer is Actually What You Need for Vision
+ 
+ 
+ Weihao Yu，Mi Luo，Pan Zhou，Chenyang Si，Yichen Zhou，Xinchao Wang，Jiashi Feng，Shuicheng Yan
+ Sea AI Lab
+ National University of Singapore
+ CVPR2022 Or">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:image" content="https://s2.loli.net/2022/05/05/Ml3k7Qw6SmPFW4g.png">
+  <meta property="article:published_time" content="2022-05-12T13:57:33.000Z">
+  <meta property="article:modified_time" content="2022-05-12T14:13:54.198Z">
+  <meta property="article:author" content="Egg Targaryen">
+  <meta property="article:tag" content="论文笔记">
+  <meta property="article:tag" content="计算机视觉">
+  <meta property="article:tag" content="Transformer">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://s2.loli.net/2022/05/05/Ml3k7Qw6SmPFW4g.png">
+
+
+  <title>MetaFormer is Actually What You Need for Vision 阅读笔记 - EggTargaryen的个人博客</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+
+
+  <!-- 主题依赖的图标库，不要自行修改 -->
+
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+  <link rel="stylesheet" href="/css/main.css" />
+
+  <!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {}
+    var CONFIG = {
+      'hostname': 'example.com',
+      'root': '/',
+      'version': '1.8.14',
+      'typing': { 'enable': true, 'typeSpeed': 70, 'cursorChar': '_', 'loop': false },
+      'anchorjs': {
+        'enable': true,
+        'element': 'h1,h2,h3,h4,h5,h6',
+        'placement': 'right',
+        'visible': 'hover',
+        'icon': ''
+      },
+      'progressbar': {
+        'enable': true,
+        'height_px': 3,
+        'color': '#29d',
+        'options': { 'showSpinner': false, 'trickleSpeed': 100 }
+      },
+      'copy_btn': true,
+      'image_zoom': { 'enable': true, 'img_url_replace': ['', ''] },
+      'toc': { 'enable': true, 'headingSelector': 'h1,h2,h3,h4,h5,h6', 'collapseDepth': 0 },
+      'lazyload': { 'enable': true, 'loading_img': '/img/loading.gif', 'onlypost': false, 'offset_factor': 2 },
+      'web_analytics': {
+        'enable': false,
+        'baidu': null,
+        'google': null,
+        'gtag': null,
+        'tencent': { 'sid': null, 'cid': null },
+        'woyaola': null,
+        'cnzz': null,
+        'leancloud': {
+          'app_id': null,
+          'app_key': null,
+          'server_url': null,
+          'path': 'window.location.pathname',
+          'ignore_local': false
+        }
+      },
+      'search_path': '/local-search.xml'
+    }
+  </script>
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
+  <meta name="generator" content="Hexo 6.2.0">
+</head>
+
+
+<body>
+<header style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <strong>EggTargaryen的个人博客</strong>
+      </a>
+
+      <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <div class="animated-icon"><span></span><span></span><span></span></div>
+      </button>
+
+      <!-- Collapsible content -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto text-center">
+
+
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页
+            </a>
+          </li>
+
+
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档
+            </a>
+          </li>
+
+
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类
+            </a>
+          </li>
+
+
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签
+            </a>
+          </li>
+
+
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于
+            </a>
+          </li>
+
+
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch"
+               aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+
+
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+              class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="banner" id="banner" parallax=true
+       style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+    <div class="full-bg-img">
+      <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+        <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="MetaFormer is Actually What You Need for Vision 阅读笔记">
+              
+            </span>
+
+
+          <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-05-12 21:57" pubdate>
+        2022年5月12日 晚上
+      </time>
+    </span>
+
+          </div>
+
+          <div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.3k 字
+    </span>
+
+
+            <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      20 分钟
+    </span>
+
+
+            <!-- 不蒜子统计文章PV -->
+            <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+
+  <div class="container-fluid nopadding-x">
+    <div class="row nomargin-x">
+      <div class="d-none d-lg-block col-lg-2"></div>
+      <div class="col-lg-8 nopadding-x-md">
+        <div class="container nopadding-x-md" id="board-ctn">
+          <div class="py-5" id="board">
+            <article class="post-content mx-auto">
+              <!-- SEO header -->
+              <h1 style="display: none">MetaFormer is Actually What You Need for Vision 阅读笔记</h1>
+
+              <p class="note note-info">
+
+                本文最后更新于：1 个月前
+
+              </p>
+
+              <div class="markdown-body">
+                <h1 id="metaformer-is-actually-what-you-need-for-vision">MetaFormer is Actually What You Need for
+                  Vision</h1>
+                <blockquote>
+                  <ul>
+                    <li>Weihao Yu，Mi Luo，Pan Zhou，Chenyang Si，Yichen Zhou，Xinchao Wang，Jiashi Feng，Shuicheng Yan</li>
+                    <li>Sea AI Lab</li>
+                    <li>National University of Singapore</li>
+                    <li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2111.11418#">CVPR2022 Oral</a>
+                    </li>
+                  </ul>
+                </blockquote>
+                <h2 id="概述">概述</h2>
+                <p>如下图所示，视觉Transformer包含两个子残差块，第一个一般为Token Mixer模块（诸如MHSA、Spatial
+                  MLP等）用于长程特征提取融合，第二个一般为两层全连接层组成的MLP（其中第二层的长度比第一层大2倍/4倍）。</p>
+                <p><img src="https://s2.loli.net/2022/05/05/Ml3k7Qw6SmPFW4g.png" srcset="/img/loading.gif" lazyload />
+                </p>
+                <p>因为通过最近的论文发现传统Transformer的Token Mixer所使用的MHSA更换为Spatial
+                  MLP或者傅里叶变换块后仍然能维持很优秀的效果，因此本文对该结构进行了抽象，并且通过实验证明了：相比Token
+                  Mixer，整体的Transformer结构（即MetaFormer）才是最重要的。除此之外，本文也就该理念提出了一个将Token
+                  Mixer更换为AvgPool的更简单的模型，即PoolFormer，其在ImageNet分类、ADE20K语义分割和COCO目标检测数据集上均能以更少的参数量和更低的MAC（Memory
+                  Access Cost）取得与其他Transformer齐平甚至更高的水平。</p>
+                <hr />
+                <h2 id="method">Method</h2>
+                <p>首先，提出了一个针对传统视觉Transformer Block的结构抽象，其公式如下： <span class="math display">\[
+\begin{align}
+&amp; X=InputEmb(I)，X\in \mathbb{R}^{N\times C}，即对输入I进行Embedding操作\nonumber\\
+&amp; Y=TokenMixer(Norm(X))+X，其中Norm可替换为LN、GN、BN\nonumber\\
+&amp; Z=\sigma(Norm(Y)W_1)W_2+Y，W_1\in \mathbb{R}^{C\times rC}，W_2\in \mathbb{R}^{rC\times C}\nonumber\\
+&amp; 其中W_1，W_2为可学习的MLP参数，r为MLP扩张率，\nonumber\\
+&amp; \sigma(\cdot)为激活函数，如GELU、ReLU等\nonumber\\
+\end{align}
+\]</span> 本文针对该抽象提出了一个自己的实现，即Token Mixer使用简单的且无可学习参数的AvgPool，构成PoolFormer
+                  Block，PyTorch代码实现如下：</p>
+                <figure class="highlight python">
+                  <table>
+                    <tr>
+                      <td class="gutter">
+                        <div class="code-wrapper">
+                          <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span
+                            class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span
+                            class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span
+                            class="line">10</span><br><span class="line">11</span><br><span
+                            class="line">12</span><br><span class="line">13</span><br><span
+                            class="line">14</span><br><span class="line">15</span><br><span
+                            class="line">16</span><br><span class="line">17</span><br></pre>
+                        </div>
+                      </td>
+                      <td class="code">
+                        <pre><code class="hljs python"><span class="hljs-keyword">import</span> torch.nn <span
+                          class="hljs-keyword">as</span> nn<br><br><span class="hljs-keyword">class</span> <span
+                          class="hljs-title class_">Pooling</span>(nn.Module):<br>  <span
+                          class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span
+                          class="hljs-params">self, pool_size=<span class="hljs-number">3</span></span>):<br>    <span
+                          class="hljs-built_in">super</span>().__init__()<br>    self.pool = nn.AvgPool2d(<br>      pool_size, stride=<span
+                          class="hljs-number">1</span>,<br>      padding=pool_size//<span
+                          class="hljs-number">2</span>,<br>      count_include_pad=<span
+                          class="hljs-literal">False</span>,<br>    )<br>    <br>  <span class="hljs-keyword">def</span> <span
+                          class="hljs-title function_">forward</span>(<span class="hljs-params">self, x</span>):<br>    <span
+                          class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    [B, C, H, W] = x.shape</span><br><span
+                          class="hljs-string">    因为TokenMixer之外有一个残差连接，所以此处需要减去该连接。</span><br><span
+                          class="hljs-string">    &quot;&quot;&quot;</span><br>    <span
+                          class="hljs-keyword">return</span> self.pool(x) - x<br></code></pre>
+                      </td>
+                    </tr>
+                  </table>
+                </figure>
+                <p>AvgPool的stride=1，因此其本身具有一定的特征聚合能力，并且由于自身并没有可学习参数，所以相对于Self-Attention和Spatial
+                  MLP等机制，PoolFormer占用显存更少，可以处理非常长的Token序列。完整网络结构如下图所示：</p>
+                <p><img src="https://s2.loli.net/2022/05/05/x8yAfieaTrzcVL9.png" srcset="/img/loading.gif" lazyload />
+                </p>
+                <p>
+                  对于Small网络结构，Embedding维度对应至4阶段分别为64、128、320、512；而对于Medium网络结构，Embedding维度分别为96、192、384、768。</p>
+                <p>PoolFormer网络架构的几种配置如下所示：</p>
+                <p><img src="https://s2.loli.net/2022/05/05/aAo3rJEv6YyBmfe.png" srcset="/img/loading.gif" lazyload />
+                </p>
+                <hr />
+                <h2 id="实验">实验</h2>
+                <h3 id="图像分类任务">图像分类任务</h3>
+                <p>数据集使用ImageNet-1K，其中包含1.3M张训练图片和5K张验证图片。</p>
+                <p><img src="https://s2.loli.net/2022/05/05/2GVhxDuUdZij4TK.png" srcset="/img/loading.gif" lazyload />
+                </p>
+                <p><img src="https://s2.loli.net/2022/05/05/r7RiazD3MAUgBbc.png" srcset="/img/loading.gif" lazyload />
+                </p>
+                <p>从表中可以看出PoolFormer与使用卷积、SA或Spatial
+                  MLP的网络相比，可以在相同甚至更少的参数量的前提下达到更好的效果，并且MAC也更低。</p>
+                <h3 id="目标检测任务">目标检测任务</h3>
+                <p>数据集使用COCO，包含118K张训练图片和5K张验证图片，PoolFormer作为Backbone应用在RetinaNet或者Mask
+                  R-CNN中。</p>
+                <p><img src="https://s2.loli.net/2022/05/05/Z4SFJRMiPGuA1Bs.png" srcset="/img/loading.gif" lazyload />
+                </p>
+                <p>表中数据表明应用PoolFormer
+                  Backbone的RetinaNet可以以更少的参数量在AP上击败以ResNet为Backbone的RetinaNet。</p>
+                <p><img src="https://s2.loli.net/2022/05/05/MUfKBVL4vmw8IhS.png" srcset="/img/loading.gif" lazyload />
+                </p>
+                <p>表中数据表明应用PoolFormer Backbone的Mask R-CNN可以以更少的参数量在AP上击败以ResNet为Backbone的Mask
+                  R-CNN。</p>
+                <h3 id="语义分割任务">语义分割任务</h3>
+                <p>该任务使用ADE20K数据集，其中训练图片20K张，验证图片2K张。</p>
+                <p><img src="https://s2.loli.net/2022/05/05/dQHrnjJSxwmMgKE.png" srcset="/img/loading.gif" lazyload />
+                </p>
+                <p>实验表明以PoolFormer为Backbone的Semantic
+                  FPN网络用更少的参数量达成了比PVT、ResNeXt、ResNet更好的分割精度。</p>
+                <h3 id="消融实验">消融实验</h3>
+                <p><img src="https://s2.loli.net/2022/05/05/JQX671PIWUnj4Co.png" srcset="/img/loading.gif" lazyload />
+                </p>
+                <p>对于Hybrid Stages：由于pool操作可以处理较长的序列信息而SA/Spatial
+                  MLP能够捕获全局信息，因此使用混合架构，即先使用PoolFormer处理长序列，随着靠后的Stage的序列长度缩短，改为使用Spatial
+                  FC作为Token Mixer，从表中可以看到该方法稍微增加了参数量但也带来了一定的性能提升。</p>
+
+              </div>
+              <hr>
+              <div>
+                <div class="post-metas mb-3">
+
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+
+                    <a class="hover-with-bg" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
+
+                    <a class="hover-with-bg"
+                       href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a>
+
+                    <a class="hover-with-bg"
+                       href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/Transformer/">Transformer</a>
+
+                  </div>
+
+
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+
+                    <a class="hover-with-bg" href="/tags/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
+
+                    <a class="hover-with-bg" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a>
+
+                    <a class="hover-with-bg" href="/tags/Transformer/">Transformer</a>
+
+                  </div>
+
+                </div>
+
+                <p class="note note-warning">
+
+                  本博客所有文章除特别声明外，均采用 <a target="_blank"
+                                                       href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh"
+                                                       rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+
+                </p>
+
+
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+
+
+                    <a
+                      href="/2022/05/12/Shunted-Self-Attention-via-Multi-Scale-Token-Aggregation-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">
+                      <i class="iconfont icon-arrowleft"></i>
+                      <span
+                        class="hidden-mobile">Shunted Self-Attention via Multi-Scale Token Aggregation 阅读笔记</span>
+                      <span class="visible-mobile">上一篇</span>
+                    </a>
+
+                  </article>
+                  <article class="post-next col-6">
+
+
+                  </article>
+                </div>
+
+              </div>
+
+
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+          <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+          <div class="toc-body" id="toc-body"></div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Custom -->
+
+
+  <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+    <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+  </a>
+
+
+  <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+          <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body mx-3">
+          <div class="md-form mb-5">
+            <input type="text" id="local-search-input" class="form-control validate">
+            <label data-error="x" data-success="v"
+                   for="local-search-input">关键词</label>
+          </div>
+          <div class="list-group" id="local-search-result"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</main>
+
+<footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i
+    class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank"
+                                       rel="nofollow noopener"><span>Fluid</span></a>
+  </div>
+
+  <div class="statistics">
+
+
+    <!-- 不蒜子统计PV -->
+    <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+
+
+    <!-- 不蒜子统计UV -->
+    <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+
+
+  </div>
+
+
+</footer>
+
+
+<!-- SCRIPTS -->
+
+<script src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+<script>
+  NProgress.configure({ 'showSpinner': false, 'trickleSpeed': 100 })
+  NProgress.start()
+  window.addEventListener('load', function() {
+    NProgress.done()
+  })
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js"></script>
+<script src="/js/events.js"></script>
+<script src="/js/plugins.js"></script>
+
+<!-- Plugins -->
+
+
+<script src="/js/local-search.js"></script>
+
+
+<script src="/js/img-lazyload.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js"></script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+
+<script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js"></script>
+<script>
+  (function(window, document) {
+    var typing = Fluid.plugins.typing
+    var title = document.getElementById('subtitle').title
+
+    typing(title)
+
+  })(window, document)
+</script>
+
+
+<!-- MathJax -->
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    loader: {
+      load: ['ui/lazy']
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = { node: text, delim: '', n: 0 }
+            math.end = { node: text, delim: '', n: 0 }
+            doc.math.push(math)
+          })
+        }, '', false],
+        insertedScript: [200, () => {
+          document.querySelectorAll('mjx-container').forEach(node => {
+            let target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+</script>
+
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script src="/js/boot.js"></script>
+
+
+</body>
+</html>
