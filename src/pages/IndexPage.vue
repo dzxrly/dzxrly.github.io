@@ -8,8 +8,17 @@
         >{{ homeTitle }}</span>
       </div>
       <div class="row justify-center items-center q-mt-lg">
-        <div class="q-pa-md rounded-borders bg-card-background text-on-surface">
-          TEST
+        <div
+          class="home-card col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 rounded-borders bg-card-background text-on-surface q-pa-md">
+          <router-view v-slot="{ Component, route }">
+            <transition
+              enter-active-class="animated fadeInRight"
+              leave-active-class="animated fadeOutLeft"
+              mode="out-in"
+            >
+              <component :is="Component" :key="route.path" />
+            </transition>
+          </router-view>
         </div>
       </div>
     </div>
@@ -63,6 +72,9 @@ onMounted(() => {
     opacity: 1
     background-color: #191c1e
     animation: home-title-span-bling 1.5s infinite
+
+  .home-card
+    overflow: hidden
 
 @keyframes home-title-span-bling
   0%
