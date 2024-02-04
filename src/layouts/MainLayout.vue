@@ -1,7 +1,7 @@
 <template>
-  <q-layout view="hHh lpR fFf">
+  <q-layout view="hhh lpR fFf">
     <q-header class="bg-transparent">
-      <div class="row justify-end items-center full-width q-py-sm q-px-md">
+      <div class="row justify-end items-center full-width q-py-sm q-px-md" style="height: 8vh">
         <q-btn-dropdown auto-close class="rounded-borders q-py-sm" color="primary" content-class="rounded-borders"
                         flat
                         icon="translate">

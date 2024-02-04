@@ -2,6 +2,8 @@ import { route } from 'quasar/wrappers'
 import { createMemoryHistory, createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 
 import routes from './routes'
+import { LoadingBar } from 'quasar'
+
 
 /*
  * If not building with SSR mode, you can
@@ -26,6 +28,14 @@ export default route(function(/* { store, ssrContext } */) {
     // quasar.conf.js -> build -> publicPath
     history: createHistory(process.env.VUE_ROUTER_BASE)
   });
+
+  Router.beforeEach(() => {
+    LoadingBar.start()
+  })
+
+  Router.afterEach(() => {
+    LoadingBar.stop()
+  })
 
   return Router
 });

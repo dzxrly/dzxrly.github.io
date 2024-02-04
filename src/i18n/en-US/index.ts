@@ -2,5 +2,8 @@
 // so you can safely delete all default props below
 
 export default {
-  homeTitle: 'Egg Targaryen\'s Dock'
+  homeTitle: 'Egg Targaryen\'s Dock',
+
+  homeBtnMyProjects: 'My Projects',
+  homeBtnPersonal: 'About Me'
 }
