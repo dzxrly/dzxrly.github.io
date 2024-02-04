@@ -11,7 +11,7 @@ import CardButton from 'components/basic/CardButton.vue'
     <card-button
       icon-name="person"
       route-path="/about"
-      secondary-avatar="/public/643s.gif"
+      secondary-avatar="643s.gif"
       title-keyword="homeBtnPersonal" />
   </div>
 </template>
