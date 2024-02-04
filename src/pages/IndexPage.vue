@@ -49,7 +49,7 @@ onMounted(() => {
           class="home-title-span text-on-background text-bold non-selectable"
         >{{ homeTitle }}</span>
     </div>
-    <div class="home-card full-width rounded-borders bg-card-background text-on-surface q-pa-md">
+    <div class="home-card full-width bg-card-background text-on-surface q-pa-md">
       <router-view v-slot="{ Component, route }">
         <transition
           :duration="{ enter: 300, leave: 300 }"
@@ -96,6 +96,8 @@ onMounted(() => {
     transform: translateY(40vh)
     transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275)
     overflow: scroll
+    border-top-left-radius: 19px
+    border-top-right-radius: 19px
     z-index: 3
 
   .home-card::-webkit-scrollbar, .home-card::-webkit-scrollbar-corner

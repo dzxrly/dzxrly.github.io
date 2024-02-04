@@ -23,12 +23,12 @@ const isLtSm = computed(() => $q.screen.lt.sm)
         </q-avatar>
       </div>
       <div :class="isLtSm ? 'col justify-center q-pt-xl' : 'col-8 justify-start q-pl-xl'" class="row items-center">
-        <div class="column justify-center items-start full-width">
+        <div :class="isLtSm ? 'items-center' : 'items-start'" class="column justify-center full-width">
           <span class="text-body1 q-my-sm">{{ t('homePersonalInfoChip1') }}</span>
           <span class="text-body1 q-my-sm">{{ t('homePersonalInfoChip2') }}</span>
           <span class="text-body1 q-my-sm">{{ t('homePersonalInfoChip3') }}</span>
           <span class="text-body1 q-mt-sm q-mb-md">{{ t('homePersonalInfoChip4') }}</span>
-          <div class="row justify-start items-center wrap">
+          <div :class="isLtSm ? 'justify-center' : 'justify-start'" class="row items-center wrap">
             <div v-for="langBadge in languageBadgeUrl" :key="langBadge" class="q-mr-sm">
               <img :src="langBadge" alt="language badge">
             </div>
