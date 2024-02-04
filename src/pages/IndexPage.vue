@@ -96,7 +96,7 @@ onMounted(() => {
     transform: translateY(40vh)
     transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275)
     overflow: scroll
-    z-index: 2
+    z-index: 3
 
   .home-card::-webkit-scrollbar, .home-card::-webkit-scrollbar-corner
     background-color: transparent
@@ -112,6 +112,7 @@ onMounted(() => {
     transform: translateY(0)
 
   .home-card
+    box-shadow: 0 5px 5px -3px #0003, 0 8px 10px 1px #00000024, 0 3px 14px 2px #0000001f
     transform: translateY(0)
 
   .home-card::-webkit-scrollbar-thumb
@@ -126,7 +127,24 @@ onMounted(() => {
   width: 100%
   height: 10vh
   background: #eef4f8
+  z-index: 2
+
+.home-page-wrapper::before
+  content: ''
+  position: absolute
+  display: inline
+  top: 0
+  left: 0
+  width: 100vw
+  height: 100vh
+  background-color: #70787d
+  pointer-events: none
+  opacity: 0
+  transition: all .5s ease-in-out
   z-index: 1
+
+.home-page-wrapper:hover::before
+  opacity: 0.5
 
 @keyframes home-title-span-bling
   0%

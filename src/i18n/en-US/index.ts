@@ -4,6 +4,10 @@
 export default {
   homeTitle: 'Egg Targaryen\'s Dock',
 
-  homeBtnMyProjects: 'My Projects',
-  homeBtnPersonal: 'About Me'
+  homeBtnMyProjects: 'Open Source',
+  homeBtnPersonal: 'About Me',
+  homePersonalInfoChip1: '👀 Deep Learning & Computer Vision',
+  homePersonalInfoChip2: '🔭 Astronomy Big Data & Data Mining',
+  homePersonalInfoChip3: '📱 Android Native Development',
+  homePersonalInfoChip4: '🌐 Web Front-end Development'
 }

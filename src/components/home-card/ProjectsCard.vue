@@ -1,5 +1,10 @@
 <script lang="ts" setup>
+import { computed } from 'vue'
+import { useQuasar } from 'quasar'
 
+const $q = useQuasar()
+
+const isLtSm = computed(() => $q.screen.lt.sm)
 </script>
 
 <template>

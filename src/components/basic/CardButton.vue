@@ -50,7 +50,7 @@ function routeTo() {
 
 <template>
   <div class="custom-card-btn q-ma-md rounded-borders" @click="routeTo">
-    <div class="secondary-btn column justify-center items-center full-width full-height">
+    <div class="secondary-btn column justify-center items-center full-width full-height wrap">
       <q-avatar v-if="!props.iconName" :size="avatarSize" class="custom-card-picture-in-btn" rounded>
         <img :src="props.avatar" alt="card btn avatar" />
       </q-avatar>
@@ -58,14 +58,14 @@ function routeTo() {
                 class="custom-card-picture-in-btn"
                 color="transparent"
                 rounded></q-avatar>
-      <span class="text-subtitle1 text-bold text-on-secondary-container">{{ t(props.titleKeyword) }}</span>
+      <span class="text-subtitle1 text-bold text-on-secondary-container ellipsis">{{ t(props.titleKeyword) }}</span>
     </div>
     <div v-if="isSecondaryAvatar"
-         class="secondary-btn-easter-egg column justify-center items-center full-width">
+         class="secondary-btn-easter-egg column justify-center items-center full-width wrap">
       <q-avatar :size="avatarSize" class="custom-card-picture-in-btn" rounded>
         <img :src="props.secondaryAvatar" alt="card btn avatar" />
       </q-avatar>
-      <span class="text-subtitle1 text-bold text-on-secondary-container">{{ t(props.titleKeyword) }}</span>
+      <span class="text-subtitle1 text-bold text-on-secondary-container ellipsis">{{ t(props.titleKeyword) }}</span>
     </div>
   </div>
 </template>
