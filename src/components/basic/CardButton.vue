@@ -1,8 +1,9 @@
 <script lang="ts" setup>
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { computed, ref } from 'vue'
+import { computed, PropType, ref } from 'vue'
 import { useQuasar } from 'quasar'
+import { ResponsiveCardBtnInterface } from 'src/interface/responsive-card-btn-interface'
 
 const { t } = useI18n()
 const $q = useQuasar()
@@ -10,6 +11,10 @@ const $q = useQuasar()
 const props = defineProps({
   routePath: {
     type: String,
+    required: true
+  },
+  responsiveProps: {
+    type: Object as PropType<ResponsiveCardBtnInterface>,
     required: true
   },
   iconName: {
@@ -41,7 +46,15 @@ const backgroundColor = ref(props.backgroundColor)
 const isSecondaryAvatar = computed(() => props.secondaryAvatar && props.secondaryAvatar != '')
 const avatarTransform = computed(() => isSecondaryAvatar.value ? 'translateY(-100%)' : 'translateY(0)')
 const secondaryAvatarTransform = computed(() => isSecondaryAvatar.value ? 'translateY(-50%)' : 'translateY(0)')
-const avatarSize = computed(() => $q.screen.lt.sm ? '3rem' : $q.screen.lt.md ? '4rem' : '7rem')
+const responsiveSize = computed(() => {
+  const size = $q.screen.width * props.responsiveProps?.coefficientA + props.responsiveProps?.coefficientB
+  if (size > props.responsiveProps?.valueMax) return props.responsiveProps?.valueMax
+  else if (size < props.responsiveProps?.valueMin) return props.responsiveProps?.valueMin
+  else return size
+})
+const cardSize = computed(() => `${responsiveSize.value}rem`)
+const cardMargin = computed(() => `${responsiveSize.value * 0.01}rem`)
+const avatarSize = computed(() => `${responsiveSize.value * 0.65}rem`)
 
 function routeTo() {
   router.push(props.routePath)
@@ -74,8 +87,8 @@ function routeTo() {
 .custom-card-btn
   position: relative
   display: inline-block
-  width: 15rem
-  height: 15rem
+  width: v-bind(cardSize)
+  height: v-bind(cardSize)
   cursor: pointer
   background-color: v-bind(backgroundColor)
   box-shadow: none
@@ -85,7 +98,7 @@ function routeTo() {
   overflow: hidden
 
   .custom-card-picture-in-btn
-    margin: 0 0 1rem 0
+    margin: 0 0 v-bind(cardMargin) 0
 
   .secondary-btn
     position: absolute
@@ -113,20 +126,4 @@ function routeTo() {
 
 .custom-card-btn-btn:active
   background-color: rgba(0, 0, 0, 0.2)
-
-@media screen and (max-width: 600px)
-  .custom-card-btn
-    width: 8rem
-    height: 8rem
-
-    .custom-card-picture-in-btn
-      margin: 0 0 .3rem 0
-
-@media screen and (max-width: 400px)
-  .custom-card-btn
-    width: 6rem
-    height: 6rem
-
-    .custom-card-picture-in-btn
-      margin: 0 0 .1rem 0
 </style>

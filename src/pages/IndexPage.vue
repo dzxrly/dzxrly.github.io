@@ -1,15 +1,16 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
-import { computed, onMounted, ref, watch } from 'vue'
-import { useQuasar } from 'quasar'
+import { computed, inject, onMounted, ref, watch } from 'vue'
+import { EventBus, useQuasar } from 'quasar'
 
 const { t } = useI18n()
 const $q = useQuasar()
 const homeTitle = ref<string>('')
+const isMouseEnter = ref<boolean>(false)
 const isLtSm = computed(() => $q.screen.lt.sm)
 const homeTitleTranslation = computed(() => t('homeTitle'))
 let typingInterval: NodeJS.Timeout | null = null
-
+const bus = inject<EventBus>('eventBus')
 
 function clearTypingInterval() {
   if (typingInterval) {
@@ -35,6 +36,10 @@ watch(() => homeTitleTranslation.value, () => {
   setHomeTitleWithAnimation()
 })
 
+watch(() => isMouseEnter.value, () => {
+  bus?.emit('set-background-cover', isMouseEnter.value)
+})
+
 onMounted(() => {
   clearTypingInterval()
   setHomeTitleWithAnimation()
@@ -43,13 +48,19 @@ onMounted(() => {
 
 <template>
   <q-page class="home-page-wrapper column justify-center items-center">
-    <div class="home-title full-width row justify-center items-center q-py-xl">
+    <div :class="{ 'home-title-hover' : isMouseEnter }"
+         class="home-title full-width row justify-center items-center q-py-xl"
+         @click="isMouseEnter = false">
         <span
           :class="{ 'text-body1': isLtSm, 'text-h5': !isLtSm }"
           class="home-title-span text-on-background text-bold non-selectable"
         >{{ homeTitle }}</span>
     </div>
-    <div class="home-card full-width bg-card-background text-on-surface q-pa-md">
+    <div :class="{ 'home-card-hover shadow-8' : isMouseEnter, 'shadow-4' : !isMouseEnter }"
+         class="home-card full-width bg-card-background text-on-surface q-pa-md"
+         @mouseenter="isMouseEnter = true"
+         @mouseleave="isMouseEnter = false"
+    >
       <router-view v-slot="{ Component, route }">
         <transition
           :duration="{ enter: 300, leave: 300 }"
@@ -98,27 +109,23 @@ onMounted(() => {
     overflow: scroll
     border-top-left-radius: 19px
     border-top-right-radius: 19px
-    z-index: 3
+    z-index: 10
 
   .home-card::-webkit-scrollbar, .home-card::-webkit-scrollbar-corner
     background-color: transparent
-    width: 0.3rem
+    width: 0.2rem
 
   .home-card::-webkit-scrollbar-thumb
     border-radius: 19px
     background-color: rgba(77, 97, 107, 0)
     transition: all .25s ease-in-out
 
-.home-page-wrapper:hover, .home-page-wrapper:active, .home-page-wrapper:focus
-  .home-title
+
+  .home-title-hover
     transform: translateY(0)
 
-  .home-card
-    box-shadow: 0 5px 5px -3px #0003, 0 8px 10px 1px #00000024, 0 3px 14px 2px #0000001f
+  .home-card-hover
     transform: translateY(0)
-
-  .home-card::-webkit-scrollbar-thumb
-    background-color: rgba(77, 97, 107, 0.5)
 
 .home-page-wrapper::after
   content: ''
@@ -130,23 +137,6 @@ onMounted(() => {
   height: 10vh
   background: #eef4f8
   z-index: 2
-
-.home-page-wrapper::before
-  content: ''
-  position: absolute
-  display: inline
-  top: 0
-  left: 0
-  width: 100vw
-  height: 100vh
-  background-color: #70787d
-  pointer-events: none
-  opacity: 0
-  transition: all .5s ease-in-out
-  z-index: 1
-
-.home-page-wrapper:hover::before
-  opacity: 0.5
 
 @keyframes home-title-span-bling
   0%
