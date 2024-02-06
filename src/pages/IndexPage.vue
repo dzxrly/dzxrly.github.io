@@ -57,20 +57,25 @@ onMounted(() => {
         >{{ homeTitle }}</span>
     </div>
     <div :class="{ 'home-card-hover shadow-8' : isMouseEnter, 'shadow-4' : !isMouseEnter }"
-         class="home-card full-width bg-card-background text-on-surface q-pa-md"
+         class="home-card full-width bg-card-background text-on-surface q-pa-md column justify-start items-center"
          @mouseenter="isMouseEnter = true"
          @mouseleave="isMouseEnter = false"
     >
-      <router-view v-slot="{ Component, route }">
-        <transition
-          :duration="{ enter: 300, leave: 300 }"
-          :enter-active-class="route.path === '/' ? 'animated fadeInLeft' : 'animated fadeInRight'"
-          :leave-active-class="route.path === '/' ? 'animated fadeOutRight' : 'animated fadeOutLeft'"
-          mode="out-in"
-        >
-          <component :is="Component" :key="route.path" />
-        </transition>
-      </router-view>
+      <div class="row justify-center items-center full-width q-mb-md">
+        <div class="home-card-modal-bar"></div>
+      </div>
+      <div class="col full-width row justify-center items-start">
+        <router-view v-slot="{ Component, route }">
+          <transition
+            :duration="{ enter: 300, leave: 300 }"
+            :enter-active-class="route.path === '/' ? 'animated fadeInLeft' : 'animated fadeInRight'"
+            :leave-active-class="route.path === '/' ? 'animated fadeOutRight' : 'animated fadeOutLeft'"
+            mode="out-in"
+          >
+            <component :is="Component" :key="route.path" />
+          </transition>
+        </router-view>
+      </div>
     </div>
   </q-page>
 </template>
@@ -110,6 +115,13 @@ onMounted(() => {
     border-top-left-radius: 19px
     border-top-right-radius: 19px
     z-index: 10
+
+    .home-card-modal-bar
+      width: 5rem
+      height: 0.3rem
+      background-color: #70787d
+      opacity: 0.5
+      border-radius: 19px
 
   .home-card::-webkit-scrollbar, .home-card::-webkit-scrollbar-corner
     background-color: transparent

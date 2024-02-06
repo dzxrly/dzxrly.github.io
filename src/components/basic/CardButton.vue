@@ -43,9 +43,9 @@ const props = defineProps({
 
 const router = useRouter()
 const backgroundColor = ref(props.backgroundColor)
-const isSecondaryAvatar = computed(() => props.secondaryAvatar && props.secondaryAvatar != '')
-const avatarTransform = computed(() => isSecondaryAvatar.value ? 'translateY(-100%)' : 'translateY(0)')
-const secondaryAvatarTransform = computed(() => isSecondaryAvatar.value ? 'translateY(-50%)' : 'translateY(0)')
+const isSecondaryAvatar = ref<boolean>(Boolean(props.secondaryAvatar && props.secondaryAvatar != ''))
+const avatarTransform = ref<string>(isSecondaryAvatar.value ? 'translateY(-100%)' : 'translateY(0)')
+const secondaryAvatarTransform = ref<string>(isSecondaryAvatar.value ? 'translateY(-50%)' : 'translateY(0)')
 const responsiveSize = computed(() => {
   const size = $q.screen.width * props.responsiveProps?.coefficientA + props.responsiveProps?.coefficientB
   if (size > props.responsiveProps?.valueMax) return props.responsiveProps?.valueMax
@@ -54,7 +54,7 @@ const responsiveSize = computed(() => {
 })
 const cardSize = computed(() => `${responsiveSize.value}rem`)
 const cardMargin = computed(() => `${responsiveSize.value * 0.01}rem`)
-const avatarSize = computed(() => `${responsiveSize.value * 0.65}rem`)
+const avatarSize = computed(() => `${responsiveSize.value * 0.6}rem`)
 
 function routeTo() {
   router.push(props.routePath)

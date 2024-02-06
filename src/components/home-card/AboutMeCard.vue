@@ -12,7 +12,7 @@ const isLtSm = computed(() => $q.screen.lt.sm)
 </script>
 
 <template>
-  <div class="about-me-card-wrapper">
+  <div class="about-me-card-wrapper full-width">
     <div class="row justify-start items-center full-width q-mb-md">
       <q-btn :size="isLtSm ? 'md' : 'lg'" color="primary" flat icon="arrow_back" round to="/" />
     </div>
