@@ -35,17 +35,30 @@ const props = defineProps({
     type: String,
     required: true
   },
+  secondaryTitleKeyword: {
+    type: String,
+    default: ''
+  },
   backgroundColor: {
     type: String,
     default: '#eef4f8'
+  },
+  textColor: {
+    type: String,
+    default: '#081e27'
+  },
+  darkMode: {
+    type: Boolean,
+    default: false
   }
 })
 
 const router = useRouter()
-const backgroundColor = ref(props.backgroundColor)
-const isSecondaryAvatar = ref<boolean>(Boolean(props.secondaryAvatar && props.secondaryAvatar != ''))
+const isSecondaryAvatar = ref<boolean>(Boolean(props.secondaryAvatar && props.secondaryAvatar !== ''))
 const avatarTransform = ref<string>(isSecondaryAvatar.value ? 'translateY(-100%)' : 'translateY(0)')
+const avatarHoverOpacity = ref<number>(isSecondaryAvatar.value ? 0 : 1)
 const secondaryAvatarTransform = ref<string>(isSecondaryAvatar.value ? 'translateY(-50%)' : 'translateY(0)')
+
 const responsiveSize = computed(() => {
   const size = $q.screen.width * props.responsiveProps?.coefficientA + props.responsiveProps?.coefficientB
   if (size > props.responsiveProps?.valueMax) return props.responsiveProps?.valueMax
@@ -55,6 +68,10 @@ const responsiveSize = computed(() => {
 const cardSize = computed(() => `${responsiveSize.value}rem`)
 const cardMargin = computed(() => `${responsiveSize.value * 0.01}rem`)
 const avatarSize = computed(() => `${responsiveSize.value * 0.6}rem`)
+const backgroundColor = computed(() => props.backgroundColor)
+const textColor = computed(() => props.textColor)
+const hoverColor = computed(() => props.darkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0, 0, 0, 0.1)')
+const activeColor = computed(() => props.darkMode ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.3)')
 
 function routeTo() {
   router.push(props.routePath)
@@ -71,14 +88,15 @@ function routeTo() {
                 class="custom-card-picture-in-btn"
                 color="transparent"
                 rounded></q-avatar>
-      <span class="text-subtitle1 text-bold text-on-secondary-container ellipsis">{{ t(props.titleKeyword) }}</span>
+      <span :style="{ color: textColor }" class="text-subtitle1 text-bold ellipsis">{{ t(props.titleKeyword) }}</span>
     </div>
     <div v-if="isSecondaryAvatar"
          class="secondary-btn-easter-egg column justify-center items-center full-width wrap">
       <q-avatar :size="avatarSize" class="custom-card-picture-in-btn" rounded>
         <img :src="props.secondaryAvatar" alt="card btn avatar" />
       </q-avatar>
-      <span class="text-subtitle1 text-bold text-on-secondary-container ellipsis">{{ t(props.titleKeyword) }}</span>
+      <span :style="{ color: textColor }" class="text-subtitle1 text-bold ellipsis">{{ t(props.secondaryTitleKeyword)
+        }}</span>
     </div>
   </div>
 </template>
@@ -103,13 +121,17 @@ function routeTo() {
   .secondary-btn
     position: absolute
     transform: translateY(0)
-    transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    background-color: transparent
+    transition: transform .5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity .5s ease-in-out
+    opacity: 1
 
   .secondary-btn-easter-egg
     position: absolute
     top: 50%
     transform: translateY(200%)
-    transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    background-color: transparent
+    transition: transform .5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity .5s ease-in-out
+    opacity: 0
 
 .custom-card-btn:hover, .custom-card-btn:active
   transform: translateY(-4px)
@@ -117,13 +139,15 @@ function routeTo() {
 
   .secondary-btn
     transform: v-bind(avatarTransform)
+    opacity: v-bind(avatarHoverOpacity)
 
   .secondary-btn-easter-egg
     transform: v-bind(secondaryAvatarTransform)
+    opacity: 1
 
 .custom-card-btn:hover
-  background-color: rgba(0, 0, 0, 0.05)
+  background-color: v-bind(hoverColor)
 
-.custom-card-btn-btn:active
-  background-color: rgba(0, 0, 0, 0.2)
+.custom-card-btn:active
+  background-color: v-bind(activeColor)
 </style>

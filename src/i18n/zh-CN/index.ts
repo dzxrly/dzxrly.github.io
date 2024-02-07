@@ -3,6 +3,9 @@ export default {
 
   homeBtnMyProjects: '开源软件',
   homeBtnPersonal: '关于我',
+  homeBtnPersonalNormalLight: 'No.643 莱斯拉姆',
+  homeBtnPersonalNormalDark: 'No.644 捷克罗姆',
+  homeBtnPersonalEasterEgg: '✨ 闪啦!',
   homePersonalInfoChip1: '👀 深度学习与计算机视觉',
   homePersonalInfoChip2: '🔭 天文大数据分析',
   homePersonalInfoChip3: '📱 Android原生开发',
