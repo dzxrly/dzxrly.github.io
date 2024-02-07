@@ -110,7 +110,7 @@ onMounted(() => {
   .home-card
     height: 72vh
     transform: translateY(40vh)
-    transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    transition: all .25s ease-in-out
     overflow: scroll
     border-top-left-radius: 19px
     border-top-right-radius: 19px
@@ -130,7 +130,7 @@ onMounted(() => {
   .home-card::-webkit-scrollbar-thumb
     border-radius: 19px
     background-color: rgba(77, 97, 107, 0)
-    transition: all .25s ease-in-out
+    transition: all .5s ease-in-out
 
 
   .home-title-hover

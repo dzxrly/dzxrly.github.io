@@ -14,3 +14,8 @@ const isLtSm = computed(() => $q.screen.lt.sm)
     </div>
   </div>
 </template>
+
+<style lang="sass" scoped>
+.projects-card-wrapper
+  transition: all .25s ease-in-out
+</style>

@@ -1,3 +1,5 @@
+import { PersonalWebSite } from 'src/interface/personal-info'
+
 const languageBadgeUrlList: string[] = [
   'https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=c-sharp&logoColor=white',
   'https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white',
@@ -14,6 +16,30 @@ const languageBadgeUrlList: string[] = [
   'https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white'
 ]
 
+const personalWebSiteList: PersonalWebSite[] = [
+  {
+    name: 'GitHub',
+    url: 'https://github.com/dzxrly',
+    iconName: 'fa-brands fa-github'
+  },
+  {
+    name: 'Gmail',
+    url: 'aegonhe993@gmail.com',
+    iconName: 'fa-regular fa-paper-plane'
+  },
+  {
+    name: 'Steam',
+    url: 'https://steamcommunity.com/id/eggtargaryen/',
+    iconName: 'fa-brands fa-steam'
+  },
+  {
+    name: 'Nexusmods',
+    url: 'https://www.nexusmods.com/users/myaccount?tab=files',
+    iconPath: 'publicAssets/nexusmods.svg'
+  }
+]
+
 export default {
-  languageBadgeUrlList
+  languageBadgeUrlList,
+  personalWebSiteList
 }
