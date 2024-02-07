@@ -21,6 +21,7 @@ const personalBtnText = computed(() => isShiny.value ? 'homeBtnPersonalEasterEgg
 const bus = inject<EventBus>('eventBus')
 
 bus?.on('dark-mode', (value: boolean) => {
+  console.log(value)
   darkMode.value = value
   value ? btnBgColor.value = '#2b2221' : btnBgColor.value = '#eef4f8'
   value ? btnTextColor.value = '#fffbff' : btnTextColor.value = '#081e27'

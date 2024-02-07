@@ -90,7 +90,9 @@ onMounted(() => {
             :leave-active-class="route.path === '/' ? 'animated fadeOutRight' : 'animated fadeOutLeft'"
             mode="out-in"
           >
-            <component :is="Component" :key="route.path" />
+            <keep-alive>
+              <component :is="Component" :key="route.path" />
+            </keep-alive>
           </transition>
         </router-view>
       </div>
