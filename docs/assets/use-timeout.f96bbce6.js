@@ -1,0 +1,1 @@
+import{b as u}from"./QBtn.d33b5778.js";import{C as i,u as m,g as s}from"./index.d093eee7.js";function f(){let e=null;const o=s();function t(){e!==null&&(clearTimeout(e),e=null)}return i(t),m(t),{removeTimeout:t,registerTimeout(n,r){t(),u(o)===!1&&(e=setTimeout(n,r))}}}export{f as u};
