@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import { useRouter } from 'vue-router'
-import { useI18n } from 'vue-i18n'
-import { computed, PropType, ref } from 'vue'
-import { useQuasar } from 'quasar'
-import { ResponsiveCardBtnInterface } from 'src/interface/responsive-card-btn-interface'
+import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
+import { computed, PropType, ref } from 'vue';
+import { useQuasar } from 'quasar';
+import { ResponsiveCardBtnInterface } from 'src/interface/responsive-card-btn-interface';
 
-const { t } = useI18n()
-const $q = useQuasar()
+const { t } = useI18n();
+const $q = useQuasar();
 
 const props = defineProps({
   routePath: {
@@ -46,35 +46,29 @@ const props = defineProps({
   textColor: {
     type: String,
     default: '#081e27'
-  },
-  darkMode: {
-    type: Boolean,
-    default: false
   }
-})
+});
 
-const router = useRouter()
-const isSecondaryAvatar = ref<boolean>(Boolean(props.secondaryAvatar && props.secondaryAvatar !== ''))
-const avatarTransform = ref<string>(isSecondaryAvatar.value ? 'translateY(-100%)' : 'translateY(0)')
-const avatarHoverOpacity = ref<number>(isSecondaryAvatar.value ? 0 : 1)
-const secondaryAvatarTransform = ref<string>(isSecondaryAvatar.value ? 'translateY(-50%)' : 'translateY(0)')
+const router = useRouter();
+const isSecondaryAvatar = ref<boolean>(Boolean(props.secondaryAvatar && props.secondaryAvatar !== ''));
+const avatarTransform = ref<string>(isSecondaryAvatar.value ? 'translateY(-100%)' : 'translateY(0)');
+const avatarHoverOpacity = ref<number>(isSecondaryAvatar.value ? 0 : 1);
+const secondaryAvatarTransform = ref<string>(isSecondaryAvatar.value ? 'translateY(-50%)' : 'translateY(0)');
 
 const responsiveSize = computed(() => {
-  const size = $q.screen.width * props.responsiveProps?.coefficientA + props.responsiveProps?.coefficientB
-  if (size > props.responsiveProps?.valueMax) return props.responsiveProps?.valueMax
-  else if (size < props.responsiveProps?.valueMin) return props.responsiveProps?.valueMin
-  else return size
-})
-const cardSize = computed(() => `${responsiveSize.value}rem`)
-const cardMargin = computed(() => `${responsiveSize.value * 0.01}rem`)
-const avatarSize = computed(() => `${responsiveSize.value * 0.6}rem`)
-const backgroundColor = computed(() => props.backgroundColor)
-const textColor = computed(() => props.textColor)
-const hoverColor = computed(() => props.darkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0, 0, 0, 0.1)')
-const activeColor = computed(() => props.darkMode ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.3)')
+  const size = $q.screen.width * props.responsiveProps?.coefficientA + props.responsiveProps?.coefficientB;
+  if (size > props.responsiveProps?.valueMax) return props.responsiveProps?.valueMax;
+  else if (size < props.responsiveProps?.valueMin) return props.responsiveProps?.valueMin;
+  else return size;
+});
+const cardSize = computed(() => `${responsiveSize.value}rem`);
+const cardMargin = computed(() => `${responsiveSize.value * 0.01}rem`);
+const avatarSize = computed(() => `${responsiveSize.value * 0.6}rem`);
+const backgroundColor = computed(() => props.backgroundColor);
+const textColor = computed(() => props.textColor);
 
 function routeTo() {
-  router.push(props.routePath)
+  router.push(props.routePath);
 }
 </script>
 
@@ -95,7 +89,8 @@ function routeTo() {
       <q-avatar :size="avatarSize" class="custom-card-picture-in-btn" rounded>
         <img :src="props.secondaryAvatar" alt="card btn avatar" />
       </q-avatar>
-      <span :style="{ color: textColor }" class="text-subtitle1 text-bold ellipsis">{{ t(props.secondaryTitleKeyword)
+      <span v-if="secondaryTitleKeyword && secondaryTitleKeyword !== ''" :style="{ color: textColor }"
+            class="text-subtitle1 text-bold ellipsis">{{ t(props.secondaryTitleKeyword)
         }}</span>
     </div>
   </div>
@@ -146,8 +141,8 @@ function routeTo() {
     opacity: 1
 
 .custom-card-btn:hover
-  background-color: v-bind(hoverColor)
+  background-color: rgba(0, 0, 0, 0.1)
 
 .custom-card-btn:active
-  background-color: v-bind(activeColor)
+  background-color: rgba(0, 0, 0, 0.3)
 </style>

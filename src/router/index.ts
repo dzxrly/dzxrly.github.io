@@ -1,8 +1,8 @@
-import { route } from 'quasar/wrappers'
-import { createMemoryHistory, createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
+import { route } from 'quasar/wrappers';
+import { createMemoryHistory, createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
 
-import routes from './routes'
-import { LoadingBar } from 'quasar'
+import routes from './routes';
+import { LoadingBar } from 'quasar';
 
 
 /*
@@ -17,7 +17,7 @@ import { LoadingBar } from 'quasar'
 export default route(function(/* { store, ssrContext } */) {
   const createHistory = process.env.SERVER
     ? createMemoryHistory
-    : (process.env.VUE_ROUTER_MODE === 'history' ? createWebHistory : createWebHashHistory)
+    : (process.env.VUE_ROUTER_MODE === 'history' ? createWebHistory : createWebHashHistory);
 
   const Router = createRouter({
     scrollBehavior: () => ({ left: 0, top: 0 }),
@@ -30,12 +30,12 @@ export default route(function(/* { store, ssrContext } */) {
   });
 
   Router.beforeEach(() => {
-    LoadingBar.start()
-  })
+    LoadingBar.start();
+  });
 
   Router.afterEach(() => {
-    LoadingBar.stop()
-  })
+    LoadingBar.stop();
+  });
 
-  return Router
+  return Router;
 });

@@ -6,9 +6,6 @@ export default {
 
   homeBtnMyProjects: 'Open Source',
   homeBtnPersonal: 'About Me',
-  homeBtnPersonalNormalLight: 'No.643 Reshiram',
-  homeBtnPersonalNormalDark: 'No.644 Zekrom',
-  homeBtnPersonalEasterEgg: '✨ Shining!',
   homePersonalInfoChip1: '👀 Deep Learning & Computer Vision',
   homePersonalInfoChip2: '🔭 Astronomy Big Data & Data Mining',
   homePersonalInfoChip3: '📱 Android Native Development',
@@ -16,4 +13,4 @@ export default {
   homePersonalInfoChip5: '🛠️ Game Modding Maker',
   homePersonalInfoChip6: '🔫 FPS Game Enthusiast',
   homePersonalInfoChip7: '💻 ITX PC Building'
-}
+};

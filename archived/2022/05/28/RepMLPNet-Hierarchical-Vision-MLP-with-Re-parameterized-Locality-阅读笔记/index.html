@@ -16,8 +16,8 @@
   <meta name="keywords" content="">
 
   <meta name="description" content="RepMLPNet: Hierarchical Vision MLP with Re-parameterized Locality
- 
- 
+
+
  Xiaohan Ding，Honghao Chen，Xiangyu Zhang，Jungong Han，Guiguang Ding
  Beijing National Research Center for Information Science and T">
   <meta property="og:type" content="article">
@@ -26,8 +26,8 @@
         content="http://example.com/2022/05/28/RepMLPNet-Hierarchical-Vision-MLP-with-Re-parameterized-Locality-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/index.html">
   <meta property="og:site_name" content="EggTargaryen的个人博客">
   <meta property="og:description" content="RepMLPNet: Hierarchical Vision MLP with Re-parameterized Locality
- 
- 
+
+
  Xiaohan Ding，Honghao Chen，Xiangyu Zhang，Jungong Han，Guiguang Ding
  Beijing National Research Center for Information Science and T">
   <meta property="og:locale" content="zh_CN">
@@ -71,7 +71,7 @@
 
 
   <script id="fluid-configs">
-    var Fluid = window.Fluid || {}
+    var Fluid = window.Fluid || {};
     var CONFIG = {
       'hostname': 'example.com',
       'root': '/',
@@ -111,7 +111,7 @@
         }
       },
       'search_path': '/local-search.xml'
-    }
+    };
   </script>
   <script src="/js/utils.js"></script>
   <script src="/js/color-schema.js"></script>
@@ -204,13 +204,13 @@
         <div class="page-header text-center fade-in-up">
             <span class="h2" id="subtitle"
                   title="RepMLPNet: Hierarchical Vision MLP with Re-parameterized Locality 阅读笔记">
-              
+
             </span>
 
 
           <div class="mt-3">
-  
-  
+
+
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
       <time datetime="2022-05-28 16:44" pubdate>
@@ -221,7 +221,7 @@
           </div>
 
           <div class="mt-1">
-  
+
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
       4.9k 字
@@ -230,8 +230,8 @@
 
             <span class="post-meta mr-2">
       <i class="iconfont icon-clock-fill"></i>
-      
-      
+
+
       42 分钟
     </span>
 
@@ -589,7 +589,7 @@ I\cdot {W^{(F,p)}}^T &amp;=CONV(RS(I,(chw,c,h,w)),F,p)\nonumber\\
 
     <!-- 不蒜子统计PV -->
     <span id="busuanzi_container_site_pv" style="display: none">
-            总访问量 
+            总访问量
             <span id="busuanzi_value_site_pv"></span>
              次
           </span>
@@ -597,7 +597,7 @@ I\cdot {W^{(F,p)}}^T &amp;=CONV(RS(I,(chw,c,h,w)),F,p)\nonumber\\
 
     <!-- 不蒜子统计UV -->
     <span id="busuanzi_container_site_uv" style="display: none">
-            总访客数 
+            总访客数
             <span id="busuanzi_value_site_uv"></span>
              人
           </span>
@@ -615,11 +615,11 @@ I\cdot {W^{(F,p)}}^T &amp;=CONV(RS(I,(chw,c,h,w)),F,p)\nonumber\\
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
 
 <script>
-  NProgress.configure({ 'showSpinner': false, 'trickleSpeed': 100 })
-  NProgress.start()
+  NProgress.configure({ 'showSpinner': false, 'trickleSpeed': 100 });
+  NProgress.start();
   window.addEventListener('load', function() {
-    NProgress.done()
-  })
+    NProgress.done();
+  });
 </script>
 
 
@@ -655,12 +655,12 @@ I\cdot {W^{(F,p)}}^T &amp;=CONV(RS(I,(chw,c,h,w)),F,p)\nonumber\\
 <script src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js"></script>
 <script>
   (function(window, document) {
-    var typing = Fluid.plugins.typing
-    var title = document.getElementById('subtitle').title
+    var typing = Fluid.plugins.typing;
+    var title = document.getElementById('subtitle').title;
 
-    typing(title)
+    typing(title);
 
-  })(window, document)
+  })(window, document);
 </script>
 
 
@@ -677,26 +677,26 @@ I\cdot {W^{(F,p)}}^T &amp;=CONV(RS(I,(chw,c,h,w)),F,p)\nonumber\\
       renderActions: {
         findScript: [10, doc => {
           document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-            const display = !!node.type.match(/; *mode=display/)
-            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
-            const text = document.createTextNode('')
-            node.parentNode.replaceChild(text, node)
-            math.start = { node: text, delim: '', n: 0 }
-            math.end = { node: text, delim: '', n: 0 }
-            doc.math.push(math)
-          })
+            const display = !!node.type.match(/; *mode=display/);
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+            const text = document.createTextNode('');
+            node.parentNode.replaceChild(text, node);
+            math.start = { node: text, delim: '', n: 0 };
+            math.end = { node: text, delim: '', n: 0 };
+            doc.math.push(math);
+          });
         }, '', false],
         insertedScript: [200, () => {
           document.querySelectorAll('mjx-container').forEach(node => {
-            let target = node.parentNode
+            let target = node.parentNode;
             if (target.nodeName.toLowerCase() === 'li') {
-              target.parentNode.classList.add('has-jax')
+              target.parentNode.classList.add('has-jax');
             }
-          })
+          });
         }, '', false]
       }
     }
-  }
+  };
 </script>
 
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>

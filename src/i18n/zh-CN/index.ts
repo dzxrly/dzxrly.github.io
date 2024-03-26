@@ -3,9 +3,6 @@ export default {
 
   homeBtnMyProjects: '开源软件',
   homeBtnPersonal: '关于我',
-  homeBtnPersonalNormalLight: 'No.643 莱希拉姆',
-  homeBtnPersonalNormalDark: 'No.644 捷克罗姆',
-  homeBtnPersonalEasterEgg: '✨ 闪啦!',
   homePersonalInfoChip1: '👀 深度学习与计算机视觉',
   homePersonalInfoChip2: '🔭 天文大数据分析',
   homePersonalInfoChip3: '📱 Android原生开发',
@@ -13,4 +10,4 @@ export default {
   homePersonalInfoChip5: '🛠️ 游戏Mod制作',
   homePersonalInfoChip6: '🔫 FPS游戏爱好者',
   homePersonalInfoChip7: '🖥️ ITX PC装机~'
-}
+};

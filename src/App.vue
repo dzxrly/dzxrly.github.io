@@ -1,23 +1,13 @@
 <script lang="ts" setup>
-import { computed, inject, ref } from 'vue'
-import { EventBus } from 'quasar'
+import { inject, ref } from 'vue';
+import { EventBus } from 'quasar';
 
-const bus = inject<EventBus>('eventBus')
-const setBackgroundCover = ref<boolean>(false)
-const darkMode = ref<boolean>(true)
-
-const appWrapperBgColor = computed(() =>
-  darkMode.value ? 'rgba(133, 115, 113, 0)' : 'rgba(112, 120, 125, 0)')
-const appWrapperCoverBgColor = computed(() =>
-  darkMode.value ? 'rgba(133, 115, 113, 0.7)' : 'rgba(112, 120, 125, 0.7)')
+const bus = inject<EventBus>('eventBus');
+const setBackgroundCover = ref<boolean>(false);
 
 bus?.on('set-background-cover', (value: boolean) => {
-  setBackgroundCover.value = value
-})
-
-bus?.on('dark-mode', (value: boolean) => {
-  darkMode.value = value
-})
+  setBackgroundCover.value = value;
+});
 </script>
 
 <template>
@@ -31,10 +21,10 @@ bus?.on('dark-mode', (value: boolean) => {
   height: 100vh
   width: 100vw
   pointer-events: auto
-  background-color: v-bind(appWrapperBgColor)
+  background-color: rgba(112, 120, 125, 0)
   opacity: 1
   transition: all 0.5s ease-in-out
 
 .app-wrapper-cover
-  background-color: v-bind(appWrapperCoverBgColor)
+  background-color: rgba(112, 120, 125, 0.7)
 </style>

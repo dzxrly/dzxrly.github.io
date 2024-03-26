@@ -45,7 +45,7 @@
 
 
   <script id="fluid-configs">
-    var Fluid = window.Fluid || {}
+    var Fluid = window.Fluid || {};
     var CONFIG = {
       'hostname': 'example.com',
       'root': '/',
@@ -85,7 +85,7 @@
         }
       },
       'search_path': '/local-search.xml'
-    }
+    };
   </script>
   <script src="/js/utils.js"></script>
   <script src="/js/color-schema.js"></script>
@@ -336,11 +336,11 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
 
 <script>
-  NProgress.configure({ 'showSpinner': false, 'trickleSpeed': 100 })
-  NProgress.start()
+  NProgress.configure({ 'showSpinner': false, 'trickleSpeed': 100 });
+  NProgress.start();
   window.addEventListener('load', function() {
-    NProgress.done()
-  })
+    NProgress.done();
+  });
 </script>
 
 
@@ -364,12 +364,12 @@
 <script src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js"></script>
 <script>
   (function(window, document) {
-    var typing = Fluid.plugins.typing
-    var title = document.getElementById('subtitle').title
+    var typing = Fluid.plugins.typing;
+    var title = document.getElementById('subtitle').title;
 
-    typing(title)
+    typing(title);
 
-  })(window, document)
+  })(window, document);
 </script>
 
 

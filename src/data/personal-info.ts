@@ -1,4 +1,4 @@
-import { PersonalWebSite } from 'src/interface/personal-info'
+import { PersonalWebSite } from 'src/interface/personal-info-interface';
 
 const languageBadgeUrlList: string[] = [
   'https://img.shields.io/badge/c%23-%23239120.svg?style=for-the-badge&logo=c-sharp&logoColor=white',
@@ -14,7 +14,7 @@ const languageBadgeUrlList: string[] = [
   'https://img.shields.io/badge/Keras-%23D00000.svg?style=for-the-badge&logo=Keras&logoColor=white',
   'https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black',
   'https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white'
-]
+];
 
 const personalWebSiteList: PersonalWebSite[] = [
   {
@@ -37,9 +37,9 @@ const personalWebSiteList: PersonalWebSite[] = [
     url: 'https://www.nexusmods.com/users/myaccount?tab=files',
     iconPath: 'publicAssets/nexusmods.svg'
   }
-]
+];
 
 export default {
   languageBadgeUrlList,
   personalWebSiteList
-}
+};

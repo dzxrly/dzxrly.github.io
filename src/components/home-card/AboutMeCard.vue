@@ -1,18 +1,18 @@
 <script lang="ts" setup>
-import { computed, inject, ref } from 'vue'
-import { openURL, useQuasar } from 'quasar'
-import { useI18n } from 'vue-i18n'
-import PersonalInfo from 'src/data/personal-info'
-import { PersonalWebSite } from 'src/interface/personal-info'
+import { computed, inject, ref } from 'vue';
+import { openURL, useQuasar } from 'quasar';
+import { useI18n } from 'vue-i18n';
+import PersonalInfo from 'src/data/personal-info';
+import { PersonalWebSite } from 'src/interface/personal-info-interface';
 
-const $q = useQuasar()
-const { t } = useI18n()
-const languageBadgeUrl = ref<string[]>(PersonalInfo.languageBadgeUrlList)
-const webSiteUrl = ref<PersonalWebSite[]>(PersonalInfo.personalWebSiteList)
+const $q = useQuasar();
+const { t } = useI18n();
+const languageBadgeUrl = ref<string[]>(PersonalInfo.languageBadgeUrlList);
+const webSiteUrl = ref<PersonalWebSite[]>(PersonalInfo.personalWebSiteList);
 
-const isShiny = ref(inject<boolean>('isShiny') || false)
+const isShiny = ref(inject<boolean>('isShiny') || false);
 
-const isLtSm = computed(() => $q.screen.lt.sm)
+const isLtSm = computed(() => $q.screen.lt.sm);
 </script>
 
 <template>

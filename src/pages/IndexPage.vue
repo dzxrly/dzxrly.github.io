@@ -1,67 +1,59 @@
 <script lang="ts" setup>
-import { useI18n } from 'vue-i18n'
-import { computed, inject, onMounted, provide, ref, watch } from 'vue'
-import { EventBus, useQuasar } from 'quasar'
+import { useI18n } from 'vue-i18n';
+import { computed, inject, onMounted, provide, ref, watch } from 'vue';
+import { EventBus, useQuasar } from 'quasar';
 
-const { t } = useI18n()
-const $q = useQuasar()
-const homeTitle = ref<string>('')
-const isMouseEnter = ref<boolean>(false)
+const { t } = useI18n();
+const $q = useQuasar();
+const homeTitle = ref<string>('');
+const isMouseEnter = ref<boolean>(false);
 // 1/4096 is the shiny rate in Pokémon games, 0.5 for debug, but I choose 5% as the default value
-const isShiny = ref<boolean>(randomShiny(0.05))
-const darkMode = ref<boolean>(true)
+const isShiny = ref<boolean>(randomShiny(0.05));
 
-const isLtSm = computed(() => $q.screen.lt.sm)
-const homeTitleTranslation = computed(() => t('homeTitle'))
-let typingInterval: NodeJS.Timeout | null = null
-const homeTitleSpanBgColor = computed(() => darkMode.value ? '#fffbff' : '#191c1e')
-const homeCardModalBarBgColor = computed(() => darkMode.value ? '#857371' : '#70787d')
-const homePageWrapperBgColor = computed(() => darkMode.value ? '#2b2221' : '#eef4f8')
+const isLtSm = computed(() => $q.screen.lt.sm);
+const homeTitleTranslation = computed(() => t('homeTitle'));
+let typingInterval: NodeJS.Timeout | null = null;
 
-const bus = inject<EventBus>('eventBus')
-provide('isShiny', isShiny)
+const bus = inject<EventBus>('eventBus');
+provide('isShiny', isShiny);
 
 function randomShiny(rate: number) {
-  return Math.random() < rate
+  return Math.random() < rate;
 }
 
 function clearTypingInterval() {
   if (typingInterval) {
-    clearInterval(typingInterval)
-    typingInterval = null
+    clearInterval(typingInterval);
+    typingInterval = null;
   }
 }
 
 function setHomeTitleWithAnimation() {
-  homeTitle.value = ''
+  homeTitle.value = '';
   // use setInterval to simulate typing animation
-  let i = 0
+  let i = 0;
   typingInterval = setInterval(() => {
     if (i < homeTitleTranslation.value.length) {
-      homeTitle.value += homeTitleTranslation.value.charAt(i)
-      i++
-    } else clearTypingInterval()
-  }, 150)
+      homeTitle.value += homeTitleTranslation.value.charAt(i);
+      i++;
+    } else clearTypingInterval();
+  }, 150);
 }
 
-bus?.on('dark-mode', (value: boolean) => {
-  darkMode.value = value
-})
-
 watch(() => homeTitleTranslation.value, () => {
-  clearTypingInterval()
-  setHomeTitleWithAnimation()
-})
+  clearTypingInterval();
+  setHomeTitleWithAnimation();
+});
 
 watch(() => isMouseEnter.value, () => {
-  bus?.emit('set-background-cover', isMouseEnter.value)
-})
+  bus?.emit('set-background-cover', isMouseEnter.value);
+});
 
 onMounted(() => {
-  clearTypingInterval()
-  setHomeTitleWithAnimation()
-  console.log('Shiny:', isShiny.value)
-})
+  clearTypingInterval();
+  setHomeTitleWithAnimation();
+  console.log('Shiny:', isShiny.value);
+});
 </script>
 
 <template>
@@ -124,7 +116,7 @@ onMounted(() => {
       width: 0.8rem
       height: 0.3rem
       opacity: 1
-      background-color: v-bind(homeTitleSpanBgColor)
+      background-color: #191c1e
       animation: home-title-span-bling 1.5s infinite
 
   .home-card
@@ -139,7 +131,7 @@ onMounted(() => {
     .home-card-modal-bar
       width: 5rem
       height: 0.3rem
-      background-color: v-bind(homeCardModalBarBgColor)
+      background-color: #70787d
       opacity: 0.5
       border-radius: 19px
 
@@ -167,7 +159,7 @@ onMounted(() => {
   left: 0
   width: 100%
   height: 10vh
-  background: v-bind(homePageWrapperBgColor)
+  background: #eef4f8
   z-index: 2
 
 @keyframes home-title-span-bling
