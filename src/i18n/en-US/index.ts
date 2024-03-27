@@ -12,5 +12,8 @@ export default {
   homePersonalInfoChip4: '🌐 Web Front-end Development',
   homePersonalInfoChip5: '🛠️ Game Modding Maker',
   homePersonalInfoChip6: '🔫 FPS Game Enthusiast',
-  homePersonalInfoChip7: '💻 ITX PC Building'
+  homePersonalInfoChip7: '💻 ITX PC Building',
+
+  projectRepoListLoading: 'Loading Repos...',
+  projectRepoOpenButton: 'View on GitHub'
 };

@@ -1,21 +1,21 @@
-export interface DescriptionI18nInterface {
-  language: string,
-  description: string,
-}
-
-export interface GithubRepoInfo {
-  owner: string,
-  repo: string,
-}
-
-export interface OpenSourceInterface {
+export interface GithubLiscenseApiResponse {
+  key: string,
   name: string,
-  description: DescriptionI18nInterface[] | string,
   url: string,
-  tags: string[],
-  language: string[],
-  license: string,
-  bannerUri?: string,
-  openSourceDate: Date,
-  githubRepoInfo?: GithubRepoInfo,
+}
+
+export interface GithubRepoApiResponse {
+  name: string,
+  html_url: string,
+  description: string,
+  fork: boolean,
+  stargazers_count: number,
+  watchers_count: number,
+  language: string,
+  forks_count: number,
+  archived: boolean,
+  license: GithubLiscenseApiResponse,
+  created_at: string,
+  updated_at: string,
+  pushed_at: string,
 }

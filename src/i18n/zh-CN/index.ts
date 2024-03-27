@@ -9,5 +9,8 @@ export default {
   homePersonalInfoChip4: '🌐 Web前端开发',
   homePersonalInfoChip5: '🛠️ 游戏Mod制作',
   homePersonalInfoChip6: '🔫 FPS游戏爱好者',
-  homePersonalInfoChip7: '🖥️ ITX PC装机~'
+  homePersonalInfoChip7: '🖥️ ITX PC装机~',
+
+  projectRepoListLoading: '读取仓库列表...',
+  projectRepoOpenButton: '在GitHub上查看'
 };
