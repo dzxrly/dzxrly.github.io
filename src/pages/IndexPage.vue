@@ -57,7 +57,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <q-page class="home-page-wrapper column justify-center items-center">
+  <q-page class="home-page-wrapper column justify-center items-center" style="min-height: 0;">
     <div :class="{ 'home-title-hover' : isMouseEnter }"
          class="home-title full-width row justify-center items-center q-py-xl"
          @click="isMouseEnter = false">
@@ -71,10 +71,10 @@ onMounted(() => {
          @mouseenter="isMouseEnter = true"
          @mouseleave="isMouseEnter = false"
     >
-      <div class="row justify-center items-center full-width q-mb-md">
+      <div class="home-card-modal-bar-wrapper row justify-center items-center full-width q-mb-md">
         <div class="home-card-modal-bar"></div>
       </div>
-      <div class="col full-width row justify-center items-start">
+      <div class="home-card-view col full-width row justify-center items-start">
         <router-view v-slot="{ Component, route }">
           <transition
             :duration="{ enter: 300, leave: 300 }"
@@ -95,12 +95,12 @@ onMounted(() => {
 <style lang="sass" scoped>
 .home-page-wrapper
   position: relative
-  overflow: hidden
 
   .home-title
     transform: translateY(20vh)
     transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275)
     height: 20vh
+    box-sizing: border-box
 
     .home-title-span
       position: relative
@@ -123,27 +123,24 @@ onMounted(() => {
     height: 72vh
     transform: translateY(40vh)
     transition: all .25s ease-in-out
-    overflow: scroll
+    overflow: hidden
     border-top-left-radius: 19px
     border-top-right-radius: 19px
     z-index: 10
+    box-sizing: border-box
 
-    .home-card-modal-bar
-      width: 5rem
-      height: 0.3rem
-      background-color: #70787d
-      opacity: 0.5
-      border-radius: 19px
+    .home-card-modal-bar-wrapper
+      height: 1rem
 
-  .home-card::-webkit-scrollbar, .home-card::-webkit-scrollbar-corner
-    background-color: transparent
-    width: 0.2rem
+      .home-card-modal-bar
+        width: 5rem
+        height: 0.3rem
+        background-color: #70787d
+        opacity: 0.5
+        border-radius: 19px
 
-  .home-card::-webkit-scrollbar-thumb
-    border-radius: 19px
-    background-color: rgba(77, 97, 107, 0)
-    transition: all .5s ease-in-out
-
+    .home-card-view
+      height: calc(72vh - 1rem)
 
   .home-title-hover
     transform: translateY(0)

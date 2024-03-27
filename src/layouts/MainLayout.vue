@@ -12,27 +12,29 @@ const languageDropdownMenuOptions = [
 
 <template>
   <q-layout view="hhh lpR fFf">
-    <q-header class="bg-transparent">
-      <div class="row justify-end items-center full-width q-py-sm q-px-md" style="height: 8vh">
-        <q-btn-dropdown auto-close class="rounded-borders q-py-sm" color="primary" content-class="rounded-borders"
-                        flat
-                        icon="translate">
-          <q-list class="bg-secondary-container">
-            <q-item v-for="option in languageDropdownMenuOptions" :key="option.value"
-                    v-ripple clickable
-                    @click="locale = option.value">
-              <q-item-section avatar>
-                <q-icon :name="option.value === locale ? 'check' : ''" color="on-secondary-container" />
-              </q-item-section>
-              <q-item-section class="text-on-secondary-container">{{ option.label }}</q-item-section>
-            </q-item>
-          </q-list>
-        </q-btn-dropdown>
-      </div>
-    </q-header>
+    <div class="main-header-wrapper row justify-end items-center full-width q-py-sm q-px-md">
+      <q-btn-dropdown auto-close class="rounded-borders q-py-sm" color="primary" content-class="rounded-borders"
+                      flat
+                      icon="translate">
+        <q-list class="bg-secondary-container">
+          <q-item v-for="option in languageDropdownMenuOptions" :key="option.value"
+                  v-ripple clickable
+                  @click="locale = option.value">
+            <q-item-section avatar>
+              <q-icon :name="option.value === locale ? 'check' : ''" color="on-secondary-container" />
+            </q-item-section>
+            <q-item-section class="text-on-secondary-container">{{ option.label }}</q-item-section>
+          </q-item>
+        </q-list>
+      </q-btn-dropdown>
+    </div>
 
     <q-page-container>
       <router-view />
     </q-page-container>
   </q-layout>
 </template>
+<style lang="sass" scoped>
+.main-header-wrapper
+  height: 8vh
+</style>

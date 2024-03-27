@@ -4,6 +4,7 @@ import { openURL, useQuasar } from 'quasar';
 import { useI18n } from 'vue-i18n';
 import PersonalInfo from 'src/data/personal-info';
 import { PersonalWebSite } from 'src/interface/personal-info-interface';
+import DetailPageWrapper from 'components/basic/DetailPageWrapper.vue';
 
 const $q = useQuasar();
 const { t } = useI18n();
@@ -16,10 +17,7 @@ const isLtSm = computed(() => $q.screen.lt.sm);
 </script>
 
 <template>
-  <div class="about-me-card-wrapper full-width">
-    <div class="row justify-start items-center full-width q-mb-md">
-      <q-btn :size="isLtSm ? 'md' : 'lg'" color="primary" flat icon="arrow_back" round to="/" />
-    </div>
+  <detail-page-wrapper>
     <div :class="isLtSm ? 'column' : 'row'" class="justify-center items-center full-width">
       <div :class="isLtSm ? 'col justify-center' : 'col-4 justify-end'" class="row items-center">
         <q-avatar v-ripple
@@ -66,10 +64,5 @@ const isLtSm = computed(() => $q.screen.lt.sm);
         </div>
       </div>
     </div>
-  </div>
+  </detail-page-wrapper>
 </template>
-
-<style lang="sass" scoped>
-.about-me-card-wrapper
-  transition: all .5s ease-in-out
-</style>
