@@ -19,30 +19,28 @@ const githubRepoInfo = ref<GithubRepoApiResponse>(props.githubRepoInfo);
 <template>
   <q-card class="repo-card-wrapper q-ma-sm rounded-borders column">
     <q-card-section class="non-selectable col-grow">
+      <span class="text-h5 text-primary q-mr-xs">{{ githubRepoInfo.name }}</span>
       <div class="row justify-start items-center full-width">
-        <span class="text-h5 text-primary q-mr-xs">{{ githubRepoInfo.name }}</span>
-        <q-badge
-          v-if="githubRepoInfo.archived"
-          label="Archived"
-          color="secondary"
-          outline
-        ></q-badge>
-      </div>
-      <div class="row justify-start items-center full-width">
-        <div class="row justify-center items-center q-mt-md">
+        <div v-if="githubRepoInfo.archived" class="row justify-center items-center q-mt-md q-mr-md">
+          <q-badge
+            v-if="githubRepoInfo.archived"
+            label="Archived"
+            color="secondary"
+            outline
+          ></q-badge>
+        </div>
+        <div class="row justify-center items-center q-mt-md q-mr-md">
           <q-icon class="q-mr-xs" name="star" color="yellow-7" size="1rem" />
           <span>{{ githubRepoInfo.stargazers_count }}</span>
         </div>
-        <!--        <div class="row justify-center items-center q-mt-md q-ml-md">-->
-        <!--          <q-icon class="q-mr-xs" name="visibility" color="teal-3" size="1rem" />-->
-        <!--          <span>{{ githubRepoInfo.watchers_count }}</span>-->
-        <!--        </div>-->
-        <div class="row justify-center items-center q-mt-md q-ml-md">
+        <div class="row justify-center items-center q-mt-md">
           <q-icon class="q-mr-xs" name="fork_right" color="deep-orange-5" size="1rem" />
           <span>{{ githubRepoInfo.forks_count }}</span>
         </div>
       </div>
-      <p class="text-body1 q-my-md">{{ githubRepoInfo.description }}</p>
+      <p class="text-body1 q-my-md"
+         style="max-lines: 2 !important; text-overflow: ellipsis">
+        {{ githubRepoInfo.description }}</p>
       <div class="row justify-start items-center">
         <q-badge
           v-if="!!githubRepoInfo.language"
@@ -69,7 +67,8 @@ const githubRepoInfo = ref<GithubRepoApiResponse>(props.githubRepoInfo);
         class="rounded-borders full-width"
         flat
         color="primary"
-        @click="openURL(githubRepoInfo.html_url)">
+        @click="openURL(githubRepoInfo.html_url)"
+        no-caps>
         <q-icon name="open_in_new" />
         <span class="q-ml-xs">{{ t('projectRepoOpenButton') }}</span>
       </q-btn>
