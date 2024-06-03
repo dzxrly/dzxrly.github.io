@@ -34,7 +34,7 @@ const personalWebSiteList: PersonalWebSite[] = [
   },
   {
     name: 'Nexusmods',
-    url: 'https://www.nexusmods.com/users/myaccount?tab=files',
+    url: 'https://next.nexusmods.com/profile/dzxrly/about-me',
     iconPath: 'publicAssets/nexusmods.svg'
   }
 ];
