@@ -11,26 +11,27 @@ const routes: RouteRecordRaw[] = [
         children: [
           {
             path: '',
-            component: () => import('components/home-card/MainCard.vue')
+            component: () => import('components/home-card/MainCard.vue'),
           },
           {
             path: '/projects',
-            component: () => import('components/home-card/ProjectsCard.vue')
+            component: () => import('components/home-card/ProjectsCard.vue'),
           },
           {
             path: '/about',
-            component: () => import('components/home-card/AboutMeCard.vue')
-          }
-        ]
-      }]
+            component: () => import('components/home-card/AboutMeCard.vue'),
+          },
+        ],
+      },
+    ],
   },
 
   // Always leave this as last one,
   // but you can also remove it
   {
     path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue')
-  }
+    component: () => import('pages/ErrorNotFound.vue'),
+  },
 ];
 
 export default routes;

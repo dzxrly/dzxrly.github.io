@@ -1,6 +1,6 @@
 /* global CONFIG, jQuery */
 
-(function() {
+(function () {
   // Modify by [hexo-generator-search](https://github.com/wzpan/hexo-generator-search)
   function localSearchFunc(path, searchSelector, resultSelector) {
     'use strict';
@@ -18,38 +18,45 @@
     }
 
     if ($result.attr('class').indexOf('list-group-item') === -1) {
-      $result.html('<div class="m-auto text-center"><div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div><br/>Loading...</div>');
+      $result.html(
+        '<div class="m-auto text-center"><div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div><br/>Loading...</div>'
+      );
     }
 
     jQuery.ajax({
       // 0x01. load xml file
       url: path,
       dataType: 'xml',
-      success: function(xmlResponse) {
+      success: function (xmlResponse) {
         // 0x02. parse xml file
-        var dataList = jQuery('entry', xmlResponse).map(function() {
-          return {
-            title: jQuery('title', this).text(),
-            content: jQuery('content', this).text(),
-            url: jQuery('url', this).text()
-          };
-        }).get();
+        var dataList = jQuery('entry', xmlResponse)
+          .map(function () {
+            return {
+              title: jQuery('title', this).text(),
+              content: jQuery('content', this).text(),
+              url: jQuery('url', this).text(),
+            };
+          })
+          .get();
 
         if ($result.html().indexOf('list-group-item') === -1) {
           $result.html('');
         }
 
-        $input.on('input', function() {
+        $input.on('input', function () {
           // 0x03. parse query to keywords list
           var content = $input.val();
           var resultHTML = '';
-          var keywords = content.trim().toLowerCase().split(/[\s-]+/);
+          var keywords = content
+            .trim()
+            .toLowerCase()
+            .split(/[\s-]+/);
           $result.html('');
           if (content.trim().length <= 0) {
             return $input.removeClass('invalid').removeClass('valid');
           }
           // 0x04. perform local searching
-          dataList.forEach(function(data) {
+          dataList.forEach(function (data) {
             var isMatch = true;
             if (!data.title || data.title.trim() === '') {
               data.title = 'Untitled';
@@ -64,7 +71,7 @@
             var first_occur = -1;
             // only match articles with not empty contents
             if (data_content !== '') {
-              keywords.forEach(function(keyword, i) {
+              keywords.forEach(function (keyword, i) {
                 index_title = data_title.indexOf(keyword);
                 index_content = data_content.indexOf(keyword);
 
@@ -85,7 +92,12 @@
             }
             // 0x05. show search results
             if (isMatch) {
-              resultHTML += '<a href=\'' + data_url + '\' class=\'list-group-item list-group-item-action font-weight-bolder search-list-title\'>' + orig_data_title + '</a>';
+              resultHTML +=
+                "<a href='" +
+                data_url +
+                "' class='list-group-item list-group-item-action font-weight-bolder search-list-title'>" +
+                orig_data_title +
+                '</a>';
               var content = orig_data_content;
               if (first_occur >= 0) {
                 // cut out 100 characters
@@ -107,12 +119,16 @@
                 var match_content = content.substring(start, end);
 
                 // highlight all keywords
-                keywords.forEach(function(keyword) {
+                keywords.forEach(function (keyword) {
                   var regS = new RegExp(keyword, 'gi');
-                  match_content = match_content.replace(regS, '<span class="search-word">' + keyword + '</span>');
+                  match_content = match_content.replace(
+                    regS,
+                    '<span class="search-word">' + keyword + '</span>'
+                  );
                 });
 
-                resultHTML += '<p class=\'search-list-content\'>' + match_content + '...</p>';
+                resultHTML +=
+                  "<p class='search-list-content'>" + match_content + '...</p>';
               }
             }
           });
@@ -122,7 +138,7 @@
           $input.addClass('valid').removeClass('invalid');
           $result.html(resultHTML);
         });
-      }
+      },
     });
   }
 
@@ -147,14 +163,14 @@
   var modal = jQuery('#modalSearch');
   var searchSelector = '#local-search-input';
   var resultSelector = '#local-search-result';
-  modal.on('show.bs.modal', function() {
+  modal.on('show.bs.modal', function () {
     var path = CONFIG.search_path || '/local-search.xml';
     localSearchFunc(path, searchSelector, resultSelector);
   });
-  modal.on('shown.bs.modal', function() {
+  modal.on('shown.bs.modal', function () {
     jQuery('#local-search-input').focus();
   });
-  modal.on('hidden.bs.modal', function() {
+  modal.on('hidden.bs.modal', function () {
     localSearchReset(searchSelector, resultSelector);
   });
 })();

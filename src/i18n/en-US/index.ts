@@ -2,7 +2,7 @@
 // so you can safely delete all default props below
 
 export default {
-  homeTitle: 'Egg Targaryen\'s Dock',
+  homeTitle: "Egg Targaryen's Dock",
 
   homeBtnMyProjects: 'Open Source',
   homeBtnPersonal: 'About Me',
@@ -15,5 +15,5 @@ export default {
   homePersonalInfoChip7: '💻 ITX PC Building',
 
   projectRepoListLoading: 'Loading Repos...',
-  projectRepoOpenButton: 'View on GitHub'
+  projectRepoOpenButton: 'View on GitHub',
 };

@@ -11,7 +11,7 @@ bus?.on('set-background-cover', (value: boolean) => {
 </script>
 
 <template>
-  <div :class="{ 'app-wrapper-cover' : setBackgroundCover }" class="app-wrapper">
+  <div :class="{ 'app-wrapper-cover': setBackgroundCover }" class="app-wrapper">
     <router-view />
   </div>
 </template>

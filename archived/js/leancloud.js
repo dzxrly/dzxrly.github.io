@@ -1,11 +1,15 @@
 /* global CONFIG */
 
-(function(window, document) {
+(function (window, document) {
   // 查询存储的记录
   function getRecord(Counter, target) {
-    return new Promise(function(resolve, reject) {
-      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ target })))
-        .then(resp => resp.json())
+    return new Promise(function (resolve, reject) {
+      Counter(
+        'get',
+        '/classes/Counter?where=' +
+          encodeURIComponent(JSON.stringify({ target }))
+      )
+        .then((resp) => resp.json())
         .then(({ results, code, error }) => {
           if (code === 401) {
             throw error;
@@ -15,56 +19,60 @@
             resolve(record);
           } else {
             Counter('post', '/classes/Counter', { target, time: 0 })
-              .then(resp => resp.json())
+              .then((resp) => resp.json())
               .then((record, error) => {
                 if (error) {
                   throw error;
                 }
                 resolve(record);
-              }).catch(error => {
-              // eslint-disable-next-line no-console
-              console.error('Failed to create', error);
-              reject(error);
-            });
+              })
+              .catch((error) => {
+                // eslint-disable-next-line no-console
+                console.error('Failed to create', error);
+                reject(error);
+              });
           }
-        }).catch((error) => {
-        // eslint-disable-next-line no-console
-        console.error('LeanCloud Counter Error:', error);
-        reject(error);
-      });
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.error('LeanCloud Counter Error:', error);
+          reject(error);
+        });
     });
   }
 
   // 发起自增请求
   function increment(Counter, incrArr) {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       Counter('post', '/batch', {
-        'requests': incrArr
-      }).then((res) => {
-        res = res.json();
-        if (res.error) {
-          throw res.error;
-        }
-        resolve(res);
-      }).catch((error) => {
-        // eslint-disable-next-line no-console
-        console.error('Failed to save visitor count', error);
-        reject(error);
-      });
+        requests: incrArr,
+      })
+        .then((res) => {
+          res = res.json();
+          if (res.error) {
+            throw res.error;
+          }
+          resolve(res);
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.error('Failed to save visitor count', error);
+          reject(error);
+        });
     });
   }
 
   // 构建自增请求体
   function buildIncrement(objectId) {
     return {
-      'method': 'PUT',
-      'path': `/1.1/classes/Counter/${objectId}`,
-      'body': {
-        'time': {
-          '__op': 'Increment',
-          'amount': 1
-        }
-      }
+      method: 'PUT',
+      path: `/1.1/classes/Counter/${objectId}`,
+      body: {
+        time: {
+          __op: 'Increment',
+          amount: 1,
+        },
+      },
     };
   }
 
@@ -130,7 +138,9 @@
     // 如果有页面浏览数节点，则请求浏览数并自增
     var viewCtn = document.querySelector('#leancloud-page-views-container');
     if (viewCtn) {
-      var path = eval(CONFIG.web_analytics.leancloud.path || 'window.location.pathname');
+      var path = eval(
+        CONFIG.web_analytics.leancloud.path || 'window.location.pathname'
+      );
       var target = decodeURI(path.replace(/\/*(index.html)?$/, '/'));
       var viewGetter = getRecord(Counter, target).then((record) => {
         enableIncr && incrArr.push(buildIncrement(record.objectId));
@@ -162,22 +172,25 @@
         headers: {
           'X-LC-Id': appId,
           'X-LC-Key': appKey,
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       });
     };
 
     addCount(Counter);
   }
 
-  var apiServer = appId.slice(-9) !== '-MdYXbMMI' ? serverUrl : `https://${appId.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+  var apiServer =
+    appId.slice(-9) !== '-MdYXbMMI'
+      ? serverUrl
+      : `https://${appId.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
 
   if (apiServer) {
     fetchData(apiServer);
   } else {
     fetch('https://app-router.leancloud.cn/2/route?appId=' + appId)
-      .then(resp => resp.json())
+      .then((resp) => resp.json())
       .then((data) => {
         if (data.api_server) {
           fetchData('https://' + data.api_server);

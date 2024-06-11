@@ -13,33 +13,33 @@ const languageBadgeUrlList: string[] = [
   'https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white',
   'https://img.shields.io/badge/Keras-%23D00000.svg?style=for-the-badge&logo=Keras&logoColor=white',
   'https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black',
-  'https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white'
+  'https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white',
 ];
 
 const personalWebSiteList: PersonalWebSite[] = [
   {
     name: 'GitHub',
     url: 'https://github.com/dzxrly',
-    iconName: 'fa-brands fa-github'
+    iconName: 'fa-brands fa-github',
   },
   {
     name: 'Gmail',
     url: 'aegonhe993@gmail.com',
-    iconName: 'fa-regular fa-paper-plane'
+    iconName: 'fa-regular fa-paper-plane',
   },
   {
     name: 'Steam',
     url: 'https://steamcommunity.com/id/eggtargaryen/',
-    iconName: 'fa-brands fa-steam'
+    iconName: 'fa-brands fa-steam',
   },
   {
     name: 'Nexusmods',
     url: 'https://next.nexusmods.com/profile/dzxrly/about-me',
-    iconPath: 'publicAssets/nexusmods.svg'
-  }
+    iconPath: 'publicAssets/nexusmods.svg',
+  },
 ];
 
 export default {
   languageBadgeUrlList,
-  personalWebSiteList
+  personalWebSiteList,
 };

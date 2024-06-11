@@ -1,20 +1,21 @@
 // app global css in SCSS form
 @font-face {
-  font-family: "JetBrains Mono";
-  src: url("../fonts/JetBrainsMono-Regular.woff2") format("truetype");
+  font-family: 'JetBrains Mono';
+  src: url('../fonts/JetBrainsMono-Regular.woff2') format('truetype');
 }
 
 @font-face {
-  font-family: "Noto Sans";
-  src: url("../fonts/NotoSansSC-Regular.ttf") format("truetype");
+  font-family: 'Noto Sans';
+  src: url('../fonts/NotoSansSC-Regular.ttf') format('truetype');
 }
 
-html, body {
+html,
+body {
   width: 100vw;
   height: 100vh;
   margin: 0;
   padding: 0;
-  font-family: "Noto Sans", "JetBrains Mono", monospace;
+  font-family: 'Noto Sans', 'JetBrains Mono', monospace;
 
   --border-radius: 19px;
 
@@ -51,7 +52,8 @@ html, body {
   --card-background-color: #eef4f8;
 }
 
-html, body {
+html,
+body {
   background: var(--background-color);
 }
 

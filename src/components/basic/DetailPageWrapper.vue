@@ -10,7 +10,14 @@ const isLtSm = computed(() => $q.screen.lt.sm);
 <template>
   <div class="detail-page-wrapper full-width full-height">
     <div class="back-btn-row row justify-start items-center full-width q-mb-md">
-      <q-btn :size="isLtSm ? 'md' : 'lg'" color="primary" flat icon="arrow_back" round to="/" />
+      <q-btn
+        :size="isLtSm ? 'md' : 'lg'"
+        color="primary"
+        flat
+        icon="arrow_back"
+        round
+        to="/"
+      />
     </div>
     <div class="content">
       <slot />

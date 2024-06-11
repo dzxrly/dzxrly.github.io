@@ -1,39 +1,35 @@
 /* global Fluid, CONFIG, jQuery */
 
-HTMLElement.prototype.wrap = function(wrapper) {
+HTMLElement.prototype.wrap = function (wrapper) {
   this.parentNode.insertBefore(wrapper, this);
   this.parentNode.removeChild(this);
   wrapper.appendChild(this);
 };
 
 Fluid.plugins = {
-
-  typing: function(text) {
+  typing: function (text) {
     if (!('Typed' in window)) {
       return;
     }
 
     var typed = new window.Typed('#subtitle', {
-      strings: [
-        '  ',
-        text + '&nbsp;'
-      ],
+      strings: ['  ', text + '&nbsp;'],
       cursorChar: CONFIG.typing.cursorChar,
       typeSpeed: CONFIG.typing.typeSpeed,
-      loop: CONFIG.typing.loop
+      loop: CONFIG.typing.loop,
     });
     typed.stop();
     var subtitle = document.getElementById('subtitle');
     if (subtitle) {
       subtitle.innerText = '';
     }
-    jQuery(document).ready(function() {
+    jQuery(document).ready(function () {
       jQuery('.typed-cursor').addClass('h2');
       typed.start();
     });
   },
 
-  initTocBot: function() {
+  initTocBot: function () {
     var toc = jQuery('#toc');
     if (toc.length === 0 || !window.tocbot) {
       return;
@@ -52,19 +48,21 @@ Fluid.plugins = {
       collapsibleClass: 'tocbot-is-collapsible',
       collapseDepth: CONFIG.toc.collapseDepth || 0,
       scrollSmooth: true,
-      headingsOffset: -boardTop
+      headingsOffset: -boardTop,
     });
     if (jQuery('.toc-list-item').length > 0) {
       toc.css('visibility', 'visible');
     }
   },
 
-  initFancyBox: function(selector) {
+  initFancyBox: function (selector) {
     if (!('fancybox' in jQuery)) {
       return;
     }
 
-    jQuery(selector || '.markdown-body :not(a) > img, .markdown-body > img').each(function() {
+    jQuery(
+      selector || '.markdown-body :not(a) > img, .markdown-body > img'
+    ).each(function () {
       var $image = jQuery(this);
       var imageUrl = $image.attr('data-src') || $image.attr('src') || '';
       if (CONFIG.image_zoom.img_url_replace) {
@@ -81,10 +79,13 @@ Fluid.plugins = {
           }
         }
       }
-      var $imageWrap = $image.wrap(`
+      var $imageWrap = $image
+        .wrap(
+          `
         <a class="fancybox fancybox.image" href="${imageUrl}"
           itemscope itemtype="http://schema.org/ImageObject" itemprop="url"></a>`
-      ).parent('a');
+        )
+        .parent('a');
       if ($image.is('.group-image-container img')) {
         $imageWrap.attr('data-fancybox', 'group').attr('rel', 'group');
       } else {
@@ -103,20 +104,20 @@ Fluid.plugins = {
       loop: true,
       helpers: {
         overlay: {
-          locked: false
-        }
-      }
+          locked: false,
+        },
+      },
     });
   },
 
-  initAnchor: function() {
+  initAnchor: function () {
     if (!('anchors' in window)) {
       return;
     }
 
     window.anchors.options = {
       placement: CONFIG.anchorjs.placement,
-      visible: CONFIG.anchorjs.visible
+      visible: CONFIG.anchorjs.visible,
     };
     if (CONFIG.anchorjs.icon) {
       window.anchors.options.icon = CONFIG.anchorjs.icon;
@@ -129,7 +130,7 @@ Fluid.plugins = {
     window.anchors.add(res.join(', '));
   },
 
-  initCopyCode: function() {
+  initCopyCode: function () {
     if (!('ClipboardJS' in window)) {
       return;
     }
@@ -138,8 +139,13 @@ Fluid.plugins = {
       if (ele.length === 0) {
         return 'copy-btn-dark';
       }
-      var rgbArr = ele.css('background-color').replace(/rgba*\(/, '').replace(')', '').split(',');
-      var color = (0.213 * rgbArr[0]) + (0.715 * rgbArr[1]) + (0.072 * rgbArr[2]) > 255 / 2;
+      var rgbArr = ele
+        .css('background-color')
+        .replace(/rgba*\(/, '')
+        .replace(')', '')
+        .split(',');
+      var color =
+        0.213 * rgbArr[0] + 0.715 * rgbArr[1] + 0.072 * rgbArr[2] > 255 / 2;
       return color ? 'copy-btn-dark' : 'copy-btn-light';
     }
 
@@ -148,7 +154,7 @@ Fluid.plugins = {
     copyHtml += '<i class="iconfont icon-copy"></i><span>Copy</span>';
     copyHtml += '</button>';
     var blockElement = jQuery('.markdown-body pre');
-    blockElement.each(function() {
+    blockElement.each(function () {
       const pre = jQuery(this);
       if (pre.find('code.mermaid').length > 0) {
         return;
@@ -159,19 +165,18 @@ Fluid.plugins = {
       pre.append(copyHtml);
     });
     var clipboard = new window.ClipboardJS('.copy-btn', {
-      target: function(trigger) {
+      target: function (trigger) {
         return trigger.previousElementSibling;
-      }
+      },
     });
     jQuery('.copy-btn').addClass(getBgClass(blockElement));
-    clipboard.on('success', function(e) {
+    clipboard.on('success', function (e) {
       e.clearSelection();
       var tmp = e.trigger.outerHTML;
       e.trigger.innerHTML = 'Success';
-      setTimeout(function() {
+      setTimeout(function () {
         e.trigger.outerHTML = tmp;
       }, 2000);
     });
-  }
-
+  },
 };

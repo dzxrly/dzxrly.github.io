@@ -9,9 +9,11 @@ const cardButtonResponsiveProps = ref<ResponsiveCardBtnInterface>({
   coefficientA: 0.015,
   coefficientB: 0.021,
   valueMax: 12,
-  valueMin: 5
+  valueMin: 5,
 });
-const personalBtnBgImg = computed(() => isShiny.value ? '643s.gif' : '643.gif');
+const personalBtnBgImg = computed(() =>
+  isShiny.value ? '643s.gif' : '643.gif'
+);
 </script>
 
 <template>
@@ -22,7 +24,8 @@ const personalBtnBgImg = computed(() => isShiny.value ? '643s.gif' : '643.gif');
       :responsive-props="cardButtonResponsiveProps"
       background-color="#eef4f8"
       text-color="#081e27"
-      title-keyword="homeBtnMyProjects" />
+      title-keyword="homeBtnMyProjects"
+    />
     <card-button
       icon-name="person"
       route-path="/about"
@@ -30,6 +33,7 @@ const personalBtnBgImg = computed(() => isShiny.value ? '643s.gif' : '643.gif');
       :secondary-avatar="personalBtnBgImg"
       background-color="#eef4f8"
       text-color="#081e27"
-      title-keyword="homeBtnPersonal" />
+      title-keyword="homeBtnPersonal"
+    />
   </div>
 </template>

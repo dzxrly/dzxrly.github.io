@@ -8,21 +8,26 @@ import DetailPageWrapper from 'components/basic/DetailPageWrapper.vue';
 
 const { t } = useI18n();
 
-
 const githubRepoList = ref<GithubRepoApiResponse[]>([]);
 const listLoading = ref(false);
 
 function fetchGithubRepos() {
   listLoading.value = true;
-  API.githubRepoList('dzxrly').then((res: any) => {
-    githubRepoList.value = (res as GithubRepoApiResponse[]).filter((repo) => !repo.fork && repo.name !== 'dzxrly').sort((a, b) => {
-      return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+  API.githubRepoList('dzxrly')
+    .then((res: any) => {
+      githubRepoList.value = (res as GithubRepoApiResponse[])
+        .filter((repo) => !repo.fork && repo.name !== 'dzxrly')
+        .sort((a, b) => {
+          return (
+            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+          );
+        });
+      listLoading.value = false;
+    })
+    .catch((err) => {
+      console.error(err);
+      listLoading.value = false;
     });
-    listLoading.value = false;
-  }).catch((err) => {
-    console.error(err);
-    listLoading.value = false;
-  });
 }
 
 fetchGithubRepos();
@@ -30,16 +35,22 @@ fetchGithubRepos();
 
 <template>
   <detail-page-wrapper>
-    <div v-if="listLoading" class="column justify-center items-center full-width q-py-xl">
+    <div
+      v-if="listLoading"
+      class="column justify-center items-center full-width q-py-xl"
+    >
       <q-spinner-hourglass size="5vw" color="primary" />
-      <span class="text-subtitle1 text-bold text-primary">{{ t('projectRepoListLoading') }}</span>
+      <span class="text-subtitle1 text-bold text-primary">{{
+        t('projectRepoListLoading')
+      }}</span>
     </div>
     <div v-else class="row justify-center items-stretch full-width wrap">
       <project-info
         class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4"
         v-for="(githubRepo, index) in githubRepoList"
         :key="index"
-        :githubRepoInfo="githubRepo" />
+        :githubRepoInfo="githubRepo"
+      />
     </div>
   </detail-page-wrapper>
 </template>

@@ -3,7 +3,7 @@
 /**
  * Modify by https://blog.skk.moe/post/hello-darkmode-my-old-friend/
  */
-(function(window, document) {
+(function (window, document) {
   var rootElement = document.documentElement;
   var colorSchemaStorageKey = 'Fluid_Color_Scheme';
   var colorSchemaMediaQueryKey = '--color-mode';
@@ -15,15 +15,13 @@
   function setLS(k, v) {
     try {
       localStorage.setItem(k, v);
-    } catch (e) {
-    }
+    } catch (e) {}
   }
 
   function removeLS(k) {
     try {
       localStorage.removeItem(k);
-    } catch (e) {
-    }
+    } catch (e) {}
   }
 
   function getLS(k) {
@@ -53,13 +51,16 @@
   }
 
   function resetSchemaAttributeAndLS() {
-    rootElement.setAttribute(userColorSchemaAttributeName, getDefaultColorSchema());
+    rootElement.setAttribute(
+      userColorSchemaAttributeName,
+      getDefaultColorSchema()
+    );
     removeLS(colorSchemaStorageKey);
   }
 
   var validColorSchemaKeys = {
     dark: true,
-    light: true
+    light: true,
   };
 
   function getDefaultColorSchema() {
@@ -84,16 +85,14 @@
 
   function applyCustomColorSchemaSettings(schema) {
     // 接受从「开关」处传来的模式，或者从 localStorage 读取，否则按默认设置值
-    var current = schema || getLS(colorSchemaStorageKey) || getDefaultColorSchema();
+    var current =
+      schema || getLS(colorSchemaStorageKey) || getDefaultColorSchema();
 
     if (current === getDefaultColorSchema()) {
       // 当用户切换的显示模式和默认模式相同时，则恢复为自动模式
       resetSchemaAttributeAndLS();
     } else if (validColorSchemaKeys[current]) {
-      rootElement.setAttribute(
-        userColorSchemaAttributeName,
-        current
-      );
+      rootElement.setAttribute(userColorSchemaAttributeName, current);
     } else {
       // 特殊情况重置
       resetSchemaAttributeAndLS();
@@ -109,7 +108,7 @@
 
   var invertColorSchemaObj = {
     dark: 'light',
-    light: 'dark'
+    light: 'dark',
   };
 
   function getIconClass(scheme) {
@@ -151,27 +150,15 @@
       }
       var iconElement = document.querySelector(colorToggleIconSelector);
       if (iconElement) {
-        iconElement.setAttribute(
-          'class',
-          'iconfont ' + icon
-        );
-        iconElement.setAttribute(
-          'data',
-          invertColorSchemaObj[schema]
-        );
+        iconElement.setAttribute('class', 'iconfont ' + icon);
+        iconElement.setAttribute('data', invertColorSchemaObj[schema]);
       } else {
         // 如果图标不存在则说明图标还没加载出来，等到页面全部加载再尝试切换
-        Fluid.utils.waitElementLoaded(colorToggleIconSelector, function() {
+        Fluid.utils.waitElementLoaded(colorToggleIconSelector, function () {
           var iconElement = document.querySelector(colorToggleIconSelector);
           if (iconElement) {
-            iconElement.setAttribute(
-              'class',
-              'iconfont ' + icon
-            );
-            iconElement.setAttribute(
-              'data',
-              invertColorSchemaObj[schema]
-            );
+            iconElement.setAttribute('class', 'iconfont ' + icon);
+            iconElement.setAttribute('data', invertColorSchemaObj[schema]);
           }
         });
       }
@@ -198,7 +185,7 @@
       }
       const message = {
         type: 'set-theme',
-        theme: theme
+        theme: theme,
       };
       utterances.contentWindow.postMessage(message, 'https://utteranc.es');
     }
@@ -207,24 +194,30 @@
   // 当页面加载时，将显示模式设置为 localStorage 中自定义的值（如果有的话）
   applyCustomColorSchemaSettings();
 
-  Fluid.utils.waitElementLoaded(colorToggleIconSelector, function() {
+  Fluid.utils.waitElementLoaded(colorToggleIconSelector, function () {
     applyCustomColorSchemaSettings();
     var button = document.querySelector(colorToggleButtonSelector);
     if (button) {
       // 当用户点击切换按钮时，获得新的显示模式、写入 localStorage、并在页面上生效
-      button.addEventListener('click', function() {
+      button.addEventListener('click', function () {
         applyCustomColorSchemaSettings(toggleCustomColorSchema());
       });
       var icon = document.querySelector(colorToggleIconSelector);
       if (icon) {
         // 光标悬停在按钮上时，切换图标
-        button.addEventListener('mouseenter', function() {
+        button.addEventListener('mouseenter', function () {
           var current = icon.getAttribute('data');
-          icon.classList.replace(getIconClass(invertColorSchemaObj[current]), getIconClass(current));
+          icon.classList.replace(
+            getIconClass(invertColorSchemaObj[current]),
+            getIconClass(current)
+          );
         });
-        button.addEventListener('mouseleave', function() {
+        button.addEventListener('mouseleave', function () {
           var current = icon.getAttribute('data');
-          icon.classList.replace(getIconClass(current), getIconClass(invertColorSchemaObj[current]));
+          icon.classList.replace(
+            getIconClass(current),
+            getIconClass(invertColorSchemaObj[current])
+          );
         });
       }
     }

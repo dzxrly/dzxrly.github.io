@@ -12,5 +12,5 @@ export default {
   homePersonalInfoChip7: '🖥️ ITX PC装机~',
 
   projectRepoListLoading: '读取仓库列表...',
-  projectRepoOpenButton: '在GitHub上查看'
+  projectRepoOpenButton: '在GitHub上查看',
 };

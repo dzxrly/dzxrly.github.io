@@ -11,54 +11,64 @@ const $q = useQuasar();
 const props = defineProps({
   routePath: {
     type: String,
-    required: true
+    required: true,
   },
   responsiveProps: {
     type: Object as PropType<ResponsiveCardBtnInterface>,
-    required: true
+    required: true,
   },
   iconName: {
-    type: String
+    type: String,
   },
   iconColorClass: {
     type: String,
-    default: 'text-primary'
+    default: 'text-primary',
   },
   avatar: {
-    type: String
+    type: String,
   },
   secondaryAvatar: {
     type: String,
-    default: ''
+    default: '',
   },
   titleKeyword: {
     type: String,
-    required: true
+    required: true,
   },
   secondaryTitleKeyword: {
     type: String,
-    default: ''
+    default: '',
   },
   backgroundColor: {
     type: String,
-    default: '#eef4f8'
+    default: '#eef4f8',
   },
   textColor: {
     type: String,
-    default: '#081e27'
-  }
+    default: '#081e27',
+  },
 });
 
 const router = useRouter();
-const isSecondaryAvatar = ref<boolean>(Boolean(props.secondaryAvatar && props.secondaryAvatar !== ''));
-const avatarTransform = ref<string>(isSecondaryAvatar.value ? 'translateY(-100%)' : 'translateY(0)');
+const isSecondaryAvatar = ref<boolean>(
+  Boolean(props.secondaryAvatar && props.secondaryAvatar !== '')
+);
+const avatarTransform = ref<string>(
+  isSecondaryAvatar.value ? 'translateY(-100%)' : 'translateY(0)'
+);
 const avatarHoverOpacity = ref<number>(isSecondaryAvatar.value ? 0 : 1);
-const secondaryAvatarTransform = ref<string>(isSecondaryAvatar.value ? 'translateY(-50%)' : 'translateY(0)');
+const secondaryAvatarTransform = ref<string>(
+  isSecondaryAvatar.value ? 'translateY(-50%)' : 'translateY(0)'
+);
 
 const responsiveSize = computed(() => {
-  const size = $q.screen.width * props.responsiveProps?.coefficientA + props.responsiveProps?.coefficientB;
-  if (size > props.responsiveProps?.valueMax) return props.responsiveProps?.valueMax;
-  else if (size < props.responsiveProps?.valueMin) return props.responsiveProps?.valueMin;
+  const size =
+    $q.screen.width * props.responsiveProps?.coefficientA +
+    props.responsiveProps?.coefficientB;
+  if (size > props.responsiveProps?.valueMax)
+    return props.responsiveProps?.valueMax;
+  else if (size < props.responsiveProps?.valueMin)
+    return props.responsiveProps?.valueMin;
   else return size;
 });
 const cardSize = computed(() => `${responsiveSize.value}rem`);
@@ -74,24 +84,45 @@ function routeTo() {
 
 <template>
   <div class="custom-card-btn q-ma-md rounded-borders" @click="routeTo">
-    <div class="secondary-btn column justify-center items-center full-width full-height wrap">
-      <q-avatar v-if="!props.iconName" :size="avatarSize" class="custom-card-picture-in-btn" rounded>
+    <div
+      class="secondary-btn column justify-center items-center full-width full-height wrap"
+    >
+      <q-avatar
+        v-if="!props.iconName"
+        :size="avatarSize"
+        class="custom-card-picture-in-btn"
+        rounded
+      >
         <img :src="props.avatar" alt="card btn avatar" />
       </q-avatar>
-      <q-avatar v-else :class="props.iconColorClass" :icon="iconName" :size="avatarSize"
-                class="custom-card-picture-in-btn"
-                color="transparent"
-                rounded></q-avatar>
-      <span :style="{ color: textColor }" class="text-subtitle1 text-bold ellipsis">{{ t(props.titleKeyword) }}</span>
+      <q-avatar
+        v-else
+        :class="props.iconColorClass"
+        :icon="iconName"
+        :size="avatarSize"
+        class="custom-card-picture-in-btn"
+        color="transparent"
+        rounded
+      ></q-avatar>
+      <span
+        :style="{ color: textColor }"
+        class="text-subtitle1 text-bold ellipsis"
+        >{{ t(props.titleKeyword) }}</span
+      >
     </div>
-    <div v-if="isSecondaryAvatar"
-         class="secondary-btn-easter-egg column justify-center items-center full-width wrap">
+    <div
+      v-if="isSecondaryAvatar"
+      class="secondary-btn-easter-egg column justify-center items-center full-width wrap"
+    >
       <q-avatar :size="avatarSize" class="custom-card-picture-in-btn" rounded>
         <img :src="props.secondaryAvatar" alt="card btn avatar" />
       </q-avatar>
-      <span v-if="secondaryTitleKeyword && secondaryTitleKeyword !== ''" :style="{ color: textColor }"
-            class="text-subtitle1 text-bold ellipsis">{{ t(props.secondaryTitleKeyword)
-        }}</span>
+      <span
+        v-if="secondaryTitleKeyword && secondaryTitleKeyword !== ''"
+        :style="{ color: textColor }"
+        class="text-subtitle1 text-bold ellipsis"
+        >{{ t(props.secondaryTitleKeyword) }}</span
+      >
     </div>
   </div>
 </template>

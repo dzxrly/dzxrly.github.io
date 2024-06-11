@@ -40,14 +40,20 @@ function setHomeTitleWithAnimation() {
   }, 150);
 }
 
-watch(() => homeTitleTranslation.value, () => {
-  clearTypingInterval();
-  setHomeTitleWithAnimation();
-});
+watch(
+  () => homeTitleTranslation.value,
+  () => {
+    clearTypingInterval();
+    setHomeTitleWithAnimation();
+  }
+);
 
-watch(() => isMouseEnter.value, () => {
-  bus?.emit('set-background-cover', isMouseEnter.value);
-});
+watch(
+  () => isMouseEnter.value,
+  () => {
+    bus?.emit('set-background-cover', isMouseEnter.value);
+  }
+);
 
 onMounted(() => {
   clearTypingInterval();
@@ -57,29 +63,49 @@ onMounted(() => {
 </script>
 
 <template>
-  <q-page class="home-page-wrapper column justify-center items-center" style="min-height: 0;">
-    <div :class="{ 'home-title-hover' : isMouseEnter }"
-         class="home-title full-width row justify-center items-center q-py-xl"
-         @click="isMouseEnter = false">
-        <span
-          :class="{ 'text-body1': isLtSm, 'text-h5': !isLtSm }"
-          class="home-title-span text-on-background text-bold non-selectable"
-        >{{ homeTitle }}</span>
-    </div>
-    <div :class="{ 'home-card-hover shadow-8' : isMouseEnter, 'shadow-4' : !isMouseEnter }"
-         class="home-card full-width bg-card-background text-on-surface q-pa-md column justify-start items-center"
-         @mouseenter="isMouseEnter = true"
-         @mouseleave="isMouseEnter = false"
+  <q-page
+    class="home-page-wrapper column justify-center items-center"
+    style="min-height: 0"
+  >
+    <div
+      :class="{ 'home-title-hover': isMouseEnter }"
+      class="home-title full-width row justify-center items-center q-py-xl"
+      @click="isMouseEnter = false"
     >
-      <div class="home-card-modal-bar-wrapper row justify-center items-center full-width q-mb-md">
+      <span
+        :class="{ 'text-body1': isLtSm, 'text-h5': !isLtSm }"
+        class="home-title-span text-on-background text-bold non-selectable"
+        >{{ homeTitle }}</span
+      >
+    </div>
+    <div
+      :class="{
+        'home-card-hover shadow-8': isMouseEnter,
+        'shadow-4': !isMouseEnter,
+      }"
+      class="home-card full-width bg-card-background text-on-surface q-pa-md column justify-start items-center"
+      @mouseenter="isMouseEnter = true"
+      @mouseleave="isMouseEnter = false"
+    >
+      <div
+        class="home-card-modal-bar-wrapper row justify-center items-center full-width q-mb-md"
+      >
         <div class="home-card-modal-bar"></div>
       </div>
       <div class="home-card-view col full-width row justify-center items-start">
         <router-view v-slot="{ Component, route }">
           <transition
             :duration="{ enter: 300, leave: 300 }"
-            :enter-active-class="route.path === '/' ? 'animated fadeInLeft' : 'animated fadeInRight'"
-            :leave-active-class="route.path === '/' ? 'animated fadeOutRight' : 'animated fadeOutLeft'"
+            :enter-active-class="
+              route.path === '/'
+                ? 'animated fadeInLeft'
+                : 'animated fadeInRight'
+            "
+            :leave-active-class="
+              route.path === '/'
+                ? 'animated fadeOutRight'
+                : 'animated fadeOutLeft'
+            "
             mode="out-in"
           >
             <keep-alive>
