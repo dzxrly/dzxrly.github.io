@@ -1,7 +1,7 @@
 export default {
   homeTitle: 'Egg Targaryen的个人小站',
 
-  homeBtnMyProjects: '开源软件',
+  homeBtnMyProjects: '代码仓库',
   homeBtnPersonal: '关于我',
   homePersonalInfoChip1: '👀 深度学习与计算机视觉',
   homePersonalInfoChip2: '🔭 天文大数据分析',
