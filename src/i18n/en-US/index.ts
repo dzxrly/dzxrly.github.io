@@ -4,7 +4,7 @@
 export default {
   homeTitle: "Egg Targaryen's Dock",
 
-  homeBtnMyProjects: 'Open Source',
+  homeBtnMyProjects: 'Code Repos',
   homeBtnPersonal: 'About Me',
   homePersonalInfoChip1: '👀 Deep Learning & Computer Vision',
   homePersonalInfoChip2: '🔭 Astronomy Big Data & Data Mining',

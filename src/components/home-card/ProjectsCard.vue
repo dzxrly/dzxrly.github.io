@@ -13,10 +13,15 @@ const listLoading = ref(false);
 
 function fetchGithubRepos() {
   listLoading.value = true;
-  API.githubRepoList('dzxrly')
-    .then((res: any) => {
-      githubRepoList.value = (res as GithubRepoApiResponse[])
-        .filter((repo) => !repo.fork && repo.name !== 'dzxrly')
+  API.githubRepoList<GithubRepoApiResponse[]>('dzxrly')
+    .then((res) => {
+      githubRepoList.value = res
+        .filter(
+          (repo) =>
+            !repo.fork &&
+            repo.name !== 'dzxrly' &&
+            repo.name !== 'dzxrly.github.io'
+        )
         .sort((a, b) => {
           return (
             new Date(b.created_at).getTime() - new Date(a.created_at).getTime()

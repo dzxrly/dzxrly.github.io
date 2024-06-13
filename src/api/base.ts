@@ -6,7 +6,7 @@ import axios, { AxiosPromise, AxiosResponse } from 'axios';
 axios.defaults.baseURL = 'https://api.github.com';
 axios.defaults.timeout = 30 * 1000;
 
-export default function axiosRequest(
+export default function axiosRequest<T>(
   url: string,
   method:
     | 'get'
@@ -33,7 +33,7 @@ export default function axiosRequest(
   data = {},
   params = {},
   headers = { 'Content-Type': 'application/json;charset=UTF-8' }
-): AxiosPromise {
+): Promise<T> {
   const requestConfig = {
     url: url,
     method: method,
@@ -43,7 +43,7 @@ export default function axiosRequest(
   };
   return new Promise((resolve, reject) => {
     axios(requestConfig)
-      .then((response: AxiosResponse) => {
+      .then((response: AxiosResponse<T>) => {
         if (response.status === 200) {
           resolve(response.data);
         } else reject('Network Error');
