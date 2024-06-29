@@ -19,6 +19,14 @@ const personalBtnBgImg = computed(() =>
 <template>
   <div class="main-card-wrapper">
     <card-button
+      icon-name="ads_click"
+      route-path="https://blog.eggtargaryen.com"
+      :responsive-props="cardButtonResponsiveProps"
+      background-color="#eef4f8"
+      text-color="#081e27"
+      title-keyword="blogBtnTitle"
+    />
+    <card-button
       icon-name="folder"
       route-path="/projects"
       :responsive-props="cardButtonResponsiveProps"

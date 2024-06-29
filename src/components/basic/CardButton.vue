@@ -2,7 +2,7 @@
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { computed, PropType, ref } from 'vue';
-import { useQuasar } from 'quasar';
+import { openURL, useQuasar } from 'quasar';
 import { ResponsiveCardBtnInterface } from 'src/interface/responsive-card-btn-interface';
 
 const { t } = useI18n();
@@ -78,7 +78,11 @@ const backgroundColor = computed(() => props.backgroundColor);
 const textColor = computed(() => props.textColor);
 
 function routeTo() {
-  router.push(props.routePath);
+  if (props.routePath?.indexOf('https://') !== -1) {
+    openURL(props.routePath);
+  } else {
+    router.push(props.routePath);
+  }
 }
 </script>
 
