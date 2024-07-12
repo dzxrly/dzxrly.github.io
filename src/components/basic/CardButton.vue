@@ -87,7 +87,7 @@ function routeTo() {
 </script>
 
 <template>
-  <div class="custom-card-btn q-ma-md rounded-borders" @click="routeTo">
+  <div class="custom-card-btn rounded-borders" @click="routeTo">
     <div
       class="secondary-btn column justify-center items-center full-width full-height wrap"
     >

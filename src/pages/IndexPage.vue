@@ -83,7 +83,7 @@ onMounted(() => {
         'home-card-hover shadow-8': isMouseEnter,
         'shadow-4': !isMouseEnter,
       }"
-      class="home-card full-width bg-card-background text-on-surface q-pa-md column justify-start items-center"
+      class="home-card full-width bg-card-background text-on-surface q-pt-md q-pb-md column justify-start items-center"
       @mouseenter="isMouseEnter = true"
       @mouseleave="isMouseEnter = false"
     >
@@ -148,6 +148,7 @@ onMounted(() => {
   .home-card
     height: 72vh
     transform: translateY(40vh)
+    //transform: translateY(0)
     transition: all .25s ease-in-out
     overflow: hidden
     border-top-left-radius: 19px
