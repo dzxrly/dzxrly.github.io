@@ -26,6 +26,7 @@ export default boot(({ app }) => {
   const locale = messages.hasOwnProperty(browserLanguage)
     ? browserLanguage
     : 'en-US';
+  console.log(navigator.language);
 
   const i18n = createI18n({
     locale: locale,

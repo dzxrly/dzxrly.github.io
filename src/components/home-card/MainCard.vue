@@ -72,6 +72,7 @@ const gridTemplateCols = computed(() => {
   display: grid
   grid-template-rows: repeat(auto-fill, v-bind(gridCardSize))
   grid-template-columns: repeat(v-bind(gridTemplateCols), v-bind(gridCardSize))
+  grid-gap: 0.5rem
   justify-items: center
   align-items: center
   justify-content: center

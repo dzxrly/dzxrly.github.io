@@ -1,18 +1,29 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n';
+import { inject, ref } from 'vue';
+import { EventBus } from 'quasar';
 
 const { locale } = useI18n({ useScope: 'global' });
+
+const bus = inject<EventBus>('eventBus');
+const setBackgroundCover = ref<boolean>(false);
 
 const languageDropdownMenuOptions = [
   { value: 'en-US', label: 'English' },
   { value: 'zh-CN', label: '简体中文' },
+  { value: 'zh-TW', label: '繁體中文' },
 ];
+
+bus?.on('set-background-cover', (value: boolean) => {
+  setBackgroundCover.value = value;
+});
 </script>
 
 <template>
   <q-layout view="hhh lpR fFf">
     <div
       class="main-header-wrapper row justify-end items-center full-width q-py-sm q-px-md"
+      :class="{ 'main-header-wrapper-hover': setBackgroundCover }"
     >
       <q-btn-dropdown
         auto-close
@@ -52,4 +63,8 @@ const languageDropdownMenuOptions = [
 <style lang="sass" scoped>
 .main-header-wrapper
   height: 8vh
+  transition: all .25s ease-in-out
+
+.main-header-wrapper-hover
+  filter: blur(5px)
 </style>

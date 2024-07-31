@@ -106,7 +106,6 @@ onMounted(() => {
                 ? 'animated fadeOutRight'
                 : 'animated fadeOutLeft'
             "
-            mode="out-in"
           >
             <keep-alive>
               <component :is="Component" :key="route.path" />
@@ -170,6 +169,7 @@ onMounted(() => {
       height: calc(72vh - 1rem)
 
   .home-title-hover
+    filter: blur(5px)
     transform: translateY(0)
 
   .home-card-hover

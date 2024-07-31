@@ -23,7 +23,7 @@ bus?.on('set-background-cover', (value: boolean) => {
   pointer-events: auto
   background-color: rgba(112, 120, 125, 0)
   opacity: 1
-  transition: all 0.5s ease-in-out
+  transition: all .25s ease-in-out
   overflow: hidden
 
 .app-wrapper-cover
