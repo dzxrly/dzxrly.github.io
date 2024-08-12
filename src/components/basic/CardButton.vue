@@ -77,58 +77,62 @@ const avatarSize = computed(() => `${responsiveSize.value * 0.6}rem`);
 const backgroundColor = computed(() => props.backgroundColor);
 const textColor = computed(() => props.textColor);
 
-function routeTo() {
-  if (props.routePath?.indexOf('https://') !== -1) {
-    openURL(props.routePath);
-  } else {
-    router.push(props.routePath);
-  }
+function routeTo(url: string) {
+  url.indexOf('https://') !== -1 || url.indexOf('http://') !== -1
+    ? openURL(url)
+    : router.push(url);
 }
 </script>
 
 <template>
-  <div class="custom-card-btn rounded-borders" @click="routeTo">
-    <div
-      class="secondary-btn column justify-center items-center full-width full-height wrap"
-    >
-      <q-avatar
-        v-if="!props.iconName"
-        :size="avatarSize"
-        class="custom-card-picture-in-btn"
-        rounded
+  <a
+    style="display: block"
+    :href="props.routePath"
+    @click.prevent="routeTo(props.routePath)"
+  >
+    <div class="custom-card-btn rounded-borders">
+      <div
+        class="secondary-btn column justify-center items-center full-width full-height wrap"
       >
-        <img :src="props.avatar" alt="card btn avatar" />
-      </q-avatar>
-      <q-avatar
-        v-else
-        :class="props.iconColorClass"
-        :icon="iconName"
-        :size="avatarSize"
-        class="custom-card-picture-in-btn"
-        color="transparent"
-        rounded
-      ></q-avatar>
-      <span
-        :style="{ color: textColor }"
-        class="text-subtitle1 text-bold ellipsis"
-        >{{ t(props.titleKeyword) }}</span
+        <q-avatar
+          v-if="!props.iconName"
+          :size="avatarSize"
+          class="custom-card-picture-in-btn"
+          rounded
+        >
+          <img :src="props.avatar" alt="card btn avatar" />
+        </q-avatar>
+        <q-avatar
+          v-else
+          :class="props.iconColorClass"
+          :icon="iconName"
+          :size="avatarSize"
+          class="custom-card-picture-in-btn"
+          color="transparent"
+          rounded
+        ></q-avatar>
+        <span
+          :style="{ color: textColor }"
+          class="text-subtitle1 text-bold ellipsis"
+          >{{ t(props.titleKeyword) }}</span
+        >
+      </div>
+      <div
+        v-if="isSecondaryAvatar"
+        class="secondary-btn-easter-egg column justify-center items-center full-width wrap"
       >
+        <q-avatar :size="avatarSize" class="custom-card-picture-in-btn" rounded>
+          <img :src="props.secondaryAvatar" alt="card btn avatar" />
+        </q-avatar>
+        <span
+          v-if="secondaryTitleKeyword && secondaryTitleKeyword !== ''"
+          :style="{ color: textColor }"
+          class="text-subtitle1 text-bold ellipsis"
+          >{{ t(props.secondaryTitleKeyword) }}</span
+        >
+      </div>
     </div>
-    <div
-      v-if="isSecondaryAvatar"
-      class="secondary-btn-easter-egg column justify-center items-center full-width wrap"
-    >
-      <q-avatar :size="avatarSize" class="custom-card-picture-in-btn" rounded>
-        <img :src="props.secondaryAvatar" alt="card btn avatar" />
-      </q-avatar>
-      <span
-        v-if="secondaryTitleKeyword && secondaryTitleKeyword !== ''"
-        :style="{ color: textColor }"
-        class="text-subtitle1 text-bold ellipsis"
-        >{{ t(props.secondaryTitleKeyword) }}</span
-      >
-    </div>
-  </div>
+  </a>
 </template>
 
 <style lang="sass" scoped>

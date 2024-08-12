@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { GithubRepoApiResponse } from 'src/interface/open-source-interface';
 import { PropType, ref } from 'vue';
-import { openURL } from 'quasar';
 import { useI18n } from 'vue-i18n';
 
 const props = defineProps({
@@ -76,7 +75,8 @@ const githubRepoInfo = ref<GithubRepoApiResponse>(props.githubRepoInfo);
         class="rounded-borders full-width"
         flat
         color="primary"
-        @click="openURL(githubRepoInfo.html_url)"
+        :href="githubRepoInfo.html_url"
+        target="_blank"
         no-caps
       >
         <q-icon name="open_in_new" />
