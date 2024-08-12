@@ -1,24 +1,24 @@
 import {
   c as s,
   g as Y,
-  k as G,
+  k as Z,
   h,
-  Y as ne,
-  a0 as ae,
+  Z as ne,
+  a1 as ae,
   l as K,
   q as re,
   u as ue,
-  H as J,
+  H as G,
   D as le,
   r as I,
   t as ie,
   E as se,
-  X as oe,
+  Y as oe,
   m as T,
   p as ce,
   v as de,
-} from './index.7d66cf72.js';
-import { u as N, a as fe, b as ve, Q } from './QIcon.78c64fff.js';
+} from './index.59749b07.js';
+import { u as N, a as fe, b as ve, Q } from './QIcon.f229e576.js';
 import { b as ge } from './render.7c7394e0.js';
 function De(e) {
   if (Object(e.$parent) === e.$parent) return e.$parent;
@@ -72,7 +72,7 @@ function ye(e, t) {
   for (const a in e) if (he(e[a], t[a]) === !1) return !1;
   return !0;
 }
-const Z = {
+const J = {
     to: [String, Object],
     replace: Boolean,
     href: String,
@@ -80,7 +80,7 @@ const Z = {
     disable: Boolean,
   },
   Ie = {
-    ...Z,
+    ...J,
     exact: Boolean,
     activeClass: { type: String, default: 'q-router-link--active' },
     exactActiveClass: { type: String, default: 'q-router-link--exact-active' },
@@ -208,7 +208,7 @@ function qe(e) {
     classes: s(() => 'q-spinner' + (e.color ? ` text-${e.color}` : '')),
   };
 }
-var xe = G({
+var xe = Z({
   name: 'QSpinner',
   props: { ...pe, thickness: { type: Number, default: 5 } },
   setup(e) {
@@ -274,7 +274,7 @@ function Se(e, t = 250) {
   };
 }
 function W(e, t, a, n) {
-  a.modifiers.stop === !0 && J(e);
+  a.modifiers.stop === !0 && G(e);
   const l = a.modifiers.color;
   let m = a.modifiers.center;
   m = m === !0 || n === !0;
@@ -317,7 +317,7 @@ function W(e, t, a, n) {
       }, 250));
   }, 50);
 }
-function X(e, { modifiers: t, value: a, arg: n }) {
+function F(e, { modifiers: t, value: a, arg: n }) {
   const l = Object.assign({}, e.cfg.ripple, t, a);
   e.modifiers = {
     early: l.early === !0,
@@ -351,7 +351,7 @@ var Ee = ae({
           W(l, e, n, !0);
       }, 300),
     };
-    X(n, t),
+    F(n, t),
       (e.__qripple = n),
       re(n, 'main', [
         [e, 'pointerdown', 'start', 'passive'],
@@ -365,7 +365,7 @@ var Ee = ae({
       const a = e.__qripple;
       a !== void 0 &&
         ((a.enabled = t.value !== !1),
-        a.enabled === !0 && Object(t.value) === t.value && X(a, t));
+        a.enabled === !0 && Object(t.value) === t.value && F(a, t));
     }
   },
   beforeUnmount(e) {
@@ -396,7 +396,7 @@ function Pe(e) {
     return `${e.vertical === !0 ? 'items' : 'justify'}-${ee[t]}`;
   });
 }
-const F = { none: 0, xs: 4, sm: 8, md: 16, lg: 24, xl: 32 },
+const X = { none: 0, xs: 4, sm: 8, md: 16, lg: 24, xl: 32 },
   we = { xs: 8, sm: 10, md: 14, lg: 20, xl: 24 },
   Re = ['button', 'submit', 'reset'],
   Be = /[^\s]\/[^\s]/,
@@ -418,7 +418,7 @@ function He(e) {
 }
 const _e = {
     ...fe,
-    ...Z,
+    ...J,
     type: { type: String, default: 'button' },
     label: [Number, String],
     icon: String,
@@ -461,7 +461,7 @@ function Oe(e) {
         ? Object.assign({}, i, {
             padding: e.padding
               .split(/\s+/)
-              .map((b) => (b in F ? F[b] + 'px' : b))
+              .map((b) => (b in X ? X[b] + 'px' : b))
               .join(' '),
             minWidth: '0',
             minHeight: '0',
@@ -555,7 +555,7 @@ const { passiveCapture: x } = de;
 let _ = null,
   A = null,
   O = null;
-var Ve = G({
+var Ve = Z({
   name: 'QBtn',
   props: {
     ...Ae,
@@ -706,7 +706,7 @@ var Ve = G({
             const c = new MouseEvent('click', r);
             (c.qKeyEvent = !0),
               r.defaultPrevented === !0 && ce(c),
-              r.cancelBubble === !0 && J(c),
+              r.cancelBubble === !0 && G(c),
               u.value.dispatchEvent(c),
               T(r),
               (r.qKeyEvent = !0);

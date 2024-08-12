@@ -1,33 +1,33 @@
-import { h as R, i as z, j as Q, k as $, Q as I } from './QBtn.497a1d04.js';
+import { h as z, i as Q, j as R, k as I, Q as $ } from './QBtn.0729658b.js';
 import {
   h as a,
-  k as v,
-  c as h,
+  k as _,
+  c as g,
   g as N,
-  d as S,
+  d as B,
   r as q,
   Q as l,
-  R as f,
+  R as p,
   S as m,
-  j as c,
+  j as i,
   U as o,
-  $ as d,
+  a0 as c,
   V as b,
   aa as y,
-  Z as B,
-  Y as w,
+  $ as C,
+  Z as S,
   _ as P,
   F as T,
   W as L,
-} from './index.7d66cf72.js';
-import { a as k } from './axios.6b484fa5.js';
-import { b as A, h as C } from './render.7c7394e0.js';
-import { Q as g } from './QIcon.78c64fff.js';
-import { u as D, a as H } from './use-dark.4a8fa5ae.js';
-import { o as M, D as V } from './DetailPageWrapper.30e2b495.js';
-import { u as j } from './vue-i18n.runtime.8bf5658f.js';
-import './use-quasar.2b2a48f2.js';
-const E = [
+} from './index.59749b07.js';
+import { a as w } from './axios.6b484fa5.js';
+import { b as A, h as k } from './render.7c7394e0.js';
+import { Q as h } from './QIcon.f229e576.js';
+import { u as D, a as H } from './use-dark.622f931c.js';
+import { u as j } from './vue-i18n.runtime.48e42421.js';
+import { D as M } from './DetailPageWrapper.67405a45.js';
+import './use-quasar.36961f8a.js';
+const V = [
   a('g', [
     a('path', {
       fill: 'none',
@@ -102,11 +102,11 @@ const E = [
     }),
   ]),
 ];
-var U = v({
+var E = _({
   name: 'QSpinnerHourglass',
-  props: R,
+  props: z,
   setup(e) {
-    const { cSize: r, classes: s } = z(e);
+    const { cSize: r, classes: s } = Q(e);
     return () =>
       a(
         'svg',
@@ -118,12 +118,12 @@ var U = v({
           preserveAspectRatio: 'xMidYMid',
           xmlns: 'http://www.w3.org/2000/svg',
         },
-        E
+        V
       );
   },
 });
-k.defaults.baseURL = 'https://api.github.com';
-k.defaults.timeout = 30 * 1e3;
+w.defaults.baseURL = 'https://api.github.com';
+w.defaults.timeout = 30 * 1e3;
 function F(
   e,
   r,
@@ -131,24 +131,24 @@ function F(
   t = {},
   n = { 'Content-Type': 'application/json;charset=UTF-8' }
 ) {
-  const i = { url: e, method: r, headers: n, data: s, params: t };
-  return new Promise((u, p) => {
-    k(i)
-      .then((_) => {
-        _.status === 200 ? u(_.data) : p('Network Error');
+  const d = { url: e, method: r, headers: n, data: s, params: t };
+  return new Promise((u, f) => {
+    w(d)
+      .then((v) => {
+        v.status === 200 ? u(v.data) : f('Network Error');
       })
       .catch(() => {
-        p('Network Error');
+        f('Network Error');
       });
   });
 }
-var G = {
+var U = {
   githubRepoList(e) {
     return F(`/users/${e}/repos`, 'GET');
   },
 };
-const O = ['top', 'middle', 'bottom'];
-var x = v({
+const G = ['top', 'middle', 'bottom'];
+var x = _({
     name: 'QBadge',
     props: {
       color: String,
@@ -159,13 +159,13 @@ var x = v({
       outline: Boolean,
       rounded: Boolean,
       label: [Number, String],
-      align: { type: String, validator: (e) => O.includes(e) },
+      align: { type: String, validator: (e) => G.includes(e) },
     },
     setup(e, { slots: r }) {
-      const s = h(() =>
+      const s = g(() =>
           e.align !== void 0 ? { verticalAlign: e.align } : null
         ),
-        t = h(() => {
+        t = g(() => {
           const n = (e.outline === !0 && e.color) || e.textColor;
           return (
             `q-badge flex inline items-center no-wrap q-badge--${
@@ -195,34 +195,34 @@ var x = v({
         );
     },
   }),
-  W = v({
+  O = _({
     name: 'QCardSection',
     props: { tag: { type: String, default: 'div' }, horizontal: Boolean },
     setup(e, { slots: r }) {
-      const s = h(
+      const s = g(
         () =>
           `q-card__section q-card__section--${
             e.horizontal === !0 ? 'horiz row no-wrap' : 'vert'
           }`
       );
-      return () => a(e.tag, { class: s.value }, C(r.default));
+      return () => a(e.tag, { class: s.value }, k(r.default));
     },
   }),
-  Y = v({
+  W = _({
     name: 'QCardActions',
-    props: { ...Q, vertical: Boolean },
+    props: { ...R, vertical: Boolean },
     setup(e, { slots: r }) {
-      const s = $(e),
-        t = h(
+      const s = I(e),
+        t = g(
           () =>
             `q-card__actions ${s.value} q-card__actions--${
               e.vertical === !0 ? 'vert column' : 'horiz row'
             }`
         );
-      return () => a('div', { class: t.value }, C(r.default));
+      return () => a('div', { class: t.value }, k(r.default));
     },
   }),
-  Z = v({
+  Y = _({
     name: 'QCard',
     props: {
       ...D,
@@ -236,7 +236,7 @@ var x = v({
           proxy: { $q: s },
         } = N(),
         t = H(e, s),
-        n = h(
+        n = g(
           () =>
             'q-card' +
             (t.value === !0 ? ' q-card--dark q-dark' : '') +
@@ -244,47 +244,47 @@ var x = v({
             (e.square === !0 ? ' q-card--square no-border-radius' : '') +
             (e.flat === !0 ? ' q-card--flat no-shadow' : '')
         );
-      return () => a(e.tag, { class: n.value }, C(r.default));
+      return () => a(e.tag, { class: n.value }, k(r.default));
     },
   });
-const J = { class: 'text-h5 text-primary q-mr-xs' },
-  K = { class: 'row justify-start items-center full-width' },
-  X = { key: 0, class: 'row justify-center items-center q-mt-md q-mr-md' },
-  ee = { class: 'row justify-center items-center q-mt-md q-mr-md' },
-  te = { class: 'row justify-center items-center q-mt-md' },
-  ae = {
+const Z = { class: 'text-h5 text-primary q-mr-xs' },
+  J = { class: 'row justify-start items-center full-width' },
+  K = { key: 0, class: 'row justify-center items-center q-mt-md q-mr-md' },
+  X = { class: 'row justify-center items-center q-mt-md q-mr-md' },
+  ee = { class: 'row justify-center items-center q-mt-md' },
+  te = {
     class: 'text-body1 q-my-md',
     style: { 'max-lines': '2 !important', 'text-overflow': 'ellipsis' },
   },
-  re = { class: 'row justify-start items-center' },
-  se = { class: 'q-ml-xs' },
-  oe = S({
+  ae = { class: 'row justify-start items-center' },
+  re = { class: 'q-ml-xs' },
+  se = B({
     __name: 'ProjectInfo',
     props: { githubRepoInfo: { type: Object, required: !0 } },
     setup(e) {
       const r = e,
         { t: s } = j(),
         t = q(r.githubRepoInfo);
-      return (n, i) => (
+      return (n, d) => (
         l(),
-        f(
-          Z,
+        p(
+          Y,
           { class: 'repo-card-wrapper q-ma-sm rounded-borders column' },
           {
             default: m(() => [
-              c(
-                W,
+              i(
+                O,
                 { class: 'non-selectable col-grow' },
                 {
                   default: m(() => [
-                    o('span', J, d(t.value.name), 1),
-                    o('div', K, [
+                    o('span', Z, c(t.value.name), 1),
+                    o('div', J, [
                       t.value.archived
                         ? (l(),
-                          b('div', X, [
+                          b('div', K, [
                             t.value.archived
                               ? (l(),
-                                f(x, {
+                                p(x, {
                                   key: 0,
                                   label: 'Archived',
                                   color: 'secondary',
@@ -293,36 +293,36 @@ const J = { class: 'text-h5 text-primary q-mr-xs' },
                               : y('', !0),
                           ]))
                         : y('', !0),
-                      o('div', ee, [
-                        c(g, {
+                      o('div', X, [
+                        i(h, {
                           class: 'q-mr-xs',
                           name: 'star',
                           color: 'yellow-7',
                           size: '1rem',
                         }),
-                        o('span', null, d(t.value.stargazers_count), 1),
+                        o('span', null, c(t.value.stargazers_count), 1),
                       ]),
-                      o('div', te, [
-                        c(g, {
+                      o('div', ee, [
+                        i(h, {
                           class: 'q-mr-xs',
                           name: 'fork_right',
                           color: 'deep-orange-5',
                           size: '1rem',
                         }),
-                        o('span', null, d(t.value.forks_count), 1),
+                        o('span', null, c(t.value.forks_count), 1),
                       ]),
                     ]),
-                    o('p', ae, d(t.value.description), 1),
-                    o('div', re, [
+                    o('p', te, c(t.value.description), 1),
+                    o('div', ae, [
                       t.value.language
                         ? (l(),
-                          f(
+                          p(
                             x,
                             { key: 0, color: 'primary', outline: '' },
                             {
                               default: m(() => [
-                                c(g, { name: 'language', class: 'q-mr-xs' }),
-                                B(' ' + d(t.value.language), 1),
+                                i(h, { name: 'language', class: 'q-mr-xs' }),
+                                C(' ' + c(t.value.language), 1),
                               ]),
                               _: 1,
                             }
@@ -330,7 +330,7 @@ const J = { class: 'text-h5 text-primary q-mr-xs' },
                         : y('', !0),
                       t.value.license
                         ? (l(),
-                          f(
+                          p(
                             x,
                             {
                               key: 1,
@@ -341,11 +341,11 @@ const J = { class: 'text-h5 text-primary q-mr-xs' },
                             },
                             {
                               default: m(() => [
-                                c(g, {
+                                i(h, {
                                   name: 'workspace_premium',
                                   class: 'q-mr-xs',
                                 }),
-                                B(' ' + d(t.value.license.key), 1),
+                                C(' ' + c(t.value.license.key), 1),
                               ]),
                               _: 1,
                             }
@@ -356,27 +356,30 @@ const J = { class: 'text-h5 text-primary q-mr-xs' },
                   _: 1,
                 }
               ),
-              c(
-                Y,
+              i(
+                W,
                 { align: 'center' },
                 {
                   default: m(() => [
-                    c(
-                      I,
+                    i(
+                      $,
                       {
                         class: 'rounded-borders full-width',
                         flat: '',
                         color: 'primary',
-                        onClick: i[0] || (i[0] = (u) => w(M)(t.value.html_url)),
+                        href: t.value.html_url,
+                        target: '_blank',
                         'no-caps': '',
                       },
                       {
                         default: m(() => [
-                          c(g, { name: 'open_in_new' }),
-                          o('span', se, d(w(s)('projectRepoOpenButton')), 1),
+                          i(h, { name: 'open_in_new' }),
+                          o('span', re, c(S(s)('projectRepoOpenButton')), 1),
                         ]),
                         _: 1,
-                      }
+                      },
+                      8,
+                      ['href']
                     ),
                   ]),
                   _: 1,
@@ -389,14 +392,14 @@ const J = { class: 'text-h5 text-primary q-mr-xs' },
       );
     },
   });
-var le = P(oe, [['__scopeId', 'data-v-93aa3a58']]);
-const ne = {
+var oe = P(se, [['__scopeId', 'data-v-741737e0']]);
+const le = {
     key: 0,
     class: 'column justify-center items-center full-width q-py-xl',
   },
-  ie = { class: 'text-subtitle1 text-bold text-primary' },
-  ue = { key: 1, class: 'row justify-center items-stretch full-width wrap' },
-  ye = S({
+  ne = { class: 'text-subtitle1 text-bold text-primary' },
+  ie = { key: 1, class: 'row justify-center items-stretch full-width wrap' },
+  ve = B({
     __name: 'ProjectsCard',
     setup(e) {
       const { t: r } = j(),
@@ -404,9 +407,9 @@ const ne = {
         t = q(!1);
       function n() {
         (t.value = !0),
-          G.githubRepoList('dzxrly')
-            .then((i) => {
-              (s.value = i
+          U.githubRepoList('dzxrly')
+            .then((d) => {
+              (s.value = d
                 .filter(
                   (u) =>
                     !u.fork &&
@@ -414,45 +417,45 @@ const ne = {
                     u.name !== 'dzxrly.github.io'
                 )
                 .sort(
-                  (u, p) =>
-                    new Date(p.created_at).getTime() -
+                  (u, f) =>
+                    new Date(f.created_at).getTime() -
                     new Date(u.created_at).getTime()
                 )),
                 (t.value = !1);
             })
-            .catch((i) => {
-              console.error(i), (t.value = !1);
+            .catch((d) => {
+              console.error(d), (t.value = !1);
             });
       }
       return (
         n(),
-        (i, u) => (
+        (d, u) => (
           l(),
-          f(V, null, {
+          p(M, null, {
             default: m(() => [
               t.value
                 ? (l(),
-                  b('div', ne, [
-                    c(U, { size: '5vw', color: 'primary' }),
-                    o('span', ie, d(w(r)('projectRepoListLoading')), 1),
+                  b('div', le, [
+                    i(E, { size: '5vw', color: 'primary' }),
+                    o('span', ne, c(S(r)('projectRepoListLoading')), 1),
                   ]))
                 : (l(),
-                  b('div', ue, [
+                  b('div', ie, [
                     (l(!0),
                     b(
                       T,
                       null,
                       L(
                         s.value,
-                        (p, _) => (
+                        (f, v) => (
                           l(),
-                          f(
-                            le,
+                          p(
+                            oe,
                             {
                               class:
                                 'col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4',
-                              key: _,
-                              githubRepoInfo: p,
+                              key: v,
+                              githubRepoInfo: f,
                             },
                             null,
                             8,
@@ -470,4 +473,4 @@ const ne = {
       );
     },
   });
-export { ye as default };
+export { ve as default };

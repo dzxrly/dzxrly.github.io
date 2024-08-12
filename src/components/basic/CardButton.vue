@@ -86,57 +86,56 @@ function routeTo(url: string) {
 
 <template>
   <a
+    class="custom-card-btn-wrapper rounded-borders"
     style="display: block"
     :href="props.routePath"
     @click.prevent="routeTo(props.routePath)"
   >
-    <div class="custom-card-btn rounded-borders">
-      <div
-        class="secondary-btn column justify-center items-center full-width full-height wrap"
+    <div
+      class="secondary-btn column justify-center items-center full-width full-height wrap"
+    >
+      <q-avatar
+        v-if="!props.iconName"
+        :size="avatarSize"
+        class="custom-card-picture-in-btn"
+        rounded
       >
-        <q-avatar
-          v-if="!props.iconName"
-          :size="avatarSize"
-          class="custom-card-picture-in-btn"
-          rounded
-        >
-          <img :src="props.avatar" alt="card btn avatar" />
-        </q-avatar>
-        <q-avatar
-          v-else
-          :class="props.iconColorClass"
-          :icon="iconName"
-          :size="avatarSize"
-          class="custom-card-picture-in-btn"
-          color="transparent"
-          rounded
-        ></q-avatar>
-        <span
-          :style="{ color: textColor }"
-          class="text-subtitle1 text-bold ellipsis"
-          >{{ t(props.titleKeyword) }}</span
-        >
-      </div>
-      <div
-        v-if="isSecondaryAvatar"
-        class="secondary-btn-easter-egg column justify-center items-center full-width wrap"
+        <img :src="props.avatar" alt="card btn avatar" />
+      </q-avatar>
+      <q-avatar
+        v-else
+        :class="props.iconColorClass"
+        :icon="iconName"
+        :size="avatarSize"
+        class="custom-card-picture-in-btn"
+        color="transparent"
+        rounded
+      ></q-avatar>
+      <span
+        :style="{ color: textColor }"
+        class="text-subtitle1 text-bold ellipsis"
+        >{{ t(props.titleKeyword) }}</span
       >
-        <q-avatar :size="avatarSize" class="custom-card-picture-in-btn" rounded>
-          <img :src="props.secondaryAvatar" alt="card btn avatar" />
-        </q-avatar>
-        <span
-          v-if="secondaryTitleKeyword && secondaryTitleKeyword !== ''"
-          :style="{ color: textColor }"
-          class="text-subtitle1 text-bold ellipsis"
-          >{{ t(props.secondaryTitleKeyword) }}</span
-        >
-      </div>
+    </div>
+    <div
+      v-if="isSecondaryAvatar"
+      class="secondary-btn-easter-egg column justify-center items-center full-width wrap"
+    >
+      <q-avatar :size="avatarSize" class="custom-card-picture-in-btn" rounded>
+        <img :src="props.secondaryAvatar" alt="card btn avatar" />
+      </q-avatar>
+      <span
+        v-if="secondaryTitleKeyword && secondaryTitleKeyword !== ''"
+        :style="{ color: textColor }"
+        class="text-subtitle1 text-bold ellipsis"
+        >{{ t(props.secondaryTitleKeyword) }}</span
+      >
     </div>
   </a>
 </template>
 
 <style lang="sass" scoped>
-.custom-card-btn
+.custom-card-btn-wrapper
   position: relative
   display: inline-block
   width: v-bind(cardSize)
@@ -167,7 +166,7 @@ function routeTo(url: string) {
     transition: transform .5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity .5s ease-in-out
     opacity: 0
 
-.custom-card-btn:hover, .custom-card-btn:active
+.custom-card-btn-wrapper:hover, .custom-card-btn-wrapper:active
   transform: translateY(-4px)
   box-shadow: 0 2px 4px -1px #0003, 0 4px 5px #00000024, 0 1px 10px #0000001f
 
@@ -179,9 +178,9 @@ function routeTo(url: string) {
     transform: v-bind(secondaryAvatarTransform)
     opacity: 1
 
-.custom-card-btn:hover
+.custom-card-btn-wrapper:hover
   background-color: rgba(0, 0, 0, 0.1)
 
-.custom-card-btn:active
+.custom-card-btn-wrapper:active
   background-color: rgba(0, 0, 0, 0.3)
 </style>

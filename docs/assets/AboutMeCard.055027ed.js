@@ -1,35 +1,35 @@
-import { Q as K } from './QAvatar.716719f8.js';
-import { Q as O } from './QIcon.78c64fff.js';
+import { Q as K, o as O } from './open-url.3fcfd6c0.js';
+import { Q as V } from './QIcon.f229e576.js';
 import {
   c as h,
-  k as V,
+  k as X,
   r as i,
-  G as X,
-  o as Y,
+  G as Y,
+  o as Z,
   h as c,
   E as J,
-  w as Z,
-  g as ee,
-  d as te,
-  i as oe,
+  w as ee,
+  g as te,
+  d as oe,
+  i as ae,
   Q as g,
   R as b,
   S as B,
   U as o,
-  a1 as v,
-  X as ae,
-  Y as m,
-  $ as d,
+  X as v,
+  Y as se,
+  Z as m,
+  a0 as d,
   V as I,
   W as z,
   F,
-} from './index.7d66cf72.js';
-import { l as se, b as L, R as ie, Q as le } from './QBtn.497a1d04.js';
-import { h as re } from './render.7c7394e0.js';
-import { u as T } from './use-timeout.94726bb5.js';
-import { D as ne, o as ue } from './DetailPageWrapper.30e2b495.js';
-import { u as ce } from './use-quasar.2b2a48f2.js';
-import { u as ge } from './vue-i18n.runtime.8bf5658f.js';
+} from './index.59749b07.js';
+import { l as ie, b as L, R as le, Q as re } from './QBtn.0729658b.js';
+import { h as ne } from './render.7c7394e0.js';
+import { u as T } from './use-timeout.c09d9e7a.js';
+import { u as ue } from './use-quasar.36961f8a.js';
+import { D as ce } from './DetailPageWrapper.67405a45.js';
+import { u as ge } from './vue-i18n.runtime.48e42421.js';
 const me = { ratio: [String, Number] };
 function de(e, l) {
   return h(() => {
@@ -38,7 +38,7 @@ function de(e, l) {
   });
 }
 const he = 1.7778;
-var fe = V({
+var fe = X({
   name: 'QImg',
   props: {
     ...me,
@@ -72,7 +72,7 @@ var fe = V({
   setup(e, { slots: l, emit: s }) {
     const p = i(e.initialRatio),
       _ = de(e, p),
-      y = ee(),
+      y = te(),
       { registerTimeout: r, removeTimeout: S } = T(),
       { registerTimeout: C, removeTimeout: a } = T(),
       x = h(() =>
@@ -87,7 +87,7 @@ var fe = V({
       k = i(!1),
       R = h(() => `q-img q-img--${e.noNativeMenu === !0 ? 'no-' : ''}menu`),
       E = h(() => ({ width: e.width, height: e.height })),
-      $ = h(
+      A = h(
         () =>
           `q-img__image ${
             e.imgClass !== void 0 ? e.imgClass + ' ' : ''
@@ -95,7 +95,7 @@ var fe = V({
             e.noTransition === !0 ? 'out' : ''
           }-transition q-img__image--`
       ),
-      A = h(() => ({
+      $ = h(() => ({
         ...e.imgStyle,
         objectFit: e.fit,
         objectPosition: e.position,
@@ -148,8 +148,8 @@ var fe = V({
       const f = n[t].value,
         q = {
           key: 'img_' + t,
-          class: $.value,
-          style: A.value,
+          class: A.value,
+          style: $.value,
           alt: e.alt,
           crossorigin: e.crossorigin,
           decoding: e.decoding,
@@ -185,7 +185,7 @@ var fe = V({
               key: 'content',
               class: 'q-img__content absolute-full q-anchor--skip',
             },
-            re(l[k.value === !0 ? 'error' : 'default'])
+            ne(l[k.value === !0 ? 'error' : 'default'])
           )
         : c(
             'div',
@@ -197,12 +197,12 @@ var fe = V({
               ? l.loading()
               : e.noSpinner === !0
               ? void 0
-              : [c(se, { color: e.spinnerColor, size: e.spinnerSize })]
+              : [c(ie, { color: e.spinnerColor, size: e.spinnerSize })]
           );
     }
     {
       let t = function () {
-        Z(
+        ee(
           () =>
             e.src || e.srcset || e.sizes
               ? { src: e.src, srcset: e.srcset, sizes: e.sizes }
@@ -216,7 +216,7 @@ var fe = V({
           { immediate: !0 }
         );
       };
-      X.value === !0 ? Y(t) : t();
+      Y.value === !0 ? Z(t) : t();
     }
     return () => {
       const t = [];
@@ -289,18 +289,18 @@ const be = ['src'],
   xe = ['src'],
   je = { class: 'row justify-center items-center' },
   Be = { class: 'q-ml-sm' },
-  Re = te({
+  Re = oe({
     __name: 'AboutMeCard',
     setup(e) {
-      const l = ce(),
+      const l = ue(),
         { t: s } = ge(),
         p = i(D.languageBadgeUrlList),
         _ = i(D.personalWebSiteList),
-        y = i(oe('isShiny') || !1),
+        y = i(ae('isShiny') || !1),
         r = h(() => l.screen.lt.sm);
       return (S, C) => (
         g(),
-        b(ne, null, {
+        b(ce, null, {
           default: B(() => [
             o(
               'div',
@@ -320,7 +320,7 @@ const be = ['src'],
                     ]),
                   },
                   [
-                    ae(
+                    se(
                       (g(),
                       b(
                         K,
@@ -331,7 +331,7 @@ const be = ['src'],
                           onClick:
                             C[0] ||
                             (C[0] = (a) =>
-                              m(ue)(
+                              m(O)(
                                 'https://bulbapedia.bulbagarden.net/wiki/Reshiram_(Pok%C3%A9mon)'
                               )),
                         },
@@ -351,7 +351,7 @@ const be = ['src'],
                           _: 1,
                         }
                       )),
-                      [[ie]]
+                      [[le]]
                     ),
                   ],
                   2
@@ -434,7 +434,7 @@ const be = ['src'],
                                 (a) => (
                                   g(),
                                   b(
-                                    le,
+                                    re,
                                     {
                                       key: a.name,
                                       href: a.url.includes('@')
@@ -454,7 +454,7 @@ const be = ['src'],
                                           a.iconName
                                             ? (g(),
                                               b(
-                                                O,
+                                                V,
                                                 {
                                                   key: 0,
                                                   name: a.iconName,

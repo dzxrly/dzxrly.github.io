@@ -1,10 +1,10 @@
 import {
-  k as Q,
-  i as b,
+  k as P,
+  i as C,
   I as l,
   c as m,
-  h as j,
-  K as q,
+  h as Q,
+  K as j,
   L as T,
   g as B,
   _ as F,
@@ -18,29 +18,29 @@ import {
   R as w,
   S as x,
   U as i,
-  a1 as I,
-  $ as R,
+  X as I,
+  a0 as R,
   j as $,
   E as z,
   a2 as A,
   a3 as O,
   a4 as D,
   a5 as E,
-} from './index.7d66cf72.js';
+} from './index.59749b07.js';
 import { h as N } from './render.7c7394e0.js';
-import { u as V } from './use-quasar.2b2a48f2.js';
-import { u as J } from './vue-i18n.runtime.8bf5658f.js';
-var U = Q({
+import { u as V } from './use-quasar.36961f8a.js';
+import { u as J } from './vue-i18n.runtime.48e42421.js';
+var U = P({
   name: 'QPage',
   props: { padding: Boolean, styleFn: Function },
-  setup(n, { slots: h }) {
+  setup(n, { slots: p }) {
     const {
         proxy: { $q: c },
       } = B(),
-      e = b(q, l);
+      e = C(j, l);
     if (e === l)
       return console.error('QPage needs to be a deep child of QLayout'), l;
-    if (b(T, l) === l)
+    if (C(T, l) === l)
       return console.error('QPage needs to be child of QPageContainer'), l;
     const u = m(() => {
         const a =
@@ -65,11 +65,11 @@ var U = Q({
         };
       }),
       d = m(() => `q-page${n.padding === !0 ? ' q-layout-padding' : ''}`);
-    return () => j('main', { class: d.value, style: u.value }, N(h.default));
+    return () => Q('main', { class: d.value, style: u.value }, N(p.default));
   },
 });
-const W = (n) => (D('data-v-02b63a5b'), (n = n()), E(), n),
-  G = W(() =>
+const W = (n) => (D('data-v-2e88669d'), (n = n()), E(), n),
+  X = W(() =>
     i(
       'div',
       {
@@ -80,19 +80,19 @@ const W = (n) => (D('data-v-02b63a5b'), (n = n()), E(), n),
       -1
     )
   ),
-  X = { class: 'home-card-view col full-width row justify-center items-start' },
+  G = { class: 'home-card-view col full-width row justify-center items-start' },
   Y = L({
     __name: 'IndexPage',
     setup(n) {
-      const { t: h } = J(),
+      const { t: p } = J(),
         c = V(),
         e = y(''),
         t = y(!1),
         u = y(k(0.05)),
         d = m(() => c.screen.lt.sm),
-        a = m(() => h('homeTitle'));
+        a = m(() => p('homeTitle'));
       let s = null;
-      const p = b('eventBus');
+      const h = C('eventBus');
       M('isShiny', u);
       function k(o) {
         return Math.random() < o;
@@ -100,7 +100,7 @@ const W = (n) => (D('data-v-02b63a5b'), (n = n()), E(), n),
       function f() {
         s && (clearInterval(s), (s = null));
       }
-      function C() {
+      function b() {
         e.value = '';
         let o = 0;
         s = setInterval(() => {
@@ -111,20 +111,20 @@ const W = (n) => (D('data-v-02b63a5b'), (n = n()), E(), n),
         S(
           () => a.value,
           () => {
-            f(), C();
+            f(), b();
           }
         ),
         S(
           () => t.value,
           () => {
-            p == null || p.emit('set-background-cover', t.value);
+            h == null || h.emit('set-background-cover', t.value);
           }
         ),
         H(() => {
-          f(), C(), console.log('Shiny:', u.value);
+          f(), b(), console.log('Shiny:', u.value);
         }),
         (o, r) => {
-          const P = K('router-view');
+          const q = K('router-view');
           return (
             _(),
             w(
@@ -167,15 +167,15 @@ const W = (n) => (D('data-v-02b63a5b'), (n = n()), E(), n),
                           'home-card-hover shadow-8': t.value,
                           'shadow-4': !t.value,
                         },
-                        'home-card full-width bg-card-background text-on-surface q-pa-md column justify-start items-center',
+                        'home-card full-width bg-card-background text-on-surface q-pt-md q-pb-md column justify-start items-center',
                       ]),
                       onMouseenter: r[1] || (r[1] = (v) => (t.value = !0)),
                       onMouseleave: r[2] || (r[2] = (v) => (t.value = !1)),
                     },
                     [
-                      G,
-                      i('div', X, [
-                        $(P, null, {
+                      X,
+                      i('div', G, [
+                        $(q, null, {
                           default: x(({ Component: v, route: g }) => [
                             $(
                               z,
@@ -189,7 +189,6 @@ const W = (n) => (D('data-v-02b63a5b'), (n = n()), E(), n),
                                   g.path === '/'
                                     ? 'animated fadeOutRight'
                                     : 'animated fadeOutLeft',
-                                mode: 'out-in',
                               },
                               {
                                 default: x(() => [
@@ -222,5 +221,5 @@ const W = (n) => (D('data-v-02b63a5b'), (n = n()), E(), n),
       );
     },
   });
-var ne = F(Y, [['__scopeId', 'data-v-02b63a5b']]);
+var ne = F(Y, [['__scopeId', 'data-v-2e88669d']]);
 export { ne as default };
