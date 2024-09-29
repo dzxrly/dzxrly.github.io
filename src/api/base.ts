@@ -32,7 +32,10 @@ export default function axiosRequest<T>(
     | undefined,
   data = {},
   params = {},
-  headers = { 'Content-Type': 'application/json;charset=UTF-8' }
+  headers = {
+    'Content-Type': 'application/json;charset=UTF-8',
+    'X-GitHub-Api-Version': '2022-11-28',
+  }
 ): Promise<T> {
   const requestConfig = {
     url: url,
