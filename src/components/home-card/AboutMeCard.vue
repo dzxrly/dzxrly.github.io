@@ -97,28 +97,13 @@ const isLtSm = computed(() => $q.screen.lt.sm);
               "
               class="q-mr-sm q-mb-sm"
               color="primary"
+              :label="webSite.name"
               no-caps
               outline
               size="md"
               target="_blank"
               type="a"
-            >
-              <div class="row justify-center items-center">
-                <q-icon
-                  v-if="webSite.iconName"
-                  :name="webSite.iconName"
-                  size="1rem"
-                />
-                <q-img
-                  v-else
-                  :src="webSite.iconPath"
-                  alt="web site icon"
-                  img-class="text-primary bg-transparent"
-                  width="1rem"
-                />
-                <span class="q-ml-sm">{{ webSite.name }}</span>
-              </div>
-            </q-btn>
+            />
           </div>
         </div>
       </div>
