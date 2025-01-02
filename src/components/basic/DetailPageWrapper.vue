@@ -1,6 +1,18 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, PropType } from 'vue';
 import { useQuasar } from 'quasar';
+import { RouteInfo } from 'src/interface/route-info';
+
+const props = defineProps({
+  toRoute: {
+    type: Object as PropType<RouteInfo>,
+    default: () => {
+      return {
+        path: '/',
+      };
+    },
+  },
+});
 
 const $q = useQuasar();
 
@@ -16,7 +28,7 @@ const isLtSm = computed(() => $q.screen.lt.sm);
         flat
         icon="arrow_back"
         round
-        to="/"
+        :to="props.toRoute"
       />
     </div>
     <div class="content">

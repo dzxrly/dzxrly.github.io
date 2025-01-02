@@ -4,6 +4,10 @@ export default {
   blogBtnTitle: '部落格',
 
   homeBtnMyProjects: '程式碼倉庫',
+
+  homeBtnGameMods: '遊戲模組',
+  gameModBtnGameNameMHSeries: '魔物獵人',
+
   homeBtnPersonal: '關於我',
   homePersonalInfoChip1: '👀 深度學習與電腦視覺',
   homePersonalInfoChip2: '🔭 天文大數據分析',

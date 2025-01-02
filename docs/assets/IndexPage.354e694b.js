@@ -74,13 +74,13 @@ const W = (n) => (D('data-v-2e88669d'), (n = n()), E(), n),
       'div',
       {
         class:
-          'home-card-modal-bar-wrapper row justify-center items-center full-width q-mb-md',
+          'homeCard-modal-bar-wrapper row justify-center items-center full-width q-mb-md',
       },
-      [i('div', { class: 'home-card-modal-bar' })],
+      [i('div', { class: 'homeCard-modal-bar' })],
       -1
     )
   ),
-  G = { class: 'home-card-view col full-width row justify-center items-start' },
+  G = { class: 'homeCard-view col full-width row justify-center items-start' },
   Y = L({
     __name: 'IndexPage',
     setup(n) {
@@ -167,7 +167,7 @@ const W = (n) => (D('data-v-2e88669d'), (n = n()), E(), n),
                           'home-card-hover shadow-8': t.value,
                           'shadow-4': !t.value,
                         },
-                        'home-card full-width bg-card-background text-on-surface q-pt-md q-pb-md column justify-start items-center',
+                        'homeCard full-width bg-card-background text-on-surface q-pt-md q-pb-md column justify-start items-center',
                       ]),
                       onMouseenter: r[1] || (r[1] = (v) => (t.value = !0)),
                       onMouseleave: r[2] || (r[2] = (v) => (t.value = !1)),

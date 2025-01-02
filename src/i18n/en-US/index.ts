@@ -7,6 +7,10 @@ export default {
   blogBtnTitle: 'Blog',
 
   homeBtnMyProjects: 'Code Repos',
+
+  homeBtnGameMods: 'Game Mods',
+  gameModBtnGameNameMHSeries: 'Monster Hunter',
+
   homeBtnPersonal: 'About Me',
   homePersonalInfoChip1: '👀 Deep Learning & Computer Vision',
   homePersonalInfoChip2: '🔭 Astronomy Big Data & Data Mining',

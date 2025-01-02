@@ -11,15 +11,30 @@ const routes: RouteRecordRaw[] = [
         children: [
           {
             path: '',
-            component: () => import('components/home-card/MainCard.vue'),
+            component: () => import('components/homeCard/MainCard.vue'),
           },
           {
             path: '/projects',
-            component: () => import('components/home-card/ProjectsCard.vue'),
+            component: () => import('components/homeCard/ProjectsCard.vue'),
+          },
+          {
+            path: '/gameMods',
+            children: [
+              {
+                path: '',
+                name: 'modsList',
+                component: () => import('components/homeCard/GameModCard.vue'),
+              },
+              {
+                path: 'modInfo/:gameName',
+                name: 'modInfo',
+                component: () => import('components/homeCard/ModInfoCard.vue'),
+              },
+            ],
           },
           {
             path: '/about',
-            component: () => import('components/home-card/AboutMeCard.vue'),
+            component: () => import('components/homeCard/AboutMeCard.vue'),
           },
         ],
       },

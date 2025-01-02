@@ -4,13 +4,14 @@ import { useI18n } from 'vue-i18n';
 import { computed, PropType, ref } from 'vue';
 import { openURL, useQuasar } from 'quasar';
 import { ResponsiveCardBtnInterface } from 'src/interface/responsive-card-btn-interface';
+import { RouteInfo } from 'src/interface/route-info';
 
 const { t } = useI18n();
 const $q = useQuasar();
 
 const props = defineProps({
-  routePath: {
-    type: String,
+  route: {
+    type: Object as PropType<RouteInfo>,
     required: true,
   },
   responsiveProps: {
@@ -60,7 +61,6 @@ const avatarHoverOpacity = ref<number>(isSecondaryAvatar.value ? 0 : 1);
 const secondaryAvatarTransform = ref<string>(
   isSecondaryAvatar.value ? 'translateY(-50%)' : 'translateY(0)'
 );
-
 const responsiveSize = computed(() => {
   const size =
     $q.screen.width * props.responsiveProps?.coefficientA +
@@ -77,10 +77,26 @@ const avatarSize = computed(() => `${responsiveSize.value * 0.6}rem`);
 const backgroundColor = computed(() => props.backgroundColor);
 const textColor = computed(() => props.textColor);
 
-function routeTo(url: string) {
-  url.indexOf('https://') !== -1 || url.indexOf('http://') !== -1
-    ? openURL(url)
-    : router.push(url);
+function routeTo(routeInfo: RouteInfo) {
+  if (routeInfo.name) {
+    routeInfo.params
+      ? router.push({
+          name: routeInfo.name,
+          params: routeInfo.params,
+        })
+      : router.push({ name: routeInfo.name });
+  } else {
+    if (routeInfo.path?.indexOf('http') === -1) {
+      routeInfo.params
+        ? router.push({
+            path: routeInfo.path,
+            params: routeInfo.params,
+          })
+        : router.push({ path: routeInfo.path });
+    } else {
+      openURL(routeInfo.path ?? '#');
+    }
+  }
 }
 </script>
 
@@ -88,8 +104,8 @@ function routeTo(url: string) {
   <a
     class="custom-card-btn-wrapper rounded-borders"
     style="display: block"
-    :href="props.routePath"
-    @click.prevent="routeTo(props.routePath)"
+    :href="props.route.path ?? '#'"
+    @click.prevent="routeTo(props.route)"
   >
     <div
       class="secondary-btn column justify-center items-center full-width full-height wrap"
@@ -100,7 +116,7 @@ function routeTo(url: string) {
         class="custom-card-picture-in-btn"
         rounded
       >
-        <img :src="props.avatar" alt="card btn avatar" />
+        <q-img :src="props.avatar" alt="card btn avatar" />
       </q-avatar>
       <q-avatar
         v-else
