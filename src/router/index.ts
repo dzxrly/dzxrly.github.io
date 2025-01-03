@@ -39,8 +39,24 @@ export default route(function (/* { store, ssrContext } */) {
     LoadingBar.start();
   });
 
-  Router.afterEach(() => {
+  Router.afterEach((to, from) => {
     LoadingBar.stop();
+    const toDepth = to.path.split('/').filter((i) => {
+      return i !== '';
+    }).length;
+    const fromDepth = from.path.split('/').filter((i) => {
+      return i !== '';
+    }).length;
+    to.meta.enterActiveClass =
+      toDepth < fromDepth ? 'animated fadeInLeft' : 'animated fadeInRight';
+    to.meta.leaveActiveClass =
+      toDepth < fromDepth ? 'animated fadeOutRight' : 'animated fadeOutLeft';
+
+    // console.log({
+    //   'toDepth': toDepth,
+    //   'fromDepth': fromDepth,
+    //   '<?': toDepth < fromDepth,
+    // })
   });
 
   return Router;

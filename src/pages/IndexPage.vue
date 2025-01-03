@@ -96,16 +96,8 @@ onMounted(() => {
         <router-view v-slot="{ Component, route }">
           <transition
             :duration="{ enter: 300, leave: 300 }"
-            :enter-active-class="
-              route.path === '/'
-                ? 'animated fadeInLeft'
-                : 'animated fadeInRight'
-            "
-            :leave-active-class="
-              route.path === '/'
-                ? 'animated fadeOutRight'
-                : 'animated fadeOutLeft'
-            "
+            :enter-active-class="route.meta.enterActiveClass"
+            :leave-active-class="route.meta.leaveActiveClass"
           >
             <keep-alive>
               <component :is="Component" :key="route.path" />
