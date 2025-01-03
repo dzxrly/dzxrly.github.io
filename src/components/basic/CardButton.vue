@@ -108,6 +108,12 @@ function routeTo(routeInfo: RouteInfo) {
     @click.prevent="routeTo(props.route)"
   >
     <div
+      v-if="props.route.path && props.route.path.indexOf('http') !== -1"
+      class="blank_href_tips_block"
+    >
+      <q-icon name="open_in_new" color="primary" size="xs" />
+    </div>
+    <div
       class="secondary-btn column justify-center items-center full-width full-height wrap"
     >
       <q-avatar
@@ -164,6 +170,13 @@ function routeTo(routeInfo: RouteInfo) {
   transform: translateY(0)
   overflow: hidden
 
+  .blank_href_tips_block
+    position: absolute
+    top: 5%
+    right: 5%
+    opacity: 0
+    transition: opacity .25s ease-in-out
+
   .custom-card-picture-in-btn
     margin: 0 0 v-bind(cardMargin) 0
 
@@ -185,6 +198,9 @@ function routeTo(routeInfo: RouteInfo) {
 .custom-card-btn-wrapper:hover, .custom-card-btn-wrapper:active
   transform: translateY(-4px)
   box-shadow: 0 2px 4px -1px #0003, 0 4px 5px #00000024, 0 1px 10px #0000001f
+
+  .blank_href_tips_block
+    opacity: 1
 
   .secondary-btn
     transform: v-bind(avatarTransform)

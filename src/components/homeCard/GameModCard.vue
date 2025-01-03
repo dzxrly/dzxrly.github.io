@@ -4,6 +4,7 @@ import { computed, ref } from 'vue';
 import { ResponsiveCardBtnInterface } from 'src/interface/responsive-card-btn-interface';
 import CardButton from 'components/basic/CardButton.vue';
 import DetailPageWrapper from 'components/basic/DetailPageWrapper.vue';
+import { GameSeries } from 'src/interface/game-mod-info';
 
 const $q = useQuasar();
 
@@ -36,13 +37,13 @@ const gridTemplateCols = computed(() => {
 
 <template>
   <detail-page-wrapper>
-    <div class="game-mod-nav-list full-width">
+    <div class="game-mod-nav-list full-width q-py-md">
       <card-button
         avatar="publicAssets/gameLogos/logo_mhs.png"
         :route="{
           name: 'modInfo',
           params: {
-            gameName: 'monsterhunterseries',
+            gameName: GameSeries.MHS,
           },
         }"
         :responsive-props="cardButtonResponsiveProps"

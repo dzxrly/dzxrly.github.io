@@ -79,7 +79,7 @@ const githubRepoInfo = ref<GithubRepoApiResponse>(props.githubRepoInfo);
         target="_blank"
         no-caps
       >
-        <q-icon name="open_in_new" />
+        <q-icon name="open_in_new" size="xs" />
         <span class="q-ml-xs">{{ t('projectRepoOpenButton') }}</span>
       </q-btn>
     </q-card-actions>

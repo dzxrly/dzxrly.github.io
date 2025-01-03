@@ -18,7 +18,7 @@ const routes: RouteRecordRaw[] = [
             component: () => import('components/homeCard/ProjectsCard.vue'),
           },
           {
-            path: '/gameMods',
+            path: '/gamemods',
             children: [
               {
                 path: '',
@@ -26,7 +26,7 @@ const routes: RouteRecordRaw[] = [
                 component: () => import('components/homeCard/GameModCard.vue'),
               },
               {
-                path: 'modInfo/:gameName',
+                path: 'modinfo/:gameName',
                 name: 'modInfo',
                 component: () => import('components/homeCard/ModInfoCard.vue'),
               },
