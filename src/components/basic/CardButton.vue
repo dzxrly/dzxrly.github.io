@@ -122,7 +122,11 @@ function routeTo(routeInfo: RouteInfo) {
         class="custom-card-picture-in-btn"
         rounded
       >
-        <q-img :src="props.avatar" alt="card btn avatar" />
+        <q-img :src="props.avatar" alt="card btn avatar">
+          <template v-slot:loading>
+            <q-spinner-hourglass color="primary" />
+          </template>
+        </q-img>
       </q-avatar>
       <q-avatar
         v-else
