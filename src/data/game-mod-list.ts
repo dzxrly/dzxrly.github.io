@@ -49,12 +49,16 @@ const gameModList: GameModInfo[] = [
     modName: 'ItemBox Editor | 道具箱编辑器',
     modVersion: 'Ver.0.2 - beta',
     modDescription:
-      'A mod of Monster Hunter Wilds (Open Beta Ver.) for editing the itembox.\n' +
-      '用于怪物猎人：荒野（测试版）的道具箱编辑器。\n',
+      'A mod of Monster Hunter Wilds for editing the itembox.\n' +
+      '用于怪物猎人：荒野的道具箱编辑器。\n',
     modDownloadLink: [
       {
         source: 'GitHub',
         url: 'https://github.com/dzxrly/MHWS-BoxItemEditor',
+      },
+      {
+        source: 'NexusMods',
+        url: 'https://www.nexusmods.com/monsterhunterwilds/mods/102',
       },
     ],
   },
