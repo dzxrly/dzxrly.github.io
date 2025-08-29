@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import CardButton from 'components/basic/CardButton.vue';
 import { computed, inject, ref } from 'vue';
-import { ResponsiveCardBtnInterface } from 'src/interface/responsive-card-btn-interface';
+import { type ResponsiveCardBtnInterface } from 'src/interface/responsive-card-btn-interface';
 import { useQuasar } from 'quasar';
 
 const $q = useQuasar();
@@ -25,9 +25,7 @@ const cardSize = computed(() => {
     return cardButtonResponsiveProps.value.valueMin;
   } else return baseSize;
 });
-const personalBtnBgImg = computed(() =>
-  isShiny.value ? '643s.gif' : '643.gif'
-);
+const personalBtnBgImg = computed(() => (isShiny.value ? '643s.gif' : '643.gif'));
 const gridCardSize = computed(() => {
   return `${cardSize.value}rem`;
 });

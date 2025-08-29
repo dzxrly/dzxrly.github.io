@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { GithubRepoApiResponse } from 'src/interface/open-source-interface';
+import { type GithubRepoApiResponse } from 'src/interface/open-source-interface';
 import API from 'src/api/api';
 import ProjectInfo from 'components/basic/ProjectInfo.vue';
 import { useI18n } from 'vue-i18n';
@@ -16,16 +16,9 @@ function fetchGithubRepos() {
   API.githubRepoList<GithubRepoApiResponse[]>('dzxrly')
     .then((res) => {
       githubRepoList.value = res
-        .filter(
-          (repo) =>
-            !repo.fork &&
-            repo.name !== 'dzxrly' &&
-            repo.name !== 'dzxrly.github.io'
-        )
+        .filter((repo) => !repo.fork && repo.name !== 'dzxrly' && repo.name !== 'dzxrly.github.io')
         .sort((a, b) => {
-          return (
-            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-          );
+          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
         });
       listLoading.value = false;
     })
@@ -40,14 +33,9 @@ fetchGithubRepos();
 
 <template>
   <detail-page-wrapper>
-    <div
-      v-if="listLoading"
-      class="column justify-center items-center full-width q-py-xl"
-    >
+    <div v-if="listLoading" class="column justify-center items-center full-width q-py-xl">
       <q-spinner-hourglass size="5vw" color="primary" />
-      <span class="text-subtitle1 text-bold text-primary">{{
-        t('projectRepoListLoading')
-      }}</span>
+      <span class="text-subtitle1 text-bold text-primary">{{ t('projectRepoListLoading') }}</span>
     </div>
     <div v-else class="row justify-center items-stretch full-width wrap">
       <project-info

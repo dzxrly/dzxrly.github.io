@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed, PropType } from 'vue';
+import { computed, type PropType } from 'vue';
 import { useQuasar } from 'quasar';
-import { RouteInfo } from 'src/interface/route-info';
+import { type RouteInfo } from 'src/interface/route-info';
 
 const props = defineProps({
   toRoute: {

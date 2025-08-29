@@ -1,4 +1,4 @@
-import { GameModInfo, GameSeries } from 'src/interface/game-mod-info';
+import { type GameModInfo, GameSeries } from 'src/interface/game-mod-info';
 
 const gameModList: GameModInfo[] = [
   {

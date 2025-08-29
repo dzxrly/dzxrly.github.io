@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useQuasar } from 'quasar';
 import { computed, ref } from 'vue';
-import { ResponsiveCardBtnInterface } from 'src/interface/responsive-card-btn-interface';
+import { type ResponsiveCardBtnInterface } from 'src/interface/responsive-card-btn-interface';
 import CardButton from 'components/basic/CardButton.vue';
 import DetailPageWrapper from 'components/basic/DetailPageWrapper.vue';
 import { GameSeries } from 'src/interface/game-mod-info';

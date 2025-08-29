@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import DetailPageWrapper from 'components/basic/DetailPageWrapper.vue';
 import { useRoute } from 'vue-router';
-import { GameSeries } from 'src/interface/game-mod-info';
+import { type GameModInfo, type GameSeries } from 'src/interface/game-mod-info';
 import gameModList from 'src/data/game-mod-list';
 import GameModInfoCard from 'components/basic/GameModInfoCard.vue';
 
@@ -23,7 +23,7 @@ const modList = gameModList.gameModList.map((gameMod) => {
         class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4"
         v-for="(gameMod, index) in modList"
         :key="index"
-        :gameModInfo="gameMod"
+        :gameModInfo="gameMod as GameModInfo"
       />
     </div>
   </detail-page-wrapper>
