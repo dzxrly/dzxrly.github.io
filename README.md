@@ -1,6 +1,6 @@
-# Quasar App (dzxrly-github-io)
+# Quasar App (eggtargaryen-com)
 
-Egg Targaryen's Dock
+A Quasar Project
 
 ## Install the dependencies
 

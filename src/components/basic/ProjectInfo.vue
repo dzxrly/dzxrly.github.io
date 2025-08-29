@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { GithubRepoApiResponse } from 'src/interface/open-source-interface';
-import { PropType, ref } from 'vue';
+import { type GithubRepoApiResponse } from 'src/interface/open-source-interface';
+import { type PropType, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const props = defineProps({
@@ -18,14 +18,9 @@ const githubRepoInfo = ref<GithubRepoApiResponse>(props.githubRepoInfo);
 <template>
   <q-card class="repo-card-wrapper q-ma-sm rounded-borders column">
     <q-card-section class="non-selectable col-grow">
-      <span class="text-h5 text-primary q-mr-xs">{{
-        githubRepoInfo.name
-      }}</span>
+      <span class="text-h5 text-primary q-mr-xs">{{ githubRepoInfo.name }}</span>
       <div class="row justify-start items-center full-width">
-        <div
-          v-if="githubRepoInfo.archived"
-          class="row justify-center items-center q-mt-md q-mr-md"
-        >
+        <div v-if="githubRepoInfo.archived" class="row justify-center items-center q-mt-md q-mr-md">
           <q-badge
             v-if="githubRepoInfo.archived"
             label="Archived"
@@ -38,19 +33,11 @@ const githubRepoInfo = ref<GithubRepoApiResponse>(props.githubRepoInfo);
           <span>{{ githubRepoInfo.stargazers_count }}</span>
         </div>
         <div class="row justify-center items-center q-mt-md">
-          <q-icon
-            class="q-mr-xs"
-            name="fork_right"
-            color="deep-orange-5"
-            size="1rem"
-          />
+          <q-icon class="q-mr-xs" name="fork_right" color="deep-orange-5" size="1rem" />
           <span>{{ githubRepoInfo.forks_count }}</span>
         </div>
       </div>
-      <p
-        class="text-body1 q-my-md"
-        style="max-lines: 2 !important; text-overflow: ellipsis"
-      >
+      <p class="text-body1 q-my-md" style="max-lines: 2 !important; text-overflow: ellipsis">
         {{ githubRepoInfo.description }}
       </p>
       <div class="row justify-start items-center">

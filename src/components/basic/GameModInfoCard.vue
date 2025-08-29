@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { PropType } from 'vue';
-import { GameModInfo } from 'src/interface/game-mod-info';
+import { type PropType } from 'vue';
+import { type GameModInfo } from 'src/interface/game-mod-info';
 
 const props = defineProps({
   gameModInfo: {
@@ -13,20 +13,11 @@ const props = defineProps({
 <template>
   <q-card class="game-mod-info-card-wrapper q-ma-sm rounded-borders column">
     <q-card-section class="non-selectable col-grow">
-      <span class="text-h5 text-primary q-mr-xs">{{
-        props.gameModInfo.modName
-      }}</span>
+      <span class="text-h5 text-primary q-mr-xs">{{ props.gameModInfo.modName }}</span>
       <div class="row justify-start items-center full-width q-mt-md">
-        <q-badge
-          :label="props.gameModInfo.gameName"
-          color="secondary"
-          outline
-        ></q-badge>
+        <q-badge :label="props.gameModInfo.gameName" color="secondary" outline></q-badge>
       </div>
-      <p
-        class="text-body1 q-my-md"
-        style="max-lines: 2 !important; text-overflow: ellipsis"
-      >
+      <p class="text-body1 q-my-md" style="max-lines: 2 !important; text-overflow: ellipsis">
         {{ props.gameModInfo.modDescription }}
       </p>
     </q-card-section>

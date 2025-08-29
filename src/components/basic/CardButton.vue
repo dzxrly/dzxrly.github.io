@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import { useRouter } from 'vue-router';
+import { type NavigationFailure, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { computed, PropType, ref } from 'vue';
+import { computed, type PropType, ref } from 'vue';
 import { openURL, useQuasar } from 'quasar';
-import { ResponsiveCardBtnInterface } from 'src/interface/responsive-card-btn-interface';
-import { RouteInfo } from 'src/interface/route-info';
+import { type ResponsiveCardBtnInterface } from 'src/interface/responsive-card-btn-interface';
+import { type RouteInfo } from 'src/interface/route-info';
 
 const { t } = useI18n();
 const $q = useQuasar();
@@ -52,23 +52,20 @@ const props = defineProps({
 
 const router = useRouter();
 const isSecondaryAvatar = ref<boolean>(
-  Boolean(props.secondaryAvatar && props.secondaryAvatar !== '')
+  Boolean(props.secondaryAvatar && props.secondaryAvatar !== ''),
 );
 const avatarTransform = ref<string>(
-  isSecondaryAvatar.value ? 'translateY(-100%)' : 'translateY(0)'
+  isSecondaryAvatar.value ? 'translateY(-100%)' : 'translateY(0)',
 );
 const avatarHoverOpacity = ref<number>(isSecondaryAvatar.value ? 0 : 1);
 const secondaryAvatarTransform = ref<string>(
-  isSecondaryAvatar.value ? 'translateY(-50%)' : 'translateY(0)'
+  isSecondaryAvatar.value ? 'translateY(-50%)' : 'translateY(0)',
 );
 const responsiveSize = computed(() => {
   const size =
-    $q.screen.width * props.responsiveProps?.coefficientA +
-    props.responsiveProps?.coefficientB;
-  if (size > props.responsiveProps?.valueMax)
-    return props.responsiveProps?.valueMax;
-  else if (size < props.responsiveProps?.valueMin)
-    return props.responsiveProps?.valueMin;
+    $q.screen.width * props.responsiveProps?.coefficientA + props.responsiveProps?.coefficientB;
+  if (size > props.responsiveProps?.valueMax) return props.responsiveProps?.valueMax;
+  else if (size < props.responsiveProps?.valueMin) return props.responsiveProps?.valueMin;
   else return size;
 });
 const cardSize = computed(() => `${responsiveSize.value}rem`);
@@ -78,21 +75,20 @@ const backgroundColor = computed(() => props.backgroundColor);
 const textColor = computed(() => props.textColor);
 
 function routeTo(routeInfo: RouteInfo) {
+  const handleNavigationFailure = (error: NavigationFailure) => {
+    console.error('路由跳转失败:', error);
+  };
   if (routeInfo.name) {
-    routeInfo.params
+    (routeInfo.params
       ? router.push({
           name: routeInfo.name,
           params: routeInfo.params,
         })
-      : router.push({ name: routeInfo.name });
+      : router.push({ name: routeInfo.name })
+    ).catch(handleNavigationFailure);
   } else {
     if (routeInfo.path?.indexOf('http') === -1) {
-      routeInfo.params
-        ? router.push({
-            path: routeInfo.path,
-            params: routeInfo.params,
-          })
-        : router.push({ path: routeInfo.path });
+      router.push({ path: routeInfo.path }).catch(handleNavigationFailure);
     } else {
       openURL(routeInfo.path ?? '#');
     }
@@ -113,9 +109,7 @@ function routeTo(routeInfo: RouteInfo) {
     >
       <q-icon name="open_in_new" color="primary" size="xs" />
     </div>
-    <div
-      class="secondary-btn column justify-center items-center full-width full-height wrap"
-    >
+    <div class="secondary-btn column justify-center items-center full-width full-height wrap">
       <q-avatar
         v-if="!props.iconName"
         :size="avatarSize"
@@ -137,11 +131,9 @@ function routeTo(routeInfo: RouteInfo) {
         color="transparent"
         rounded
       ></q-avatar>
-      <span
-        :style="{ color: textColor }"
-        class="text-subtitle1 text-bold ellipsis"
-        >{{ t(props.titleKeyword) }}</span
-      >
+      <span :style="{ color: textColor }" class="text-subtitle1 text-bold ellipsis">{{
+        t(props.titleKeyword)
+      }}</span>
     </div>
     <div
       v-if="isSecondaryAvatar"

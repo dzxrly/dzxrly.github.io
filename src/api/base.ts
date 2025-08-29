@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import axios, { type AxiosRequestConfig, type AxiosResponse } from 'axios';
 
 /**
  * axios全局默认值
@@ -35,7 +35,7 @@ export default function axiosRequest<T>(
   headers = {
     'Content-Type': 'application/json;charset=UTF-8',
     'X-GitHub-Api-Version': '2022-11-28',
-  }
+  },
 ): Promise<T> {
   const requestConfig = {
     url: url,
@@ -43,16 +43,16 @@ export default function axiosRequest<T>(
     headers: headers,
     data: data,
     params: params,
-  };
+  } as AxiosRequestConfig;
   return new Promise((resolve, reject) => {
     axios(requestConfig)
       .then((response: AxiosResponse<T>) => {
         if (response.status === 200) {
           resolve(response.data);
-        } else reject('Network Error');
+        } else reject(new Error(`Error: ${response.statusText}`));
       })
       .catch(() => {
-        reject('Network Error');
+        reject(new Error('Network Error'));
       });
   });
 }

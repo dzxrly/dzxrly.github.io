@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { inject, ref } from 'vue';
-import { EventBus } from 'quasar';
+import { type EventBus } from 'quasar';
 
 const bus = inject<EventBus>('eventBus');
 const setBackgroundCover = ref<boolean>(false);

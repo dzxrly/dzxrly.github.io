@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n';
 import { computed, inject, onMounted, provide, ref, watch } from 'vue';
-import { EventBus, useQuasar } from 'quasar';
+import { type EventBus, useQuasar } from 'quasar';
 
 const { t } = useI18n();
 const $q = useQuasar();
@@ -45,14 +45,14 @@ watch(
   () => {
     clearTypingInterval();
     setHomeTitleWithAnimation();
-  }
+  },
 );
 
 watch(
   () => isMouseEnter.value,
   () => {
     bus?.emit('set-background-cover', isMouseEnter.value);
-  }
+  },
 );
 
 onMounted(() => {
@@ -63,10 +63,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <q-page
-    class="home-page-wrapper column justify-center items-center"
-    style="min-height: 0"
-  >
+  <q-page class="home-page-wrapper column justify-center items-center" style="min-height: 0">
     <div
       :class="{ 'home-title-hover': isMouseEnter }"
       class="home-title full-width row justify-center items-center q-py-xl"
@@ -87,17 +84,15 @@ onMounted(() => {
       @mouseenter="isMouseEnter = true"
       @mouseleave="isMouseEnter = false"
     >
-      <div
-        class="home-card-modal-bar-wrapper row justify-center items-center full-width q-mb-md"
-      >
+      <div class="home-card-modal-bar-wrapper row justify-center items-center full-width q-mb-md">
         <div class="home-card-modal-bar"></div>
       </div>
       <div class="home-card-view col full-width row justify-center items-start">
         <router-view v-slot="{ Component, route }">
           <transition
             :duration="{ enter: 300, leave: 300 }"
-            :enter-active-class="route.meta.enterActiveClass"
-            :leave-active-class="route.meta.leaveActiveClass"
+            :enter-active-class="route.meta.enterActiveClass as string"
+            :leave-active-class="route.meta.leaveActiveClass as string"
           >
             <keep-alive>
               <component :is="Component" :key="route.path" />

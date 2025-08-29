@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n';
 import { inject, ref } from 'vue';
-import { EventBus } from 'quasar';
+import { type EventBus } from 'quasar';
 
 const { locale } = useI18n({ useScope: 'global' });
 
@@ -10,7 +10,8 @@ const setBackgroundCover = ref<boolean>(false);
 
 const languageDropdownMenuOptions = [
   { value: 'en-US', label: 'English' },
-  { value: 'zh-CN', label: '简体中文' },
+  { value: 'zh-CN', label: '简体中文 (中国)' },
+  { value: 'zh-SG', label: '简体中文 (新加坡)' },
   { value: 'zh-TW', label: '繁體中文' },
 ];
 
@@ -47,9 +48,7 @@ bus?.on('set-background-cover', (value: boolean) => {
                 color="on-secondary-container"
               />
             </q-item-section>
-            <q-item-section class="text-on-secondary-container">{{
-              option.label
-            }}</q-item-section>
+            <q-item-section class="text-on-secondary-container">{{ option.label }}</q-item-section>
           </q-item>
         </q-list>
       </q-btn-dropdown>
