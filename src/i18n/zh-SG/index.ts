@@ -1,0 +1,22 @@
+export default {
+  homeTitle: 'Egg Targaryen的个人小站',
+
+  blogBtnTitle: '博客',
+
+  homeBtnMyProjects: '代码仓库',
+
+  homeBtnGameMods: '游戏模组',
+  gameModBtnGameNameMHSeries: '怪物猎人',
+
+  homeBtnPersonal: '关于我',
+  homePersonalInfoChip1: '👀 深度学习与计算机视觉',
+  homePersonalInfoChip2: '🔭 天文大数据分析',
+  homePersonalInfoChip3: '📱 Android原生开发',
+  homePersonalInfoChip4: '🌐 Web前端开发',
+  homePersonalInfoChip5: '🛠️ 游戏Mod制作',
+  homePersonalInfoChip6: '🔫 FPS游戏爱好者',
+  homePersonalInfoChip7: '🖥️ ITX PC装机~',
+
+  projectRepoListLoading: '读取仓库列表...',
+  projectRepoOpenButton: '在GitHub上查看',
+};

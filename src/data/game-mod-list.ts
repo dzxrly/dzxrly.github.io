@@ -7,18 +7,18 @@ const gameModList: GameModInfo[] = [
     modName: 'CSO SGMissile HBG | 撼宇碎星替换冥赤重弩MOD',
     modVersion: 'Ver.1.0',
     modDescription:
-      'This MOD will replace the model of Safi\'s Burstcannon with the model of SGMissile shotgun in CSO/CS-Zombie.\n' +
+      "This MOD will replace the model of Safi's Burstcannon with the model of SGMissile shotgun in CSO/CS-Zombie.\n" +
       '这个MOD将会使用CSOL的撼宇碎星(狗神)武器模型替换冥赤系列重弩。\n',
     modDownloadLink: [
       {
         source: 'NexusMods',
-        url: 'https://www.nexusmods.com/monsterhunterworld/mods/3258'
+        url: 'https://www.nexusmods.com/monsterhunterworld/mods/3258',
       },
       {
         source: '小黑盒',
-        url: 'https://api.xiaoheihe.cn/v3/bbs/app/api/web/share?link_id=39322702'
-      }
-    ]
+        url: 'https://api.xiaoheihe.cn/v3/bbs/app/api/web/share?link_id=39322702',
+      },
+    ],
   },
   {
     gameSeries: GameSeries.MHS,
@@ -31,17 +31,17 @@ const gameModList: GameModInfo[] = [
     modDownloadLink: [
       {
         source: 'NexusMods',
-        url: 'https://www.nexusmods.com/monsterhunterrise/mods/1088'
+        url: 'https://www.nexusmods.com/monsterhunterrise/mods/1088',
       },
       {
         source: 'GitHub',
-        url: 'https://github.com/dzxrly/MHR-ItemSetAutoResupplyMod'
+        url: 'https://github.com/dzxrly/MHR-ItemSetAutoResupplyMod',
       },
       {
         source: '小黑盒',
-        url: 'https://api.xiaoheihe.cn/v3/bbs/app/api/web/share?link_id=87648433'
-      }
-    ]
+        url: 'https://api.xiaoheihe.cn/v3/bbs/app/api/web/share?link_id=87648433',
+      },
+    ],
   },
   {
     gameSeries: GameSeries.MHS,
@@ -54,14 +54,14 @@ const gameModList: GameModInfo[] = [
     modDownloadLink: [
       {
         source: 'NexusMods',
-        url: 'https://www.nexusmods.com/monsterhunterwilds/mods/102'
+        url: 'https://www.nexusmods.com/monsterhunterwilds/mods/102',
       },
       {
         source: 'GitHub',
-        url: 'https://github.com/dzxrly/MHWS-BoxItemEditor'
-      }
-    ]
-  }
+        url: 'https://github.com/dzxrly/MHWS-BoxItemEditor',
+      },
+    ],
+  },
 ];
 
 export default { gameModList };
