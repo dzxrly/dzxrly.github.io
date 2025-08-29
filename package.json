@@ -1,8 +1,8 @@
 {
   "name": "eggtargaryen-com",
   "version": "0.0.1",
-  "description": "A Quasar Project",
-  "productName": "Quasar App",
+  "description": "Egg Targaryen's Dock",
+  "productName": "Egg Targaryen's Dock",
   "author": "Egg Targaryen <dzxrly2@gmail.com>",
   "type": "module",
   "private": true,
