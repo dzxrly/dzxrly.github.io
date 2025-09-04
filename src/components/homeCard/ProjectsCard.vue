@@ -18,7 +18,10 @@ function fetchGithubRepos() {
       githubRepoList.value = res
         .filter((repo) => !repo.fork && repo.name !== 'dzxrly' && repo.name !== 'dzxrly.github.io')
         .sort((a, b) => {
-          return b.stargazers_count - a.stargazers_count;
+          if (a.archived !== b.archived) {
+            return a.archived ? 1 : -1; // 未归档排前面
+          }
+          return b.stargazers_count - a.stargazers_count; // star降序
         });
       listLoading.value = false;
     })
