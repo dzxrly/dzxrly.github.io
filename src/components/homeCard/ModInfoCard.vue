@@ -21,7 +21,7 @@ const modList = gameModList.gameModList.map((gameMod) => {
     <div class="row justify-center items-stretch full-width wrap">
       <game-mod-info-card
         class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4"
-        v-for="(gameMod, index) in modList"
+        v-for="(gameMod, index) in modList.reverse()"
         :key="index"
         :gameModInfo="gameMod as GameModInfo"
       />

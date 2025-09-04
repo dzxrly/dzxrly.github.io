@@ -47,7 +47,7 @@ const gameModList: GameModInfo[] = [
     gameSeries: GameSeries.MHS,
     gameName: 'Monster Hunter: Wilds',
     modName: 'ItemBox Editor | 道具箱编辑器',
-    modVersion: 'Ver.0.2 - beta',
+    modVersion: 'V1.9.8',
     modDescription:
       'A mod of Monster Hunter Wilds for editing the itembox.\n' +
       '用于怪物猎人：荒野的道具箱编辑器。\n',
@@ -59,6 +59,21 @@ const gameModList: GameModInfo[] = [
       {
         source: 'GitHub',
         url: 'https://github.com/dzxrly/MHWS-BoxItemEditor',
+      },
+    ],
+  },
+  {
+    gameSeries: GameSeries.MHS,
+    gameName: 'Monster Hunter: Wilds',
+    modName: 'CSO SGMissile HBG | 撼宇碎星替换锁刃重弩MOD',
+    modVersion: 'Ver.1.1',
+    modDescription:
+      "Replace Arkveld's Heavy Bowgun (Rare 8) model with CSO/CS-Zombie SGMissile shotgun model.\n" +
+      '这个MOD将会使用CSOL的撼宇碎星(狗神)武器模型替换锁刃龙重弩。\n',
+    modDownloadLink: [
+      {
+        source: 'NexusMods',
+        url: 'https://www.nexusmods.com/monsterhunterwilds/mods/3178',
       },
     ],
   },

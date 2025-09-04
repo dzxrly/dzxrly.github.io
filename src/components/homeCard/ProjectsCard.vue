@@ -18,7 +18,7 @@ function fetchGithubRepos() {
       githubRepoList.value = res
         .filter((repo) => !repo.fork && repo.name !== 'dzxrly' && repo.name !== 'dzxrly.github.io')
         .sort((a, b) => {
-          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+          return b.stargazers_count - a.stargazers_count;
         });
       listLoading.value = false;
     })
