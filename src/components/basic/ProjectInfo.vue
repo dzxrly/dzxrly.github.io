@@ -64,6 +64,7 @@ const githubRepoInfo = ref<GithubRepoApiResponse>(props.githubRepoInfo);
         color="primary"
         :href="githubRepoInfo.html_url"
         target="_blank"
+        referrerpolicy="no-referrer"
         no-caps
       >
         <q-icon name="open_in_new" size="xs" />

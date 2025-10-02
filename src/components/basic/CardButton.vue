@@ -102,6 +102,7 @@ function routeTo(routeInfo: RouteInfo) {
     style="display: block"
     :href="props.route.path ?? '#'"
     @click.prevent="routeTo(props.route)"
+    referrerpolicy="strict-origin-when-cross-origin"
   >
     <div
       v-if="props.route.path && props.route.path.indexOf('http') !== -1"

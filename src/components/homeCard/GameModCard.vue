@@ -5,6 +5,7 @@ import { type ResponsiveCardBtnInterface } from 'src/interface/responsive-card-b
 import CardButton from 'components/basic/CardButton.vue';
 import DetailPageWrapper from 'components/basic/DetailPageWrapper.vue';
 import { GameSeries } from 'src/interface/game-mod-info';
+import gameModList from 'src/data/game-mod-list';
 
 const $q = useQuasar();
 
@@ -14,7 +15,7 @@ const cardButtonResponsiveProps = ref<ResponsiveCardBtnInterface>({
   valueMax: 12,
   valueMin: 9,
 });
-const cardBtnNumber = ref(1);
+const cardBtnNumber = ref(new Set(gameModList.gameModList.map((item) => item.gameSeries)).size);
 
 const cardSize = computed(() => {
   const baseSize =

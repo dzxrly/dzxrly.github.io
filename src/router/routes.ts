@@ -14,6 +14,10 @@ const routes: RouteRecordRaw[] = [
             component: () => import('components/homeCard/MainCard.vue'),
           },
           {
+            path: '/tools',
+            component: () => import('components/homeCard/ToolsCard.vue'),
+          },
+          {
             path: '/projects',
             component: () => import('components/homeCard/ProjectsCard.vue'),
           },

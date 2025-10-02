@@ -48,6 +48,16 @@ const gridTemplateCols = computed(() => {
       title-keyword="blogBtnTitle"
     />
     <card-button
+      icon-name="home_repair_service"
+      :route="{
+        path: '/tools',
+      }"
+      :responsive-props="cardButtonResponsiveProps"
+      background-color="#eef4f8"
+      text-color="#081e27"
+      title-keyword="toolsBtnTitle"
+    />
+    <card-button
       icon-name="folder"
       :route="{
         path: '/projects',

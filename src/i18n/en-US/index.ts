@@ -6,6 +6,8 @@ export default {
 
   blogBtnTitle: 'Blog',
 
+  toolsBtnTitle: 'Tools',
+
   homeBtnMyProjects: 'Code Repos',
 
   homeBtnGameMods: 'Game Mods',

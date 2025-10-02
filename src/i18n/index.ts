@@ -1,11 +1,9 @@
 import enUS from './en-US';
-import zhCN from './zh-CN';
-import zhSG from './zh-SG';
-import zhTW from './zh-TW';
+import zhHans from './zh-Hans';
+import zhHant from './zh-Hant';
 
 export default {
   'en-US': enUS,
-  'zh-CN': zhCN,
-  'zh-SG': zhSG,
-  'zh-TW': zhTW,
+  'zh-Hans': zhHans,
+  'zh-Hant': zhHant,
 };

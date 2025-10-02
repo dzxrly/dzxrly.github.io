@@ -32,6 +32,7 @@ const props = defineProps({
         icon="cloud_download"
         :label="downloadLink.source"
         :href="downloadLink.url"
+        referrerpolicy="no-referrer"
         target="_blank"
       />
     </q-card-actions>

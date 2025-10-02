@@ -76,6 +76,7 @@ const isLtSm = computed(() => $q.screen.lt.sm);
               :key="webSite.name"
               :href="webSite.url.includes('@') ? `mailto:${webSite.url}` : webSite.url"
               class="q-mr-sm q-mb-sm"
+              referrerpolicy="no-referrer"
               color="primary"
               :label="webSite.name"
               no-caps

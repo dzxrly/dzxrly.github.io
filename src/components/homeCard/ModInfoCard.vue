@@ -28,5 +28,3 @@ const modList = gameModList.gameModList.map((gameMod) => {
     </div>
   </detail-page-wrapper>
 </template>
-
-<style scoped lang="sass"></style>

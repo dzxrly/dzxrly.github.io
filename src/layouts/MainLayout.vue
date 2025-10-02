@@ -10,9 +10,8 @@ const setBackgroundCover = ref<boolean>(false);
 
 const languageDropdownMenuOptions = [
   { value: 'en-US', label: 'English' },
-  { value: 'zh-CN', label: '简体中文 (中国)' },
-  { value: 'zh-SG', label: '简体中文 (新加坡)' },
-  { value: 'zh-TW', label: '繁體中文' },
+  { value: 'zh-Hans', label: '简体中文' },
+  { value: 'zh-Hant', label: '繁體中文' },
 ];
 
 bus?.on('set-background-cover', (value: boolean) => {
