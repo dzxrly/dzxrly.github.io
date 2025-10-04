@@ -21,6 +21,11 @@ const toolsSitesList: ToolsSites[] = [
     siteDesc: '快速搜索战地1/5/2042的可用中文ID编码。',
     siteUrl: 'https://bfid.eggtargaryen.com/',
   },
+  {
+    siteName: '《怪物猎人：荒野》护石表生成器',
+    siteDesc: '用于网页配装器的护石表生成工具。',
+    siteUrl: 'https://mhws-amulet.eggtargaryen.com/',
+  },
 ];
 
 export default { toolsSitesList };
