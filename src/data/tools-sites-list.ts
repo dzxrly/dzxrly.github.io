@@ -9,7 +9,7 @@ const toolsSitesList: ToolsSites[] = [
   {
     siteName: '战地中文ID查询工具',
     siteDesc: '快速搜索战地1/5/2042的可用中文ID编码。',
-    siteUrl: 'https://bfid.eggtargaryen.com/',
+    siteUrl: 'https://bfcnid.eggtargaryen.com/',
   },
   {
     siteName: '怪物猎人：荒野护石表生成器',

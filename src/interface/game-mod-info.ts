@@ -11,7 +11,6 @@ export interface GameModInfo {
   gameSeries: GameSeries;
   gameName: string;
   modName: string;
-  modVersion: string;
   modDescription: string;
   modDownloadLink: DownloadLink[];
 }
