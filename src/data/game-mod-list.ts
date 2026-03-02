@@ -82,8 +82,30 @@ const gameModList: GameModInfo[] = [
       '用于怪物猎人物语3的生态等级编辑器 。\n',
     modDownloadLink: [
       {
+        source: 'NexusMods',
+        url: 'https://www.nexusmods.com/monsterhunterstories3twistedreflection/mods/4',
+      },
+      {
         source: 'Github',
         url: 'https://github.com/dzxrly/MHST3-AreaEcoLevelCustomizer',
+      },
+    ],
+  },
+  {
+    gameSeries: GameSeries.MHS,
+    gameName: 'Monster Hunter: Stories 3',
+    modName: 'NestRarityLocker | 巢穴稀有度锁定',
+    modDescription:
+      'A mod for Monster Hunter Stories 3 that allows players to lock the nest rarity.\n' +
+      '用于怪物猎人物语3的巢穴锁定稀有度MOD。\n',
+    modDownloadLink: [
+      {
+        source: 'NexusMods',
+        url: 'https://www.nexusmods.com/monsterhunterstories3twistedreflection/mods/5',
+      },
+      {
+        source: 'Github',
+        url: 'https://github.com/dzxrly/MHST3-LockNestMaxRarity',
       },
     ],
   },

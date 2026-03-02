@@ -8,4 +8,6 @@ var e=(o=>(o.MHS="monsterhunterseries",o))(e||{});const s=[{gameSeries:e.MHS,gam
 这个MOD将会使用CSOL的撼宇碎星(狗神)武器模型替换锁刃龙重弩。
 `,modDownloadLink:[{source:"NexusMods",url:"https://www.nexusmods.com/monsterhunterwilds/mods/3178"}]},{gameSeries:e.MHS,gameName:"Monster Hunter: Stories 3",modName:"AreaEcoLevelCustomizer | 生态等级编辑器",modDescription:`A mod for Monster Hunter Stories 3 that allows players to customize the eco level of each area in the game.
 用于怪物猎人物语3的生态等级编辑器 。
-`,modDownloadLink:[{source:"Github",url:"https://github.com/dzxrly/MHST3-AreaEcoLevelCustomizer"}]}],t={gameModList:s};export{e as G,t as g};
+`,modDownloadLink:[{source:"NexusMods",url:"https://www.nexusmods.com/monsterhunterstories3twistedreflection/mods/4"},{source:"Github",url:"https://github.com/dzxrly/MHST3-AreaEcoLevelCustomizer"}]},{gameSeries:e.MHS,gameName:"Monster Hunter: Stories 3",modName:"NestRarityLocker | 巢穴稀有度锁定",modDescription:`A mod for Monster Hunter Stories 3 that allows players to lock the nest rarity.
+用于怪物猎人物语3的巢穴锁定稀有度MOD。
+`,modDownloadLink:[{source:"NexusMods",url:"https://www.nexusmods.com/monsterhunterstories3twistedreflection/mods/5"},{source:"Github",url:"https://github.com/dzxrly/MHST3-LockNestMaxRarity"}]}],t={gameModList:s};export{e as G,t as g};
