@@ -10,4 +10,6 @@ var e=(o=>(o.MHS="monsterhunterseries",o))(e||{});const s=[{gameSeries:e.MHS,gam
 用于怪物猎人物语3的生态等级编辑器 。
 `,modDownloadLink:[{source:"NexusMods",url:"https://www.nexusmods.com/monsterhunterstories3twistedreflection/mods/4"},{source:"Github",url:"https://github.com/dzxrly/MHST3-AreaEcoLevelCustomizer"}]},{gameSeries:e.MHS,gameName:"Monster Hunter: Stories 3",modName:"NestRarityLocker | 巢穴稀有度锁定",modDescription:`A mod for Monster Hunter Stories 3 that allows players to lock the nest rarity.
 用于怪物猎人物语3的巢穴锁定稀有度MOD。
-`,modDownloadLink:[{source:"NexusMods",url:"https://www.nexusmods.com/monsterhunterstories3twistedreflection/mods/5"},{source:"Github",url:"https://github.com/dzxrly/MHST3-LockNestMaxRarity"}]}],t={gameModList:s};export{e as G,t as g};
+`,modDownloadLink:[{source:"NexusMods",url:"https://www.nexusmods.com/monsterhunterstories3twistedreflection/mods/5"},{source:"Github",url:"https://github.com/dzxrly/MHST3-LockNestMaxRarity"}]},{gameSeries:e.MHS,gameName:"Monster Hunter: Stories 3",modName:"Item Box Editor | 道具箱编辑器",modDescription:`A mod for Monster Hunter Stories 3 that allows players to editor their item boxes.
+用于怪物猎人物语3的道具箱编辑器。
+`,modDownloadLink:[{source:"NexusMods",url:"https://www.nexusmods.com/monsterhunterstories3twistedreflection/mods/6"},{source:"Github",url:"https://github.com/dzxrly/MHST3-ItemBoxEditor"}]}],t={gameModList:s};export{e as G,t as g};
