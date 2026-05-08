@@ -1,5 +1,6 @@
 export enum GameSeries {
   MHS = 'monsterhunterseries',
+  PRAGMATA = 'pragmata',
 }
 
 export interface DownloadLink {

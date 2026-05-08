@@ -12,6 +12,7 @@ export default {
 
   homeBtnGameMods: 'Game Mods',
   gameModBtnGameNameMHSeries: 'Monster Hunter',
+  gameModBtnGameNamePragmata: 'PRAGMATA',
 
   homeBtnPersonal: 'About Me',
   homePersonalInfoChip1: '👀 Deep Learning & Computer Vision',

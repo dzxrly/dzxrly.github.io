@@ -9,10 +9,8 @@ const $route = useRoute();
 
 // get GameSeries from route.params.gameName
 const gameSeries: GameSeries = $route.params.gameName as GameSeries;
-const modList = gameModList.gameModList.map((gameMod) => {
-  if (gameMod.gameSeries === gameSeries) {
-    return gameMod;
-  }
+const modList = gameModList.gameModList.filter((gameMod) => {
+  return gameMod.gameSeries === gameSeries;
 });
 </script>
 

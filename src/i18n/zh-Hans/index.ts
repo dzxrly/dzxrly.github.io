@@ -9,6 +9,7 @@ export default {
 
   homeBtnGameMods: '游戏模组',
   gameModBtnGameNameMHSeries: '怪物猎人',
+  gameModBtnGameNamePragmata: '识质存在',
 
   homeBtnPersonal: '关于我',
   homePersonalInfoChip1: '👀 深度学习与计算机视觉',

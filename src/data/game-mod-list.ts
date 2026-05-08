@@ -127,6 +127,42 @@ const gameModList: GameModInfo[] = [
       },
     ],
   },
+  {
+    gameSeries: GameSeries.MHS,
+    gameName: 'Monster Hunter: Stories 3',
+    modName: 'Normal Otomon Scale | 正常随行兽体型',
+    modDescription:
+      'A mod for Monster Hunter Stories 3 that keep all monsties in normal size.\n' +
+      '用于怪物猎人物语3的锁定随行兽为正常体型MOD。\n',
+    modDownloadLink: [
+      {
+        source: 'NexusMods',
+        url: 'https://www.nexusmods.com/monsterhunterstories3twistedreflection/mods/172',
+      },
+      {
+        source: 'Github',
+        url: 'https://github.com/dzxrly/MHST3-NormalOtomonScale',
+      },
+    ],
+  },
+  {
+    gameSeries: GameSeries.PRAGMATA,
+    gameName: 'PRAGMATA',
+    modName: 'Maximum Time Limit | 模拟游戏时间限制最大化',
+    modDescription:
+      'A mod for PRAGMATA that allows players to maximum the time limitation of the simulation mini game.\n' +
+      '用于PRAGMATA的模拟游戏最大化时间上限MOD。\n',
+    modDownloadLink: [
+      {
+        source: 'NexusMods',
+        url: 'https://www.nexusmods.com/pragmata/mods/136',
+      },
+      {
+        source: 'Github',
+        url: 'https://github.com/dzxrly/PRAGMATA-MaximumTimeLimit',
+      },
+    ],
+  },
 ];
 
 export default { gameModList };

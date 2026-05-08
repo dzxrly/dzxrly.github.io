@@ -52,6 +52,19 @@ const gridTemplateCols = computed(() => {
         text-color="#081e27"
         title-keyword="gameModBtnGameNameMHSeries"
       />
+      <card-button
+        avatar="publicAssets/gameLogos/logo_pragmata.png"
+        :route="{
+          name: 'modInfo',
+          params: {
+            gameName: GameSeries.PRAGMATA,
+          },
+        }"
+        :responsive-props="cardButtonResponsiveProps"
+        background-color="#eef4f8"
+        text-color="#081e27"
+        title-keyword="gameModBtnGameNamePragmata"
+      />
     </div>
   </detail-page-wrapper>
 </template>

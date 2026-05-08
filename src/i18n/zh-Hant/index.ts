@@ -9,6 +9,7 @@ export default {
 
   homeBtnGameMods: '遊戲模組',
   gameModBtnGameNameMHSeries: '魔物獵人',
+  gameModBtnGameNamePragmata: 'PRAGMATA',
 
   homeBtnPersonal: '關於我',
   homePersonalInfoChip1: '👀 深度學習與電腦視覺',
