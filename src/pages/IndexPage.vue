@@ -68,6 +68,8 @@ onMounted(() => {
       :class="{ 'home-title-hover': isMouseEnter }"
       class="home-title full-width row justify-center items-center q-py-xl"
       @click="isMouseEnter = false"
+      v-touch-swipe.up="() => (isMouseEnter = true)"
+      v-touch-swipe.down="() => (isMouseEnter = false)"
     >
       <span
         :class="{ 'text-body1': isLtSm, 'text-h5': !isLtSm }"
@@ -83,12 +85,12 @@ onMounted(() => {
       class="home-card full-width bg-card-background text-on-surface q-pt-md q-pb-md column justify-start items-center"
       @mouseenter="isMouseEnter = true"
       @mouseleave="isMouseEnter = false"
-      v-touch-swipe.up="() => (isMouseEnter = true)"
-      v-touch-swipe.down="() => (isMouseEnter = false)"
     >
       <div
-        class="home-card-modal-bar-wrapper row justify-center items-center full-width q-mb-md cursor-pointer"
+        class="home-card-modal-bar-wrapper row justify-center items-center full-width q-mb-md cursor-pointer q-py-sm"
         @click="isMouseEnter = !isMouseEnter"
+        v-touch-swipe.up="() => (isMouseEnter = true)"
+        v-touch-swipe.down="() => (isMouseEnter = false)"
       >
         <div class="home-card-modal-bar"></div>
       </div>
@@ -148,7 +150,7 @@ onMounted(() => {
     box-sizing: border-box
 
     .home-card-modal-bar-wrapper
-      height: 1rem
+      height: 2rem
 
       .home-card-modal-bar
         width: 5rem
@@ -158,7 +160,7 @@ onMounted(() => {
         border-radius: 24px
 
     .home-card-view
-      height: calc(72vh - 1rem)
+      height: calc(72vh - 2rem)
 
   .home-title-hover
     filter: blur(5px)

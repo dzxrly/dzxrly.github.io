@@ -1,1 +1,155 @@
-import{D as x}from"./DetailPageWrapper-BukT8e79.js";import{H as p,J as s,K as e,L as a,N as n,M as t,X as i,Q as u,S as f,R as _,_ as y,a4 as M,V as b}from"./index-DWv1t-r6.js";import{g as I}from"./game-mod-list-Dp-QRfa3.js";import{Q as w,a as Q}from"./QCardActions-Bx72-GTJ.js";import{a as C,Q as k}from"./QCard-CsIiEg4D.js";import{Q as B}from"./QBtn-B2AxGdAM.js";import"./use-quasar-CoNAkHaw.js";import"./render-C8JR9mId.js";import"./use-dark-DE6LiphU.js";import"./QSpinner-BS31LsP8.js";const L={class:"text-h5 text-primary q-mr-xs"},N={class:"row justify-start items-center full-width q-mt-md"},q={class:"text-body1 q-my-md",style:{"max-lines":"2 !important","text-overflow":"ellipsis"}},v=p({__name:"GameModInfoCard",props:{gameModInfo:{type:Object,required:!0}},setup(l){const o=l;return(m,c)=>(e(),s(C,{class:"game-mod-info-card-wrapper q-ma-sm rounded-borders column"},{default:a(()=>[n(k,{class:"non-selectable col-grow"},{default:a(()=>[t("span",L,i(o.gameModInfo.modName),1),t("div",N,[n(w,{label:o.gameModInfo.gameName,color:"secondary",outline:""},null,8,["label"])]),t("p",q,i(o.gameModInfo.modDescription),1)]),_:1}),n(Q,{align:"center"},{default:a(()=>[(e(!0),u(_,null,f(o.gameModInfo.modDownloadLink,(r,d)=>(e(),s(B,{class:"rounded-borders",key:d,color:"primary","no-caps":"",flat:"",icon:"cloud_download",label:r.source,href:r.url,referrerpolicy:"no-referrer",target:"_blank"},null,8,["label","href"]))),128))]),_:1})]),_:1}))}}),D=y(v,[["__scopeId","data-v-d652bc66"]]),S={class:"row justify-center items-stretch full-width wrap"},K=p({__name:"ModInfoCard",setup(l){const m=M().params.gameName,c=I.gameModList.filter(r=>r.gameSeries===m);return(r,d)=>(e(),s(x,{"to-route":{name:"modsList"}},{default:a(()=>[t("div",S,[(e(!0),u(_,null,f(b(c).reverse(),(g,h)=>(e(),s(D,{class:"col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4",key:h,gameModInfo:g},null,8,["gameModInfo"]))),128))])]),_:1}))}});export{K as default};
+import { D as x } from './DetailPageWrapper-BukT8e79.js';
+import {
+  H as p,
+  J as s,
+  K as e,
+  L as a,
+  N as n,
+  M as t,
+  X as i,
+  Q as u,
+  S as f,
+  R as _,
+  _ as y,
+  a4 as M,
+  V as b,
+} from './index-DWv1t-r6.js';
+import { g as I } from './game-mod-list-Dp-QRfa3.js';
+import { Q as w, a as Q } from './QCardActions-Bx72-GTJ.js';
+import { a as C, Q as k } from './QCard-CsIiEg4D.js';
+import { Q as B } from './QBtn-B2AxGdAM.js';
+import './use-quasar-CoNAkHaw.js';
+import './render-C8JR9mId.js';
+import './use-dark-DE6LiphU.js';
+import './QSpinner-BS31LsP8.js';
+const L = { class: 'text-h5 text-primary q-mr-xs' },
+  N = { class: 'row justify-start items-center full-width q-mt-md' },
+  q = {
+    class: 'text-body1 q-my-md',
+    style: { 'max-lines': '2 !important', 'text-overflow': 'ellipsis' },
+  },
+  v = p({
+    __name: 'GameModInfoCard',
+    props: { gameModInfo: { type: Object, required: !0 } },
+    setup(l) {
+      const o = l;
+      return (m, c) => (
+        e(),
+        s(
+          C,
+          { class: 'game-mod-info-card-wrapper q-ma-sm rounded-borders column' },
+          {
+            default: a(() => [
+              n(
+                k,
+                { class: 'non-selectable col-grow' },
+                {
+                  default: a(() => [
+                    t('span', L, i(o.gameModInfo.modName), 1),
+                    t('div', N, [
+                      n(
+                        w,
+                        { label: o.gameModInfo.gameName, color: 'secondary', outline: '' },
+                        null,
+                        8,
+                        ['label'],
+                      ),
+                    ]),
+                    t('p', q, i(o.gameModInfo.modDescription), 1),
+                  ]),
+                  _: 1,
+                },
+              ),
+              n(
+                Q,
+                { align: 'center' },
+                {
+                  default: a(() => [
+                    (e(!0),
+                    u(
+                      _,
+                      null,
+                      f(
+                        o.gameModInfo.modDownloadLink,
+                        (r, d) => (
+                          e(),
+                          s(
+                            B,
+                            {
+                              class: 'rounded-borders',
+                              key: d,
+                              color: 'primary',
+                              'no-caps': '',
+                              flat: '',
+                              icon: 'cloud_download',
+                              label: r.source,
+                              href: r.url,
+                              referrerpolicy: 'no-referrer',
+                              target: '_blank',
+                            },
+                            null,
+                            8,
+                            ['label', 'href'],
+                          )
+                        ),
+                      ),
+                      128,
+                    )),
+                  ]),
+                  _: 1,
+                },
+              ),
+            ]),
+            _: 1,
+          },
+        )
+      );
+    },
+  }),
+  D = y(v, [['__scopeId', 'data-v-d652bc66']]),
+  S = { class: 'row justify-center items-stretch full-width wrap' },
+  K = p({
+    __name: 'ModInfoCard',
+    setup(l) {
+      const m = M().params.gameName,
+        c = I.gameModList.filter((r) => r.gameSeries === m);
+      return (r, d) => (
+        e(),
+        s(
+          x,
+          { 'to-route': { name: 'modsList' } },
+          {
+            default: a(() => [
+              t('div', S, [
+                (e(!0),
+                u(
+                  _,
+                  null,
+                  f(
+                    b(c).reverse(),
+                    (g, h) => (
+                      e(),
+                      s(
+                        D,
+                        {
+                          class: 'col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4',
+                          key: h,
+                          gameModInfo: g,
+                        },
+                        null,
+                        8,
+                        ['gameModInfo'],
+                      )
+                    ),
+                  ),
+                  128,
+                )),
+              ]),
+            ]),
+            _: 1,
+          },
+        )
+      );
+    },
+  });
+export { K as default };
