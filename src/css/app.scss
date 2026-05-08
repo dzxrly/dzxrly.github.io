@@ -38,7 +38,7 @@ body {
   font-family: 'Noto Sans', 'JetBrains Mono', monospace;
   font-synthesis: weight style small-caps;
 
-  --border-radius: 19px;
+  --border-radius: 24px;
 
   --primary-color: #006783;
   --on-primary-color: #ffffff;
@@ -273,4 +273,16 @@ body {
 
 .rounded-borders {
   border-radius: var(--border-radius);
+}
+
+.md3-shadow-2 {
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.08),
+    0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.md3-shadow-4 {
+  box-shadow:
+    0 4px 12px 3px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.05);
 }

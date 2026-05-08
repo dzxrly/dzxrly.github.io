@@ -77,14 +77,19 @@ onMounted(() => {
     </div>
     <div
       :class="{
-        'home-card-hover shadow-8': isMouseEnter,
-        'shadow-4': !isMouseEnter,
+        'home-card-hover md3-shadow-4': isMouseEnter,
+        'md3-shadow-2': !isMouseEnter,
       }"
       class="home-card full-width bg-card-background text-on-surface q-pt-md q-pb-md column justify-start items-center"
       @mouseenter="isMouseEnter = true"
       @mouseleave="isMouseEnter = false"
+      v-touch-swipe.up="() => (isMouseEnter = true)"
+      v-touch-swipe.down="() => (isMouseEnter = false)"
     >
-      <div class="home-card-modal-bar-wrapper row justify-center items-center full-width q-mb-md">
+      <div
+        class="home-card-modal-bar-wrapper row justify-center items-center full-width q-mb-md cursor-pointer"
+        @click="isMouseEnter = !isMouseEnter"
+      >
         <div class="home-card-modal-bar"></div>
       </div>
       <div class="home-card-view col full-width row justify-center items-start">
@@ -137,8 +142,8 @@ onMounted(() => {
     //transform: translateY(0)
     transition: all .25s ease-in-out
     overflow: hidden
-    border-top-left-radius: 19px
-    border-top-right-radius: 19px
+    border-top-left-radius: 24px
+    border-top-right-radius: 24px
     z-index: 10
     box-sizing: border-box
 
@@ -150,7 +155,7 @@ onMounted(() => {
         height: 0.3rem
         background-color: #70787d
         opacity: 0.5
-        border-radius: 19px
+        border-radius: 24px
 
     .home-card-view
       height: calc(72vh - 1rem)

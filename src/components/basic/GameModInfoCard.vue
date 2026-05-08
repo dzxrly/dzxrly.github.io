@@ -43,11 +43,11 @@ const props = defineProps({
 .game-mod-info-card-wrapper
   max-width: 400px
   min-width: 280px
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2), 0 2px 2px rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12)
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1)
   transform: translateY(0)
-  transition: all .25s ease-in-out
+  transition: all .25s cubic-bezier(0.4, 0, 0.2, 1)
 
 .game-mod-info-card-wrapper:hover, .game-mod-info-card-wrapper:active, .game-mod-info-card-wrapper:focus
-  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12)
+  box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05)
   transform: translateY(-3px)
 </style>

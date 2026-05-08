@@ -98,11 +98,12 @@ function routeTo(routeInfo: RouteInfo) {
 
 <template>
   <a
-    class="custom-card-btn-wrapper rounded-borders"
+    class="custom-card-btn-wrapper rounded-borders relative-position"
     style="display: block"
     :href="props.route.path ?? '#'"
     @click.prevent="routeTo(props.route)"
     referrerpolicy="strict-origin-when-cross-origin"
+    v-ripple
   >
     <div
       v-if="props.route.path && props.route.path.indexOf('http') !== -1"
@@ -192,9 +193,9 @@ function routeTo(routeInfo: RouteInfo) {
     transition: transform .5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity .5s ease-in-out
     opacity: 0
 
-.custom-card-btn-wrapper:hover, .custom-card-btn-wrapper:active
+.custom-card-btn-wrapper:hover, .custom-card-btn-wrapper:focus
   transform: translateY(-4px)
-  box-shadow: 0 2px 4px -1px #0003, 0 4px 5px #00000024, 0 1px 10px #0000001f
+  box-shadow: 0 4px 8px 3px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.05)
 
   .blank_href_tips_block
     opacity: 1
@@ -207,9 +208,9 @@ function routeTo(routeInfo: RouteInfo) {
     transform: v-bind(secondaryAvatarTransform)
     opacity: 1
 
-.custom-card-btn-wrapper:hover
-  background-color: rgba(0, 0, 0, 0.1)
+.custom-card-btn-wrapper:hover, .custom-card-btn-wrapper:focus
+  background-color: rgba(0, 0, 0, 0.08)
 
 .custom-card-btn-wrapper:active
-  background-color: rgba(0, 0, 0, 0.3)
+  background-color: rgba(0, 0, 0, 0.12)
 </style>

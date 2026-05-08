@@ -18,7 +18,10 @@ const props = defineProps({
       target="_blank"
       referrerpolicy="strict-origin-when-cross-origin"
     >
-      <q-card class="tool-site-info-card full-width rounded-borders column">
+      <q-card
+        class="tool-site-info-card full-width rounded-borders column relative-position"
+        v-ripple
+      >
         <q-card-section class="non-selectable col-grow">
           <div class="row justify-between items-center full-width">
             <span class="text-h5 text-primary q-mr-xs">{{ props.toolSiteInfo.siteName }}</span>
@@ -44,11 +47,11 @@ const props = defineProps({
 
   .tool-site-info-card
     cursor: pointer
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2), 0 2px 2px rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12)
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1)
     transform: translateY(0)
-    transition: all .25s ease-in-out
+    transition: all .25s cubic-bezier(0.4, 0, 0.2, 1)
 
   .tool-site-info-card:hover, .tool-site-info-card:active, .tool-site-info-card:focus
-    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12)
+    box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05)
     transform: translateY(-3px)
 </style>

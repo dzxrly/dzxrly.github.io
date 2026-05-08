@@ -104,6 +104,7 @@ export default defineConfig((ctx) => {
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#framework
     framework: {
       config: {
+        ripple: true,
         loadingBar: {
           color: 'primary',
           size: '3px',
