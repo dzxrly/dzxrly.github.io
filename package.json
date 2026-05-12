@@ -1,7 +1,7 @@
 {
   "name": "eggtargaryen-com",
   "version": "0.0.1",
-  "description": "Egg Targaryen's Dock",
+  "description": "Egg Targaryen 的个人导航站，聚合博客、开发工具、开源项目、游戏 Mod 和个人资料。",
   "productName": "Egg Targaryen's Dock",
   "author": "Egg Targaryen <dzxrly2@gmail.com>",
   "type": "module",

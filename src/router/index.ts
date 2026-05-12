@@ -4,6 +4,7 @@ import {
   createRouter,
   createWebHashHistory,
   createWebHistory,
+  type RouteLocationNormalized,
 } from 'vue-router';
 import routes from './routes';
 import { LoadingBar } from 'quasar';
@@ -34,8 +35,25 @@ export default defineRouter(function (/* { store, ssrContext } */) {
     history: createHistory(process.env.VUE_ROUTER_BASE),
   });
 
-  Router.beforeEach(() => {
+  async function preloadRouteComponents(to: RouteLocationNormalized) {
+    const loaders = to.matched.flatMap((record) => {
+      return Object.values(record.components ?? {}).filter((component) => {
+        return typeof component === 'function' && !('render' in component);
+      }) as Array<() => Promise<unknown>>;
+    });
+
+    await Promise.all(loaders.map((loader) => loader()));
+  }
+
+  Router.beforeEach(async (to) => {
     LoadingBar.start();
+    try {
+      await preloadRouteComponents(to);
+      return true;
+    } catch (error) {
+      LoadingBar.stop();
+      throw error;
+    }
   });
 
   Router.afterEach((to, from) => {
@@ -46,15 +64,10 @@ export default defineRouter(function (/* { store, ssrContext } */) {
     const fromDepth = from.path.split('/').filter((i) => {
       return i !== '';
     }).length;
-    to.meta.enterActiveClass = toDepth < fromDepth ? 'animated fadeInLeft' : 'animated fadeInRight';
+    to.meta.enterActiveClass =
+      toDepth < fromDepth ? 'route-slide-in-back' : 'route-slide-in-forward';
     to.meta.leaveActiveClass =
-      toDepth < fromDepth ? 'animated fadeOutRight' : 'animated fadeOutLeft';
-
-    // console.log({
-    //   'toDepth': toDepth,
-    //   'fromDepth': fromDepth,
-    //   '<?': toDepth < fromDepth,
-    // })
+      toDepth < fromDepth ? 'route-slide-out-back' : 'route-slide-out-forward';
   });
 
   return Router;

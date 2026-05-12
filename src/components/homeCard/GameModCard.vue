@@ -48,8 +48,8 @@ const gridTemplateCols = computed(() => {
           },
         }"
         :responsive-props="cardButtonResponsiveProps"
-        background-color="#eef4f8"
-        text-color="#081e27"
+        background-color="var(--primary-container-color)"
+        text-color="var(--on-primary-container-color)"
         title-keyword="gameModBtnGameNameMHSeries"
       />
       <card-button
@@ -61,8 +61,8 @@ const gridTemplateCols = computed(() => {
           },
         }"
         :responsive-props="cardButtonResponsiveProps"
-        background-color="#eef4f8"
-        text-color="#081e27"
+        background-color="var(--primary-container-color)"
+        text-color="var(--on-primary-container-color)"
         title-keyword="gameModBtnGameNamePragmata"
       />
     </div>
@@ -74,7 +74,7 @@ const gridTemplateCols = computed(() => {
   display: grid
   grid-template-rows: repeat(auto-fill, v-bind(gridCardSize))
   grid-template-columns: repeat(v-bind(gridTemplateCols), v-bind(gridCardSize))
-  grid-gap: 0.5rem
+  gap: clamp(.65rem, 2vw, 1rem)
   justify-items: center
   align-items: center
   justify-content: center

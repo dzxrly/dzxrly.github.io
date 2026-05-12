@@ -24,16 +24,18 @@ bus?.on('set-background-cover', (value: boolean) => {
     <div
       class="main-header-wrapper row justify-end items-center full-width q-py-sm q-px-md"
       :class="{ 'main-header-wrapper-hover': setBackgroundCover }"
+      role="banner"
     >
       <q-btn-dropdown
         auto-close
-        class="rounded-borders q-py-sm"
+        class="language-switch q-py-sm"
         color="primary"
-        content-class="rounded-borders"
+        content-class="language-menu"
         flat
         icon="translate"
+        aria-label="Switch language"
       >
-        <q-list class="bg-secondary-container">
+        <q-list class="bg-secondary-container text-on-secondary-container">
           <q-item
             v-for="option in languageDropdownMenuOptions"
             :key="option.value"
@@ -61,8 +63,30 @@ bus?.on('set-background-cover', (value: boolean) => {
 <style lang="sass" scoped>
 .main-header-wrapper
   height: 8vh
-  transition: all .25s ease-in-out
+  transition: opacity .2s var(--motion-expressive), transform .2s var(--motion-expressive)
+  will-change: opacity, transform
+  position: relative
+  z-index: 20
+
+  .language-switch
+    border-radius: 999px
+    min-width: 3rem
+    min-height: 3rem
+    background: rgba(198, 231, 255, 0.72)
+    color: var(--on-primary-container-color) !important
+    transition: transform .18s var(--motion-bounce), background-color .18s var(--motion-expressive)
+
+  .language-switch:hover,
+  .language-switch:focus
+    transform: scale(1.04)
+    background: var(--primary-container-color)
 
 .main-header-wrapper-hover
-  filter: blur(5px)
+  opacity: .46
+  transform: translate3d(0, -4px, 0)
+
+:global(.language-menu)
+  border-radius: var(--border-radius) !important
+  overflow: hidden
+  box-shadow: 0 12px 28px rgba(39, 38, 48, .16)
 </style>

@@ -13,7 +13,7 @@ const cardButtonResponsiveProps = ref<ResponsiveCardBtnInterface>({
   valueMax: 12,
   valueMin: 9,
 });
-const cardBtnNumber = ref(4);
+const cardBtnNumber = ref(5);
 
 const cardSize = computed(() => {
   const baseSize =
@@ -43,8 +43,8 @@ const gridTemplateCols = computed(() => {
         path: 'https://blog.eggtargaryen.com',
       }"
       :responsive-props="cardButtonResponsiveProps"
-      background-color="#eef4f8"
-      text-color="#081e27"
+      background-color="var(--primary-container-color)"
+      text-color="var(--on-primary-container-color)"
       title-keyword="blogBtnTitle"
     />
     <card-button
@@ -53,8 +53,8 @@ const gridTemplateCols = computed(() => {
         path: '/tools',
       }"
       :responsive-props="cardButtonResponsiveProps"
-      background-color="#eef4f8"
-      text-color="#081e27"
+      background-color="var(--primary-container-color)"
+      text-color="var(--on-primary-container-color)"
       title-keyword="toolsBtnTitle"
     />
     <card-button
@@ -63,8 +63,8 @@ const gridTemplateCols = computed(() => {
         path: '/projects',
       }"
       :responsive-props="cardButtonResponsiveProps"
-      background-color="#eef4f8"
-      text-color="#081e27"
+      background-color="var(--primary-container-color)"
+      text-color="var(--on-primary-container-color)"
       title-keyword="homeBtnMyProjects"
     />
     <card-button
@@ -73,8 +73,8 @@ const gridTemplateCols = computed(() => {
         name: 'modsList',
       }"
       :responsive-props="cardButtonResponsiveProps"
-      background-color="#eef4f8"
-      text-color="#081e27"
+      background-color="var(--primary-container-color)"
+      text-color="var(--on-primary-container-color)"
       title-keyword="homeBtnGameMods"
     />
     <card-button
@@ -84,8 +84,8 @@ const gridTemplateCols = computed(() => {
       }"
       :responsive-props="cardButtonResponsiveProps"
       :secondary-avatar="personalBtnBgImg"
-      background-color="#eef4f8"
-      text-color="#081e27"
+      background-color="var(--primary-container-color)"
+      text-color="var(--on-primary-container-color)"
       title-keyword="homeBtnPersonal"
     />
   </div>
@@ -96,7 +96,7 @@ const gridTemplateCols = computed(() => {
   display: grid
   grid-template-rows: repeat(auto-fill, v-bind(gridCardSize))
   grid-template-columns: repeat(v-bind(gridTemplateCols), v-bind(gridCardSize))
-  grid-gap: 0.5rem
+  gap: clamp(.65rem, 2vw, 1rem)
   justify-items: center
   align-items: center
   justify-content: center

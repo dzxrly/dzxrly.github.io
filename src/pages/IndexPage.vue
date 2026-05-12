@@ -1,18 +1,18 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n';
-import { computed, inject, onMounted, provide, ref, watch } from 'vue';
+import { computed, inject, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue';
 import { type EventBus, useQuasar } from 'quasar';
 
 const { t } = useI18n();
 const $q = useQuasar();
+const isDockOpen = ref<boolean>(false);
 const homeTitle = ref<string>('');
-const isMouseEnter = ref<boolean>(false);
 // 1/4096 is the shiny rate in Pokémon games, 0.5 for debug, but I choose 5% as the default value
 const isShiny = ref<boolean>(randomShiny(0.05));
 
 const isLtSm = computed(() => $q.screen.lt.sm);
 const homeTitleTranslation = computed(() => t('homeTitle'));
-let typingInterval: NodeJS.Timeout | null = null;
+let typingInterval: ReturnType<typeof setInterval> | null = null;
 
 const bus = inject<EventBus>('eventBus');
 provide('isShiny', isShiny);
@@ -29,68 +29,78 @@ function clearTypingInterval() {
 }
 
 function setHomeTitleWithAnimation() {
+  clearTypingInterval();
   homeTitle.value = '';
-  // use setInterval to simulate typing animation
+
   let i = 0;
   typingInterval = setInterval(() => {
     if (i < homeTitleTranslation.value.length) {
       homeTitle.value += homeTitleTranslation.value.charAt(i);
       i++;
-    } else clearTypingInterval();
-  }, 150);
+      return;
+    }
+
+    clearTypingInterval();
+  }, 110);
 }
 
 watch(
   () => homeTitleTranslation.value,
-  () => {
-    clearTypingInterval();
-    setHomeTitleWithAnimation();
-  },
+  () => setHomeTitleWithAnimation(),
 );
 
 watch(
-  () => isMouseEnter.value,
-  () => {
-    bus?.emit('set-background-cover', isMouseEnter.value);
+  () => isDockOpen.value,
+  (value) => {
+    bus?.emit('set-background-cover', value);
   },
 );
 
 onMounted(() => {
-  clearTypingInterval();
   setHomeTitleWithAnimation();
-  console.log('Shiny:', isShiny.value);
+});
+
+onBeforeUnmount(() => {
+  clearTypingInterval();
 });
 </script>
 
 <template>
   <q-page class="home-page-wrapper column justify-center items-center" style="min-height: 0">
     <div
-      :class="{ 'home-title-hover': isMouseEnter }"
+      :class="{ 'home-title-open': isDockOpen }"
       class="home-title full-width row justify-center items-center q-py-xl"
-      @click="isMouseEnter = false"
-      v-touch-swipe.up="() => (isMouseEnter = true)"
-      v-touch-swipe.down="() => (isMouseEnter = false)"
+      aria-label="Open dock"
+      @click="isDockOpen = false"
+      v-touch-swipe.up="() => (isDockOpen = true)"
+      v-touch-swipe.down="() => (isDockOpen = false)"
     >
       <span
-        :class="{ 'text-body1': isLtSm, 'text-h5': !isLtSm }"
+        :class="{ 'text-body1': isLtSm, 'text-h4': !isLtSm }"
         class="home-title-span text-on-background text-bold non-selectable"
         >{{ homeTitle }}</span
       >
     </div>
     <div
       :class="{
-        'home-card-hover md3-shadow-4': isMouseEnter,
-        'md3-shadow-2': !isMouseEnter,
+        'home-card-open md3-shadow-4': isDockOpen,
+        'md3-shadow-2': !isDockOpen,
       }"
       class="home-card full-width bg-card-background text-on-surface q-pt-md q-pb-md column justify-start items-center"
-      @mouseenter="isMouseEnter = true"
-      @mouseleave="isMouseEnter = false"
+      @mouseenter="isDockOpen = true"
+      @mouseleave="isDockOpen = false"
     >
       <div
+        :class="{ 'home-card-modal-bar-wrapper-open': isDockOpen }"
         class="home-card-modal-bar-wrapper row justify-center items-center full-width q-mb-md cursor-pointer q-py-sm"
-        @click="isMouseEnter = !isMouseEnter"
-        v-touch-swipe.up="() => (isMouseEnter = true)"
-        v-touch-swipe.down="() => (isMouseEnter = false)"
+        role="button"
+        aria-label="Toggle dock"
+        tabindex="0"
+        @click="isDockOpen = !isDockOpen"
+        @keydown.enter="isDockOpen = !isDockOpen"
+        @keydown.space.prevent="isDockOpen = !isDockOpen"
+        v-touch-swipe.up="() => (isDockOpen = true)"
+        v-touch-swipe.down="() => (isDockOpen = false)"
       >
         <div class="home-card-modal-bar"></div>
       </div>
@@ -102,7 +112,7 @@ onMounted(() => {
             :leave-active-class="route.meta.leaveActiveClass as string"
           >
             <keep-alive>
-              <component :is="Component" :key="route.path" />
+              <component :is="Component" :key="route.path" class="route-view-panel" />
             </keep-alive>
           </transition>
         </router-view>
@@ -114,60 +124,87 @@ onMounted(() => {
 <style lang="sass" scoped>
 .home-page-wrapper
   position: relative
+  min-height: 92vh
 
   .home-title
-    transform: translateY(20vh)
-    transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    transform: translate3d(0, 20vh, 0) scale(1)
+    transform-origin: center
+    transition: transform .46s var(--motion-bounce), opacity .24s var(--motion-expressive)
     height: 20vh
     box-sizing: border-box
+    will-change: transform, opacity
 
     .home-title-span
       position: relative
-      letter-spacing: 0.1rem
-      line-height: 2rem
+      display: inline-block
+      white-space: nowrap
+      letter-spacing: 0
+      line-height: 1.35
 
     .home-title-span::after
       content: ''
-      display: inline
       position: absolute
-      bottom: 0
-      right: -1rem
-      width: 0.8rem
-      height: 0.3rem
+      bottom: .12em
+      right: -.36em
+      width: .16em
+      height: 1em
       opacity: 1
-      background-color: #191c1e
-      animation: home-title-span-bling 1.5s infinite
+      background-color: var(--primary-color)
+      border-radius: 100px
+      animation: home-title-caret 1s steps(2, jump-none) infinite
 
   .home-card
     height: 72vh
-    transform: translateY(40vh)
-    //transform: translateY(0)
-    transition: all .25s ease-in-out
+    transform: translate3d(0, 40vh, 0) scale(.985)
+    transform-origin: center bottom
+    transition: transform .34s var(--motion-bounce), border-radius .34s var(--motion-expressive), box-shadow .24s var(--motion-expressive)
     overflow: hidden
-    border-top-left-radius: 24px
-    border-top-right-radius: 24px
+    border-top-left-radius: var(--border-radius-lg)
+    border-top-right-radius: var(--border-radius-lg)
     z-index: 10
     box-sizing: border-box
+    will-change: transform
 
     .home-card-modal-bar-wrapper
       height: 2rem
+      transition: transform .24s var(--motion-bounce)
 
       .home-card-modal-bar
         width: 5rem
         height: 0.3rem
-        background-color: #70787d
-        opacity: 0.5
+        background-color: var(--outline-color)
+        opacity: 0.68
         border-radius: 24px
+        transition: width .24s var(--motion-bounce), opacity .18s var(--motion-expressive), background-color .18s var(--motion-expressive)
+
+    .home-card-modal-bar-wrapper-open
+      transform: translate3d(0, -1px, 0)
+
+      .home-card-modal-bar
+        width: 3.4rem
+        opacity: 1
+        background-color: var(--primary-color)
 
     .home-card-view
+      position: relative
       height: calc(72vh - 2rem)
+      overflow: hidden
 
-  .home-title-hover
-    filter: blur(5px)
-    transform: translateY(0)
+      :global(.route-view-panel)
+        position: absolute
+        inset: 0
+        width: 100%
+        height: 100%
+        overflow: hidden
 
-  .home-card-hover
-    transform: translateY(0)
+  .home-title-open
+    opacity: 0.32
+    transform: translate3d(0, 0, 0) scale(0.96)
+
+  .home-card-open
+    transform: translate3d(0, 0, 0) scale(1)
+    border-top-left-radius: 32px
+    border-top-right-radius: 32px
 
 .home-page-wrapper::after
   content: ''
@@ -177,10 +214,10 @@ onMounted(() => {
   left: 0
   width: 100%
   height: 10vh
-  background: #eef4f8
+  background: var(--surface-container-color)
   z-index: 2
 
-@keyframes home-title-span-bling
+@keyframes home-title-caret
   0%
     opacity: 1
   50%

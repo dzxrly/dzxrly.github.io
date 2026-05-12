@@ -63,8 +63,8 @@ const isLtSm = computed(() => $q.screen.lt.sm);
             :class="isLtSm ? 'justify-center' : 'justify-start'"
             class="row items-center wrap q-mt-md"
           >
-            <div v-for="langBadge in languageBadgeUrl" :key="langBadge" class="q-mr-sm">
-              <img :src="langBadge" alt="language badge" />
+            <div v-for="langBadge in languageBadgeUrl" :key="langBadge" class="q-mr-sm q-mb-sm">
+              <img :src="langBadge" alt="language badge" loading="lazy" />
             </div>
           </div>
           <div
@@ -80,7 +80,8 @@ const isLtSm = computed(() => $q.screen.lt.sm);
               color="primary"
               :label="webSite.name"
               no-caps
-              outline
+              unelevated
+              rounded
               size="md"
               target="_blank"
               type="a"

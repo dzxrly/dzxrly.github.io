@@ -55,11 +55,11 @@ const isSecondaryAvatar = ref<boolean>(
   Boolean(props.secondaryAvatar && props.secondaryAvatar !== ''),
 );
 const avatarTransform = ref<string>(
-  isSecondaryAvatar.value ? 'translateY(-100%)' : 'translateY(0)',
+  isSecondaryAvatar.value ? 'translate3d(0, -92%, 0) scale(.94)' : 'translate3d(0, 0, 0)',
 );
 const avatarHoverOpacity = ref<number>(isSecondaryAvatar.value ? 0 : 1);
 const secondaryAvatarTransform = ref<string>(
-  isSecondaryAvatar.value ? 'translateY(-50%)' : 'translateY(0)',
+  isSecondaryAvatar.value ? 'translate3d(0, -50%, 0) scale(1)' : 'translate3d(0, 0, 0)',
 );
 const responsiveSize = computed(() => {
   const size =
@@ -71,8 +71,16 @@ const responsiveSize = computed(() => {
 const cardSize = computed(() => `${responsiveSize.value}rem`);
 const cardMargin = computed(() => `${responsiveSize.value * 0.01}rem`);
 const avatarSize = computed(() => `${responsiveSize.value * 0.6}rem`);
-const backgroundColor = computed(() => props.backgroundColor);
-const textColor = computed(() => props.textColor);
+const backgroundColor = computed(() =>
+  props.backgroundColor === '#eef4f8' ? 'var(--primary-container-color)' : props.backgroundColor,
+);
+const textColor = computed(() =>
+  props.textColor === '#081e27' ? 'var(--on-primary-container-color)' : props.textColor,
+);
+const isExternalRoute = computed(() => props.route.path?.startsWith('http') ?? false);
+const externalLinkAttrs = computed(() =>
+  isExternalRoute.value ? { target: '_blank', rel: 'noopener noreferrer' } : {},
+);
 
 function routeTo(routeInfo: RouteInfo) {
   const handleNavigationFailure = (error: NavigationFailure) => {
@@ -101,14 +109,13 @@ function routeTo(routeInfo: RouteInfo) {
     class="custom-card-btn-wrapper rounded-borders relative-position"
     style="display: block"
     :href="props.route.path ?? '#'"
+    :aria-label="t(props.titleKeyword)"
+    v-bind="externalLinkAttrs"
     @click.prevent="routeTo(props.route)"
     referrerpolicy="strict-origin-when-cross-origin"
     v-ripple
   >
-    <div
-      v-if="props.route.path && props.route.path.indexOf('http') !== -1"
-      class="blank_href_tips_block"
-    >
+    <div v-if="isExternalRoute" class="blank_href_tips_block">
       <q-icon name="open_in_new" color="primary" size="xs" />
     </div>
     <div class="secondary-btn column justify-center items-center full-width full-height wrap">
@@ -118,7 +125,7 @@ function routeTo(routeInfo: RouteInfo) {
         class="custom-card-picture-in-btn"
         rounded
       >
-        <q-img :src="props.avatar" alt="card btn avatar">
+        <q-img :src="props.avatar" :alt="t(props.titleKeyword)">
           <template v-slot:loading>
             <q-spinner-hourglass color="primary" />
           </template>
@@ -142,7 +149,7 @@ function routeTo(routeInfo: RouteInfo) {
       class="secondary-btn-easter-egg column justify-center items-center full-width wrap"
     >
       <q-avatar :size="avatarSize" class="custom-card-picture-in-btn" rounded>
-        <img :src="props.secondaryAvatar" alt="card btn avatar" />
+        <img :src="props.secondaryAvatar" :alt="t(props.titleKeyword)" loading="lazy" />
       </q-avatar>
       <span
         v-if="secondaryTitleKeyword && secondaryTitleKeyword !== ''"
@@ -162,43 +169,88 @@ function routeTo(routeInfo: RouteInfo) {
   height: v-bind(cardSize)
   cursor: pointer
   background-color: v-bind(backgroundColor)
-  box-shadow: none
-  transition: all .25s ease-in-out
+  color: v-bind(textColor)
+  border: 1px solid rgba(119, 118, 128, .12)
+  box-shadow: 0 1px 2px rgba(39, 38, 48, .06)
+  transition: transform .2s var(--motion-bounce), background-color .18s var(--motion-expressive), border-color .18s var(--motion-expressive), box-shadow .18s var(--motion-expressive), border-radius .2s var(--motion-expressive)
   user-select: none
-  transform: translateY(0)
+  transform: translate3d(0, 0, 0)
   overflow: hidden
+  will-change: transform
+
+  &::before
+    content: ''
+    position: absolute
+    inset: 0
+    z-index: 0
+    pointer-events: none
+    background: currentColor
+    opacity: 0
+    transform: scale(.92)
+    transition: opacity .16s var(--motion-expressive), transform .2s var(--motion-bounce)
+
+  &::after
+    content: ''
+    position: absolute
+    inset: auto 18% 10% 18%
+    height: .26rem
+    z-index: 0
+    pointer-events: none
+    border-radius: 999px
+    background: currentColor
+    opacity: 0
+    transform: scaleX(.35)
+    transform-origin: center
+    transition: opacity .16s var(--motion-expressive), transform .24s var(--motion-bounce)
 
   .blank_href_tips_block
     position: absolute
     top: 5%
     right: 5%
+    z-index: 1
     opacity: 0
-    transition: opacity .25s ease-in-out
+    transition: opacity .18s var(--motion-expressive)
 
   .custom-card-picture-in-btn
     margin: 0 0 v-bind(cardMargin) 0
+    transition: transform .24s var(--motion-bounce)
 
   .secondary-btn
     position: absolute
-    transform: translateY(0)
+    z-index: 1
+    transform: translate3d(0, 0, 0)
     background-color: transparent
-    transition: transform .5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity .5s ease-in-out
+    transition: transform .36s var(--motion-bounce), opacity .18s var(--motion-expressive)
     opacity: 1
 
   .secondary-btn-easter-egg
     position: absolute
     top: 50%
-    transform: translateY(200%)
+    z-index: 1
+    transform: translate3d(0, 160%, 0) scale(.9)
     background-color: transparent
-    transition: transform .5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity .5s ease-in-out
+    transition: transform .36s var(--motion-bounce), opacity .18s var(--motion-expressive)
     opacity: 0
 
 .custom-card-btn-wrapper:hover, .custom-card-btn-wrapper:focus
-  transform: translateY(-4px)
-  box-shadow: 0 4px 8px 3px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.05)
+  transform: translate3d(0, -3px, 0) scale(1.015)
+  border-color: rgba(0, 106, 142, .22)
+  border-radius: var(--border-radius-lg)
+  box-shadow: 0 12px 28px rgba(39, 38, 48, .12), 0 2px 6px rgba(39, 38, 48, .06)
+
+  &::before
+    opacity: .08
+    transform: scale(1)
+
+  &::after
+    opacity: .22
+    transform: scaleX(1)
 
   .blank_href_tips_block
     opacity: 1
+
+  .custom-card-picture-in-btn
+    transform: scale(1.06) rotate(-2deg)
 
   .secondary-btn
     transform: v-bind(avatarTransform)
@@ -208,9 +260,9 @@ function routeTo(routeInfo: RouteInfo) {
     transform: v-bind(secondaryAvatarTransform)
     opacity: 1
 
-.custom-card-btn-wrapper:hover, .custom-card-btn-wrapper:focus
-  background-color: rgba(0, 0, 0, 0.08)
-
 .custom-card-btn-wrapper:active
-  background-color: rgba(0, 0, 0, 0.12)
+  transform: translate3d(0, 0, 0) scale(.985)
+
+  &::before
+    opacity: .14
 </style>

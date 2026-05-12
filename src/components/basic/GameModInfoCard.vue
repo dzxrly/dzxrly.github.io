@@ -11,9 +11,9 @@ const props = defineProps({
 </script>
 
 <template>
-  <q-card class="game-mod-info-card-wrapper q-ma-sm rounded-borders column">
+  <q-card class="game-mod-info-card-wrapper expressive-card q-ma-sm rounded-borders column">
     <q-card-section class="non-selectable col-grow">
-      <span class="text-h5 text-primary q-mr-xs">{{ props.gameModInfo.modName }}</span>
+      <span class="text-h6 text-primary q-mr-xs">{{ props.gameModInfo.modName }}</span>
       <div class="row justify-start items-center full-width q-mt-md">
         <q-badge :label="props.gameModInfo.gameName" color="secondary" outline></q-badge>
       </div>
@@ -21,14 +21,15 @@ const props = defineProps({
         {{ props.gameModInfo.modDescription }}
       </p>
     </q-card-section>
-    <q-card-actions align="center">
+    <q-card-actions align="center" class="game-mod-actions">
       <q-btn
-        class="rounded-borders"
+        class="mod-download-btn"
         v-for="(downloadLink, index) in props.gameModInfo.modDownloadLink"
         :key="index"
         color="primary"
         no-caps
-        flat
+        unelevated
+        rounded
         icon="cloud_download"
         :label="downloadLink.source"
         :href="downloadLink.url"
@@ -42,12 +43,28 @@ const props = defineProps({
 <style scoped lang="sass">
 .game-mod-info-card-wrapper
   max-width: 400px
-  min-width: 280px
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1)
-  transform: translateY(0)
-  transition: all .25s cubic-bezier(0.4, 0, 0.2, 1)
+  width: min(100%, 400px)
+  min-width: 0
+  min-height: 12rem
 
-.game-mod-info-card-wrapper:hover, .game-mod-info-card-wrapper:active, .game-mod-info-card-wrapper:focus
-  box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05)
-  transform: translateY(-3px)
+  .game-mod-actions
+    gap: .5rem
+    padding: .5rem 1rem 1rem
+
+  .mod-download-btn
+    flex: 0 1 auto
+    min-width: 0
+
+@media (max-width: 599px)
+  .game-mod-info-card-wrapper
+    margin-left: 0
+    margin-right: 0
+
+    .game-mod-actions
+      justify-content: center
+      padding-left: .75rem
+      padding-right: .75rem
+
+    .mod-download-btn
+      max-width: 100%
 </style>

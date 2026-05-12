@@ -1,7 +1,7 @@
 // app global css in SCSS form
 @font-face {
   font-family: 'JetBrains Mono';
-  src: url('../fonts/JetBrainsMono-Regular.woff2') format('truetype');
+  src: url('../fonts/JetBrainsMono-Regular.woff2') format('woff2');
   font-display: swap;
 }
 
@@ -9,6 +9,8 @@
   font-family: 'Noto Sans';
   src: url('../fonts/NotoSansSC-Regular.ttf') format('truetype');
   font-display: swap;
+  font-weight: 400;
+  font-style: normal;
 }
 
 a {
@@ -31,51 +33,68 @@ a:focus {
 
 html,
 body {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  min-width: 320px;
+  height: 100%;
   margin: 0;
   padding: 0;
-  font-family: 'Noto Sans', 'JetBrains Mono', monospace;
+  font-family: 'Noto Sans', 'Roboto', 'JetBrains Mono', sans-serif;
   font-synthesis: weight style small-caps;
 
-  --border-radius: 24px;
+  --border-radius: 28px;
+  --border-radius-lg: 36px;
+  --motion-expressive: cubic-bezier(0.2, 0, 0, 1);
+  --motion-bounce: cubic-bezier(0.2, 0, 0, 1.2);
 
-  --primary-color: #006783;
+  --primary-color: #006a8e;
   --on-primary-color: #ffffff;
-  --primary-container-color: #bce9ff;
-  --on-primary-container-color: #001f29;
+  --primary-container-color: #c6e7ff;
+  --on-primary-container-color: #001e2c;
 
-  --secondary-color: #4d616b;
+  --secondary-color: #58636d;
   --on-secondary-color: #ffffff;
-  --secondary-container-color: #d0e6f2;
-  --on-secondary-container-color: #081e27;
+  --secondary-container-color: #dce4ec;
+  --on-secondary-container-color: #151d24;
 
-  --tertiary-color: #5c5b7d;
+  --tertiary-color: #806b57;
   --on-tertiary-color: #ffffff;
-  --tertiary-container-color: #e2dfff;
-  --on-tertiary-container-color: #191836;
+  --tertiary-container-color: #f4dec9;
+  --on-tertiary-container-color: #2c1708;
 
   --error-color: #ba1a1a;
   --on-error-color: #ffffff;
   --error-container-color: #ffdad6;
   --on-error-container-color: #410002;
 
-  --background-color: #fbfcfe;
-  --on-background-color: #191c1e;
+  --background-color: #f8faff;
+  --on-background-color: #171c21;
 
-  --surface-color: #fbfcfe;
-  --on-surface-color: #191c1e;
+  --surface-color: #f8faff;
+  --surface-container-low-color: #f0f4fa;
+  --surface-container-color: #e8edf5;
+  --surface-container-high-color: #dee6ef;
+  --on-surface-color: #171c21;
 
-  --outline-color: #70787d;
-  --surface-variant-color: #dce4e9;
-  --on-surface-variant-color: #40484c;
+  --outline-color: #707780;
+  --surface-variant-color: #dde3eb;
+  --on-surface-variant-color: #414850;
 
-  --card-background-color: #eef4f8;
+  --card-background-color: var(--surface-container-color);
+  --scrim-color: rgba(18, 29, 38, 0.44);
 }
 
 html,
 body {
-  background: var(--background-color);
+  background:
+    linear-gradient(145deg, rgba(198, 231, 255, 0.78), transparent 34%),
+    linear-gradient(25deg, rgba(244, 222, 201, 0.38), transparent 42%),
+    linear-gradient(315deg, rgba(221, 227, 235, 0.58), transparent 46%), var(--background-color);
+  color: var(--on-background-color);
+  overflow: hidden;
+}
+
+#q-app {
+  min-height: 100%;
 }
 
 // app color presets
@@ -231,6 +250,14 @@ body {
   background: var(--surface-color) !important;
 }
 
+.text-surface-container {
+  color: var(--surface-container-color) !important;
+}
+
+.bg-surface-container {
+  background: var(--surface-container-color) !important;
+}
+
 .text-on-surface {
   color: var(--on-surface-color) !important;
 }
@@ -277,12 +304,100 @@ body {
 
 .md3-shadow-2 {
   box-shadow:
-    0 2px 6px rgba(0, 0, 0, 0.08),
-    0 1px 2px rgba(0, 0, 0, 0.04);
+    0 2px 8px rgba(39, 38, 48, 0.08),
+    0 1px 2px rgba(39, 38, 48, 0.04);
 }
 
 .md3-shadow-4 {
   box-shadow:
-    0 4px 12px 3px rgba(0, 0, 0, 0.1),
-    0 1px 3px rgba(0, 0, 0, 0.05);
+    0 10px 30px rgba(39, 38, 48, 0.14),
+    0 2px 6px rgba(39, 38, 48, 0.08);
+}
+
+.expressive-card {
+  background: var(--surface-container-low-color);
+  border: 1px solid rgba(119, 118, 128, 0.14);
+  box-shadow: 0 1px 2px rgba(39, 38, 48, 0.06);
+  contain: layout paint;
+  transition:
+    transform 220ms var(--motion-bounce),
+    background-color 180ms var(--motion-expressive),
+    border-color 180ms var(--motion-expressive),
+    box-shadow 180ms var(--motion-expressive),
+    border-radius 220ms var(--motion-expressive);
+}
+
+.expressive-card:hover,
+.expressive-card:focus-within {
+  background: var(--surface-container-color);
+  border-color: rgba(0, 106, 142, 0.22);
+  border-radius: var(--border-radius-lg);
+  transform: translate3d(0, -2px, 0) scale(1.006);
+  box-shadow:
+    0 8px 24px rgba(39, 38, 48, 0.1),
+    0 2px 6px rgba(39, 38, 48, 0.06);
+}
+
+.route-slide-in-forward,
+.route-slide-in-back {
+  transform-origin: center;
+  backface-visibility: hidden;
+  will-change: opacity, transform;
+  animation: route-slide-in 180ms var(--motion-expressive) both;
+}
+
+.route-slide-out-forward,
+.route-slide-out-back {
+  transform-origin: center;
+  backface-visibility: hidden;
+  pointer-events: none;
+  will-change: opacity, transform;
+  animation: route-slide-out 150ms var(--motion-expressive) both;
+}
+
+.route-slide-in-back {
+  animation-name: route-slide-in-back;
+}
+
+.route-slide-out-back {
+  animation-name: route-slide-out-back;
+}
+
+@keyframes route-slide-in {
+  from {
+    opacity: 0;
+    transform: translate3d(14px, 0, 0) scale(0.99);
+  }
+}
+
+@keyframes route-slide-out {
+  to {
+    opacity: 0;
+    transform: translate3d(-10px, 0, 0) scale(0.992);
+  }
+}
+
+@keyframes route-slide-in-back {
+  from {
+    opacity: 0;
+    transform: translate3d(-14px, 0, 0) scale(0.99);
+  }
+}
+
+@keyframes route-slide-out-back {
+  to {
+    opacity: 0;
+    transform: translate3d(10px, 0, 0) scale(0.992);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
