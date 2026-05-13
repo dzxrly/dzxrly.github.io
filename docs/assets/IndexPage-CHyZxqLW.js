@@ -1,0 +1,446 @@
+import {
+  a as K,
+  g as O,
+  B,
+  C as h,
+  D as H,
+  F as U,
+  b as $,
+  h as V,
+  Z as X,
+  j as q,
+  v as y,
+  $ as S,
+  G as Y,
+  e as w,
+  s as _,
+  x as M,
+  a0 as R,
+  I as G,
+  J,
+  r as T,
+  w as j,
+  o as W,
+  f as Z,
+  K as ee,
+  L as I,
+  M as g,
+  N as A,
+  V as L,
+  O as C,
+  R as z,
+  Q as b,
+  Y as te,
+  a1 as Q,
+  a2 as ne,
+  P as E,
+  y as oe,
+  a3 as ae,
+  a4 as se,
+  E as re,
+  _ as ie,
+} from './index-B4Fegd2x.js';
+import { h as ue } from './render-C8JR9mId.js';
+import { c as le } from './selection-wSKXO16l.js';
+import { u as ce } from './use-quasar-B9Viz2rg.js';
+const de = K({
+    name: 'QPage',
+    props: { padding: Boolean, styleFn: Function },
+    setup(o, { slots: t }) {
+      const {
+          proxy: { $q: i },
+        } = O(),
+        n = B(H, h);
+      if (n === h) return (console.error('QPage needs to be a deep child of QLayout'), h);
+      if (B(U, h) === h) return (console.error('QPage needs to be child of QPageContainer'), h);
+      const e = $(() => {
+          const s =
+            (n.header.space === !0 ? n.header.size : 0) +
+            (n.footer.space === !0 ? n.footer.size : 0);
+          if (typeof o.styleFn == 'function') {
+            const c = n.isContainer.value === !0 ? n.containerHeight.value : i.screen.height;
+            return o.styleFn(s, c);
+          }
+          return {
+            minHeight:
+              n.isContainer.value === !0
+                ? n.containerHeight.value - s + 'px'
+                : i.screen.height === 0
+                  ? s !== 0
+                    ? `calc(100vh - ${s}px)`
+                    : '100vh'
+                  : i.screen.height - s + 'px',
+          };
+        }),
+        a = $(() => `q-page${o.padding === !0 ? ' q-layout-padding' : ''}`);
+      return () => V('main', { class: a.value, style: e.value }, ue(t.default));
+    },
+  }),
+  D = { left: !0, right: !0, up: !0, down: !0, horizontal: !0, vertical: !0 },
+  ve = Object.keys(D);
+D.all = !0;
+function F(o) {
+  const t = {};
+  for (const i of ve) o[i] === !0 && (t[i] = !0);
+  return Object.keys(t).length === 0
+    ? D
+    : (t.horizontal === !0
+        ? (t.left = t.right = !0)
+        : t.left === !0 && t.right === !0 && (t.horizontal = !0),
+      t.vertical === !0 ? (t.up = t.down = !0) : t.up === !0 && t.down === !0 && (t.vertical = !0),
+      t.horizontal === !0 && t.vertical === !0 && (t.all = !0),
+      t);
+}
+const pe = ['INPUT', 'TEXTAREA'];
+function N(o, t) {
+  return (
+    t.event === void 0 &&
+    o.target !== void 0 &&
+    o.target.draggable !== !0 &&
+    typeof t.handler == 'function' &&
+    pe.includes(o.target.nodeName.toUpperCase()) === !1 &&
+    (o.qClonedBy === void 0 || o.qClonedBy.indexOf(t.uid) === -1)
+  );
+}
+function fe(o) {
+  const t = [0.06, 6, 50];
+  return (
+    typeof o == 'string' &&
+      o.length &&
+      o.split(':').forEach((i, n) => {
+        const p = parseFloat(i);
+        p && (t[n] = p);
+      }),
+    t
+  );
+}
+const x = X({
+    name: 'touch-swipe',
+    beforeMount(o, { value: t, arg: i, modifiers: n }) {
+      if (n.mouse !== !0 && y.has.touch !== !0) return;
+      const p = n.mouseCapture === !0 ? 'Capture' : '',
+        e = {
+          handler: t,
+          sensitivity: fe(i),
+          direction: F(n),
+          noop: Y,
+          mouseStart(a) {
+            N(a, e) &&
+              R(a) &&
+              (w(e, 'temp', [
+                [document, 'mousemove', 'move', `notPassive${p}`],
+                [document, 'mouseup', 'end', 'notPassiveCapture'],
+              ]),
+              e.start(a, !0));
+          },
+          touchStart(a) {
+            if (N(a, e)) {
+              const s = a.target;
+              (w(e, 'temp', [
+                [s, 'touchmove', 'move', 'notPassiveCapture'],
+                [s, 'touchcancel', 'end', 'notPassiveCapture'],
+                [s, 'touchend', 'end', 'notPassiveCapture'],
+              ]),
+                e.start(a));
+            }
+          },
+          start(a, s) {
+            y.is.firefox === !0 && S(o, !0);
+            const c = M(a);
+            e.event = { x: c.left, y: c.top, time: Date.now(), mouse: s === !0, dir: !1 };
+          },
+          move(a) {
+            if (e.event === void 0) return;
+            if (e.event.dir !== !1) {
+              _(a);
+              return;
+            }
+            const s = Date.now() - e.event.time;
+            if (s === 0) return;
+            const c = M(a),
+              m = c.left - e.event.x,
+              l = Math.abs(m),
+              f = c.top - e.event.y,
+              u = Math.abs(f);
+            if (e.event.mouse !== !0) {
+              if (l < e.sensitivity[1] && u < e.sensitivity[1]) {
+                e.end(a);
+                return;
+              }
+            } else if (window.getSelection().toString() !== '') {
+              e.end(a);
+              return;
+            } else if (l < e.sensitivity[2] && u < e.sensitivity[2]) return;
+            const d = l / s,
+              r = u / s;
+            (e.direction.vertical === !0 &&
+              l < u &&
+              l < 100 &&
+              r > e.sensitivity[0] &&
+              (e.event.dir = f < 0 ? 'up' : 'down'),
+              e.direction.horizontal === !0 &&
+                l > u &&
+                u < 100 &&
+                d > e.sensitivity[0] &&
+                (e.event.dir = m < 0 ? 'left' : 'right'),
+              e.direction.up === !0 &&
+                l < u &&
+                f < 0 &&
+                l < 100 &&
+                r > e.sensitivity[0] &&
+                (e.event.dir = 'up'),
+              e.direction.down === !0 &&
+                l < u &&
+                f > 0 &&
+                l < 100 &&
+                r > e.sensitivity[0] &&
+                (e.event.dir = 'down'),
+              e.direction.left === !0 &&
+                l > u &&
+                m < 0 &&
+                u < 100 &&
+                d > e.sensitivity[0] &&
+                (e.event.dir = 'left'),
+              e.direction.right === !0 &&
+                l > u &&
+                m > 0 &&
+                u < 100 &&
+                d > e.sensitivity[0] &&
+                (e.event.dir = 'right'),
+              e.event.dir !== !1
+                ? (_(a),
+                  e.event.mouse === !0 &&
+                    (document.body.classList.add('no-pointer-events--children'),
+                    document.body.classList.add('non-selectable'),
+                    le(),
+                    (e.styleCleanup = (P) => {
+                      ((e.styleCleanup = void 0), document.body.classList.remove('non-selectable'));
+                      const v = () => {
+                        document.body.classList.remove('no-pointer-events--children');
+                      };
+                      P === !0 ? setTimeout(v, 50) : v();
+                    })),
+                  e.handler({
+                    evt: a,
+                    touch: e.event.mouse !== !0,
+                    mouse: e.event.mouse,
+                    direction: e.event.dir,
+                    duration: s,
+                    distance: { x: l, y: u },
+                  }))
+                : e.end(a));
+          },
+          end(a) {
+            e.event !== void 0 &&
+              (q(e, 'temp'),
+              y.is.firefox === !0 && S(o, !1),
+              e.styleCleanup?.(!0),
+              a !== void 0 && e.event.dir !== !1 && _(a),
+              (e.event = void 0));
+          },
+        };
+      if (((o.__qtouchswipe = e), n.mouse === !0)) {
+        const a = n.mouseCapture === !0 || n.mousecapture === !0 ? 'Capture' : '';
+        w(e, 'main', [[o, 'mousedown', 'mouseStart', `passive${a}`]]);
+      }
+      y.has.touch === !0 &&
+        w(e, 'main', [
+          [o, 'touchstart', 'touchStart', `passive${n.capture === !0 ? 'Capture' : ''}`],
+          [o, 'touchmove', 'noop', 'notPassiveCapture'],
+        ]);
+    },
+    updated(o, t) {
+      const i = o.__qtouchswipe;
+      i !== void 0 &&
+        (t.oldValue !== t.value && (typeof t.value != 'function' && i.end(), (i.handler = t.value)),
+        (i.direction = F(t.modifiers)));
+    },
+    beforeUnmount(o) {
+      const t = o.__qtouchswipe;
+      t !== void 0 &&
+        (q(t, 'main'),
+        q(t, 'temp'),
+        y.is.firefox === !0 && S(o, !1),
+        t.styleCleanup?.(),
+        delete o.__qtouchswipe);
+    },
+  }),
+  me = { class: 'home-card-view col full-width row justify-center items-start' },
+  he = G({
+    __name: 'IndexPage',
+    setup(o) {
+      const { t } = J(),
+        i = ce(),
+        n = T(!1),
+        p = T(''),
+        e = T(l(0.05)),
+        a = $(() => i.screen.lt.sm),
+        s = $(() => t('homeTitle'));
+      let c = null;
+      const m = B('eventBus');
+      re('isShiny', e);
+      function l(d) {
+        return Math.random() < d;
+      }
+      function f() {
+        c && (clearInterval(c), (c = null));
+      }
+      function u() {
+        (f(), (p.value = ''));
+        let d = 0;
+        c = setInterval(() => {
+          if (d < s.value.length) {
+            ((p.value += s.value.charAt(d)), d++);
+            return;
+          }
+          f();
+        }, 110);
+      }
+      return (
+        j(
+          () => s.value,
+          () => u(),
+        ),
+        j(
+          () => n.value,
+          (d) => {
+            m?.emit('set-background-cover', d);
+          },
+        ),
+        W(() => {
+          u();
+        }),
+        Z(() => {
+          f();
+        }),
+        (d, r) => {
+          const P = ee('router-view');
+          return (
+            g(),
+            I(
+              de,
+              {
+                class: 'home-page-wrapper column justify-center items-center',
+                style: { 'min-height': '0' },
+              },
+              {
+                default: A(() => [
+                  L(
+                    (g(),
+                    z(
+                      'div',
+                      {
+                        class: b([
+                          { 'home-title-open': n.value },
+                          'home-title full-width row justify-center items-center q-py-xl',
+                        ]),
+                        'aria-label': 'Open dock',
+                        onClick: r[0] || (r[0] = (v) => (n.value = !1)),
+                      },
+                      [
+                        C(
+                          'span',
+                          {
+                            class: b([
+                              { 'text-body1': a.value, 'text-h4': !a.value },
+                              'home-title-span text-on-background text-bold non-selectable',
+                            ]),
+                          },
+                          te(p.value),
+                          3,
+                        ),
+                      ],
+                      2,
+                    )),
+                    [
+                      [x, () => (n.value = !0), void 0, { up: !0 }],
+                      [x, () => (n.value = !1), void 0, { down: !0 }],
+                    ],
+                  ),
+                  C(
+                    'div',
+                    {
+                      class: b([
+                        { 'home-card-open md3-shadow-4': n.value, 'md3-shadow-2': !n.value },
+                        'home-card full-width bg-card-background text-on-surface q-pt-md q-pb-md column justify-start items-center',
+                      ]),
+                      onMouseenter: r[4] || (r[4] = (v) => (n.value = !0)),
+                      onMouseleave: r[5] || (r[5] = (v) => (n.value = !1)),
+                    },
+                    [
+                      L(
+                        (g(),
+                        z(
+                          'div',
+                          {
+                            class: b([
+                              { 'home-card-modal-bar-wrapper-open': n.value },
+                              'home-card-modal-bar-wrapper row justify-center items-center full-width q-mb-md cursor-pointer q-py-sm',
+                            ]),
+                            role: 'button',
+                            'aria-label': 'Toggle dock',
+                            tabindex: '0',
+                            onClick: r[1] || (r[1] = (v) => (n.value = !n.value)),
+                            onKeydown: [
+                              r[2] || (r[2] = Q((v) => (n.value = !n.value), ['enter'])),
+                              r[3] ||
+                                (r[3] = Q(
+                                  ne((v) => (n.value = !n.value), ['prevent']),
+                                  ['space'],
+                                )),
+                            ],
+                          },
+                          [
+                            ...(r[6] ||
+                              (r[6] = [C('div', { class: 'home-card-modal-bar' }, null, -1)])),
+                          ],
+                          34,
+                        )),
+                        [
+                          [x, () => (n.value = !0), void 0, { up: !0 }],
+                          [x, () => (n.value = !1), void 0, { down: !0 }],
+                        ],
+                      ),
+                      C('div', me, [
+                        E(P, null, {
+                          default: A(({ Component: v, route: k }) => [
+                            E(
+                              oe,
+                              {
+                                duration: { enter: 300, leave: 300 },
+                                'enter-active-class': k.meta.enterActiveClass,
+                                'leave-active-class': k.meta.leaveActiveClass,
+                              },
+                              {
+                                default: A(() => [
+                                  (g(),
+                                  I(
+                                    ae,
+                                    null,
+                                    [(g(), I(se(v), { key: k.path, class: 'route-view-panel' }))],
+                                    1024,
+                                  )),
+                                ]),
+                                _: 2,
+                              },
+                              1032,
+                              ['enter-active-class', 'leave-active-class'],
+                            ),
+                          ]),
+                          _: 1,
+                        }),
+                      ]),
+                    ],
+                    34,
+                  ),
+                ]),
+                _: 1,
+              },
+            )
+          );
+        }
+      );
+    },
+  }),
+  be = ie(he, [['__scopeId', 'data-v-561b2e87']]);
+export { be as default };
