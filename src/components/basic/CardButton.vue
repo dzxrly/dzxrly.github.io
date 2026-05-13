@@ -71,6 +71,8 @@ const responsiveSize = computed(() => {
 const cardSize = computed(() => `${responsiveSize.value}rem`);
 const cardMargin = computed(() => `${responsiveSize.value * 0.01}rem`);
 const avatarSize = computed(() => `${responsiveSize.value * 0.6}rem`);
+const imageFrameWidth = computed(() => `${responsiveSize.value * 0.72}rem`);
+const imageFrameHeight = computed(() => `${responsiveSize.value * 0.38}rem`);
 const backgroundColor = computed(() =>
   props.backgroundColor === '#eef4f8' ? 'var(--primary-container-color)' : props.backgroundColor,
 );
@@ -120,19 +122,7 @@ function routeTo(routeInfo: RouteInfo) {
     </div>
     <div class="secondary-btn column justify-center items-center full-width full-height wrap">
       <q-avatar
-        v-if="!props.iconName"
-        :size="avatarSize"
-        class="custom-card-picture-in-btn"
-        rounded
-      >
-        <q-img :src="props.avatar" :alt="t(props.titleKeyword)">
-          <template v-slot:loading>
-            <q-spinner-hourglass color="primary" />
-          </template>
-        </q-img>
-      </q-avatar>
-      <q-avatar
-        v-else
+        v-if="props.iconName"
         :class="props.iconColorClass"
         :icon="iconName"
         :size="avatarSize"
@@ -140,6 +130,16 @@ function routeTo(routeInfo: RouteInfo) {
         color="transparent"
         rounded
       ></q-avatar>
+      <div
+        v-else
+        class="custom-card-image-frame custom-card-picture-in-btn row justify-center items-center"
+      >
+        <q-img :src="props.avatar" :alt="t(props.titleKeyword)" fit="contain" no-spinner>
+          <template v-slot:loading>
+            <q-spinner-hourglass color="primary" />
+          </template>
+        </q-img>
+      </div>
       <span :style="{ color: textColor }" class="text-subtitle1 text-bold ellipsis">{{
         t(props.titleKeyword)
       }}</span>
@@ -148,9 +148,11 @@ function routeTo(routeInfo: RouteInfo) {
       v-if="isSecondaryAvatar"
       class="secondary-btn-easter-egg column justify-center items-center full-width wrap"
     >
-      <q-avatar :size="avatarSize" class="custom-card-picture-in-btn" rounded>
-        <img :src="props.secondaryAvatar" :alt="t(props.titleKeyword)" loading="lazy" />
-      </q-avatar>
+      <div
+        class="custom-card-image-frame custom-card-picture-in-btn row justify-center items-center"
+      >
+        <q-img :src="props.secondaryAvatar" :alt="t(props.titleKeyword)" fit="contain" no-spinner />
+      </div>
       <span
         v-if="secondaryTitleKeyword && secondaryTitleKeyword !== ''"
         :style="{ color: textColor }"
@@ -189,20 +191,6 @@ function routeTo(routeInfo: RouteInfo) {
     transform: scale(.92)
     transition: opacity .16s var(--motion-expressive), transform .2s var(--motion-bounce)
 
-  &::after
-    content: ''
-    position: absolute
-    inset: auto 18% 10% 18%
-    height: .26rem
-    z-index: 0
-    pointer-events: none
-    border-radius: 999px
-    background: currentColor
-    opacity: 0
-    transform: scaleX(.35)
-    transform-origin: center
-    transition: opacity .16s var(--motion-expressive), transform .24s var(--motion-bounce)
-
   .blank_href_tips_block
     position: absolute
     top: 5%
@@ -214,6 +202,21 @@ function routeTo(routeInfo: RouteInfo) {
   .custom-card-picture-in-btn
     margin: 0 0 v-bind(cardMargin) 0
     transition: transform .24s var(--motion-bounce)
+
+  .custom-card-image-frame
+    width: v-bind(imageFrameWidth)
+    height: v-bind(imageFrameHeight)
+    max-width: 78%
+    min-height: 2.25rem
+    overflow: visible
+
+    :deep(.q-img)
+      width: 100%
+      height: 100%
+
+    :deep(.q-img__image)
+      object-fit: contain !important
+      object-position: center !important
 
   .secondary-btn
     position: absolute
@@ -242,10 +245,6 @@ function routeTo(routeInfo: RouteInfo) {
     opacity: .08
     transform: scale(1)
 
-  &::after
-    opacity: .22
-    transform: scaleX(1)
-
   .blank_href_tips_block
     opacity: 1
 
@@ -265,4 +264,19 @@ function routeTo(routeInfo: RouteInfo) {
 
   &::before
     opacity: .14
+
+@media (hover: none), (pointer: coarse)
+  .custom-card-btn-wrapper:hover, .custom-card-btn-wrapper:focus
+    transform: translate3d(0, -1px, 0) scale(1.004)
+    box-shadow: 0 6px 16px rgba(39, 38, 48, .1), 0 1px 4px rgba(39, 38, 48, .05)
+
+    .custom-card-picture-in-btn
+      transform: scale(1.025)
+
+@media (max-width: 599px)
+  .custom-card-btn-wrapper
+    border-radius: 24px
+
+  .custom-card-btn-wrapper:hover, .custom-card-btn-wrapper:focus
+    border-radius: 28px
 </style>

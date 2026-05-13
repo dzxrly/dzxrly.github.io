@@ -97,8 +97,14 @@ const gridTemplateCols = computed(() => {
   grid-template-rows: repeat(auto-fill, v-bind(gridCardSize))
   grid-template-columns: repeat(v-bind(gridTemplateCols), v-bind(gridCardSize))
   gap: clamp(.65rem, 2vw, 1rem)
+  padding: .5rem
   justify-items: center
   align-items: center
   justify-content: center
   align-content: start
+
+@media (max-width: 599px)
+  .main-card-wrapper
+    gap: .75rem
+    padding: .75rem .25rem 1rem
 </style>

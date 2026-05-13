@@ -1,131 +1,19 @@
-var e = ((o) => ((o.MHS = 'monsterhunterseries'), (o.PRAGMATA = 'pragmata'), o))(e || {});
-const t = [
-    {
-      gameSeries: e.MHS,
-      gameName: 'Monster Hunter: World (Iceborne)',
-      modName: 'CSO SGMissile HBG | 撼宇碎星替换冥赤重弩MOD',
-      modDescription: `This MOD will replace the model of Safi's Burstcannon with the model of SGMissile shotgun in CSO/CS-Zombie.
+var e=(o=>(o.MHS="monsterhunterseries",o.PRAGMATA="pragmata",o))(e||{});const t=[{gameSeries:e.MHS,gameName:"Monster Hunter: World (Iceborne)",modName:"CSO SGMissile HBG | 撼宇碎星替换冥赤重弩MOD",modDescription:`This MOD will replace the model of Safi's Burstcannon with the model of SGMissile shotgun in CSO/CS-Zombie.
 这个MOD将会使用CSOL的撼宇碎星(狗神)武器模型替换冥赤系列重弩。
-`,
-      modDownloadLink: [
-        { source: 'NexusMods', url: 'https://www.nexusmods.com/monsterhunterworld/mods/3258' },
-        {
-          source: '小黑盒',
-          url: 'https://api.xiaoheihe.cn/v3/bbs/app/api/web/share?link_id=39322702',
-        },
-      ],
-    },
-    {
-      gameSeries: e.MHS,
-      gameName: 'Monster Hunter: Rise (Sunbreak)',
-      modName: 'Auto Resupply Item Set | 任务完成自动补充背包',
-      modDescription: `This mod can automatically resupply at the end of a mission according to a preset combination of item sets.
+`,modDownloadLink:[{source:"NexusMods",url:"https://www.nexusmods.com/monsterhunterworld/mods/3258"},{source:"小黑盒",url:"https://api.xiaoheihe.cn/v3/bbs/app/api/web/share?link_id=39322702"}]},{gameSeries:e.MHS,gameName:"Monster Hunter: Rise (Sunbreak)",modName:"Auto Resupply Item Set | 任务完成自动补充背包",modDescription:`This mod can automatically resupply at the end of a mission according to a preset combination of item sets.
 这个MOD可以在你完成任务时自动加载你的道具个人组合。
-`,
-      modDownloadLink: [
-        { source: 'NexusMods', url: 'https://www.nexusmods.com/monsterhunterrise/mods/1088' },
-        { source: 'GitHub', url: 'https://github.com/dzxrly/MHR-ItemSetAutoResupplyMod' },
-        {
-          source: '小黑盒',
-          url: 'https://api.xiaoheihe.cn/v3/bbs/app/api/web/share?link_id=87648433',
-        },
-      ],
-    },
-    {
-      gameSeries: e.MHS,
-      gameName: 'Monster Hunter: Wilds',
-      modName: 'ItemBox Editor | 道具箱编辑器',
-      modDescription: `A mod of Monster Hunter Wilds for editing the itembox.
+`,modDownloadLink:[{source:"NexusMods",url:"https://www.nexusmods.com/monsterhunterrise/mods/1088"},{source:"GitHub",url:"https://github.com/dzxrly/MHR-ItemSetAutoResupplyMod"},{source:"小黑盒",url:"https://api.xiaoheihe.cn/v3/bbs/app/api/web/share?link_id=87648433"}]},{gameSeries:e.MHS,gameName:"Monster Hunter: Wilds",modName:"ItemBox Editor | 道具箱编辑器",modDescription:`A mod of Monster Hunter Wilds for editing the itembox.
 用于怪物猎人：荒野的道具箱编辑器。
-`,
-      modDownloadLink: [
-        { source: 'NexusMods', url: 'https://www.nexusmods.com/monsterhunterwilds/mods/102' },
-        { source: 'GitHub', url: 'https://github.com/dzxrly/MHWS-BoxItemEditor' },
-      ],
-    },
-    {
-      gameSeries: e.MHS,
-      gameName: 'Monster Hunter: Wilds',
-      modName: 'CSO SGMissile HBG | 撼宇碎星替换锁刃重弩MOD',
-      modDescription: `Replace Arkveld's Heavy Bowgun (Rare 8) model with CSO/CS-Zombie SGMissile shotgun model.
+`,modDownloadLink:[{source:"NexusMods",url:"https://www.nexusmods.com/monsterhunterwilds/mods/102"},{source:"GitHub",url:"https://github.com/dzxrly/MHWS-BoxItemEditor"}]},{gameSeries:e.MHS,gameName:"Monster Hunter: Wilds",modName:"CSO SGMissile HBG | 撼宇碎星替换锁刃重弩MOD",modDescription:`Replace Arkveld's Heavy Bowgun (Rare 8) model with CSO/CS-Zombie SGMissile shotgun model.
 这个MOD将会使用CSOL的撼宇碎星(狗神)武器模型替换锁刃龙重弩。
-`,
-      modDownloadLink: [
-        { source: 'NexusMods', url: 'https://www.nexusmods.com/monsterhunterwilds/mods/3178' },
-      ],
-    },
-    {
-      gameSeries: e.MHS,
-      gameName: 'Monster Hunter: Stories 3',
-      modName: 'AreaEcoLevelCustomizer | 生态等级编辑器',
-      modDescription: `A mod for Monster Hunter Stories 3 that allows players to customize the eco level of each area in the game.
+`,modDownloadLink:[{source:"NexusMods",url:"https://www.nexusmods.com/monsterhunterwilds/mods/3178"}]},{gameSeries:e.MHS,gameName:"Monster Hunter: Stories 3",modName:"AreaEcoLevelCustomizer | 生态等级编辑器",modDescription:`A mod for Monster Hunter Stories 3 that allows players to customize the eco level of each area in the game.
 用于怪物猎人物语3的生态等级编辑器 。
-`,
-      modDownloadLink: [
-        {
-          source: 'NexusMods',
-          url: 'https://www.nexusmods.com/monsterhunterstories3twistedreflection/mods/4',
-        },
-        { source: 'Github', url: 'https://github.com/dzxrly/MHST3-AreaEcoLevelCustomizer' },
-      ],
-    },
-    {
-      gameSeries: e.MHS,
-      gameName: 'Monster Hunter: Stories 3',
-      modName: 'NestRarityLocker | 巢穴稀有度锁定',
-      modDescription: `A mod for Monster Hunter Stories 3 that allows players to lock the nest rarity.
+`,modDownloadLink:[{source:"NexusMods",url:"https://www.nexusmods.com/monsterhunterstories3twistedreflection/mods/4"},{source:"Github",url:"https://github.com/dzxrly/MHST3-AreaEcoLevelCustomizer"}]},{gameSeries:e.MHS,gameName:"Monster Hunter: Stories 3",modName:"NestRarityLocker | 巢穴稀有度锁定",modDescription:`A mod for Monster Hunter Stories 3 that allows players to lock the nest rarity.
 用于怪物猎人物语3的巢穴锁定稀有度MOD。
-`,
-      modDownloadLink: [
-        {
-          source: 'NexusMods',
-          url: 'https://www.nexusmods.com/monsterhunterstories3twistedreflection/mods/5',
-        },
-        { source: 'Github', url: 'https://github.com/dzxrly/MHST3-LockNestMaxRarity' },
-      ],
-    },
-    {
-      gameSeries: e.MHS,
-      gameName: 'Monster Hunter: Stories 3',
-      modName: 'Item Box Editor | 道具箱编辑器',
-      modDescription: `A mod for Monster Hunter Stories 3 that allows players to editor their item boxes.
+`,modDownloadLink:[{source:"NexusMods",url:"https://www.nexusmods.com/monsterhunterstories3twistedreflection/mods/5"},{source:"Github",url:"https://github.com/dzxrly/MHST3-LockNestMaxRarity"}]},{gameSeries:e.MHS,gameName:"Monster Hunter: Stories 3",modName:"Item Box Editor | 道具箱编辑器",modDescription:`A mod for Monster Hunter Stories 3 that allows players to editor their item boxes.
 用于怪物猎人物语3的道具箱编辑器。
-`,
-      modDownloadLink: [
-        {
-          source: 'NexusMods',
-          url: 'https://www.nexusmods.com/monsterhunterstories3twistedreflection/mods/6',
-        },
-        { source: 'Github', url: 'https://github.com/dzxrly/MHST3-ItemBoxEditor' },
-      ],
-    },
-    {
-      gameSeries: e.MHS,
-      gameName: 'Monster Hunter: Stories 3',
-      modName: 'Normal Otomon Scale | 正常随行兽体型',
-      modDescription: `A mod for Monster Hunter Stories 3 that keep all monsties in normal size.
+`,modDownloadLink:[{source:"NexusMods",url:"https://www.nexusmods.com/monsterhunterstories3twistedreflection/mods/6"},{source:"Github",url:"https://github.com/dzxrly/MHST3-ItemBoxEditor"}]},{gameSeries:e.MHS,gameName:"Monster Hunter: Stories 3",modName:"Normal Otomon Scale | 正常随行兽体型",modDescription:`A mod for Monster Hunter Stories 3 that keep all monsties in normal size.
 用于怪物猎人物语3的锁定随行兽为正常体型MOD。
-`,
-      modDownloadLink: [
-        {
-          source: 'NexusMods',
-          url: 'https://www.nexusmods.com/monsterhunterstories3twistedreflection/mods/172',
-        },
-        { source: 'Github', url: 'https://github.com/dzxrly/MHST3-NormalOtomonScale' },
-      ],
-    },
-    {
-      gameSeries: e.PRAGMATA,
-      gameName: 'PRAGMATA',
-      modName: 'Maximum Time Limit | 模拟游戏时间限制最大化',
-      modDescription: `A mod for PRAGMATA that allows players to maximum the time limitation of the simulation mini game.
+`,modDownloadLink:[{source:"NexusMods",url:"https://www.nexusmods.com/monsterhunterstories3twistedreflection/mods/172"},{source:"Github",url:"https://github.com/dzxrly/MHST3-NormalOtomonScale"}]},{gameSeries:e.PRAGMATA,gameName:"PRAGMATA",modName:"Maximum Time Limit | 模拟游戏时间限制最大化",modDescription:`A mod for PRAGMATA that allows players to maximum the time limitation of the simulation mini game.
 用于PRAGMATA的模拟游戏最大化时间上限MOD。
-`,
-      modDownloadLink: [
-        { source: 'NexusMods', url: 'https://www.nexusmods.com/pragmata/mods/136' },
-        { source: 'Github', url: 'https://github.com/dzxrly/PRAGMATA-MaximumTimeLimit' },
-      ],
-    },
-  ],
-  s = { gameModList: t };
-export { e as G, s as g };
+`,modDownloadLink:[{source:"NexusMods",url:"https://www.nexusmods.com/pragmata/mods/136"},{source:"Github",url:"https://github.com/dzxrly/PRAGMATA-MaximumTimeLimit"}]}],s={gameModList:t};export{e as G,s as g};

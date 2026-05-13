@@ -67,8 +67,9 @@ watch(
     flex: 1 1 auto
     min-height: 0
     overflow-y: auto
+    overflow-x: visible
     scrollbar-gutter: stable
-    padding-bottom: 1rem
+    padding: .25rem .25rem 1rem
 
   .content::-webkit-scrollbar, .content::-webkit-scrollbar-corner
     background-color: transparent
@@ -81,12 +82,12 @@ watch(
 @media (max-width: 599px)
   .detail-page-wrapper
     gap: .5rem
-    padding-left: .75rem
-    padding-right: .75rem
+    padding-left: .5rem
+    padding-right: .5rem
 
     .back-btn-row
       height: 2.75rem
 
     .content
-      padding-bottom: 1.5rem
+      padding: .25rem .125rem 1.5rem
 </style>

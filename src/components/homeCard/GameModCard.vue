@@ -75,8 +75,16 @@ const gridTemplateCols = computed(() => {
   grid-template-rows: repeat(auto-fill, v-bind(gridCardSize))
   grid-template-columns: repeat(v-bind(gridTemplateCols), v-bind(gridCardSize))
   gap: clamp(.65rem, 2vw, 1rem)
+  padding-left: .5rem
+  padding-right: .5rem
   justify-items: center
   align-items: center
   justify-content: center
   align-content: start
+
+@media (max-width: 599px)
+  .game-mod-nav-list
+    gap: .75rem
+    padding-left: .25rem
+    padding-right: .25rem
 </style>

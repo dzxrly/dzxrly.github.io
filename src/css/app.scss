@@ -338,6 +338,17 @@ body {
     0 2px 6px rgba(39, 38, 48, 0.06);
 }
 
+@media (hover: none), (pointer: coarse) {
+  .expressive-card:hover,
+  .expressive-card:focus-within {
+    border-radius: 30px;
+    transform: translate3d(0, -1px, 0) scale(1.002);
+    box-shadow:
+      0 5px 16px rgba(39, 38, 48, 0.09),
+      0 1px 4px rgba(39, 38, 48, 0.05);
+  }
+}
+
 .route-slide-in-forward,
 .route-slide-in-back {
   transform-origin: center;

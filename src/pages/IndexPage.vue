@@ -188,14 +188,14 @@ onBeforeUnmount(() => {
     .home-card-view
       position: relative
       height: calc(72vh - 2rem)
-      overflow: hidden
+      overflow: visible
 
       :global(.route-view-panel)
         position: absolute
         inset: 0
         width: 100%
         height: 100%
-        overflow: hidden
+        overflow: visible
 
   .home-title-open
     opacity: 0.32
@@ -216,6 +216,49 @@ onBeforeUnmount(() => {
   height: 10vh
   background: var(--surface-container-color)
   z-index: 2
+
+@media (max-width: 599px)
+  .home-page-wrapper
+    min-height: 92svh
+
+    .home-title
+      height: 18svh
+      padding-top: 1.25rem
+      padding-bottom: 1.25rem
+      transform: translate3d(0, 16svh, 0) scale(1)
+
+      .home-title-span
+        max-width: calc(100vw - 2rem)
+        overflow: hidden
+        text-overflow: ellipsis
+
+    .home-card
+      height: 74svh
+      transform: translate3d(0, 38svh, 0) scale(.99)
+      border-top-left-radius: 28px
+      border-top-right-radius: 28px
+
+      .home-card-modal-bar-wrapper
+        height: 1.75rem
+        margin-bottom: .25rem
+        padding-top: .35rem
+        padding-bottom: .35rem
+
+      .home-card-view
+        height: calc(74svh - 2rem)
+        padding: 0 .5rem .75rem
+
+        :global(.route-view-panel)
+          inset: .25rem .5rem .75rem
+          width: auto
+          height: auto
+
+    .home-card-open
+      border-top-left-radius: 28px
+      border-top-right-radius: 28px
+
+  .home-page-wrapper::after
+    height: 8svh
 
 @keyframes home-title-caret
   0%
