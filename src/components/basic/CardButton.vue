@@ -174,11 +174,9 @@ function routeTo(routeInfo: RouteInfo) {
   color: v-bind(textColor)
   border: 1px solid rgba(119, 118, 128, .12)
   box-shadow: 0 1px 2px rgba(39, 38, 48, .06)
-  transition: transform .2s var(--motion-bounce), background-color .18s var(--motion-expressive), border-color .18s var(--motion-expressive), box-shadow .18s var(--motion-expressive), border-radius .2s var(--motion-expressive)
+  transition: transform .2s var(--motion-bounce), background-color .18s var(--motion-expressive), border-color .18s var(--motion-expressive), box-shadow .22s var(--motion-expressive), border-radius .2s var(--motion-expressive)
   user-select: none
-  transform: translate3d(0, 0, 0)
   overflow: hidden
-  will-change: transform
 
   &::before
     content: ''
@@ -236,10 +234,10 @@ function routeTo(routeInfo: RouteInfo) {
     opacity: 0
 
 .custom-card-btn-wrapper:hover, .custom-card-btn-wrapper:focus
-  transform: translate3d(0, -3px, 0) scale(1.015)
+  transform: translate3d(0, -3px, 0)
   border-color: rgba(0, 106, 142, .22)
   border-radius: var(--border-radius-lg)
-  box-shadow: 0 12px 28px rgba(39, 38, 48, .12), 0 2px 6px rgba(39, 38, 48, .06)
+  box-shadow: 0 16px 32px rgba(39, 38, 48, .14), 0 3px 8px rgba(39, 38, 48, .08)
 
   &::before
     opacity: .08
@@ -267,8 +265,8 @@ function routeTo(routeInfo: RouteInfo) {
 
 @media (hover: none), (pointer: coarse)
   .custom-card-btn-wrapper:hover, .custom-card-btn-wrapper:focus
-    transform: translate3d(0, -1px, 0) scale(1.004)
-    box-shadow: 0 6px 16px rgba(39, 38, 48, .1), 0 1px 4px rgba(39, 38, 48, .05)
+    transform: translate3d(0, -1px, 0)
+    box-shadow: 0 8px 18px rgba(39, 38, 48, .11), 0 2px 5px rgba(39, 38, 48, .06)
 
     .custom-card-picture-in-btn
       transform: scale(1.025)
