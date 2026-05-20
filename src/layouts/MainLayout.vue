@@ -64,7 +64,6 @@ bus?.on('set-background-cover', (value: boolean) => {
 .main-header-wrapper
   height: 8vh
   transition: opacity .2s var(--motion-expressive), transform .2s var(--motion-expressive)
-  will-change: opacity, transform
   position: relative
   z-index: 20
 

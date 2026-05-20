@@ -132,7 +132,6 @@ onBeforeUnmount(() => {
     transition: transform .46s var(--motion-bounce), opacity .24s var(--motion-expressive)
     height: 20vh
     box-sizing: border-box
-    will-change: transform, opacity
 
     .home-title-span
       position: relative
@@ -163,7 +162,6 @@ onBeforeUnmount(() => {
     border-top-right-radius: var(--border-radius-lg)
     z-index: 10
     box-sizing: border-box
-    will-change: transform
 
     .home-card-modal-bar-wrapper
       height: 2rem
