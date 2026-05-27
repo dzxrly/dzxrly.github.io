@@ -15,8 +15,10 @@ const shinyRate = import.meta.env.DEV ? 0.5 : 1 / 4096;
 const shinyAttempts = 3;
 
 const isLtSm = computed(() => $q.screen.lt.sm);
+const isMobileDock = computed(() => $q.platform.is.mobile || isLtSm.value);
 const homeTitleTranslation = computed(() => t('homeTitle'));
 let typingInterval: ReturnType<typeof setInterval> | null = null;
+let swipeClickGuardTimeout: ReturnType<typeof setTimeout> | null = null;
 
 const bus = inject<EventBus>('eventBus');
 provide('isShiny', isShiny);
@@ -39,6 +41,60 @@ function clearTypingInterval() {
     clearInterval(typingInterval);
     typingInterval = null;
   }
+}
+
+function clearSwipeClickGuard() {
+  if (swipeClickGuardTimeout) {
+    clearTimeout(swipeClickGuardTimeout);
+    swipeClickGuardTimeout = null;
+  }
+}
+
+function setDockOpen(value: boolean) {
+  isDockOpen.value = value;
+}
+
+function closeDockFromTitleClick() {
+  if (swipeClickGuardTimeout) {
+    clearSwipeClickGuard();
+    return;
+  }
+
+  setDockOpen(false);
+}
+
+function openDockFromClosedClick() {
+  if (swipeClickGuardTimeout) {
+    clearSwipeClickGuard();
+    return;
+  }
+
+  setDockOpen(true);
+}
+
+function setDockOpenFromSwipe(value: boolean) {
+  setDockOpen(value);
+  clearSwipeClickGuard();
+  swipeClickGuardTimeout = setTimeout(() => {
+    swipeClickGuardTimeout = null;
+  }, 350);
+}
+
+function toggleDock() {
+  if (swipeClickGuardTimeout) {
+    clearSwipeClickGuard();
+    return;
+  }
+
+  isDockOpen.value = !isDockOpen.value;
+}
+
+function handleDockPointerEnter(event: PointerEvent) {
+  if (!isMobileDock.value && event.pointerType === 'mouse') setDockOpen(true);
+}
+
+function handleDockPointerLeave(event: PointerEvent) {
+  if (!isMobileDock.value && event.pointerType === 'mouse') setDockOpen(false);
 }
 
 function setHomeTitleWithAnimation() {
@@ -82,6 +138,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   clearTypingInterval();
+  clearSwipeClickGuard();
   document.documentElement.classList.remove('shiny');
 });
 </script>
@@ -92,9 +149,9 @@ onBeforeUnmount(() => {
       :class="{ 'home-title-open': isDockOpen }"
       class="home-title full-width row justify-center items-center q-py-xl"
       aria-label="Open dock"
-      @click="isDockOpen = false"
-      v-touch-swipe.up="() => (isDockOpen = true)"
-      v-touch-swipe.down="() => (isDockOpen = false)"
+      @click="closeDockFromTitleClick"
+      v-touch-swipe.mouse.up="() => setDockOpenFromSwipe(true)"
+      v-touch-swipe.mouse.down="() => setDockOpenFromSwipe(false)"
     >
       <span
         :class="{ 'text-body1': isLtSm, 'text-h4': !isLtSm }"
@@ -108,8 +165,8 @@ onBeforeUnmount(() => {
         'md3-shadow-2': !isDockOpen,
       }"
       class="home-card full-width bg-card-background text-on-surface q-pt-md q-pb-md column justify-start items-center"
-      @mouseenter="isDockOpen = true"
-      @mouseleave="isDockOpen = false"
+      @pointerenter="handleDockPointerEnter"
+      @pointerleave="handleDockPointerLeave"
     >
       <div
         :class="{ 'home-card-modal-bar-wrapper-open': isDockOpen }"
@@ -117,11 +174,11 @@ onBeforeUnmount(() => {
         role="button"
         aria-label="Toggle dock"
         tabindex="0"
-        @click="isDockOpen = !isDockOpen"
-        @keydown.enter="isDockOpen = !isDockOpen"
-        @keydown.space.prevent="isDockOpen = !isDockOpen"
-        v-touch-swipe.up="() => (isDockOpen = true)"
-        v-touch-swipe.down="() => (isDockOpen = false)"
+        @click.stop="toggleDock"
+        @keydown.enter.stop="toggleDock"
+        @keydown.space.stop.prevent="toggleDock"
+        v-touch-swipe.mouse.up="() => setDockOpenFromSwipe(true)"
+        v-touch-swipe.mouse.down="() => setDockOpenFromSwipe(false)"
       >
         <div class="home-card-modal-bar"></div>
       </div>
@@ -139,6 +196,18 @@ onBeforeUnmount(() => {
         </router-view>
       </div>
     </div>
+    <div
+      v-if="isMobileDock && !isDockOpen"
+      class="home-dock-hit-area"
+      role="button"
+      aria-label="Open dock"
+      tabindex="0"
+      @click="openDockFromClosedClick"
+      @keydown.enter="openDockFromClosedClick"
+      @keydown.space.prevent="openDockFromClosedClick"
+      v-touch-swipe.mouse.up="() => setDockOpenFromSwipe(true)"
+      v-touch-swipe.mouse.down="() => setDockOpenFromSwipe(false)"
+    ></div>
   </q-page>
 </template>
 
@@ -150,6 +219,7 @@ onBeforeUnmount(() => {
   .home-title
     transform: translate3d(0, 20vh, 0) scale(1)
     transform-origin: center
+    touch-action: none
     transition: transform .46s var(--motion-bounce), opacity .24s var(--motion-expressive)
     height: 20vh
     box-sizing: border-box
@@ -174,6 +244,7 @@ onBeforeUnmount(() => {
       animation: home-title-caret 1s steps(2, jump-none) infinite
 
   .home-card
+    position: relative
     height: 72vh
     transform: translate3d(0, 40vh, 0) scale(.985)
     transform-origin: center bottom
@@ -185,7 +256,12 @@ onBeforeUnmount(() => {
     box-sizing: border-box
 
     .home-card-modal-bar-wrapper
+      position: relative
       height: 2rem
+      flex: 0 0 auto
+      touch-action: none
+      -webkit-tap-highlight-color: transparent
+      z-index: 1
       transition: transform .24s var(--motion-bounce)
 
       .home-card-modal-bar
@@ -206,15 +282,29 @@ onBeforeUnmount(() => {
 
     .home-card-view
       position: relative
+      min-height: 0
       height: calc(72vh - 2rem)
-      overflow: visible
+      overflow: hidden
 
       :global(.route-view-panel)
         position: absolute
         inset: 0
         width: 100%
         height: 100%
-        overflow: visible
+        min-height: 0
+        overflow-y: auto
+        overflow-x: hidden
+        overscroll-behavior: contain
+        -webkit-overflow-scrolling: touch
+
+      :global(.route-view-panel::-webkit-scrollbar),
+      :global(.route-view-panel::-webkit-scrollbar-corner)
+        background-color: transparent
+        width: .35rem
+
+      :global(.route-view-panel::-webkit-scrollbar-thumb)
+        border-radius: 19px
+        background-color: rgba(119, 118, 128, .34)
 
   .home-title-open
     opacity: 0.32
@@ -224,6 +314,18 @@ onBeforeUnmount(() => {
     transform: translate3d(0, 0, 0) scale(1)
     border-top-left-radius: 32px
     border-top-right-radius: 32px
+
+  .home-dock-hit-area
+    position: absolute
+    left: 0
+    right: 0
+    bottom: 0
+    height: 46svh
+    z-index: 30
+    cursor: pointer
+    touch-action: none
+    -webkit-tap-highlight-color: transparent
+    background: transparent
 
 .home-page-wrapper::after
   content: ''
@@ -272,7 +374,11 @@ onBeforeUnmount(() => {
           width: auto
           height: auto
 
+    .home-title-open
+      transform: translate3d(0, 0, 0) scale(.96)
+
     .home-card-open
+      transform: translate3d(0, 0, 0) scale(1)
       border-top-left-radius: 28px
       border-top-right-radius: 28px
 
