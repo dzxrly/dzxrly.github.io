@@ -83,6 +83,47 @@ body {
   --scrim-color: rgba(18, 29, 38, 0.44);
 }
 
+// Shiny palette — MD3 Expressive scheme derived from public/avatar.png
+// Source hues: gold collar (#e8b833), red eye (#d62a30), warm white body.
+html.shiny,
+html.shiny body {
+  --primary-color: #835500;
+  --on-primary-color: #ffffff;
+  --primary-container-color: #ffddae;
+  --on-primary-container-color: #2a1800;
+
+  --secondary-color: #6e5c3f;
+  --on-secondary-color: #ffffff;
+  --secondary-container-color: #fadfbb;
+  --on-secondary-container-color: #261904;
+
+  --tertiary-color: #934a3b;
+  --on-tertiary-color: #ffffff;
+  --tertiary-container-color: #ffdad2;
+  --on-tertiary-container-color: #3a0b03;
+
+  --error-color: #ba1a1a;
+  --on-error-color: #ffffff;
+  --error-container-color: #ffdad6;
+  --on-error-container-color: #410002;
+
+  --background-color: #fff8f1;
+  --on-background-color: #1f1b13;
+
+  --surface-color: #fff8f1;
+  --surface-container-low-color: #faf2e5;
+  --surface-container-color: #f4ecdf;
+  --surface-container-high-color: #eee6d8;
+  --on-surface-color: #1f1b13;
+
+  --outline-color: #807659;
+  --surface-variant-color: #ede1c8;
+  --on-surface-variant-color: #4e4639;
+
+  --card-background-color: var(--surface-container-color);
+  --scrim-color: rgba(48, 32, 8, 0.46);
+}
+
 html,
 body {
   background:
@@ -103,6 +144,21 @@ body {
   animation: home-bg-wave 28s ease-in-out infinite;
   color: var(--on-background-color);
   overflow: hidden;
+}
+
+html.shiny,
+html.shiny body {
+  background:
+    linear-gradient(145deg, rgba(255, 221, 174, 0.78), transparent 34%),
+    linear-gradient(25deg, rgba(255, 218, 210, 0.42), transparent 42%),
+    linear-gradient(315deg, rgba(237, 225, 200, 0.62), transparent 46%), var(--background-color);
+  background-size:
+    220% 220%,
+    240% 240%,
+    260% 260%,
+    100% 100%;
+  background-repeat: no-repeat;
+  animation: home-bg-wave 28s ease-in-out infinite;
 }
 
 @keyframes home-bg-wave {
