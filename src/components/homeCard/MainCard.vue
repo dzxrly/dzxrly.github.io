@@ -153,12 +153,7 @@ function handlePersonalBtnTrigger() {
         title-keyword="homeBtnPersonal"
       />
       <div v-if="showStars" class="shiny-stars" aria-hidden="true">
-        <span
-          v-for="(s, idx) in stars"
-          :key="idx"
-          class="shiny-star"
-          :style="starStyle(s)"
-        />
+        <span v-for="(s, idx) in stars" :key="idx" class="shiny-star" :style="starStyle(s)" />
       </div>
     </div>
   </div>

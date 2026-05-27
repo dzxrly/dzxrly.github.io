@@ -16,36 +16,156 @@
 // MD3 tokens + body wash colors registered as <color> so they animate when transitioned.
 // Without @property, CSS custom properties are typeless and snap on change.
 // 浏览器若不支持 @property，下面的 transition 会自动退化为 snap（与硬切换一致）。
-@property --primary-color { syntax: '<color>'; inherits: true; initial-value: #006a8e; }
-@property --on-primary-color { syntax: '<color>'; inherits: true; initial-value: #ffffff; }
-@property --primary-container-color { syntax: '<color>'; inherits: true; initial-value: #c6e7ff; }
-@property --on-primary-container-color { syntax: '<color>'; inherits: true; initial-value: #001e2c; }
-@property --secondary-color { syntax: '<color>'; inherits: true; initial-value: #58636d; }
-@property --on-secondary-color { syntax: '<color>'; inherits: true; initial-value: #ffffff; }
-@property --secondary-container-color { syntax: '<color>'; inherits: true; initial-value: #dce4ec; }
-@property --on-secondary-container-color { syntax: '<color>'; inherits: true; initial-value: #151d24; }
-@property --tertiary-color { syntax: '<color>'; inherits: true; initial-value: #806b57; }
-@property --on-tertiary-color { syntax: '<color>'; inherits: true; initial-value: #ffffff; }
-@property --tertiary-container-color { syntax: '<color>'; inherits: true; initial-value: #f4dec9; }
-@property --on-tertiary-container-color { syntax: '<color>'; inherits: true; initial-value: #2c1708; }
-@property --error-color { syntax: '<color>'; inherits: true; initial-value: #ba1a1a; }
-@property --on-error-color { syntax: '<color>'; inherits: true; initial-value: #ffffff; }
-@property --error-container-color { syntax: '<color>'; inherits: true; initial-value: #ffdad6; }
-@property --on-error-container-color { syntax: '<color>'; inherits: true; initial-value: #410002; }
-@property --background-color { syntax: '<color>'; inherits: true; initial-value: #f8faff; }
-@property --on-background-color { syntax: '<color>'; inherits: true; initial-value: #171c21; }
-@property --surface-color { syntax: '<color>'; inherits: true; initial-value: #f8faff; }
-@property --surface-container-low-color { syntax: '<color>'; inherits: true; initial-value: #f0f4fa; }
-@property --surface-container-color { syntax: '<color>'; inherits: true; initial-value: #e8edf5; }
-@property --surface-container-high-color { syntax: '<color>'; inherits: true; initial-value: #dee6ef; }
-@property --on-surface-color { syntax: '<color>'; inherits: true; initial-value: #171c21; }
-@property --outline-color { syntax: '<color>'; inherits: true; initial-value: #707780; }
-@property --surface-variant-color { syntax: '<color>'; inherits: true; initial-value: #dde3eb; }
-@property --on-surface-variant-color { syntax: '<color>'; inherits: true; initial-value: #414850; }
-@property --scrim-color { syntax: '<color>'; inherits: true; initial-value: rgba(18, 29, 38, 0.44); }
-@property --bg-wash-1 { syntax: '<color>'; inherits: true; initial-value: rgba(198, 231, 255, 0.78); }
-@property --bg-wash-2 { syntax: '<color>'; inherits: true; initial-value: rgba(244, 222, 201, 0.38); }
-@property --bg-wash-3 { syntax: '<color>'; inherits: true; initial-value: rgba(221, 227, 235, 0.58); }
+@property --primary-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #006a8e;
+}
+@property --on-primary-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #ffffff;
+}
+@property --primary-container-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #c6e7ff;
+}
+@property --on-primary-container-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #001e2c;
+}
+@property --secondary-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #58636d;
+}
+@property --on-secondary-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #ffffff;
+}
+@property --secondary-container-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #dce4ec;
+}
+@property --on-secondary-container-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #151d24;
+}
+@property --tertiary-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #806b57;
+}
+@property --on-tertiary-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #ffffff;
+}
+@property --tertiary-container-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #f4dec9;
+}
+@property --on-tertiary-container-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #2c1708;
+}
+@property --error-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #ba1a1a;
+}
+@property --on-error-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #ffffff;
+}
+@property --error-container-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #ffdad6;
+}
+@property --on-error-container-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #410002;
+}
+@property --background-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #f8faff;
+}
+@property --on-background-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #171c21;
+}
+@property --surface-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #f8faff;
+}
+@property --surface-container-low-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #f0f4fa;
+}
+@property --surface-container-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #e8edf5;
+}
+@property --surface-container-high-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #dee6ef;
+}
+@property --on-surface-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #171c21;
+}
+@property --outline-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #707780;
+}
+@property --surface-variant-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #dde3eb;
+}
+@property --on-surface-variant-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #414850;
+}
+@property --scrim-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: rgba(18, 29, 38, 0.44);
+}
+@property --bg-wash-1 {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: rgba(198, 231, 255, 0.78);
+}
+@property --bg-wash-2 {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: rgba(244, 222, 201, 0.38);
+}
+@property --bg-wash-3 {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: rgba(221, 227, 235, 0.58);
+}
 
 a {
   text-decoration: none;
