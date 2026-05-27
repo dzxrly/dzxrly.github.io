@@ -7,8 +7,12 @@ const { t } = useI18n();
 const $q = useQuasar();
 const isDockOpen = ref<boolean>(false);
 const homeTitle = ref<string>('');
-// 1/4096 is the shiny rate in Pokémon games, 0.5 for debug, but I choose 5% as the default value
-const isShiny = ref<boolean>(randomShiny(0.05));
+const isShiny = ref<boolean>(false);
+const isShinyChecked = ref<boolean>(false);
+
+// 1/4096 是宝可梦异色概率；dev 模式下放大到 50% 方便测试。判定三次，每次独立 roll，命中立即 break。
+const shinyRate = import.meta.env.DEV ? 0.5 : 1 / 4096;
+const shinyAttempts = 3;
 
 const isLtSm = computed(() => $q.screen.lt.sm);
 const homeTitleTranslation = computed(() => t('homeTitle'));
@@ -16,9 +20,18 @@ let typingInterval: ReturnType<typeof setInterval> | null = null;
 
 const bus = inject<EventBus>('eventBus');
 provide('isShiny', isShiny);
+provide('triggerShiny', triggerShiny);
 
-function randomShiny(rate: number) {
-  return Math.random() < rate;
+function triggerShiny(): boolean {
+  if (isShinyChecked.value) return isShiny.value;
+  isShinyChecked.value = true;
+  for (let i = 0; i < shinyAttempts; i++) {
+    if (Math.random() < shinyRate) {
+      isShiny.value = true;
+      break;
+    }
+  }
+  return isShiny.value;
 }
 
 function clearTypingInterval() {
@@ -56,12 +69,20 @@ watch(
   },
 );
 
+watch(
+  () => isShiny.value,
+  (value) => {
+    document.documentElement.classList.toggle('shiny', value);
+  },
+);
+
 onMounted(() => {
   setHomeTitleWithAnimation();
 });
 
 onBeforeUnmount(() => {
   clearTypingInterval();
+  document.documentElement.classList.remove('shiny');
 });
 </script>
 
