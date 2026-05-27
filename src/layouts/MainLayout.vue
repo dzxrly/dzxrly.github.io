@@ -71,7 +71,7 @@ bus?.on('set-background-cover', (value: boolean) => {
     border-radius: 999px
     min-width: 3rem
     min-height: 3rem
-    background: rgba(198, 231, 255, 0.72)
+    background: color-mix(in srgb, var(--primary-container-color) 72%, transparent)
     color: var(--on-primary-container-color) !important
     transition: transform .18s var(--motion-bounce), background-color .18s var(--motion-expressive)
 
