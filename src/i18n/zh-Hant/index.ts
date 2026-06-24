@@ -11,6 +11,10 @@ export default {
   gameModBtnGameNameMHSeries: '魔物獵人',
   gameModBtnGameNamePragmata: 'PRAGMATA',
 
+  homeBtnOpenSource: '開源庫',
+  openSourceBtnRegistryNpm: 'npm',
+  openSourceBtnRegistryPypi: 'PyPI',
+
   homeBtnPersonal: '關於我',
   homePersonalInfoChip1: '👀 深度學習與電腦視覺',
   homePersonalInfoChip2: '🔭 天文大數據分析',
@@ -21,5 +25,6 @@ export default {
   homePersonalInfoChip7: '🖥️ ITX PC組裝~',
 
   projectRepoListLoading: '讀取倉庫列表...',
+  projectRepoListLoadError: '倉庫列表讀取失敗',
   projectRepoOpenButton: '在GitHub上查看',
 };

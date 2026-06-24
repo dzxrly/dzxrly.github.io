@@ -19,3 +19,27 @@ export interface GithubRepoApiResponse {
   updated_at: string;
   pushed_at: string;
 }
+
+export enum OpenSourcePackageRegistry {
+  NPM = 'npm',
+  PYPI = 'pypi',
+}
+
+export interface OpenSourceRegistryInfo {
+  packageRegistry: OpenSourcePackageRegistry;
+  iconName: string;
+  titleKeyword: string;
+}
+
+export interface OpenSourcePackageLink {
+  source: string;
+  url: string;
+}
+
+export interface OpenSourcePackageInfo {
+  packageRegistry: OpenSourcePackageRegistry;
+  packageRegistryName: string;
+  packageName: string;
+  packageDescription: string;
+  packageLink: OpenSourcePackageLink[];
+}

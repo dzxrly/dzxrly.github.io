@@ -163,6 +163,19 @@ const gameModList: GameModInfo[] = [
       },
     ],
   },
+  {
+    gameSeries: GameSeries.MHS,
+    gameName: 'Monster Hunter: Wilds',
+    modName: 'Better4KHDTexture | 高清材质包画质增强',
+    modDescription:
+      'Graphics enhancement mod for Monster Hunter Wilds \n' + '怪物猎人荒野画质增强MOD \n',
+    modDownloadLink: [
+      {
+        source: 'Github',
+        url: 'https://github.com/dzxrly/MHWS-Better4KHDTexture',
+      },
+    ],
+  },
 ];
 
 export default { gameModList };

@@ -21,6 +21,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://eggtargaryen.com/opensource</loc>
+    <lastmod>2026-06-24</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://eggtargaryen.com/about</loc>
     <lastmod>2026-05-12</lastmod>
     <priority>0.7</priority>

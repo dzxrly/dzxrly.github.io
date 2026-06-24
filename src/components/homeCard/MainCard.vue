@@ -14,7 +14,7 @@ const cardButtonResponsiveProps = ref<ResponsiveCardBtnInterface>({
   valueMax: 12,
   valueMin: 9,
 });
-const cardBtnNumber = ref(5);
+const cardBtnNumber = ref(6);
 
 interface ShinyStar {
   dx: number;
@@ -134,6 +134,16 @@ function handlePersonalBtnTrigger() {
       background-color="var(--primary-container-color)"
       text-color="var(--on-primary-container-color)"
       title-keyword="homeBtnGameMods"
+    />
+    <card-button
+      icon-name="inventory_2"
+      :route="{
+        name: 'openSourceList',
+      }"
+      :responsive-props="cardButtonResponsiveProps"
+      background-color="var(--primary-container-color)"
+      text-color="var(--on-primary-container-color)"
+      title-keyword="homeBtnOpenSource"
     />
     <div
       class="personal-btn-trigger"

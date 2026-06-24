@@ -14,6 +14,10 @@ export default {
   gameModBtnGameNameMHSeries: 'Monster Hunter',
   gameModBtnGameNamePragmata: 'PRAGMATA',
 
+  homeBtnOpenSource: 'Open Source',
+  openSourceBtnRegistryNpm: 'npm',
+  openSourceBtnRegistryPypi: 'PyPI',
+
   homeBtnPersonal: 'About Me',
   homePersonalInfoChip1: '👀 Deep Learning & Computer Vision',
   homePersonalInfoChip2: '🔭 Astronomy Big Data & Data Mining',
@@ -24,5 +28,6 @@ export default {
   homePersonalInfoChip7: '💻 ITX PC Building',
 
   projectRepoListLoading: 'Loading Repos...',
+  projectRepoListLoadError: 'Failed to load repos',
   projectRepoOpenButton: 'View on GitHub',
 };

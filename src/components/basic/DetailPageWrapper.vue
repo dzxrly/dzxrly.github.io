@@ -45,7 +45,7 @@ watch(
         :to="props.toRoute"
       />
     </div>
-    <div ref="contentRef" class="content">
+    <div ref="contentRef" class="content scroll-y">
       <slot />
     </div>
   </div>

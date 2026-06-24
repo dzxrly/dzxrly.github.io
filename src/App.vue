@@ -21,6 +21,7 @@ const pageTitle = computed(() => {
   if (route.path === '/tools') return `${t('toolsBtnTitle')} | ${siteTitle}`;
   if (route.path === '/projects') return `${t('homeBtnMyProjects')} | ${siteTitle}`;
   if (route.path.startsWith('/gamemods')) return `${t('homeBtnGameMods')} | ${siteTitle}`;
+  if (route.path.startsWith('/opensource')) return `${t('homeBtnOpenSource')} | ${siteTitle}`;
   if (route.path === '/about') return `${t('homeBtnPersonal')} | ${siteTitle}`;
   return siteTitle;
 });

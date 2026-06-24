@@ -11,6 +11,10 @@ export default {
   gameModBtnGameNameMHSeries: '怪物猎人',
   gameModBtnGameNamePragmata: '识质存在',
 
+  homeBtnOpenSource: '开源库',
+  openSourceBtnRegistryNpm: 'npm',
+  openSourceBtnRegistryPypi: 'PyPI',
+
   homeBtnPersonal: '关于我',
   homePersonalInfoChip1: '👀 深度学习与计算机视觉',
   homePersonalInfoChip2: '🔭 天文大数据分析',
@@ -21,5 +25,6 @@ export default {
   homePersonalInfoChip7: '🖥️ ITX PC装机~',
 
   projectRepoListLoading: '读取仓库列表...',
+  projectRepoListLoadError: '仓库列表读取失败',
   projectRepoOpenButton: '在GitHub上查看',
 };

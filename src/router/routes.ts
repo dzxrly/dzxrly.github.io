@@ -37,6 +37,21 @@ const routes: RouteRecordRaw[] = [
             ],
           },
           {
+            path: '/opensource',
+            children: [
+              {
+                path: '',
+                name: 'openSourceList',
+                component: () => import('components/homeCard/OpenSourceCard.vue'),
+              },
+              {
+                path: 'packageinfo/:packageRegistry',
+                name: 'openSourceInfo',
+                component: () => import('components/homeCard/OpenSourceInfoCard.vue'),
+              },
+            ],
+          },
+          {
             path: '/about',
             component: () => import('components/homeCard/AboutMeCard.vue'),
           },
