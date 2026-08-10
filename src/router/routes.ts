@@ -25,7 +25,7 @@ const routes: RouteRecordRaw[] = [
             path: '/gamemods',
             children: [
               {
-                path: '',
+                path: '/modsList',
                 name: 'modsList',
                 component: () => import('components/homeCard/GameModCard.vue'),
               },
@@ -40,7 +40,7 @@ const routes: RouteRecordRaw[] = [
             path: '/opensource',
             children: [
               {
-                path: '',
+                path: '/openSourceList',
                 name: 'openSourceList',
                 component: () => import('components/homeCard/OpenSourceCard.vue'),
               },

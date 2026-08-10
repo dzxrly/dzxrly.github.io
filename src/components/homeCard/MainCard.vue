@@ -128,7 +128,7 @@ function handlePersonalBtnTrigger() {
     <card-button
       icon-name="build"
       :route="{
-        name: 'modsList',
+        path: '/modsList',
       }"
       :responsive-props="cardButtonResponsiveProps"
       background-color="var(--primary-container-color)"
@@ -138,7 +138,7 @@ function handlePersonalBtnTrigger() {
     <card-button
       icon-name="inventory_2"
       :route="{
-        name: 'openSourceList',
+        path: '/openSourceList',
       }"
       :responsive-props="cardButtonResponsiveProps"
       background-color="var(--primary-container-color)"
