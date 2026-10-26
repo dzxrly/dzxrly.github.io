@@ -17,9 +17,9 @@ const toolsSitesList: ToolsSites[] = [
     siteUrl: 'https://mhws-amulet.eggtargaryen.com/',
   },
   {
-    siteName: '怪物猎人：荒野怪物战斗行动逻辑可视化',
-    siteDesc: '使用决策树可视化展示怪物的战斗行动逻辑。',
-    siteUrl: 'https://mhws-monsters-ai.eggtargaryen.com/',
+    siteName: '怪物猎人：荒野解包资料站',
+    siteDesc: '可视化游戏内的多种解包数据。',
+    siteUrl: 'https://mhws-info.eggtargaryen.com/',
   },
 ];
 
