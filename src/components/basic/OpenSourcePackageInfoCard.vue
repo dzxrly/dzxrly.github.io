@@ -15,9 +15,7 @@ const props = defineProps({
     class="open-source-package-info-card-wrapper expressive-card q-ma-sm rounded-borders column"
   >
     <q-card-section class="non-selectable col-grow">
-      <span class="text-h6 text-primary q-mr-xs">{{
-        props.openSourcePackageInfo.packageName
-      }}</span>
+      <span class="expressive-card-title">{{ props.openSourcePackageInfo.packageName }}</span>
       <div class="row justify-start items-center full-width q-mt-md">
         <q-badge
           :label="props.openSourcePackageInfo.packageRegistryName"
@@ -25,7 +23,10 @@ const props = defineProps({
           outline
         />
       </div>
-      <p class="text-body1 q-my-md" style="max-lines: 2 !important; text-overflow: ellipsis">
+      <p
+        class="expressive-card-text q-my-md"
+        style="max-lines: 2 !important; text-overflow: ellipsis"
+      >
         {{ props.openSourcePackageInfo.packageDescription }}
       </p>
     </q-card-section>

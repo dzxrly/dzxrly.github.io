@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n';
-import { computed, inject, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue';
+import { computed, inject, nextTick, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue';
 import { type EventBus, useQuasar } from 'quasar';
 
 const { t } = useI18n();
@@ -9,6 +9,9 @@ const isDockOpen = ref<boolean>(false);
 const homeTitle = ref<string>('');
 const isShiny = ref<boolean>(false);
 const isShinyChecked = ref<boolean>(false);
+// 圆形展开期间浏览器把指针命中切到根元素：dock 会收到一次 pointerleave（需要忽略），
+// 触发按钮也会失去 :hover（MainCard 据此让按钮保持悬停外观）。
+const isRevealingShiny = ref<boolean>(false);
 
 // 1/4096 是宝可梦异色概率；dev 模式下放大到 50% 方便测试。判定三次，每次独立 roll，命中立即 break。
 const shinyRate = import.meta.env.DEV ? 0.5 : 1 / 4096;
@@ -23,17 +26,58 @@ let swipeClickGuardTimeout: ReturnType<typeof setTimeout> | null = null;
 const bus = inject<EventBus>('eventBus');
 provide('isShiny', isShiny);
 provide('triggerShiny', triggerShiny);
+provide('isRevealingShiny', isRevealingShiny);
 
-function triggerShiny(): boolean {
+interface RevealOrigin {
+  x: number;
+  y: number;
+}
+
+// 命中后异色配色从触发按钮中心以圆形展开（View Transitions），圆内是新配色、圆外仍是原配色；
+// 不支持的浏览器或减少动态效果时退回 app.scss 中的颜色过渡。
+// prepare 在切换配色前执行（如预载异色图片），展开时新状态已经就绪。
+function revealShiny(origin?: RevealOrigin, prepare?: () => Promise<void>) {
+  const root = document.documentElement;
+  const commit = async () => {
+    await prepare?.();
+    isShiny.value = true;
+    await nextTick();
+  };
+  if (
+    !origin ||
+    !document.startViewTransition ||
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  ) {
+    void commit();
+    return;
+  }
+  const radius = Math.hypot(
+    Math.max(origin.x, window.innerWidth - origin.x),
+    Math.max(origin.y, window.innerHeight - origin.y),
+  );
+  root.style.setProperty('--reveal-x', `${origin.x}px`);
+  root.style.setProperty('--reveal-y', `${origin.y}px`);
+  root.style.setProperty('--reveal-r', `${radius}px`);
+  root.classList.add('shiny-reveal');
+  isRevealingShiny.value = true;
+  void document.startViewTransition(commit).finished.finally(() => {
+    root.classList.remove('shiny-reveal');
+    isRevealingShiny.value = false;
+  });
+}
+
+function triggerShiny(origin?: RevealOrigin, prepare?: () => Promise<void>): boolean {
   if (isShinyChecked.value) return isShiny.value;
   isShinyChecked.value = true;
+  let hit = false;
   for (let i = 0; i < shinyAttempts; i++) {
     if (Math.random() < shinyRate) {
-      isShiny.value = true;
+      hit = true;
       break;
     }
   }
-  return isShiny.value;
+  if (hit) revealShiny(origin, prepare);
+  return hit;
 }
 
 function clearTypingInterval() {
@@ -94,6 +138,7 @@ function handleDockPointerEnter(event: PointerEvent) {
 }
 
 function handleDockPointerLeave(event: PointerEvent) {
+  if (isRevealingShiny.value) return;
   if (!isMobileDock.value && event.pointerType === 'mouse') setDockOpen(false);
 }
 
@@ -139,7 +184,7 @@ onMounted(() => {
 onBeforeUnmount(() => {
   clearTypingInterval();
   clearSwipeClickGuard();
-  document.documentElement.classList.remove('shiny');
+  document.documentElement.classList.remove('shiny', 'shiny-reveal');
 });
 </script>
 
@@ -220,7 +265,7 @@ onBeforeUnmount(() => {
     transform: translate3d(0, 20vh, 0) scale(1)
     transform-origin: center
     touch-action: none
-    transition: transform .46s var(--motion-bounce), opacity .24s var(--motion-expressive)
+    transition: transform var(--dur-spring) var(--spring), opacity var(--dur-effects) var(--effects)
     height: 20vh
     box-sizing: border-box
 
@@ -248,7 +293,8 @@ onBeforeUnmount(() => {
     height: 72vh
     transform: translate3d(0, 40vh, 0) scale(.985)
     transform-origin: center bottom
-    transition: transform .34s var(--motion-bounce), border-radius .34s var(--motion-expressive), box-shadow .24s var(--motion-expressive)
+    // 只过渡 transform：圆角和阴影在大面积、带裁剪的卡片上逐帧变化会整层重绘。
+    transition: transform var(--dur-spring) var(--spring)
     overflow: hidden
     border-top-left-radius: var(--border-radius-lg)
     border-top-right-radius: var(--border-radius-lg)
@@ -262,7 +308,7 @@ onBeforeUnmount(() => {
       touch-action: none
       -webkit-tap-highlight-color: transparent
       z-index: 1
-      transition: transform .24s var(--motion-bounce)
+      transition: transform var(--dur-spring-fast) var(--spring-fast)
 
       .home-card-modal-bar
         width: 5rem
@@ -270,13 +316,14 @@ onBeforeUnmount(() => {
         background-color: var(--outline-color)
         opacity: 0.68
         border-radius: 24px
-        transition: width .24s var(--motion-bounce), opacity .18s var(--motion-expressive), background-color .18s var(--motion-expressive)
+        transform-origin: center
+        transition: transform var(--dur-spring-fast) var(--spring-fast), opacity var(--dur-effects) var(--effects), background-color var(--dur-effects) var(--effects)
 
     .home-card-modal-bar-wrapper-open
       transform: translate3d(0, -1px, 0)
 
       .home-card-modal-bar
-        width: 3.4rem
+        transform: scaleX(.68)
         opacity: 1
         background-color: var(--primary-color)
 
@@ -312,8 +359,6 @@ onBeforeUnmount(() => {
 
   .home-card-open
     transform: translate3d(0, 0, 0) scale(1)
-    border-top-left-radius: 32px
-    border-top-right-radius: 32px
 
   .home-dock-hit-area
     position: absolute

@@ -5,14 +5,6 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'Noto Sans';
-  src: url('../fonts/NotoSansSC-Regular.ttf') format('truetype');
-  font-display: swap;
-  font-weight: 400;
-  font-style: normal;
-}
-
 // MD3 tokens + body wash colors registered as <color> so they animate when transitioned.
 // Without @property, CSS custom properties are typeless and snap on change.
 // 浏览器若不支持 @property，下面的 transition 会自动退化为 snap（与硬切换一致）。
@@ -192,13 +184,48 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: 'Noto Sans', 'Roboto', 'JetBrains Mono', sans-serif;
+  // Same system stack as the blog and the MHWS site; the bundled 10 MB
+  // Noto Sans SC file blocked every first visit.
+  font-family:
+    'Noto Sans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', 'Roboto', system-ui, sans-serif;
   font-synthesis: weight style small-caps;
+  -webkit-font-smoothing: antialiased;
+}
 
+// Tokens live on the root only: body and every portal inherit them, so a
+// theme change transitions one element instead of two.
+:root {
   --border-radius: 28px;
   --border-radius-lg: 36px;
+
+  // Material 3 Expressive shape scale.
+  --shape-s: 8px;
+  --shape-m: 12px;
+  --shape-l: 16px;
+  --shape-l-plus: 20px;
+  --shape-xl: 28px;
+  --shape-full: 999px;
+
+  // Material 3 Expressive motion. Spatial curves (position, size, shape)
+  // overshoot like a spring; effect curves (colour, opacity) never do.
+  --spring-fast: cubic-bezier(0.42, 1.67, 0.21, 0.9);
+  --spring: cubic-bezier(0.38, 1.21, 0.22, 1);
+  --effects-fast: cubic-bezier(0.31, 0.94, 0.34, 1);
+  --effects: cubic-bezier(0.34, 0.8, 0.34, 1);
+  --emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --emphasized-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --dur-spring-fast: 350ms;
+  --dur-spring: 500ms;
+  --dur-effects-fast: 150ms;
+  --dur-effects: 200ms;
+  --dur-press: 120ms;
   --motion-expressive: cubic-bezier(0.2, 0, 0, 1);
-  --motion-bounce: cubic-bezier(0.2, 0, 0, 1.2);
+  --motion-bounce: var(--spring-fast);
+
+  // State layer opacities: hover, keyboard focus, press.
+  --state-hover: 0.08;
+  --state-focus: 0.1;
+  --state-press: 0.12;
 
   --primary-color: #006a8e;
   --on-primary-color: #ffffff;
@@ -243,8 +270,7 @@ body {
 
 // Shiny palette — MD3 Expressive scheme derived from public/avatar.png
 // Source hues: gold collar (#e8b833), red eye (#d62a30), warm white body.
-html.shiny,
-html.shiny body {
+html.shiny {
   --primary-color: #835500;
   --on-primary-color: #ffffff;
   --primary-container-color: #ffddae;
@@ -288,24 +314,67 @@ html.shiny body {
 
 html,
 body {
-  background:
-    linear-gradient(145deg, var(--bg-wash-1), transparent 34%),
-    linear-gradient(25deg, var(--bg-wash-2), transparent 42%),
-    linear-gradient(315deg, var(--bg-wash-3), transparent 46%), var(--background-color);
-  background-size:
-    220% 220%,
-    240% 240%,
-    260% 260%,
-    100% 100%;
-  background-position:
-    0% 0%,
-    100% 0%,
-    50% 100%,
-    0% 0%;
-  background-repeat: no-repeat;
-  animation: home-bg-wave 28s ease-in-out infinite;
   color: var(--on-background-color);
   overflow: hidden;
+}
+
+body {
+  background: transparent;
+}
+
+// The drifting colour wash sits on two oversized fixed layers that move by
+// transform only, so the compositor drifts them without repainting the
+// viewport every frame as the old background-position animation did.
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  inset: -15%;
+  z-index: -1;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  backface-visibility: hidden;
+  animation: wash-drift-a 28s ease-in-out infinite alternate;
+}
+
+body::before {
+  background-image:
+    linear-gradient(145deg, var(--bg-wash-1), transparent 74%),
+    linear-gradient(315deg, var(--bg-wash-3), transparent 64%);
+}
+
+body::after {
+  background-image: linear-gradient(25deg, var(--bg-wash-2), transparent 64%);
+  animation-name: wash-drift-b;
+  animation-duration: 34s;
+}
+
+@keyframes wash-drift-a {
+  from {
+    transform: translate3d(-7%, -6%, 0) scale(1.06);
+  }
+  50% {
+    transform: translate3d(6%, 5%, 0) scale(1.12);
+  }
+  to {
+    transform: translate3d(2%, -7%, 0) scale(1);
+  }
+}
+
+@keyframes wash-drift-b {
+  from {
+    transform: translate3d(7%, -4%, 0) scale(1.1);
+  }
+  50% {
+    transform: translate3d(-6%, 6%, 0) scale(1);
+  }
+  to {
+    transform: translate3d(-3%, -6%, 0) scale(1.08);
+  }
+}
+
+html {
+  background: var(--background-color);
 
   // 主题切换平滑过渡。不支持 @property 的浏览器中上面注册的变量仍是无类型 token，
   // 下面的 transition 对它们没有可插值类型 → 自动退回 snap，无需 JS 检测。
@@ -342,46 +411,106 @@ body {
     --bg-wash-3 700ms var(--motion-expressive);
 }
 
-@keyframes home-bg-wave {
-  0% {
-    background-position:
-      0% 0%,
-      100% 0%,
-      50% 100%,
-      0% 0%;
+// Shiny reveal: the shiny palette spreads as a circle from the centre of the
+// button that found it (IndexPage sets --reveal-*). Inside the circle the new
+// palette shows at once, so the colour transitions above are switched off
+// for the reveal; browsers without view transitions keep them.
+html.shiny-reveal,
+html.shiny-reveal *,
+html.shiny-reveal *::before,
+html.shiny-reveal *::after {
+  transition: none !important;
+}
+
+html.shiny-reveal::view-transition-old(root),
+html.shiny-reveal::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+html.shiny-reveal::view-transition-new(root) {
+  animation: shiny-reveal 900ms var(--emphasized-decelerate) both;
+}
+
+@keyframes shiny-reveal {
+  from {
+    clip-path: circle(0 at var(--reveal-x) var(--reveal-y));
   }
-  25% {
-    background-position:
-      55% 45%,
-      60% 35%,
-      25% 65%,
-      0% 0%;
-  }
-  50% {
-    background-position:
-      100% 100%,
-      0% 100%,
-      100% 0%,
-      0% 0%;
-  }
-  75% {
-    background-position:
-      35% 70%,
-      45% 55%,
-      70% 30%,
-      0% 0%;
-  }
-  100% {
-    background-position:
-      0% 0%,
-      100% 0%,
-      50% 100%,
-      0% 0%;
+  to {
+    clip-path: circle(var(--reveal-r) at var(--reveal-x) var(--reveal-y));
   }
 }
 
 #q-app {
   min-height: 100%;
+}
+
+::selection {
+  background: var(--primary-container-color);
+  color: var(--on-primary-container-color);
+}
+
+a:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 3px;
+}
+
+// Thin rounded scrollbars without a track, as on the blog and MHWS site.
+// Firefox and Chromium 121+ read scrollbar-color; Safari uses the -webkit- rules.
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(119, 118, 128, 0.4) transparent;
+}
+
+// Material 3 Expressive buttons: a pill (or circle) squares up while pressed.
+// Metrics follow the Material 3 common button: 40px tall (2.857em of the
+// 14px button font), 24px side padding, 16px on the side of a leading icon
+// and 8px between icon and label. The pill radius is half the height: a
+// larger radius (Quasar's 28px) only visibly changes near the end of the
+// transition, so the corner snapped instead of morphing.
+// Rounded buttons also carry q-btn--rectangle, and Quasar's
+// `.q-card__actions .q-btn--rectangle { padding: 0 8px }` outranks a single
+// class, so the padding here repeats the classes to win inside card actions.
+.q-btn.q-btn--rectangle.q-btn--rounded {
+  min-height: 2.857em;
+  padding: 0 1.714em;
+  border-radius: 1.4286em;
+}
+
+.q-btn.q-btn--rectangle.q-btn--rounded:has(> .q-btn__content > .q-icon.on-left:first-child) {
+  padding-left: 1.143em;
+}
+
+// 18px icon (1.286em of the 14px button font) with an 8px gap to the label;
+// the gap is in the icon's own em (8 / 18), so it scales with the size prop.
+.q-btn.q-btn--rounded .q-btn__content > .q-icon {
+  font-size: 1.286em;
+}
+
+.q-btn.q-btn--rounded .q-btn__content > .q-icon.on-left {
+  margin-right: 0.444em;
+}
+
+.q-btn--rounded,
+.q-btn--round {
+  transition: border-radius var(--dur-spring) var(--spring);
+}
+
+.q-btn--rounded:active,
+.q-btn--rounded.q-btn--active {
+  border-radius: var(--shape-m);
+}
+
+.q-btn--round:active {
+  border-radius: var(--shape-l);
+}
+
+// Press feedback squeezes in quickly without overshoot; release springs back
+// through the slower transition above.
+.q-btn--rounded:active,
+.q-btn--round:active {
+  transition-duration: var(--dur-press);
+  transition-timing-function: var(--effects-fast);
 }
 
 // app color presets
@@ -601,38 +730,131 @@ body {
     0 2px 6px rgba(39, 38, 48, 0.08);
 }
 
+// Paint containment would clip the raised shadow below, so only layout is
+// contained. The raised shadow lives on its own layer and only fades,
+// instead of repainting a transitioning box-shadow.
 .expressive-card {
   background: var(--surface-container-low-color);
   border: 1px solid rgba(119, 118, 128, 0.14);
   box-shadow: 0 1px 2px rgba(39, 38, 48, 0.06);
-  contain: layout paint;
+  contain: layout;
+  isolation: isolate;
   transition:
-    transform 220ms var(--motion-bounce),
-    background-color 180ms var(--motion-expressive),
-    border-color 180ms var(--motion-expressive),
-    box-shadow 180ms var(--motion-expressive),
-    border-radius 220ms var(--motion-expressive);
+    transform var(--dur-spring) var(--spring),
+    background-color var(--dur-effects) var(--effects),
+    border-color var(--dur-effects) var(--effects),
+    border-radius var(--dur-spring) var(--spring);
+}
+
+.expressive-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  box-shadow:
+    0 8px 24px rgba(39, 38, 48, 0.1),
+    0 2px 6px rgba(39, 38, 48, 0.06);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-effects) var(--effects);
 }
 
 .expressive-card:hover,
 .expressive-card:focus-within {
   background: var(--surface-container-color);
-  border-color: rgba(0, 106, 142, 0.22);
+  border-color: color-mix(in srgb, var(--primary-color) 22%, transparent);
   border-radius: var(--border-radius-lg);
-  transform: translate3d(0, -2px, 0) scale(1.006);
-  box-shadow:
-    0 8px 24px rgba(39, 38, 48, 0.1),
-    0 2px 6px rgba(39, 38, 48, 0.06);
+  transform: translate3d(0, -2px, 0);
+}
+
+.expressive-card:hover::after,
+.expressive-card:focus-within::after {
+  opacity: 1;
 }
 
 @media (hover: none), (pointer: coarse) {
   .expressive-card:hover,
   .expressive-card:focus-within {
     border-radius: 30px;
-    transform: translate3d(0, -1px, 0) scale(1.002);
-    box-shadow:
-      0 5px 16px rgba(39, 38, 48, 0.09),
-      0 1px 4px rgba(39, 38, 48, 0.05);
+    transform: translate3d(0, -1px, 0);
+  }
+
+  .expressive-card:hover::after,
+  .expressive-card:focus-within::after {
+    opacity: 0.6;
+  }
+}
+
+// Material 3 shared-axis (X) transition. The old and new pages occupy the
+// same spot in the dock, so they must never be visible together: the old page
+// fades out within the first 105ms, and the new page stays transparent until
+// then before fading and sliding in. Cross-fading them showed both pages'
+// content at once as a ghost image, worst on slower mobile frames.
+// Card content in the style of the MHWS site's cards: a dark title that turns
+// primary on hover, muted body text, small-cornered chips, and an external
+// link arrow in a tonal circle that turns and squares up on hover.
+.expressive-card-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.expressive-card-title {
+  display: block;
+  min-width: 0;
+  color: var(--on-surface-color);
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  transition: color var(--dur-effects) var(--effects);
+}
+
+.expressive-card-text {
+  color: var(--on-surface-variant-color);
+  font-size: 0.875rem;
+  line-height: 1.75;
+}
+
+.expressive-card .card-arrow {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--primary-container-color);
+  color: var(--primary-color);
+  font-size: 20px;
+  transition:
+    transform var(--dur-spring) var(--spring),
+    border-radius var(--dur-spring) var(--spring);
+}
+
+.expressive-card .q-badge {
+  padding: 4px 10px;
+  border-radius: var(--shape-s);
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+.expressive-card .q-badge--outline {
+  border-color: var(--outline-color);
+  color: var(--on-surface-variant-color) !important;
+}
+
+.expressive-card:hover .expressive-card-title,
+.expressive-card:focus-within .expressive-card-title {
+  color: var(--primary-color);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .expressive-card:hover .card-arrow {
+    transform: rotate(-25deg);
+    border-radius: var(--shape-m);
   }
 }
 
@@ -641,7 +863,7 @@ body {
   transform-origin: center;
   backface-visibility: hidden;
   will-change: opacity, transform;
-  animation: route-slide-in 180ms var(--motion-expressive) both;
+  animation: route-slide-in 300ms var(--emphasized-decelerate) both;
 }
 
 .route-slide-out-forward,
@@ -650,7 +872,7 @@ body {
   backface-visibility: hidden;
   pointer-events: none;
   will-change: opacity, transform;
-  animation: route-slide-out 150ms var(--motion-expressive) both;
+  animation: route-slide-out 105ms var(--emphasized-accelerate) both;
 }
 
 .route-slide-in-back {
@@ -662,30 +884,40 @@ body {
 }
 
 @keyframes route-slide-in {
-  from {
+  0%,
+  35% {
     opacity: 0;
-    transform: translate3d(14px, 0, 0) scale(0.99);
+    transform: translate3d(30px, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
   }
 }
 
 @keyframes route-slide-out {
   to {
     opacity: 0;
-    transform: translate3d(-10px, 0, 0) scale(0.992);
+    transform: translate3d(-30px, 0, 0);
   }
 }
 
 @keyframes route-slide-in-back {
-  from {
+  0%,
+  35% {
     opacity: 0;
-    transform: translate3d(-14px, 0, 0) scale(0.99);
+    transform: translate3d(-30px, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
   }
 }
 
 @keyframes route-slide-out-back {
   to {
     opacity: 0;
-    transform: translate3d(10px, 0, 0) scale(0.992);
+    transform: translate3d(30px, 0, 0);
   }
 }
 

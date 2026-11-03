@@ -18,7 +18,7 @@ const githubRepoInfo = ref<GithubRepoApiResponse>(props.githubRepoInfo);
 <template>
   <q-card class="repo-card-wrapper expressive-card q-ma-sm rounded-borders column">
     <q-card-section class="non-selectable col-grow">
-      <span class="text-h6 text-primary q-mr-xs">{{ githubRepoInfo.name }}</span>
+      <span class="expressive-card-title">{{ githubRepoInfo.name }}</span>
       <div class="row justify-start items-center full-width">
         <div v-if="githubRepoInfo.archived" class="row justify-center items-center q-mt-md q-mr-md">
           <q-badge
@@ -37,7 +37,10 @@ const githubRepoInfo = ref<GithubRepoApiResponse>(props.githubRepoInfo);
           <span>{{ githubRepoInfo.forks_count }}</span>
         </div>
       </div>
-      <p class="text-body1 q-my-md" style="max-lines: 2 !important; text-overflow: ellipsis">
+      <p
+        class="expressive-card-text q-my-md"
+        style="max-lines: 2 !important; text-overflow: ellipsis"
+      >
         {{ githubRepoInfo.description }}
       </p>
       <div class="row justify-start items-center">

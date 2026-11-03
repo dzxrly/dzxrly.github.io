@@ -2,12 +2,14 @@
 import { type NavigationFailure, useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { computed, type PropType, ref } from 'vue';
-import { openURL, useQuasar } from 'quasar';
-import { type ResponsiveCardBtnInterface } from 'src/interface/responsive-card-btn-interface';
+import { openURL } from 'quasar';
+import {
+  cardButtonCssSize,
+  type ResponsiveCardBtnInterface,
+} from 'src/interface/responsive-card-btn-interface';
 import { type RouteInfo } from 'src/interface/route-info';
 
 const { t } = useI18n();
-const $q = useQuasar();
 
 const props = defineProps({
   route: {
@@ -48,6 +50,18 @@ const props = defineProps({
     type: String,
     default: '#081e27',
   },
+  // Keep the hover look while the pointer is not over the button, e.g.
+  // during the shiny reveal, when the browser drops :hover.
+  holdHover: {
+    type: Boolean,
+    default: false,
+  },
+  // Show the easter-egg image without the raised look, e.g. while a finger
+  // holds the tile (the parent tracks the hold with touch events).
+  flipped: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const router = useRouter();
@@ -61,18 +75,9 @@ const avatarHoverOpacity = ref<number>(isSecondaryAvatar.value ? 0 : 1);
 const secondaryAvatarTransform = ref<string>(
   isSecondaryAvatar.value ? 'translate3d(0, -50%, 0) scale(1)' : 'translate3d(0, 0, 0)',
 );
-const responsiveSize = computed(() => {
-  const size =
-    $q.screen.width * props.responsiveProps?.coefficientA + props.responsiveProps?.coefficientB;
-  if (size > props.responsiveProps?.valueMax) return props.responsiveProps?.valueMax;
-  else if (size < props.responsiveProps?.valueMin) return props.responsiveProps?.valueMin;
-  else return size;
-});
-const cardSize = computed(() => `${responsiveSize.value}rem`);
-const cardMargin = computed(() => `${responsiveSize.value * 0.01}rem`);
-const avatarSize = computed(() => `${responsiveSize.value * 0.6}rem`);
-const imageFrameWidth = computed(() => `${responsiveSize.value * 0.72}rem`);
-const imageFrameHeight = computed(() => `${responsiveSize.value * 0.38}rem`);
+const cardSize = computed(() => cardButtonCssSize(props.responsiveProps));
+// Inner sizes follow the card through --card-btn-size (set in the style below).
+const avatarSize = 'calc(var(--card-btn-size) * .6)';
 const backgroundColor = computed(() =>
   props.backgroundColor === '#eef4f8' ? 'var(--primary-container-color)' : props.backgroundColor,
 );
@@ -109,6 +114,10 @@ function routeTo(routeInfo: RouteInfo) {
 <template>
   <a
     class="custom-card-btn-wrapper rounded-borders relative-position"
+    :class="{
+      'custom-card-btn-wrapper--hover': props.holdHover,
+      'custom-card-btn-wrapper--flipped': props.flipped,
+    }"
     style="display: block"
     :href="props.route.path ?? '#'"
     :aria-label="t(props.titleKeyword)"
@@ -164,19 +173,54 @@ function routeTo(routeInfo: RouteInfo) {
 </template>
 
 <style lang="sass" scoped>
+// The easter-egg image slides in over the icon.
+=card-btn-flipped
+  .secondary-btn
+    transform: v-bind(avatarTransform)
+    opacity: v-bind(avatarHoverOpacity)
+
+  .secondary-btn-easter-egg
+    transform: v-bind(secondaryAvatarTransform)
+    opacity: 1
+
+// Raised look: hover on pointer devices, keyboard focus, or held by the parent
+// (shiny reveal). Touch screens never get it from a tap, because a tapped link
+// keeps :hover and :focus and stayed raised after coming back from its page.
+=card-btn-raised
+  transform: translate3d(0, -3px, 0)
+  border-color: color-mix(in srgb, var(--primary-color) 22%, transparent)
+  border-radius: var(--border-radius-lg)
+  box-shadow: 0 16px 32px rgba(39, 38, 48, .14), 0 3px 8px rgba(39, 38, 48, .08)
+
+  &::before
+    opacity: var(--state-hover)
+
+  .blank_href_tips_block
+    opacity: 1
+    transform: scale(1)
+
+  .custom-card-picture-in-btn
+    transform: scale(1.06) rotate(-2deg)
+
+  +card-btn-flipped
+
+// Material 3 Expressive tile: hover rounds the corners out, press squares
+// them up; the state layer (::before) only changes opacity.
 .custom-card-btn-wrapper
+  --card-btn-size: v-bind(cardSize)
   position: relative
   display: inline-block
-  width: v-bind(cardSize)
-  height: v-bind(cardSize)
+  width: var(--card-btn-size)
+  height: var(--card-btn-size)
   cursor: pointer
   background-color: v-bind(backgroundColor)
   color: v-bind(textColor)
   border: 1px solid rgba(119, 118, 128, .12)
   box-shadow: 0 1px 2px rgba(39, 38, 48, .06)
-  transition: transform .2s var(--motion-bounce), background-color .18s var(--motion-expressive), border-color .18s var(--motion-expressive), box-shadow .22s var(--motion-expressive), border-radius .2s var(--motion-expressive)
+  transition: transform var(--dur-spring) var(--spring), background-color var(--dur-effects) var(--effects), border-color var(--dur-effects) var(--effects), box-shadow var(--dur-effects) var(--effects), border-radius var(--dur-spring) var(--spring)
   user-select: none
   overflow: hidden
+  -webkit-tap-highlight-color: transparent
 
   &::before
     content: ''
@@ -186,8 +230,7 @@ function routeTo(routeInfo: RouteInfo) {
     pointer-events: none
     background: currentColor
     opacity: 0
-    transform: scale(.92)
-    transition: opacity .16s var(--motion-expressive), transform .2s var(--motion-bounce)
+    transition: opacity var(--dur-effects-fast) var(--effects-fast)
 
   .blank_href_tips_block
     position: absolute
@@ -195,15 +238,16 @@ function routeTo(routeInfo: RouteInfo) {
     right: 5%
     z-index: 1
     opacity: 0
-    transition: opacity .18s var(--motion-expressive)
+    transform: scale(.6)
+    transition: opacity var(--dur-effects) var(--effects), transform var(--dur-spring-fast) var(--spring-fast)
 
   .custom-card-picture-in-btn
-    margin: 0 0 v-bind(cardMargin) 0
-    transition: transform .24s var(--motion-bounce)
+    margin: 0 0 calc(var(--card-btn-size) * .01) 0
+    transition: transform var(--dur-spring) var(--spring)
 
   .custom-card-image-frame
-    width: v-bind(imageFrameWidth)
-    height: v-bind(imageFrameHeight)
+    width: calc(var(--card-btn-size) * .72)
+    height: calc(var(--card-btn-size) * .38)
     max-width: 78%
     min-height: 2.25rem
     overflow: visible
@@ -221,7 +265,7 @@ function routeTo(routeInfo: RouteInfo) {
     z-index: 1
     transform: translate3d(0, 0, 0)
     background-color: transparent
-    transition: transform .36s var(--motion-bounce), opacity .18s var(--motion-expressive)
+    transition: transform var(--dur-spring) var(--spring), opacity var(--dur-effects) var(--effects)
     opacity: 1
 
   .secondary-btn-easter-egg
@@ -230,51 +274,62 @@ function routeTo(routeInfo: RouteInfo) {
     z-index: 1
     transform: translate3d(0, 160%, 0) scale(.9)
     background-color: transparent
-    transition: transform .36s var(--motion-bounce), opacity .18s var(--motion-expressive)
+    transition: transform var(--dur-spring) var(--spring), opacity var(--dur-effects) var(--effects)
     opacity: 0
 
-.custom-card-btn-wrapper:hover, .custom-card-btn-wrapper:focus
-  transform: translate3d(0, -3px, 0)
-  border-color: rgba(0, 106, 142, .22)
-  border-radius: var(--border-radius-lg)
-  box-shadow: 0 16px 32px rgba(39, 38, 48, .14), 0 3px 8px rgba(39, 38, 48, .08)
+.custom-card-btn-wrapper:focus-visible, .custom-card-btn-wrapper--hover
+  +card-btn-raised
 
-  &::before
-    opacity: .08
-    transform: scale(1)
+@media (hover: hover)
+  .custom-card-btn-wrapper:hover
+    +card-btn-raised
 
-  .blank_href_tips_block
-    opacity: 1
-
-  .custom-card-picture-in-btn
-    transform: scale(1.06) rotate(-2deg)
-
-  .secondary-btn
-    transform: v-bind(avatarTransform)
-    opacity: v-bind(avatarHoverOpacity)
-
-  .secondary-btn-easter-egg
-    transform: v-bind(secondaryAvatarTransform)
-    opacity: 1
-
-.custom-card-btn-wrapper:active
-  transform: translate3d(0, 0, 0) scale(.985)
-
-  &::before
-    opacity: .14
+.custom-card-btn-wrapper:focus-visible::before
+  opacity: var(--state-focus)
 
 @media (hover: none), (pointer: coarse)
-  .custom-card-btn-wrapper:hover, .custom-card-btn-wrapper:focus
+  .custom-card-btn-wrapper:focus-visible, .custom-card-btn-wrapper--hover
     transform: translate3d(0, -1px, 0)
     box-shadow: 0 8px 18px rgba(39, 38, 48, .11), 0 2px 5px rgba(39, 38, 48, .06)
 
     .custom-card-picture-in-btn
       transform: scale(1.025)
 
+// Touch: holding the tile is the counterpart of hover. The parent sets
+// --flipped from touch events, since browsers drop :active once they
+// recognise a long press. The image starts to flip out 150ms into the hold,
+// so a quick tap only shows the press feedback, and flips back as soon as the
+// finger lifts or starts a scroll. The long-press callout is turned off so it
+// does not cover the tile.
+@media (hover: none)
+  .custom-card-btn-wrapper
+    -webkit-touch-callout: none
+
+.custom-card-btn-wrapper--flipped
+  +card-btn-flipped
+
+  .secondary-btn, .secondary-btn-easter-egg
+    transition-delay: 150ms
+
 @media (max-width: 599px)
   .custom-card-btn-wrapper
     border-radius: 24px
 
-  .custom-card-btn-wrapper:hover, .custom-card-btn-wrapper:focus
+  .custom-card-btn-wrapper:focus-visible, .custom-card-btn-wrapper--hover
     border-radius: 28px
+
+@media (max-width: 599px) and (hover: hover)
+  .custom-card-btn-wrapper:hover
+    border-radius: 28px
+
+// Press squeezes in quickly without overshoot; release springs back through
+// the slower base transition. Last, so it wins over the raised corners.
+.custom-card-btn-wrapper:active
+  transform: translate3d(0, 0, 0) scale(.97)
+  border-radius: var(--shape-l-plus)
+  transition-duration: var(--dur-press)
+  transition-timing-function: var(--effects-fast)
+
+  &::before
+    opacity: var(--state-press)
 </style>

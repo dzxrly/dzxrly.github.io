@@ -89,14 +89,25 @@ useMeta(() => ({
 
 <style lang="sass" scoped>
 .app-wrapper
+  position: relative
+  isolation: isolate
   min-height: 100vh
   width: 100%
   pointer-events: auto
-  background-color: transparent
-  opacity: 1
-  transition: background-color .2s var(--motion-expressive)
   overflow: hidden
 
-.app-wrapper-cover
+// The scrim fades as its own layer instead of repainting the whole page's
+// background colour.
+.app-wrapper::before
+  content: ''
+  position: fixed
+  inset: 0
+  z-index: -1
+  pointer-events: none
   background-color: var(--scrim-color)
+  opacity: 0
+  transition: opacity var(--dur-effects) var(--effects)
+
+.app-wrapper-cover::before
+  opacity: 1
 </style>

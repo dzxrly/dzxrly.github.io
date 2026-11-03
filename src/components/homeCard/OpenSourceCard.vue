@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { useQuasar } from 'quasar';
 import { computed, ref } from 'vue';
-import { type ResponsiveCardBtnInterface } from 'src/interface/responsive-card-btn-interface';
+import {
+  cardButtonCssSize,
+  type ResponsiveCardBtnInterface,
+} from 'src/interface/responsive-card-btn-interface';
 import CardButton from 'components/basic/CardButton.vue';
 import DetailPageWrapper from 'components/basic/DetailPageWrapper.vue';
 import openSourceList from 'src/data/open-source-list';
-
-const $q = useQuasar();
 
 const cardButtonResponsiveProps = ref<ResponsiveCardBtnInterface>({
   coefficientA: 0.015,
@@ -22,25 +22,7 @@ const availableRegistryInfoList = computed(() => {
     packageRegistries.has(registryInfo.packageRegistry),
   );
 });
-const cardBtnNumber = computed(() => availableRegistryInfoList.value.length);
-
-const cardSize = computed(() => {
-  const baseSize =
-    $q.screen.width * cardButtonResponsiveProps.value.coefficientA +
-    cardButtonResponsiveProps.value.coefficientB;
-  if (baseSize > cardButtonResponsiveProps.value.valueMax) {
-    return cardButtonResponsiveProps.value.valueMax;
-  } else if (baseSize < cardButtonResponsiveProps.value.valueMin) {
-    return cardButtonResponsiveProps.value.valueMin;
-  } else return baseSize;
-});
-const gridCardSize = computed(() => {
-  return `${cardSize.value}rem`;
-});
-const gridTemplateCols = computed(() => {
-  const maxCols = Math.floor($q.screen.width / 16 / cardSize.value);
-  return maxCols > cardBtnNumber.value ? cardBtnNumber.value : maxCols;
-});
+const gridCardSize = computed(() => cardButtonCssSize(cardButtonResponsiveProps.value));
 </script>
 
 <template>
@@ -69,7 +51,7 @@ const gridTemplateCols = computed(() => {
 .open-source-nav-list
   display: grid
   grid-template-rows: repeat(auto-fill, v-bind(gridCardSize))
-  grid-template-columns: repeat(v-bind(gridTemplateCols), v-bind(gridCardSize))
+  grid-template-columns: repeat(auto-fit, v-bind(gridCardSize))
   gap: clamp(.65rem, 2vw, 1rem)
   padding-left: .5rem
   padding-right: .5rem

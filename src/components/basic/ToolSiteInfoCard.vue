@@ -23,13 +23,13 @@ const props = defineProps({
         v-ripple
       >
         <q-card-section class="non-selectable col-grow">
-          <div class="row justify-between items-center full-width">
-            <span class="text-h6 text-primary q-mr-xs">{{ props.toolSiteInfo.siteName }}</span>
-            <q-icon class="text-h5 text-primary" name="open_in_new" />
+          <div class="expressive-card-heading">
+            <span class="expressive-card-title">{{ props.toolSiteInfo.siteName }}</span>
+            <span class="card-arrow" aria-hidden="true"><q-icon name="open_in_new" /></span>
           </div>
           <p
             v-if="props.toolSiteInfo?.siteDesc"
-            class="text-body1 q-my-md"
+            class="expressive-card-text q-my-md"
             style="max-lines: 2 !important; text-overflow: ellipsis"
           >
             {{ props.toolSiteInfo.siteDesc }}
