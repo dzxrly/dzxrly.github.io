@@ -186,8 +186,9 @@ function routeTo(routeInfo: RouteInfo) {
 // Raised look: hover on pointer devices, keyboard focus, or held by the parent
 // (shiny reveal). Touch screens never get it from a tap, because a tapped link
 // keeps :hover and :focus and stayed raised after coming back from its page.
+// No lift or scaling: moving the tile, or scaling its icon, with a transform
+// drew them as a resampled bitmap, blurry until the animation ended.
 =card-btn-raised
-  transform: translate3d(0, -3px, 0)
   border-color: color-mix(in srgb, var(--primary-color) 22%, transparent)
   border-radius: var(--border-radius-lg)
   box-shadow: 0 16px 32px rgba(39, 38, 48, .14), 0 3px 8px rgba(39, 38, 48, .08)
@@ -200,7 +201,7 @@ function routeTo(routeInfo: RouteInfo) {
     transform: scale(1)
 
   .custom-card-picture-in-btn
-    transform: scale(1.06) rotate(-2deg)
+    transform: rotate(-3deg)
 
   +card-btn-flipped
 
@@ -217,7 +218,7 @@ function routeTo(routeInfo: RouteInfo) {
   color: v-bind(textColor)
   border: 1px solid rgba(119, 118, 128, .12)
   box-shadow: 0 1px 2px rgba(39, 38, 48, .06)
-  transition: transform var(--dur-spring) var(--spring), background-color var(--dur-effects) var(--effects), border-color var(--dur-effects) var(--effects), box-shadow var(--dur-effects) var(--effects), border-radius var(--dur-spring) var(--spring)
+  transition: background-color var(--dur-effects) var(--effects), border-color var(--dur-effects) var(--effects), box-shadow var(--dur-effects) var(--effects), border-radius var(--dur-spring) var(--spring)
   user-select: none
   overflow: hidden
   -webkit-tap-highlight-color: transparent
@@ -289,11 +290,7 @@ function routeTo(routeInfo: RouteInfo) {
 
 @media (hover: none), (pointer: coarse)
   .custom-card-btn-wrapper:focus-visible, .custom-card-btn-wrapper--hover
-    transform: translate3d(0, -1px, 0)
     box-shadow: 0 8px 18px rgba(39, 38, 48, .11), 0 2px 5px rgba(39, 38, 48, .06)
-
-    .custom-card-picture-in-btn
-      transform: scale(1.025)
 
 // Touch: holding the tile is the counterpart of hover. The parent sets
 // --flipped from touch events, since browsers drop :active once they
@@ -325,7 +322,6 @@ function routeTo(routeInfo: RouteInfo) {
 // Press squeezes in quickly without overshoot; release springs back through
 // the slower base transition. Last, so it wins over the raised corners.
 .custom-card-btn-wrapper:active
-  transform: translate3d(0, 0, 0) scale(.97)
   border-radius: var(--shape-l-plus)
   transition-duration: var(--dur-press)
   transition-timing-function: var(--effects-fast)
