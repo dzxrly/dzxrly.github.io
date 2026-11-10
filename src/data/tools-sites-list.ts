@@ -21,6 +21,11 @@ const toolsSitesList: ToolsSites[] = [
     siteDesc: '可视化游戏内的多种解包数据。',
     siteUrl: 'https://mhws-info.eggtargaryen.com/',
   },
+  {
+    siteName: 'AI 前端测试对比',
+    siteDesc: '在多项前端任务中对比不同AI模型的效果。',
+    siteUrl: 'https://ai-frontend-test.eggtargaryen.com/',
+  },
 ];
 
 export default { toolsSitesList };
