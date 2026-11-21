@@ -921,6 +921,55 @@ a:focus-visible {
   }
 }
 
+.loading-indicator {
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--primary-container-color);
+
+  &--large {
+    width: 48px;
+  }
+
+  &::after {
+    content: '';
+    width: 62.5%;
+    height: 62.5%;
+    border-radius: 50%;
+    background: var(--primary-color);
+    animation:
+      loading-morph 2.4s var(--spring) infinite,
+      loading-turn 4.8s linear infinite;
+  }
+}
+
+@keyframes loading-morph {
+  0%,
+  100% {
+    border-radius: 50%;
+  }
+  20% {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  }
+  40% {
+    border-radius: 20%;
+  }
+  60% {
+    border-radius: 50% 50% 20% 80% / 25% 80% 20% 75%;
+  }
+  80% {
+    border-radius: 70% 30% 50% 50% / 30% 50% 50% 70%;
+  }
+}
+
+@keyframes loading-turn {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

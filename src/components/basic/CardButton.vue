@@ -145,7 +145,7 @@ function routeTo(routeInfo: RouteInfo) {
       >
         <q-img :src="props.avatar" :alt="t(props.titleKeyword)" fit="contain" no-spinner>
           <template v-slot:loading>
-            <q-spinner-hourglass color="primary" />
+            <span class="loading-indicator" aria-hidden="true" />
           </template>
         </q-img>
       </div>

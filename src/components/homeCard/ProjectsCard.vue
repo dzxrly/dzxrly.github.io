@@ -99,8 +99,12 @@ async function fetchGithubRepos(_index: number, done: InfiniteScrollDone) {
           class="column justify-center items-center full-width"
           :class="{ 'q-py-xl': isInitialLoading, 'q-py-lg': !isInitialLoading }"
         >
-          <q-spinner-hourglass :size="isInitialLoading ? '5vw' : '2rem'" color="primary" />
-          <span v-if="isInitialLoading" class="text-subtitle1 text-bold text-primary">{{
+          <span
+            class="loading-indicator"
+            :class="{ 'loading-indicator--large': isInitialLoading }"
+            aria-hidden="true"
+          />
+          <span v-if="isInitialLoading" class="q-mt-sm text-subtitle1 text-bold text-primary">{{
             t('projectRepoListLoading')
           }}</span>
         </div>
