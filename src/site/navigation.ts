@@ -42,3 +42,53 @@ export function pageFromPath(path: string): SitePage | undefined {
   const normalized = localizedPath(path.toLowerCase(), defaultLocale);
   return sitePages.find((page) => pages[page] === normalized);
 }
+
+const localeStorageKey = 'site-locale';
+const crawlerUserAgent =
+  /bot|crawler|spider|slurp|bingpreview|lighthouse|facebookexternalhit|twitterbot|discordbot|telegrambot|whatsapp|applebot|petalbot|bytespider|yandex|sogou|yisouspider/i;
+
+export function resolveBrowserLocale(languages: readonly string[]): SiteLocale {
+  for (const rawTag of languages) {
+    const tag = rawTag.trim().toLowerCase();
+    if (!tag) continue;
+    if (tag === 'en' || tag.startsWith('en-')) return 'en-US';
+    if (tag === 'zh' || tag.startsWith('zh-')) {
+      return /(?:^|-)hant(?:$|-)|(?:^|-)(?:tw|hk|mo)(?:$|-)/.test(tag) ? 'zh-Hant' : 'zh-Hans';
+    }
+  }
+  return defaultLocale;
+}
+
+export function savePreferredLocale(locale: SiteLocale): void {
+  if (typeof localStorage === 'undefined') return;
+  try {
+    localStorage.setItem(localeStorageKey, locale);
+  } catch {
+    // Ignore storage quota / privacy mode failures.
+  }
+}
+
+export function getSavedLocale(): SiteLocale | undefined {
+  if (typeof localStorage === 'undefined') return undefined;
+  try {
+    const value = localStorage.getItem(localeStorageKey);
+    return value && siteLocales.includes(value as SiteLocale) ? (value as SiteLocale) : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+export function detectInitialLocale(): SiteLocale {
+  if (typeof navigator === 'undefined') return defaultLocale;
+  if (crawlerUserAgent.test(navigator.userAgent)) return defaultLocale;
+
+  const saved = getSavedLocale();
+  if (saved) return saved;
+
+  const preferred = navigator.languages?.length
+    ? navigator.languages
+    : navigator.language
+      ? [navigator.language]
+      : [];
+  return resolveBrowserLocale(preferred);
+}

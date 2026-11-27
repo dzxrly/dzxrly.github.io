@@ -3,7 +3,7 @@ import { useI18n } from 'vue-i18n';
 import { inject, ref } from 'vue';
 import { type EventBus } from 'quasar';
 import { useRoute } from 'vue-router';
-import { localizedPath, locales, siteLocales } from 'src/site/navigation';
+import { localizedPath, locales, savePreferredLocale, siteLocales } from 'src/site/navigation';
 
 const { t, locale } = useI18n({ useScope: 'global' });
 const route = useRoute();
@@ -41,6 +41,7 @@ bus?.on('set-background-cover', (value: boolean) => {
             :class="{ 'language-current': option === locale }"
             :to="{ path: localizedPath(route.path, option), query: route.query, hash: route.hash }"
             :hreflang="locales[option].lang"
+            @click="savePreferredLocale(option)"
           >
             <q-item-section avatar>
               <q-icon :name="option === locale ? 'check' : ''" color="on-secondary-container" />

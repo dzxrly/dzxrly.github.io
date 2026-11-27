@@ -4,11 +4,14 @@ import {
   createRouter,
   createWebHashHistory,
   createWebHistory,
+  START_LOCATION,
   type RouteLocationNormalized,
 } from 'vue-router';
 import routes from './routes';
 import { LoadingBar } from 'quasar';
 import {
+  defaultLocale,
+  detectInitialLocale,
   localeFromPath,
   localizedPath,
   pageFromPath,
@@ -52,7 +55,19 @@ export default defineRouter(function (/* { store, ssrContext } */) {
     await Promise.all(loaders.map((loader) => loader()));
   }
 
-  Router.beforeEach(async (to) => {
+  Router.beforeEach(async (to, from) => {
+    if (!process.env.SERVER && from === START_LOCATION && to.path === '/' && !to.redirectedFrom) {
+      const preferredLocale = detectInitialLocale();
+      if (preferredLocale !== defaultLocale) {
+        return {
+          path: localizedPath(pages.home, preferredLocale),
+          query: to.query,
+          hash: to.hash,
+          replace: true,
+        };
+      }
+    }
+
     const page = pageFromPath(to.path);
     if (page) {
       const path = localizedPath(pages[page], localeFromPath(to.path));
