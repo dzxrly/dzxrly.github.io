@@ -7,9 +7,16 @@ import { useI18n } from 'vue-i18n';
 import DetailPageWrapper from 'components/basic/DetailPageWrapper.vue';
 
 const { t } = useI18n();
+const repoPageSize = 12;
 const githubRepoList = shallowRef<GitHubRepo[]>(githubReposSnapshot);
+const visibleRepoCount = ref(repoPageSize);
 const listLoadError = ref(false);
 const isRefreshing = ref(true);
+
+function showMoreRepos(_index: number, done: () => void) {
+  visibleRepoCount.value += repoPageSize;
+  done();
+}
 
 onMounted(async () => {
   try {
@@ -25,14 +32,21 @@ onMounted(async () => {
 
 <template>
   <detail-page-wrapper>
-    <div class="row justify-center items-stretch full-width wrap">
-      <project-info
-        class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4"
-        v-for="githubRepo in githubRepoList"
-        :key="githubRepo.name"
-        :githubRepoInfo="githubRepo"
-      />
-    </div>
+    <q-infinite-scroll
+      :disable="visibleRepoCount >= githubRepoList.length"
+      :offset="300"
+      @load="showMoreRepos"
+    >
+      <div class="row justify-center items-stretch full-width wrap">
+        <project-info
+          class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4"
+          v-for="(githubRepo, index) in githubRepoList"
+          v-show="index < visibleRepoCount"
+          :key="githubRepo.name"
+          :githubRepoInfo="githubRepo"
+        />
+      </div>
+    </q-infinite-scroll>
     <div
       v-if="listLoadError"
       class="column justify-center items-center full-width q-py-lg text-negative"
