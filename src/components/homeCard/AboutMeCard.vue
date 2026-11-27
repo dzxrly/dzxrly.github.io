@@ -3,13 +3,11 @@ import { computed, inject, ref } from 'vue';
 import { openURL, useQuasar } from 'quasar';
 import { useI18n } from 'vue-i18n';
 import PersonalInfo from 'src/data/personal-info';
-import { type PersonalWebSite } from 'src/interface/personal-info-interface';
 import DetailPageWrapper from 'components/basic/DetailPageWrapper.vue';
 
 const $q = useQuasar();
 const { t } = useI18n();
-const languageBadgeUrl = ref<string[]>(PersonalInfo.languageBadgeUrlList);
-const webSiteUrl = ref<PersonalWebSite[]>(PersonalInfo.personalWebSiteList);
+const { languageBadges, personalWebSiteList } = PersonalInfo;
 
 const isShiny = ref(inject<boolean>('isShiny') || false);
 
@@ -25,9 +23,18 @@ const isLtSm = computed(() => $q.screen.lt.sm);
           class="cursor-pointer"
           rounded
           size="15rem"
-          @click="openURL('https://bulbapedia.bulbagarden.net/wiki/Reshiram_(Pok%C3%A9mon)')"
+          @click="
+            openURL('https://bulbapedia.bulbagarden.net/wiki/Reshiram_(Pok%C3%A9mon)', undefined, {
+              noreferrer: true,
+            })
+          "
         >
-          <img :src="isShiny ? '/avatar.png' : '/avatar_s.png'" alt="avatar" />
+          <img
+            :src="isShiny ? '/avatar.png' : '/avatar_s.png'"
+            alt="Egg Targaryen · Reshiram"
+            width="460"
+            height="460"
+          />
         </q-avatar>
       </div>
       <div
@@ -63,8 +70,8 @@ const isLtSm = computed(() => $q.screen.lt.sm);
             :class="isLtSm ? 'justify-center' : 'justify-start'"
             class="row items-center wrap q-mt-md"
           >
-            <div v-for="langBadge in languageBadgeUrl" :key="langBadge" class="q-mr-sm q-mb-sm">
-              <img :src="langBadge" alt="language badge" loading="lazy" />
+            <div v-for="badge in languageBadges" :key="badge.name" class="q-mr-sm q-mb-sm">
+              <img :src="badge.url" :alt="badge.name" height="28" loading="lazy" />
             </div>
           </div>
           <div
@@ -72,18 +79,21 @@ const isLtSm = computed(() => $q.screen.lt.sm);
             class="row items-center wrap q-mt-md"
           >
             <q-btn
-              v-for="webSite in webSiteUrl"
+              v-for="webSite in personalWebSiteList"
               :key="webSite.name"
-              :href="webSite.url.includes('@') ? `mailto:${webSite.url}` : webSite.url"
+              :href="webSite.url"
+              v-bind="
+                /^https?:\/\//i.test(webSite.url)
+                  ? { target: '_blank', rel: 'noopener noreferrer', referrerpolicy: 'no-referrer' }
+                  : {}
+              "
               class="q-mr-sm q-mb-sm"
-              referrerpolicy="no-referrer"
               color="primary"
               :label="webSite.name"
               no-caps
               unelevated
               rounded
               size="md"
-              target="_blank"
               type="a"
             />
           </div>

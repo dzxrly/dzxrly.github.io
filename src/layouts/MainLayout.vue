@@ -2,17 +2,14 @@
 import { useI18n } from 'vue-i18n';
 import { inject, ref } from 'vue';
 import { type EventBus } from 'quasar';
+import { useRoute } from 'vue-router';
+import { localizedPath, locales, siteLocales } from 'src/site/navigation';
 
-const { locale } = useI18n({ useScope: 'global' });
+const { t, locale } = useI18n({ useScope: 'global' });
+const route = useRoute();
 
 const bus = inject<EventBus>('eventBus');
 const setBackgroundCover = ref<boolean>(false);
-
-const languageDropdownMenuOptions = [
-  { value: 'en-US', label: 'English' },
-  { value: 'zh-Hans', label: '简体中文' },
-  { value: 'zh-Hant', label: '繁體中文' },
-];
 
 bus?.on('set-background-cover', (value: boolean) => {
   setBackgroundCover.value = value;
@@ -33,24 +30,24 @@ bus?.on('set-background-cover', (value: boolean) => {
         content-class="language-menu"
         flat
         icon="translate"
-        aria-label="Switch language"
+        :aria-label="t('navigation.switchLanguage')"
       >
         <q-list class="bg-secondary-container text-on-secondary-container">
           <q-item
-            v-for="option in languageDropdownMenuOptions"
-            :key="option.value"
+            v-for="option in siteLocales"
+            :key="option"
             v-ripple
             clickable
-            :class="{ 'language-current': option.value === locale }"
-            @click="locale = option.value"
+            :class="{ 'language-current': option === locale }"
+            :to="{ path: localizedPath(route.path, option), query: route.query, hash: route.hash }"
+            :hreflang="locales[option].lang"
           >
             <q-item-section avatar>
-              <q-icon
-                :name="option.value === locale ? 'check' : ''"
-                color="on-secondary-container"
-              />
+              <q-icon :name="option === locale ? 'check' : ''" color="on-secondary-container" />
             </q-item-section>
-            <q-item-section class="text-on-secondary-container">{{ option.label }}</q-item-section>
+            <q-item-section class="text-on-secondary-container" :lang="locales[option].lang">{{
+              locales[option].label
+            }}</q-item-section>
           </q-item>
         </q-list>
       </q-btn-dropdown>

@@ -2,6 +2,8 @@
 import CardButton from 'components/basic/CardButton.vue';
 import { computed, inject, onBeforeUnmount, onDeactivated, ref, watch, type Ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { resolveLocalizedRoute } from 'src/router/localized-route';
+import { pages } from 'src/site/navigation';
 import { LoadingBar } from 'quasar';
 import {
   cardButtonCssSize,
@@ -39,7 +41,7 @@ const shinyFXFired = ref<boolean>(false);
 const holdPersonalBtnHover = ref<boolean>(false);
 let starsTimer: ReturnType<typeof setTimeout> | null = null;
 
-const personalBtnBgImg = computed(() => (isShiny.value ? '643s.gif' : '643.gif'));
+const personalBtnBgImg = computed(() => (isShiny.value ? '/643s.gif' : '/643.gif'));
 const gridCardSize = computed(() => cardButtonCssSize(cardButtonResponsiveProps.value));
 
 function buildStars(): ShinyStar[] {
@@ -83,7 +85,7 @@ function startStars() {
 // 异色 gif 在展开前载入，圆形扫过按钮时直接显示新图；最多等待 1.5 秒，失败也照常展开。
 function preloadShinyImage(): Promise<void> {
   const image = new Image();
-  image.src = '643s.gif';
+  image.src = '/643s.gif';
   const loaded = image.decode().then(
     () => undefined,
     () => undefined,
@@ -191,7 +193,9 @@ function dwellThenNavigate() {
   clearShowcaseWaits();
   showcaseTimer = setTimeout(() => {
     showcaseTimer = null;
-    void router.push('/about').finally(endShowcase);
+    void router
+      .push(resolveLocalizedRoute(router, { path: pages.about }).fullPath)
+      .finally(endShowcase);
   }, SHOWCASE_DWELL_MS);
 }
 
@@ -250,7 +254,9 @@ function handlePersonalBtnContextMenu(event: Event) {
   if (isTouchHolding.value) event.preventDefault();
 }
 
-function handlePersonalBtnClickCapture(event: Event) {
+function handlePersonalBtnClickCapture(event: MouseEvent) {
+  if (event.button !== 0 || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey)
+    return;
   const isTouchTap = lastPointerType === 'touch';
   if (!suppressNextClick && !isShowcasing.value && !isTouchTap) return;
   event.preventDefault();
@@ -293,7 +299,7 @@ function handlePersonalBtnSlideEnd(event: TransitionEvent) {
     <card-button
       icon-name="home_repair_service"
       :route="{
-        path: '/tools',
+        path: pages.tools,
       }"
       :responsive-props="cardButtonResponsiveProps"
       background-color="var(--primary-container-color)"
@@ -303,7 +309,7 @@ function handlePersonalBtnSlideEnd(event: TransitionEvent) {
     <card-button
       icon-name="folder"
       :route="{
-        path: '/projects',
+        path: pages.projects,
       }"
       :responsive-props="cardButtonResponsiveProps"
       background-color="var(--primary-container-color)"
@@ -313,7 +319,7 @@ function handlePersonalBtnSlideEnd(event: TransitionEvent) {
     <card-button
       icon-name="build"
       :route="{
-        path: '/modsList',
+        path: pages.gamemods,
       }"
       :responsive-props="cardButtonResponsiveProps"
       background-color="var(--primary-container-color)"
@@ -323,7 +329,7 @@ function handlePersonalBtnSlideEnd(event: TransitionEvent) {
     <card-button
       icon-name="inventory_2"
       :route="{
-        path: '/openSourceList',
+        path: pages.opensource,
       }"
       :responsive-props="cardButtonResponsiveProps"
       background-color="var(--primary-container-color)"
@@ -345,7 +351,7 @@ function handlePersonalBtnSlideEnd(event: TransitionEvent) {
       <card-button
         icon-name="person"
         :route="{
-          path: '/about',
+          path: pages.about,
         }"
         :responsive-props="cardButtonResponsiveProps"
         :secondary-avatar="personalBtnBgImg"

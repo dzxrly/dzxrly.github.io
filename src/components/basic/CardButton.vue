@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import { type NavigationFailure, useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { computed, type PropType, ref } from 'vue';
-import { openURL } from 'quasar';
+import { resolveLocalizedRoute } from 'src/router/localized-route';
 import {
   cardButtonCssSize,
   type ResponsiveCardBtnInterface,
@@ -84,30 +84,33 @@ const backgroundColor = computed(() =>
 const textColor = computed(() =>
   props.textColor === '#081e27' ? 'var(--on-primary-container-color)' : props.textColor,
 );
-const isExternalRoute = computed(() => props.route.path?.startsWith('http') ?? false);
-const externalLinkAttrs = computed(() =>
-  isExternalRoute.value ? { target: '_blank', rel: 'noopener noreferrer' } : {},
-);
+const destination = computed(() => {
+  const path = props.route.path;
+  return path && /^https?:\/\//i.test(path)
+    ? { href: path, target: '_blank', rel: 'noopener noreferrer' }
+    : resolveLocalizedRoute(router, props.route);
+});
+const externalLinkAttrs = computed(() => {
+  const link = destination.value;
+  return 'target' in link ? { target: link.target, rel: link.rel } : {};
+});
 
-function routeTo(routeInfo: RouteInfo) {
-  const handleNavigationFailure = (error: NavigationFailure) => {
+function navigate(event: MouseEvent) {
+  if (
+    !('fullPath' in destination.value) ||
+    event.defaultPrevented ||
+    event.button !== 0 ||
+    event.ctrlKey ||
+    event.metaKey ||
+    event.altKey ||
+    event.shiftKey
+  )
+    return;
+
+  event.preventDefault();
+  void router.push(destination.value.fullPath).catch((error: unknown) => {
     console.error('路由跳转失败:', error);
-  };
-  if (routeInfo.name) {
-    (routeInfo.params
-      ? router.push({
-          name: routeInfo.name,
-          params: routeInfo.params,
-        })
-      : router.push({ name: routeInfo.name })
-    ).catch(handleNavigationFailure);
-  } else {
-    if (routeInfo.path?.indexOf('http') === -1) {
-      router.push({ path: routeInfo.path }).catch(handleNavigationFailure);
-    } else {
-      openURL(routeInfo.path ?? '#');
-    }
-  }
+  });
 }
 </script>
 
@@ -119,14 +122,14 @@ function routeTo(routeInfo: RouteInfo) {
       'custom-card-btn-wrapper--flipped': props.flipped,
     }"
     style="display: block"
-    :href="props.route.path ?? '#'"
+    :href="destination.href"
     :aria-label="t(props.titleKeyword)"
     v-bind="externalLinkAttrs"
-    @click.prevent="routeTo(props.route)"
+    @click="navigate"
     referrerpolicy="strict-origin-when-cross-origin"
     v-ripple
   >
-    <div v-if="isExternalRoute" class="blank_href_tips_block">
+    <div v-if="'target' in destination" class="blank_href_tips_block">
       <q-icon name="open_in_new" color="primary" size="xs" />
     </div>
     <div class="secondary-btn column justify-center items-center full-width full-height wrap">

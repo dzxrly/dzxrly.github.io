@@ -2,7 +2,10 @@
 import { computed, nextTick, type PropType, ref, watch } from 'vue';
 import { useQuasar } from 'quasar';
 import { type RouteInfo } from 'src/interface/route-info';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
+import { resolveLocalizedRoute } from 'src/router/localized-route';
+import { pageFromPath } from 'src/site/navigation';
+import { useI18n } from 'vue-i18n';
 
 const props = defineProps({
   toRoute: {
@@ -17,6 +20,10 @@ const props = defineProps({
 
 const $q = useQuasar();
 const route = useRoute();
+const router = useRouter();
+const { t } = useI18n();
+const page = computed(() => pageFromPath(route.path));
+const backHref = computed(() => resolveLocalizedRoute(router, props.toRoute).fullPath);
 const contentRef = ref<HTMLElement | null>(null);
 
 const isLtSm = computed(() => $q.screen.lt.sm);
@@ -41,11 +48,12 @@ watch(
         flat
         icon="arrow_back"
         round
-        aria-label="Back"
-        :to="props.toRoute"
+        :aria-label="t('navigation.back')"
+        :to="backHref"
       />
     </div>
     <div ref="contentRef" class="content scroll-y">
+      <h2 v-if="page" class="q-sr-only">{{ t(`seo.${page}.title`) }}</h2>
       <slot />
     </div>
   </div>

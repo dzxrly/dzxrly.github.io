@@ -21,7 +21,7 @@ const gridCardSize = computed(() => cardButtonCssSize(cardButtonResponsiveProps.
   <detail-page-wrapper>
     <div class="game-mod-nav-list full-width q-py-md">
       <card-button
-        avatar="publicAssets/gameLogos/logo_mhs.png"
+        avatar="/publicAssets/gameLogos/logo_mhs.png"
         :route="{
           name: 'modInfo',
           params: {
@@ -34,7 +34,7 @@ const gridCardSize = computed(() => cardButtonCssSize(cardButtonResponsiveProps.
         title-keyword="gameModBtnGameNameMHSeries"
       />
       <card-button
-        avatar="publicAssets/gameLogos/logo_pragmata.png"
+        avatar="/publicAssets/gameLogos/logo_pragmata.png"
         :route="{
           name: 'modInfo',
           params: {

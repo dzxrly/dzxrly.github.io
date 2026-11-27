@@ -1,24 +1,16 @@
 <script setup lang="ts">
-import { type GithubRepoApiResponse } from 'src/interface/open-source-interface';
-import { type PropType, ref } from 'vue';
+import type { GitHubRepo } from 'src/api/github-repos';
 import { useI18n } from 'vue-i18n';
 
-const props = defineProps({
-  githubRepoInfo: {
-    type: Object as PropType<GithubRepoApiResponse>,
-    required: true,
-  },
-});
+const { githubRepoInfo } = defineProps<{ githubRepoInfo: GitHubRepo }>();
 
 const { t } = useI18n();
-
-const githubRepoInfo = ref<GithubRepoApiResponse>(props.githubRepoInfo);
 </script>
 
 <template>
   <q-card class="repo-card-wrapper expressive-card q-ma-sm rounded-borders column">
     <q-card-section class="non-selectable col-grow">
-      <span class="expressive-card-title">{{ githubRepoInfo.name }}</span>
+      <h3 class="expressive-card-title">{{ githubRepoInfo.name }}</h3>
       <div class="row justify-start items-center full-width">
         <div v-if="githubRepoInfo.archived" class="row justify-center items-center q-mt-md q-mr-md">
           <q-badge
@@ -68,6 +60,7 @@ const githubRepoInfo = ref<GithubRepoApiResponse>(props.githubRepoInfo);
         color="primary"
         :href="githubRepoInfo.html_url"
         target="_blank"
+        rel="noopener noreferrer"
         referrerpolicy="no-referrer"
         no-caps
       >

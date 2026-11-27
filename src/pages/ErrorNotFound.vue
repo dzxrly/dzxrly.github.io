@@ -1,3 +1,12 @@
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+import { useRoute } from 'vue-router';
+import { localeFromPath, localizedPath, pages } from 'src/site/navigation';
+
+const { t } = useI18n();
+const route = useRoute();
+</script>
+
 <template>
   <div id="cf-wrapper full-width">
     <div id="cf-error-details" class="p-0">
@@ -5,10 +14,9 @@
         <h1
           class="inline-block sm:block sm:mb-2 font-light text-60 lg:text-4xl text-black-dark leading-tight mr-2"
         >
-          <span class="inline-block">Not Found</span>
-          <span class="code-label">Error code 404</span>
+          <span class="inline-block">{{ t('navigation.notFound') }}</span>
+          <span class="code-label">404</span>
         </h1>
-        <div class="mt-3">2025-12-10 03:50:29 UTC</div>
       </header>
       <div class="my-8 bg-gradient-gray">
         <div class="w-240 lg:w-full mx-auto">
@@ -75,11 +83,13 @@
         <div class="clearfix">
           <div class="w-1/2 md:w-full float-left pr-6 md:pb-10 md:pr-0 leading-relaxed">
             <h2 class="text-3xl font-normal leading-1.3 mb-4">What happened?</h2>
-            The URL you wanna go to is missing.
+            {{ t('navigation.notFoundDescription') }}
           </div>
           <div class="w-1/2 md:w-full float-left leading-relaxed">
             <h2 class="text-3xl font-normal leading-1.3 mb-4">What can I do?</h2>
-            Back to the last page~
+            <router-link :to="localizedPath(pages.home, localeFromPath(route.path))">
+              {{ t('navigation.home') }}
+            </router-link>
           </div>
         </div>
       </div>

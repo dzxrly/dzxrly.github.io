@@ -1,0 +1,433 @@
+[
+  {
+    "name": "MHWS-BoxItemEditor",
+    "html_url": "https://github.com/dzxrly/MHWS-BoxItemEditor",
+    "description": "ItemBox Editor for Monster Hunter Wilds / 怪物猎人：荒野道具箱编辑器",
+    "fork": false,
+    "stargazers_count": 37,
+    "language": "Lua",
+    "forks_count": 8,
+    "archived": false,
+    "license": {
+      "key": "mit"
+    },
+    "updated_at": "2026-11-08T07:27:04Z",
+    "pushed_at": "2026-07-24T02:37:09Z"
+  },
+  {
+    "name": "AstroYOLO",
+    "html_url": "https://github.com/dzxrly/AstroYOLO",
+    "description": "AstroYOLO: A CNN and Transformer Hybrid Deep Learning Object Detection Model for Blue Horizontal-branch Stars",
+    "fork": false,
+    "stargazers_count": 6,
+    "language": "Python",
+    "forks_count": 0,
+    "archived": false,
+    "license": {
+      "key": "mit"
+    },
+    "updated_at": "2025-04-21T08:59:16Z",
+    "pushed_at": "2023-10-11T09:35:08Z"
+  },
+  {
+    "name": "MHST3-in-json",
+    "html_url": "https://github.com/dzxrly/MHST3-in-json",
+    "description": "The MHST3's all data with json format, exported from user.3 files. Refer to https://github.com/dtlnor/MHWs-in-json",
+    "fork": false,
+    "stargazers_count": 4,
+    "language": "Python",
+    "forks_count": 0,
+    "archived": false,
+    "license": {
+      "key": "mit"
+    },
+    "updated_at": "2026-08-27T10:40:07Z",
+    "pushed_at": "2026-11-23T10:33:51Z"
+  },
+  {
+    "name": "MHWS-in-json",
+    "html_url": "https://github.com/dzxrly/MHWS-in-json",
+    "description": "MHWS game data export libraries similar to https://github.com/eigeen/mhws-data-dump-scripts and https://github.com/dtlnor/MHWs-in-json",
+    "fork": false,
+    "stargazers_count": 3,
+    "language": "Python",
+    "forks_count": 0,
+    "archived": false,
+    "license": {
+      "key": "mit"
+    },
+    "updated_at": "2026-11-15T11:28:09Z",
+    "pushed_at": "2026-11-23T07:30:44Z"
+  },
+  {
+    "name": "PyREUser3",
+    "html_url": "https://github.com/dzxrly/PyREUser3",
+    "description": "A Python package for RE Engine .user.3 file export & re-pack.",
+    "fork": false,
+    "stargazers_count": 3,
+    "language": "Python",
+    "forks_count": 0,
+    "archived": false,
+    "license": {
+      "key": "mit"
+    },
+    "updated_at": "2026-09-22T18:46:20Z",
+    "pushed_at": "2026-11-27T02:08:50Z"
+  },
+  {
+    "name": "CatalogFitsOperatorLib",
+    "html_url": "https://github.com/dzxrly/CatalogFitsOperatorLib",
+    "description": "自用天文星表、Fits光谱+测光图像处理库",
+    "fork": false,
+    "stargazers_count": 2,
+    "language": "Python",
+    "forks_count": 0,
+    "archived": false,
+    "license": {
+      "key": "apache-2.0"
+    },
+    "updated_at": "2025-08-25T03:46:41Z",
+    "pushed_at": "2025-08-25T03:46:38Z"
+  },
+  {
+    "name": "MHST3-LockNestMaxRarity",
+    "html_url": "https://github.com/dzxrly/MHST3-LockNestMaxRarity",
+    "description": "A mod for Monster Hunter Stories 3 that allows players to lock the nest rarity. / 用于怪物猎人物语3的巢穴锁定稀有度MOD。",
+    "fork": false,
+    "stargazers_count": 2,
+    "language": "Lua",
+    "forks_count": 0,
+    "archived": false,
+    "license": {
+      "key": "mit"
+    },
+    "updated_at": "2026-07-24T02:26:21Z",
+    "pushed_at": "2026-07-24T02:26:18Z"
+  },
+  {
+    "name": "PRAGMATA-MaximumTimeLimit",
+    "html_url": "https://github.com/dzxrly/PRAGMATA-MaximumTimeLimit",
+    "description": "A mod for PRAGMATA that allows players to maximum the time limitation of the simulation mini game. / 用于PRAGMATA的模拟游戏最大化时间上限MOD。",
+    "fork": false,
+    "stargazers_count": 2,
+    "language": "Python",
+    "forks_count": 0,
+    "archived": false,
+    "license": {
+      "key": "mit"
+    },
+    "updated_at": "2026-07-24T02:38:02Z",
+    "pushed_at": "2026-07-24T02:37:43Z"
+  },
+  {
+    "name": "server-monitor",
+    "html_url": "https://github.com/dzxrly/server-monitor",
+    "description": "Lightweight server hardware status monitoring website",
+    "fork": false,
+    "stargazers_count": 2,
+    "language": null,
+    "forks_count": 0,
+    "archived": false,
+    "license": {
+      "key": "apache-2.0"
+    },
+    "updated_at": "2026-03-23T04:24:00Z",
+    "pushed_at": "2026-10-18T03:46:45Z"
+  },
+  {
+    "name": "MHST3-ItemBoxEditor",
+    "html_url": "https://github.com/dzxrly/MHST3-ItemBoxEditor",
+    "description": "A mod for Monster Hunter Stories 3 that allows players to editor their item boxes. / 用于怪物猎人物语3的道具箱编辑器。",
+    "fork": false,
+    "stargazers_count": 1,
+    "language": "Lua",
+    "forks_count": 0,
+    "archived": false,
+    "license": {
+      "key": "mit"
+    },
+    "updated_at": "2026-07-24T02:23:47Z",
+    "pushed_at": "2026-07-24T02:23:44Z"
+  },
+  {
+    "name": "REFramework-MCP",
+    "html_url": "https://github.com/dzxrly/REFramework-MCP",
+    "description": "REFramework-MCP lets an MCP client search RE Engine metadata, inspect live game objects, and test Lua code through REFramework. It is intended for MOD authors who would otherwise spend a lot of time tracing types and calls in Object Explorer.",
+    "fork": false,
+    "stargazers_count": 1,
+    "language": "Python",
+    "forks_count": 0,
+    "archived": false,
+    "license": {
+      "key": "mit"
+    },
+    "updated_at": "2026-09-22T18:46:15Z",
+    "pushed_at": "2026-11-23T08:11:45Z"
+  },
+  {
+    "name": "MHST3-AreaEcoLevelCustomizer",
+    "html_url": "https://github.com/dzxrly/MHST3-AreaEcoLevelCustomizer",
+    "description": "A mod for Monster Hunter Stories 3 that allows players to customize the eco level of each area in the game. / 用于怪物猎人物语3的生态等级编辑器",
+    "fork": false,
+    "stargazers_count": 0,
+    "language": "Lua",
+    "forks_count": 0,
+    "archived": false,
+    "license": {
+      "key": "mit"
+    },
+    "updated_at": "2026-07-24T02:25:36Z",
+    "pushed_at": "2026-07-24T02:25:29Z"
+  },
+  {
+    "name": "MHST3-NormalOtomonScale",
+    "html_url": "https://github.com/dzxrly/MHST3-NormalOtomonScale",
+    "description": "A mod for Monster Hunter Stories 3 that keep all monsties in normal size. / 用于怪物猎人物语3的锁定随行兽为正常体型MOD。",
+    "fork": false,
+    "stargazers_count": 0,
+    "language": "Python",
+    "forks_count": 0,
+    "archived": false,
+    "license": {
+      "key": "mit"
+    },
+    "updated_at": "2026-07-24T02:40:40Z",
+    "pushed_at": "2026-11-23T16:05:11Z"
+  },
+  {
+    "name": "MHWS-Better4KHDTexture",
+    "html_url": "https://github.com/dzxrly/MHWS-Better4KHDTexture",
+    "description": "Graphics enhancement mod for Monster Hunter Wilds",
+    "fork": false,
+    "stargazers_count": 0,
+    "language": "Python",
+    "forks_count": 0,
+    "archived": false,
+    "license": {
+      "key": "mit"
+    },
+    "updated_at": "2026-11-27T02:14:58Z",
+    "pushed_at": "2026-11-18T02:54:42Z"
+  },
+  {
+    "name": "MHWS-CharmListGenerator",
+    "html_url": "https://github.com/dzxrly/MHWS-CharmListGenerator",
+    "description": "A charm list generator for Armor Searcher (https://mhwilds.wiki-db.com/sim/)",
+    "fork": false,
+    "stargazers_count": 0,
+    "language": "Vue",
+    "forks_count": 0,
+    "archived": false,
+    "license": {
+      "key": "mit"
+    },
+    "updated_at": "2026-02-18T05:56:39Z",
+    "pushed_at": "2026-02-18T05:58:12Z"
+  },
+  {
+    "name": "MHWS-NS2-Graphics-Preset-for-PC",
+    "html_url": "https://github.com/dzxrly/MHWS-NS2-Graphics-Preset-for-PC",
+    "description": "Enable the Nintendo Switch 2 graphics presets in Monster Hunter Wilds on PC, with Dock and Handheld variants.",
+    "fork": false,
+    "stargazers_count": 0,
+    "language": "Python",
+    "forks_count": 0,
+    "archived": false,
+    "license": {
+      "key": "mit"
+    },
+    "updated_at": "2026-11-17T07:12:57Z",
+    "pushed_at": "2026-11-17T10:00:29Z"
+  },
+  {
+    "name": "Pytorch_lightning-Training-Tools",
+    "html_url": "https://github.com/dzxrly/Pytorch_lightning-Training-Tools",
+    "description": "自用的Pytorch_lightning训练工具包",
+    "fork": false,
+    "stargazers_count": 0,
+    "language": "Python",
+    "forks_count": 0,
+    "archived": false,
+    "license": {
+      "key": "mit"
+    },
+    "updated_at": "2025-06-17T01:49:57Z",
+    "pushed_at": "2025-06-17T01:49:54Z"
+  },
+  {
+    "name": "re-engine-file-hash-exporter",
+    "html_url": "https://github.com/dzxrly/re-engine-file-hash-exporter",
+    "description": "RE Engine assets file extensions hash exporter for https://github.com/eigeen/ree-path-searcher",
+    "fork": false,
+    "stargazers_count": 0,
+    "language": "Python",
+    "forks_count": 0,
+    "archived": false,
+    "license": {
+      "key": "mit"
+    },
+    "updated_at": "2026-07-17T02:51:04Z",
+    "pushed_at": "2026-07-17T02:51:00Z"
+  },
+  {
+    "name": "BF2042State2.0",
+    "html_url": "https://github.com/dzxrly/BF2042State2.0",
+    "description": "一个简单的Flutter应用，用于查询战地2042战绩，支持Android与Web PWA | A simple application for querying Battlefield 2042 profiles, supporting Android and Web PWA",
+    "fork": false,
+    "stargazers_count": 20,
+    "language": "Dart",
+    "forks_count": 2,
+    "archived": true,
+    "license": {
+      "key": "mit"
+    },
+    "updated_at": "2026-08-12T01:28:10Z",
+    "pushed_at": "2024-04-01T02:30:28Z"
+  },
+  {
+    "name": "BFVStatus",
+    "html_url": "https://github.com/dzxrly/BFVStatus",
+    "description": "战地五战绩查询工具",
+    "fork": false,
+    "stargazers_count": 8,
+    "language": "Java",
+    "forks_count": 2,
+    "archived": true,
+    "license": {
+      "key": "mit"
+    },
+    "updated_at": "2026-09-20T04:37:59Z",
+    "pushed_at": "2021-08-12T23:54:07Z"
+  },
+  {
+    "name": "HeyboxGame",
+    "html_url": "https://github.com/dzxrly/HeyboxGame",
+    "description": "小黑盒连连看",
+    "fork": false,
+    "stargazers_count": 8,
+    "language": "JavaScript",
+    "forks_count": 2,
+    "archived": true,
+    "license": {
+      "key": "mit"
+    },
+    "updated_at": "2026-04-29T17:54:03Z",
+    "pushed_at": "2020-06-22T05:21:03Z"
+  },
+  {
+    "name": "MHWIBDmgCalculator",
+    "html_url": "https://github.com/dzxrly/MHWIBDmgCalculator",
+    "description": "A Vue-based MHWIB damege calculator",
+    "fork": false,
+    "stargazers_count": 7,
+    "language": "JavaScript",
+    "forks_count": 0,
+    "archived": true,
+    "license": {
+      "key": "mit"
+    },
+    "updated_at": "2025-09-03T16:45:23Z",
+    "pushed_at": "2024-08-04T13:57:12Z"
+  },
+  {
+    "name": "palworld-server-config-generator",
+    "html_url": "https://github.com/dzxrly/palworld-server-config-generator",
+    "description": "A simple web-basded tool for generating Palworld server config .ini file.",
+    "fork": false,
+    "stargazers_count": 4,
+    "language": "Vue",
+    "forks_count": 0,
+    "archived": true,
+    "license": {
+      "key": "mit"
+    },
+    "updated_at": "2026-04-29T17:53:47Z",
+    "pushed_at": "2024-06-11T15:01:54Z"
+  },
+  {
+    "name": "BF2042State",
+    "html_url": "https://github.com/dzxrly/BF2042State",
+    "description": "An Android App for BF 2042 based on Jetpack Compose.",
+    "fork": false,
+    "stargazers_count": 0,
+    "language": "Kotlin",
+    "forks_count": 0,
+    "archived": true,
+    "license": {
+      "key": "mit"
+    },
+    "updated_at": "2026-04-24T01:21:32Z",
+    "pushed_at": "2023-10-22T03:42:31Z"
+  },
+  {
+    "name": "BF2042StateWeb",
+    "html_url": "https://github.com/dzxrly/BF2042StateWeb",
+    "description": null,
+    "fork": false,
+    "stargazers_count": 0,
+    "language": "JavaScript",
+    "forks_count": 0,
+    "archived": true,
+    "license": null,
+    "updated_at": "2026-04-06T09:05:29Z",
+    "pushed_at": "2024-03-22T02:29:41Z"
+  },
+  {
+    "name": "HeyBoxGamePage",
+    "html_url": "https://github.com/dzxrly/HeyBoxGamePage",
+    "description": "小黑盒连连看网页端",
+    "fork": false,
+    "stargazers_count": 0,
+    "language": "HTML",
+    "forks_count": 0,
+    "archived": true,
+    "license": null,
+    "updated_at": "2026-04-06T09:05:52Z",
+    "pushed_at": "2020-06-22T05:21:46Z"
+  },
+  {
+    "name": "MHR-ItemSetAutoResupplyMod",
+    "html_url": "https://github.com/dzxrly/MHR-ItemSetAutoResupplyMod",
+    "description": "A mod of Monster Hunter Rise (SunBreak) for resupply item set when quest finished automatically. / 用于怪物猎人崛起（含曙光）的任务完成时自动加载预设的个人道具组合Mod。",
+    "fork": false,
+    "stargazers_count": 0,
+    "language": "Lua",
+    "forks_count": 1,
+    "archived": true,
+    "license": {
+      "key": "mit"
+    },
+    "updated_at": "2026-04-06T09:02:50Z",
+    "pushed_at": "2026-04-01T02:08:34Z"
+  },
+  {
+    "name": "mhst2factor",
+    "html_url": "https://github.com/dzxrly/mhst2factor",
+    "description": "怪物猎人物语2因子配装器",
+    "fork": false,
+    "stargazers_count": 0,
+    "language": "Vue",
+    "forks_count": 0,
+    "archived": true,
+    "license": {
+      "key": "mit"
+    },
+    "updated_at": "2024-08-04T12:49:01Z",
+    "pushed_at": "2024-08-04T12:47:13Z"
+  },
+  {
+    "name": "MHWS-WeaponUseCounterBlocker",
+    "html_url": "https://github.com/dzxrly/MHWS-WeaponUseCounterBlocker",
+    "description": "A mod of Monster Hunter Wilds for block weapon use counter. / 用于怪物猎人：荒野的武器使用次数记录屏蔽器",
+    "fork": false,
+    "stargazers_count": 0,
+    "language": "Lua",
+    "forks_count": 0,
+    "archived": true,
+    "license": {
+      "key": "mit"
+    },
+    "updated_at": "2025-08-26T06:47:57Z",
+    "pushed_at": "2025-06-12T01:44:38Z"
+  }
+]

@@ -1,3 +1,5 @@
+import type { SiteLocale } from 'src/site/navigation';
+
 export enum GameSeries {
   MHS = 'monsterhunterseries',
   PRAGMATA = 'pragmata',
@@ -10,8 +12,8 @@ export interface DownloadLink {
 
 export interface GameModInfo {
   gameSeries: GameSeries;
-  gameName: string;
-  modName: string;
-  modDescription: string;
+  gameName: Record<SiteLocale, string>;
+  modName: Record<SiteLocale, string>;
+  modDescription: Record<SiteLocale, string>;
   modDownloadLink: DownloadLink[];
 }

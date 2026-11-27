@@ -1,21 +1,18 @@
 <script setup lang="ts">
 import DetailPageWrapper from 'components/basic/DetailPageWrapper.vue';
 import { useRoute } from 'vue-router';
-import { type GameModInfo, type GameSeries } from 'src/interface/game-mod-info';
 import gameModList from 'src/data/game-mod-list';
 import GameModInfoCard from 'components/basic/GameModInfoCard.vue';
 import { computed } from 'vue';
 
 const $route = useRoute();
 
-// get GameSeries from route.params.gameName
-const gameSeries: GameSeries = $route.params.gameName as GameSeries;
+const gameSeries = computed(() => $route.params.gameName);
 const modList = computed(() =>
   gameModList.gameModList
     .filter((gameMod) => {
-      return gameMod.gameSeries === gameSeries;
+      return gameMod.gameSeries === gameSeries.value;
     })
-    .slice()
     .reverse(),
 );
 </script>
@@ -27,7 +24,7 @@ const modList = computed(() =>
         class="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4"
         v-for="(gameMod, index) in modList"
         :key="index"
-        :gameModInfo="gameMod as GameModInfo"
+        :gameModInfo="gameMod"
       />
     </div>
   </detail-page-wrapper>

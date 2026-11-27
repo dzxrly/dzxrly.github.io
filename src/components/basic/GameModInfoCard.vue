@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { type PropType } from 'vue';
 import { type GameModInfo } from 'src/interface/game-mod-info';
+import { useI18n } from 'vue-i18n';
+import type { SiteLocale } from 'src/site/navigation';
+
+const { locale } = useI18n<{ message: never }, SiteLocale>();
 
 const props = defineProps({
   gameModInfo: {
@@ -13,15 +17,15 @@ const props = defineProps({
 <template>
   <q-card class="game-mod-info-card-wrapper expressive-card q-ma-sm rounded-borders column">
     <q-card-section class="non-selectable col-grow">
-      <span class="expressive-card-title">{{ props.gameModInfo.modName }}</span>
+      <h3 class="expressive-card-title">{{ props.gameModInfo.modName[locale] }}</h3>
       <div class="row justify-start items-center full-width q-mt-md">
-        <q-badge :label="props.gameModInfo.gameName" color="secondary" outline></q-badge>
+        <q-badge :label="props.gameModInfo.gameName[locale]" color="secondary" outline></q-badge>
       </div>
       <p
         class="expressive-card-text q-my-md"
         style="max-lines: 2 !important; text-overflow: ellipsis"
       >
-        {{ props.gameModInfo.modDescription }}
+        {{ props.gameModInfo.modDescription[locale] }}
       </p>
     </q-card-section>
     <q-card-actions align="center" class="game-mod-actions">
@@ -38,6 +42,7 @@ const props = defineProps({
         :href="downloadLink.url"
         referrerpolicy="no-referrer"
         target="_blank"
+        rel="noopener noreferrer"
       />
     </q-card-actions>
   </q-card>

@@ -1,0 +1,36 @@
+# Preserve legacy links and point directly at the directory-index URLs.
+/modsList /gamemods/ 301
+/openSourceList /opensource/ 301
+/modsList/ /gamemods/ 301
+/openSourceList/ /opensource/ 301
+/zh-hans/modsList /zh-hans/gamemods/ 301
+/zh-hans/modsList/ /zh-hans/gamemods/ 301
+/zh-hans/openSourceList /zh-hans/opensource/ 301
+/zh-hans/openSourceList/ /zh-hans/opensource/ 301
+/zh-hant/modsList /zh-hant/gamemods/ 301
+/zh-hant/modsList/ /zh-hant/gamemods/ 301
+/zh-hant/openSourceList /zh-hant/opensource/ 301
+/zh-hant/openSourceList/ /zh-hant/opensource/ 301
+/en/modsList /gamemods/ 301
+/en/modsList/ /gamemods/ 301
+/en/openSourceList /opensource/ 301
+/en/openSourceList/ /opensource/ 301
+
+/en / 301
+/en/ / 301
+/en/tools /tools/ 301
+/en/tools/ /tools/ 301
+/en/projects /projects/ 301
+/en/projects/ /projects/ 301
+/en/gamemods /gamemods/ 301
+/en/gamemods/ /gamemods/ 301
+/en/gamemods/modinfo/monsterhunterseries /gamemods/modinfo/monsterhunterseries/ 301
+/en/gamemods/modinfo/monsterhunterseries/ /gamemods/modinfo/monsterhunterseries/ 301
+/en/gamemods/modinfo/pragmata /gamemods/modinfo/pragmata/ 301
+/en/gamemods/modinfo/pragmata/ /gamemods/modinfo/pragmata/ 301
+/en/opensource /opensource/ 301
+/en/opensource/ /opensource/ 301
+/en/opensource/packageinfo/pypi /opensource/packageinfo/pypi/ 301
+/en/opensource/packageinfo/pypi/ /opensource/packageinfo/pypi/ 301
+/en/about /about/ 301
+/en/about/ /about/ 301

@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { type PropType } from 'vue';
 import { type ToolsSites } from 'src/interface/tools-sites';
+import { useI18n } from 'vue-i18n';
+import type { SiteLocale } from 'src/site/navigation';
+
+const { locale } = useI18n<{ message: never }, SiteLocale>();
 
 const props = defineProps({
   toolSiteInfo: {
@@ -16,6 +20,7 @@ const props = defineProps({
       style="display: block"
       :href="props.toolSiteInfo.siteUrl"
       target="_blank"
+      rel="noopener noreferrer"
       referrerpolicy="strict-origin-when-cross-origin"
     >
       <q-card
@@ -24,15 +29,14 @@ const props = defineProps({
       >
         <q-card-section class="non-selectable col-grow">
           <div class="expressive-card-heading">
-            <span class="expressive-card-title">{{ props.toolSiteInfo.siteName }}</span>
+            <h3 class="expressive-card-title">{{ props.toolSiteInfo.siteName[locale] }}</h3>
             <span class="card-arrow" aria-hidden="true"><q-icon name="open_in_new" /></span>
           </div>
           <p
-            v-if="props.toolSiteInfo?.siteDesc"
             class="expressive-card-text q-my-md"
             style="max-lines: 2 !important; text-overflow: ellipsis"
           >
-            {{ props.toolSiteInfo.siteDesc }}
+            {{ props.toolSiteInfo.siteDesc[locale] }}
           </p>
         </q-card-section>
       </q-card>

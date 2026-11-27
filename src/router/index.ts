@@ -8,6 +8,13 @@ import {
 } from 'vue-router';
 import routes from './routes';
 import { LoadingBar } from 'quasar';
+import {
+  localeFromPath,
+  localizedPath,
+  pageFromPath,
+  pages,
+  unprefixedPath,
+} from 'src/site/navigation';
 
 /*
  * If not building with SSR mode, you can
@@ -46,6 +53,12 @@ export default defineRouter(function (/* { store, ssrContext } */) {
   }
 
   Router.beforeEach(async (to) => {
+    const page = pageFromPath(to.path);
+    if (page) {
+      const path = localizedPath(pages[page], localeFromPath(to.path));
+      if (to.path !== path) return { path, query: to.query, hash: to.hash, replace: true };
+    }
+
     LoadingBar.start();
     try {
       await preloadRouteComponents(to);
@@ -58,12 +71,8 @@ export default defineRouter(function (/* { store, ssrContext } */) {
 
   Router.afterEach((to, from) => {
     LoadingBar.stop();
-    const toDepth = to.path.split('/').filter((i) => {
-      return i !== '';
-    }).length;
-    const fromDepth = from.path.split('/').filter((i) => {
-      return i !== '';
-    }).length;
+    const toDepth = unprefixedPath(to.path).split('/').filter(Boolean).length;
+    const fromDepth = unprefixedPath(from.path).split('/').filter(Boolean).length;
     to.meta.enterActiveClass =
       toDepth < fromDepth ? 'route-slide-in-back' : 'route-slide-in-forward';
     to.meta.leaveActiveClass =

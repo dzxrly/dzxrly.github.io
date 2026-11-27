@@ -2,6 +2,7 @@
 import { useI18n } from 'vue-i18n';
 import { computed, inject, nextTick, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue';
 import { type EventBus, useQuasar } from 'quasar';
+import { unprefixedPath } from 'src/site/navigation';
 
 const { t } = useI18n();
 const $q = useQuasar();
@@ -198,11 +199,13 @@ onBeforeUnmount(() => {
       v-touch-swipe.mouse.up="() => setDockOpenFromSwipe(true)"
       v-touch-swipe.mouse.down="() => setDockOpenFromSwipe(false)"
     >
-      <span
+      <h1
         :class="{ 'text-body1': isLtSm, 'text-h4': !isLtSm }"
         class="home-title-span text-on-background text-bold non-selectable"
-        >{{ homeTitle }}</span
       >
+        <span class="q-sr-only">{{ homeTitleTranslation }}</span>
+        <span aria-hidden="true">{{ homeTitle }}</span>
+      </h1>
     </div>
     <div
       :class="{
@@ -235,7 +238,11 @@ onBeforeUnmount(() => {
             :leave-active-class="route.meta.leaveActiveClass as string"
           >
             <keep-alive>
-              <component :is="Component" :key="route.path" class="route-view-panel" />
+              <component
+                :is="Component"
+                :key="unprefixedPath(route.path)"
+                class="route-view-panel"
+              />
             </keep-alive>
           </transition>
         </router-view>
@@ -270,6 +277,7 @@ onBeforeUnmount(() => {
     box-sizing: border-box
 
     .home-title-span
+      margin: 0
       position: relative
       display: inline-block
       white-space: nowrap

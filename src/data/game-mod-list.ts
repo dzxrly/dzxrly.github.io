@@ -1,18 +1,50 @@
 import { type GameModInfo, GameSeries } from 'src/interface/game-mod-info';
 
+const games = {
+  world: {
+    'en-US': 'Monster Hunter: World (Iceborne)',
+    'zh-Hans': '怪物猎人：世界（冰原）',
+    'zh-Hant': '魔物獵人 世界（Iceborne）',
+  },
+  rise: {
+    'en-US': 'Monster Hunter Rise: Sunbreak',
+    'zh-Hans': '怪物猎人：崛起（曙光）',
+    'zh-Hant': '魔物獵人 崛起（破曉）',
+  },
+  wilds: {
+    'en-US': 'Monster Hunter Wilds',
+    'zh-Hans': '怪物猎人：荒野',
+    'zh-Hant': '魔物獵人 荒野',
+  },
+  stories: {
+    'en-US': 'Monster Hunter Stories 3',
+    'zh-Hans': '怪物猎人物语 3',
+    'zh-Hant': '魔物獵人物語 3',
+  },
+  pragmata: {
+    'en-US': 'PRAGMATA',
+    'zh-Hans': '识质存在',
+    'zh-Hant': 'PRAGMATA',
+  },
+};
+
 const gameModList: GameModInfo[] = [
   {
     gameSeries: GameSeries.MHS,
-    gameName: 'Monster Hunter: World (Iceborne)',
-    modName: 'CSO SGMissile HBG | 撼宇碎星替换冥赤重弩MOD',
-    modDescription:
-      "This MOD will replace the model of Safi's Burstcannon with the model of SGMissile shotgun in CSO/CS-Zombie.\n" +
-      '这个MOD将会使用CSOL的撼宇碎星(狗神)武器模型替换冥赤系列重弩。\n',
+    gameName: games.world,
+    modName: {
+      'en-US': 'CSO SGMissile HBG',
+      'zh-Hans': '撼宇碎星替换冥赤重弩',
+      'zh-Hant': '撼宇碎星替換冥赤重弩',
+    },
+    modDescription: {
+      'en-US':
+        "Replaces Safi's Burstcannon with the SGMissile shotgun model from Counter-Strike Online.",
+      'zh-Hans': '使用《反恐精英 Online》的撼宇碎星（狗神）霰弹枪模型替换冥赤龙重弩。',
+      'zh-Hant': '使用《絕對武力 Online》的撼宇碎星霰彈槍模型替換冥赤龍重弩。',
+    },
     modDownloadLink: [
-      {
-        source: 'NexusMods',
-        url: 'https://www.nexusmods.com/monsterhunterworld/mods/3258',
-      },
+      { source: 'Nexus Mods', url: 'https://www.nexusmods.com/monsterhunterworld/mods/3258' },
       {
         source: '小黑盒',
         url: 'https://api.xiaoheihe.cn/v3/bbs/app/api/web/share?link_id=39322702',
@@ -21,20 +53,21 @@ const gameModList: GameModInfo[] = [
   },
   {
     gameSeries: GameSeries.MHS,
-    gameName: 'Monster Hunter: Rise (Sunbreak)',
-    modName: 'Auto Resupply Item Set | 任务完成自动补充背包',
-    modDescription:
-      'This mod can automatically resupply at the end of a mission according to a preset combination of item sets.\n' +
-      '这个MOD可以在你完成任务时自动加载你的道具个人组合。\n',
+    gameName: games.rise,
+    modName: {
+      'en-US': 'Auto Resupply Item Set',
+      'zh-Hans': '任务完成自动补充背包',
+      'zh-Hant': '任務完成後自動補充道具',
+    },
+    modDescription: {
+      'en-US':
+        'Automatically resupplies your item pouch from a preset loadout at the end of a quest.',
+      'zh-Hans': '任务结束后，按预设的道具组合自动补充背包。',
+      'zh-Hant': '任務結束後，依照預設的道具組合自動補充道具袋。',
+    },
     modDownloadLink: [
-      {
-        source: 'NexusMods',
-        url: 'https://www.nexusmods.com/monsterhunterrise/mods/1088',
-      },
-      {
-        source: 'GitHub',
-        url: 'https://github.com/dzxrly/MHR-ItemSetAutoResupplyMod',
-      },
+      { source: 'Nexus Mods', url: 'https://www.nexusmods.com/monsterhunterrise/mods/1088' },
+      { source: 'GitHub', url: 'https://github.com/dzxrly/MHR-ItemSetAutoResupplyMod' },
       {
         source: '小黑盒',
         url: 'https://api.xiaoheihe.cn/v3/bbs/app/api/web/share?link_id=87648433',
@@ -43,137 +76,157 @@ const gameModList: GameModInfo[] = [
   },
   {
     gameSeries: GameSeries.MHS,
-    gameName: 'Monster Hunter: Wilds',
-    modName: 'ItemBox Editor | 道具箱编辑器',
-    modDescription:
-      'A mod of Monster Hunter Wilds for editing the itembox.\n' +
-      '用于怪物猎人：荒野的道具箱编辑器。\n',
+    gameName: games.wilds,
+    modName: {
+      'en-US': 'ItemBox Editor',
+      'zh-Hans': '道具箱编辑器',
+      'zh-Hant': '道具箱編輯器',
+    },
+    modDescription: {
+      'en-US': 'Edit the contents of your item box in Monster Hunter Wilds.',
+      'zh-Hans': '编辑《怪物猎人：荒野》道具箱里的道具。',
+      'zh-Hant': '編輯《魔物獵人 荒野》道具箱中的道具。',
+    },
     modDownloadLink: [
-      {
-        source: 'NexusMods',
-        url: 'https://www.nexusmods.com/monsterhunterwilds/mods/102',
-      },
-      {
-        source: 'GitHub',
-        url: 'https://github.com/dzxrly/MHWS-BoxItemEditor',
-      },
+      { source: 'Nexus Mods', url: 'https://www.nexusmods.com/monsterhunterwilds/mods/102' },
+      { source: 'GitHub', url: 'https://github.com/dzxrly/MHWS-BoxItemEditor' },
     ],
   },
   {
     gameSeries: GameSeries.MHS,
-    gameName: 'Monster Hunter: Wilds',
-    modName: 'CSO SGMissile HBG | 撼宇碎星替换锁刃重弩MOD',
-    modDescription:
-      "Replace Arkveld's Heavy Bowgun (Rare 8) model with CSO/CS-Zombie SGMissile shotgun model.\n" +
-      '这个MOD将会使用CSOL的撼宇碎星(狗神)武器模型替换锁刃龙重弩。\n',
+    gameName: games.wilds,
+    modName: {
+      'en-US': 'CSO SGMissile HBG',
+      'zh-Hans': '撼宇碎星替换锁刃重弩',
+      'zh-Hant': '撼宇碎星替換鎖刃重弩',
+    },
+    modDescription: {
+      'en-US':
+        "Replaces Arkveld's rarity 8 heavy bowgun with the SGMissile shotgun model from Counter-Strike Online.",
+      'zh-Hans': '使用《反恐精英 Online》的撼宇碎星霰弹枪模型替换稀有度 8 的锁刃龙重弩。',
+      'zh-Hant': '使用《絕對武力 Online》的撼宇碎星霰彈槍模型替換稀有度 8 的鎖刃龍重弩。',
+    },
     modDownloadLink: [
-      {
-        source: 'NexusMods',
-        url: 'https://www.nexusmods.com/monsterhunterwilds/mods/3178',
-      },
+      { source: 'Nexus Mods', url: 'https://www.nexusmods.com/monsterhunterwilds/mods/3178' },
     ],
   },
   {
     gameSeries: GameSeries.MHS,
-    gameName: 'Monster Hunter: Stories 3',
-    modName: 'AreaEcoLevelCustomizer | 生态等级编辑器',
-    modDescription:
-      'A mod for Monster Hunter Stories 3 that allows players to customize the eco level of each area in the game.\n' +
-      '用于怪物猎人物语3的生态等级编辑器 。\n',
+    gameName: games.stories,
+    modName: {
+      'en-US': 'AreaEcoLevelCustomizer',
+      'zh-Hans': '生态等级编辑器',
+      'zh-Hant': '生態等級編輯器',
+    },
+    modDescription: {
+      'en-US': 'Customize the ecology level of each area in Monster Hunter Stories 3.',
+      'zh-Hans': '调整《怪物猎人物语 3》中各个区域的生态等级。',
+      'zh-Hant': '調整《魔物獵人物語 3》中各個區域的生態等級。',
+    },
     modDownloadLink: [
       {
-        source: 'NexusMods',
+        source: 'Nexus Mods',
         url: 'https://www.nexusmods.com/monsterhunterstories3twistedreflection/mods/4',
       },
-      {
-        source: 'Github',
-        url: 'https://github.com/dzxrly/MHST3-AreaEcoLevelCustomizer',
-      },
+      { source: 'GitHub', url: 'https://github.com/dzxrly/MHST3-AreaEcoLevelCustomizer' },
     ],
   },
   {
     gameSeries: GameSeries.MHS,
-    gameName: 'Monster Hunter: Stories 3',
-    modName: 'NestRarityLocker | 巢穴稀有度锁定',
-    modDescription:
-      'A mod for Monster Hunter Stories 3 that allows players to lock the nest rarity.\n' +
-      '用于怪物猎人物语3的巢穴锁定稀有度MOD。\n',
+    gameName: games.stories,
+    modName: {
+      'en-US': 'NestRarityLocker',
+      'zh-Hans': '巢穴稀有度锁定',
+      'zh-Hant': '巢穴稀有度鎖定',
+    },
+    modDescription: {
+      'en-US': 'Lock nest rarity in Monster Hunter Stories 3.',
+      'zh-Hans': '锁定《怪物猎人物语 3》中的巢穴稀有度。',
+      'zh-Hant': '鎖定《魔物獵人物語 3》中的巢穴稀有度。',
+    },
     modDownloadLink: [
       {
-        source: 'NexusMods',
+        source: 'Nexus Mods',
         url: 'https://www.nexusmods.com/monsterhunterstories3twistedreflection/mods/5',
       },
-      {
-        source: 'Github',
-        url: 'https://github.com/dzxrly/MHST3-LockNestMaxRarity',
-      },
+      { source: 'GitHub', url: 'https://github.com/dzxrly/MHST3-LockNestMaxRarity' },
     ],
   },
   {
     gameSeries: GameSeries.MHS,
-    gameName: 'Monster Hunter: Stories 3',
-    modName: 'Item Box Editor | 道具箱编辑器',
-    modDescription:
-      'A mod for Monster Hunter Stories 3 that allows players to editor their item boxes.\n' +
-      '用于怪物猎人物语3的道具箱编辑器。\n',
+    gameName: games.stories,
+    modName: {
+      'en-US': 'Item Box Editor',
+      'zh-Hans': '道具箱编辑器',
+      'zh-Hant': '道具箱編輯器',
+    },
+    modDescription: {
+      'en-US': 'Edit the contents of your item box in Monster Hunter Stories 3.',
+      'zh-Hans': '编辑《怪物猎人物语 3》道具箱里的道具。',
+      'zh-Hant': '編輯《魔物獵人物語 3》道具箱中的道具。',
+    },
     modDownloadLink: [
       {
-        source: 'NexusMods',
+        source: 'Nexus Mods',
         url: 'https://www.nexusmods.com/monsterhunterstories3twistedreflection/mods/6',
       },
-      {
-        source: 'Github',
-        url: 'https://github.com/dzxrly/MHST3-ItemBoxEditor',
-      },
+      { source: 'GitHub', url: 'https://github.com/dzxrly/MHST3-ItemBoxEditor' },
     ],
   },
   {
     gameSeries: GameSeries.MHS,
-    gameName: 'Monster Hunter: Stories 3',
-    modName: 'Normal Otomon Scale | 正常随行兽体型',
-    modDescription:
-      'A mod for Monster Hunter Stories 3 that keep all monsties in normal size.\n' +
-      '用于怪物猎人物语3的锁定随行兽为正常体型MOD。\n',
+    gameName: games.stories,
+    modName: {
+      'en-US': 'Normal Otomon Scale',
+      'zh-Hans': '正常随行兽体型',
+      'zh-Hant': '正常隨行獸體型',
+    },
+    modDescription: {
+      'en-US': 'Keeps every Monstie at its normal size in Monster Hunter Stories 3.',
+      'zh-Hans': '将《怪物猎人物语 3》中的随行兽锁定为正常体型。',
+      'zh-Hant': '將《魔物獵人物語 3》中的隨行獸固定為正常體型。',
+    },
     modDownloadLink: [
       {
-        source: 'NexusMods',
+        source: 'Nexus Mods',
         url: 'https://www.nexusmods.com/monsterhunterstories3twistedreflection/mods/172',
       },
-      {
-        source: 'Github',
-        url: 'https://github.com/dzxrly/MHST3-NormalOtomonScale',
-      },
+      { source: 'GitHub', url: 'https://github.com/dzxrly/MHST3-NormalOtomonScale' },
     ],
   },
   {
     gameSeries: GameSeries.PRAGMATA,
-    gameName: 'PRAGMATA',
-    modName: 'Maximum Time Limit | 模拟游戏时间限制最大化',
-    modDescription:
-      'A mod for PRAGMATA that allows players to maximum the time limitation of the simulation mini game.\n' +
-      '用于PRAGMATA的模拟游戏最大化时间上限MOD。\n',
+    gameName: games.pragmata,
+    modName: {
+      'en-US': 'Maximum Time Limit',
+      'zh-Hans': '模拟游戏时间上限最大化',
+      'zh-Hant': '模擬小遊戲時間上限最大化',
+    },
+    modDescription: {
+      'en-US': "Sets the simulation minigame's time limit to its maximum in PRAGMATA.",
+      'zh-Hans': '将《识质存在》中模拟小游戏的时间上限设为最大值。',
+      'zh-Hant': '將《PRAGMATA》中模擬小遊戲的時間上限設為最大值。',
+    },
     modDownloadLink: [
-      {
-        source: 'NexusMods',
-        url: 'https://www.nexusmods.com/pragmata/mods/136',
-      },
-      {
-        source: 'Github',
-        url: 'https://github.com/dzxrly/PRAGMATA-MaximumTimeLimit',
-      },
+      { source: 'Nexus Mods', url: 'https://www.nexusmods.com/pragmata/mods/136' },
+      { source: 'GitHub', url: 'https://github.com/dzxrly/PRAGMATA-MaximumTimeLimit' },
     ],
   },
   {
     gameSeries: GameSeries.MHS,
-    gameName: 'Monster Hunter: Wilds',
-    modName: 'Better4KHDTexture | 高清材质包画质增强',
-    modDescription:
-      'Graphics enhancement mod for Monster Hunter Wilds \n' + '怪物猎人荒野画质增强MOD \n',
+    gameName: games.wilds,
+    modName: {
+      'en-US': 'Better4KHDTexture',
+      'zh-Hans': '高清材质包画质增强',
+      'zh-Hant': '高畫質材質包影像強化',
+    },
+    modDescription: {
+      'en-US': 'Enhances the visual quality of high-resolution textures in Monster Hunter Wilds.',
+      'zh-Hans': '增强《怪物猎人：荒野》的高清材质表现。',
+      'zh-Hant': '改善《魔物獵人 荒野》的高解析度材質表現。',
+    },
     modDownloadLink: [
-      {
-        source: 'Github',
-        url: 'https://github.com/dzxrly/MHWS-Better4KHDTexture',
-      },
+      { source: 'GitHub', url: 'https://github.com/dzxrly/MHWS-Better4KHDTexture' },
     ],
   },
 ];

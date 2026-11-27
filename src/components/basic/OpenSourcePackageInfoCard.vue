@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { type PropType } from 'vue';
 import { type OpenSourcePackageInfo } from 'src/interface/open-source-interface';
+import { useI18n } from 'vue-i18n';
+import type { SiteLocale } from 'src/site/navigation';
+
+const { locale } = useI18n<{ message: never }, SiteLocale>();
 
 const props = defineProps({
   openSourcePackageInfo: {
@@ -15,7 +19,7 @@ const props = defineProps({
     class="open-source-package-info-card-wrapper expressive-card q-ma-sm rounded-borders column"
   >
     <q-card-section class="non-selectable col-grow">
-      <span class="expressive-card-title">{{ props.openSourcePackageInfo.packageName }}</span>
+      <h3 class="expressive-card-title">{{ props.openSourcePackageInfo.packageName }}</h3>
       <div class="row justify-start items-center full-width q-mt-md">
         <q-badge
           :label="props.openSourcePackageInfo.packageRegistryName"
@@ -27,7 +31,7 @@ const props = defineProps({
         class="expressive-card-text q-my-md"
         style="max-lines: 2 !important; text-overflow: ellipsis"
       >
-        {{ props.openSourcePackageInfo.packageDescription }}
+        {{ props.openSourcePackageInfo.packageDescription[locale] }}
       </p>
     </q-card-section>
     <q-card-actions align="center" class="open-source-package-actions">
@@ -44,6 +48,7 @@ const props = defineProps({
         :href="packageLink.url"
         referrerpolicy="no-referrer"
         target="_blank"
+        rel="noopener noreferrer"
       />
     </q-card-actions>
   </q-card>

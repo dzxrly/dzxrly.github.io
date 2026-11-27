@@ -1,33 +1,219 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://eggtargaryen.com/</loc>
-    <lastmod>2026-05-12</lastmod>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://eggtargaryen.com/tools</loc>
-    <lastmod>2026-05-12</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://eggtargaryen.com/projects</loc>
-    <lastmod>2026-05-12</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://eggtargaryen.com/gamemods</loc>
-    <lastmod>2026-05-12</lastmod>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://eggtargaryen.com/opensource</loc>
     <lastmod>2026-06-24</lastmod>
-    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eggtargaryen.com/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://eggtargaryen.com/zh-hans/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://eggtargaryen.com/zh-hant/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eggtargaryen.com/" />
   </url>
   <url>
-    <loc>https://eggtargaryen.com/about</loc>
-    <lastmod>2026-05-12</lastmod>
-    <priority>0.7</priority>
+    <loc>https://eggtargaryen.com/tools/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eggtargaryen.com/tools/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://eggtargaryen.com/zh-hans/tools/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://eggtargaryen.com/zh-hant/tools/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eggtargaryen.com/tools/" />
+  </url>
+  <url>
+    <loc>https://eggtargaryen.com/projects/</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eggtargaryen.com/projects/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://eggtargaryen.com/zh-hans/projects/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://eggtargaryen.com/zh-hant/projects/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eggtargaryen.com/projects/" />
+  </url>
+  <url>
+    <loc>https://eggtargaryen.com/gamemods/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eggtargaryen.com/gamemods/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://eggtargaryen.com/zh-hans/gamemods/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://eggtargaryen.com/zh-hant/gamemods/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eggtargaryen.com/gamemods/" />
+  </url>
+  <url>
+    <loc>https://eggtargaryen.com/gamemods/modinfo/monsterhunterseries/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eggtargaryen.com/gamemods/modinfo/monsterhunterseries/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://eggtargaryen.com/zh-hans/gamemods/modinfo/monsterhunterseries/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://eggtargaryen.com/zh-hant/gamemods/modinfo/monsterhunterseries/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eggtargaryen.com/gamemods/modinfo/monsterhunterseries/" />
+  </url>
+  <url>
+    <loc>https://eggtargaryen.com/gamemods/modinfo/pragmata/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eggtargaryen.com/gamemods/modinfo/pragmata/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://eggtargaryen.com/zh-hans/gamemods/modinfo/pragmata/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://eggtargaryen.com/zh-hant/gamemods/modinfo/pragmata/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eggtargaryen.com/gamemods/modinfo/pragmata/" />
+  </url>
+  <url>
+    <loc>https://eggtargaryen.com/opensource/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eggtargaryen.com/opensource/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://eggtargaryen.com/zh-hans/opensource/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://eggtargaryen.com/zh-hant/opensource/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eggtargaryen.com/opensource/" />
+  </url>
+  <url>
+    <loc>https://eggtargaryen.com/opensource/packageinfo/pypi/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eggtargaryen.com/opensource/packageinfo/pypi/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://eggtargaryen.com/zh-hans/opensource/packageinfo/pypi/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://eggtargaryen.com/zh-hant/opensource/packageinfo/pypi/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eggtargaryen.com/opensource/packageinfo/pypi/" />
+  </url>
+  <url>
+    <loc>https://eggtargaryen.com/about/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eggtargaryen.com/about/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://eggtargaryen.com/zh-hans/about/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://eggtargaryen.com/zh-hant/about/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eggtargaryen.com/about/" />
+  </url>
+  <url>
+    <loc>https://eggtargaryen.com/zh-hans/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eggtargaryen.com/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://eggtargaryen.com/zh-hans/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://eggtargaryen.com/zh-hant/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eggtargaryen.com/" />
+  </url>
+  <url>
+    <loc>https://eggtargaryen.com/zh-hans/tools/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eggtargaryen.com/tools/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://eggtargaryen.com/zh-hans/tools/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://eggtargaryen.com/zh-hant/tools/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eggtargaryen.com/tools/" />
+  </url>
+  <url>
+    <loc>https://eggtargaryen.com/zh-hans/projects/</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eggtargaryen.com/projects/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://eggtargaryen.com/zh-hans/projects/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://eggtargaryen.com/zh-hant/projects/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eggtargaryen.com/projects/" />
+  </url>
+  <url>
+    <loc>https://eggtargaryen.com/zh-hans/gamemods/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eggtargaryen.com/gamemods/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://eggtargaryen.com/zh-hans/gamemods/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://eggtargaryen.com/zh-hant/gamemods/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eggtargaryen.com/gamemods/" />
+  </url>
+  <url>
+    <loc>https://eggtargaryen.com/zh-hans/gamemods/modinfo/monsterhunterseries/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eggtargaryen.com/gamemods/modinfo/monsterhunterseries/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://eggtargaryen.com/zh-hans/gamemods/modinfo/monsterhunterseries/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://eggtargaryen.com/zh-hant/gamemods/modinfo/monsterhunterseries/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eggtargaryen.com/gamemods/modinfo/monsterhunterseries/" />
+  </url>
+  <url>
+    <loc>https://eggtargaryen.com/zh-hans/gamemods/modinfo/pragmata/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eggtargaryen.com/gamemods/modinfo/pragmata/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://eggtargaryen.com/zh-hans/gamemods/modinfo/pragmata/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://eggtargaryen.com/zh-hant/gamemods/modinfo/pragmata/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eggtargaryen.com/gamemods/modinfo/pragmata/" />
+  </url>
+  <url>
+    <loc>https://eggtargaryen.com/zh-hans/opensource/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eggtargaryen.com/opensource/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://eggtargaryen.com/zh-hans/opensource/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://eggtargaryen.com/zh-hant/opensource/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eggtargaryen.com/opensource/" />
+  </url>
+  <url>
+    <loc>https://eggtargaryen.com/zh-hans/opensource/packageinfo/pypi/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eggtargaryen.com/opensource/packageinfo/pypi/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://eggtargaryen.com/zh-hans/opensource/packageinfo/pypi/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://eggtargaryen.com/zh-hant/opensource/packageinfo/pypi/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eggtargaryen.com/opensource/packageinfo/pypi/" />
+  </url>
+  <url>
+    <loc>https://eggtargaryen.com/zh-hans/about/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eggtargaryen.com/about/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://eggtargaryen.com/zh-hans/about/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://eggtargaryen.com/zh-hant/about/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eggtargaryen.com/about/" />
+  </url>
+  <url>
+    <loc>https://eggtargaryen.com/zh-hant/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eggtargaryen.com/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://eggtargaryen.com/zh-hans/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://eggtargaryen.com/zh-hant/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eggtargaryen.com/" />
+  </url>
+  <url>
+    <loc>https://eggtargaryen.com/zh-hant/tools/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eggtargaryen.com/tools/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://eggtargaryen.com/zh-hans/tools/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://eggtargaryen.com/zh-hant/tools/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eggtargaryen.com/tools/" />
+  </url>
+  <url>
+    <loc>https://eggtargaryen.com/zh-hant/projects/</loc>
+    <lastmod>2026-11-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eggtargaryen.com/projects/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://eggtargaryen.com/zh-hans/projects/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://eggtargaryen.com/zh-hant/projects/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eggtargaryen.com/projects/" />
+  </url>
+  <url>
+    <loc>https://eggtargaryen.com/zh-hant/gamemods/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eggtargaryen.com/gamemods/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://eggtargaryen.com/zh-hans/gamemods/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://eggtargaryen.com/zh-hant/gamemods/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eggtargaryen.com/gamemods/" />
+  </url>
+  <url>
+    <loc>https://eggtargaryen.com/zh-hant/gamemods/modinfo/monsterhunterseries/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eggtargaryen.com/gamemods/modinfo/monsterhunterseries/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://eggtargaryen.com/zh-hans/gamemods/modinfo/monsterhunterseries/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://eggtargaryen.com/zh-hant/gamemods/modinfo/monsterhunterseries/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eggtargaryen.com/gamemods/modinfo/monsterhunterseries/" />
+  </url>
+  <url>
+    <loc>https://eggtargaryen.com/zh-hant/gamemods/modinfo/pragmata/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eggtargaryen.com/gamemods/modinfo/pragmata/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://eggtargaryen.com/zh-hans/gamemods/modinfo/pragmata/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://eggtargaryen.com/zh-hant/gamemods/modinfo/pragmata/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eggtargaryen.com/gamemods/modinfo/pragmata/" />
+  </url>
+  <url>
+    <loc>https://eggtargaryen.com/zh-hant/opensource/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eggtargaryen.com/opensource/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://eggtargaryen.com/zh-hans/opensource/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://eggtargaryen.com/zh-hant/opensource/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eggtargaryen.com/opensource/" />
+  </url>
+  <url>
+    <loc>https://eggtargaryen.com/zh-hant/opensource/packageinfo/pypi/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eggtargaryen.com/opensource/packageinfo/pypi/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://eggtargaryen.com/zh-hans/opensource/packageinfo/pypi/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://eggtargaryen.com/zh-hant/opensource/packageinfo/pypi/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eggtargaryen.com/opensource/packageinfo/pypi/" />
+  </url>
+  <url>
+    <loc>https://eggtargaryen.com/zh-hant/about/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eggtargaryen.com/about/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://eggtargaryen.com/zh-hans/about/" />
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="https://eggtargaryen.com/zh-hant/about/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eggtargaryen.com/about/" />
   </url>
 </urlset>
